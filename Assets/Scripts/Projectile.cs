@@ -29,6 +29,13 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject != owner)
+        {
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.GetKilled(owner.GetComponent<ScoreSystem>());
+            }
             Destroy(gameObject);
+        }
     }
 }

@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour
     private new Camera camera;
     public float movementSpeed = 2f;
 
-    public float gravity = 1f;
-    public float verticalSpeed = 0;
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -36,12 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 direction = toCharacter * moveForward + toRight * moveRight;
         Vector3 velocity = direction.normalized * movementSpeed * Time.deltaTime;
-
-        if (characterController.isGrounded)
-            verticalSpeed = 0;
-        else
-            verticalSpeed += gravity * Time.deltaTime;
-        velocity.y -= verticalSpeed;
 
         characterController.Move(velocity);
     }
