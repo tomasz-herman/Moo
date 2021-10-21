@@ -6,8 +6,10 @@ public class PlayerRotation : MonoBehaviour
 {
     private CharacterController characterController;
     private new Camera camera;
+    private int mouseRaycastLayerMask;
     void Start()
     {
+        mouseRaycastLayerMask = LayerMask.GetMask(Layers.Enemy, Layers.Floor, Layers.Wall);
         characterController = GetComponent<CharacterController>();
         camera = Camera.main;
     }
@@ -16,7 +18,7 @@ public class PlayerRotation : MonoBehaviour
     {
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask(Layers.Floor)))
+        if (Physics.Raycast(ray, out hit, 100, mouseRaycastLayerMask))
         {
             Vector3 lookAt = hit.point;
             lookAt.y = gameObject.transform.position.y;
