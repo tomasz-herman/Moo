@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42476316}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 367747131}
   - component: {fileID: 367747133}
   - component: {fileID: 367747132}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ RectTransform:
   - {fileID: 1923055166}
   - {fileID: 2144928303}
   m_Father: {fileID: 1255325826}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 1013039303}
   - component: {fileID: 1013039305}
   - component: {fileID: 1013039304}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 1066358430}
   - component: {fileID: 1066358432}
   - component: {fileID: 1066358431}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 1095274387}
   - component: {fileID: 1095274389}
   - component: {fileID: 1095274388}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1191,7 @@ GameObject:
   - component: {fileID: 1255325824}
   - component: {fileID: 1255325823}
   - component: {fileID: 1255325822}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,8 +1283,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 367747131}
   - {fileID: 1843641180}
+  - {fileID: 367747131}
   m_Father: {fileID: 42476316}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 1610237620}
   - component: {fileID: 1610237619}
   - component: {fileID: 1610237618}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Resume Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1634,7 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1643,8 +1643,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.8198476, g: 1, b: 0.7028302, a: 1}
+    m_PressedColor: {r: 0.2739625, g: 1, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1787,7 +1787,7 @@ GameObject:
   - component: {fileID: 1843641180}
   - component: {fileID: 1843641182}
   - component: {fileID: 1843641181}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HUD Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1807,7 +1807,7 @@ RectTransform:
   m_Children:
   - {fileID: 1066358430}
   m_Father: {fileID: 1255325826}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1863,7 +1863,7 @@ GameObject:
   - component: {fileID: 1923055166}
   - component: {fileID: 1923055168}
   - component: {fileID: 1923055167}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Pause Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2069,7 +2069,7 @@ GameObject:
   - component: {fileID: 2144928306}
   - component: {fileID: 2144928305}
   - component: {fileID: 2144928304}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2109,7 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2118,8 +2118,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.7216981, b: 0.7216981, a: 1}
+    m_PressedColor: {r: 1, g: 0.43867922, b: 0.43867922, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
