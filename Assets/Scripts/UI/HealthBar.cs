@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar()
     {
-        fill.transform.localScale = new Vector3(1, health/maxHealth, 1);
+        fill.transform.localScale = new Vector3(health / maxHealth, 1, 1);
 
         int displayHealth = Mathf.CeilToInt(health);
         int displayMaxHealth = Mathf.CeilToInt(maxHealth);

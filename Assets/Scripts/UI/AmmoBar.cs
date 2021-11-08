@@ -29,7 +29,7 @@ public class AmmoBar : MonoBehaviour
 
     private void UpdateBar()
     {
-        fill.transform.localScale = new Vector3(1, (float)ammo / maxAmmo, 1);
+        fill.transform.localScale = new Vector3((float)ammo / maxAmmo, 1, 1);
         text.text = $"{ammo}/{maxAmmo}";
     }
 }
