@@ -19,6 +19,6 @@ public class ScoreSystem : MonoBehaviour
     }
     private void UpdateHud()
     {
-        hud.SetScore(score);
+        hud.scoreBar.SetScore(score);
     }
 }

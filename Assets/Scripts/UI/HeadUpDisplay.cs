@@ -5,20 +5,8 @@ using UnityEngine;
 
 public class HeadUpDisplay : MonoBehaviour
 {
-    public TMP_Text scoreText;
-    void Start()
-    {
-        
-    }
+    public ScoreBar scoreBar;
+    public AmmoBar ammoBar;
+    public HealthBar healthBar;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetScore(int value)
-    {
-        scoreText.text = value.ToString();
-    }
 }
