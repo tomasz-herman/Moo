@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
-    public Text textObject;
+    public HeadUpDisplay hud;
     private int score = 0;
     void Start()
     {
@@ -19,6 +19,6 @@ public class ScoreSystem : MonoBehaviour
     }
     private void UpdateHud()
     {
-        textObject.text = score.ToString();
+        hud.SetScore(score);
     }
 }
