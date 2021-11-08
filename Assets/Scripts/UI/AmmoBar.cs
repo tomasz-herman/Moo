@@ -8,27 +8,18 @@ public class AmmoBar : MonoBehaviour
 {
     public Image fill;
     public TMP_Text text;
-    public int maxAmmo = 100;
-    public int ammo = 50;
+    public AmmoSystem ammoSystem;
 
     public void Start()
     {
+        ammoSystem.AmmoChanged += (sender, args) => UpdateBar();
         UpdateBar();
     }
 
-    public void SetMaxAmmo(int value)
+    public void UpdateBar()
     {
-        maxAmmo = value;
-        UpdateBar();
-    }
-    public void SetHealth(int value)
-    {
-        ammo = value;
-        UpdateBar();
-    }
-
-    private void UpdateBar()
-    {
+        int ammo = ammoSystem.Ammo;
+        int maxAmmo = ammoSystem.MaxAmmo;
         fill.transform.localScale = new Vector3((float)ammo / maxAmmo, 1, 1);
         text.text = $"{ammo}/{maxAmmo}";
     }

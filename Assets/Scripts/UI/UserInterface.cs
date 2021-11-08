@@ -15,11 +15,22 @@ public class UserInterface : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            TryToggleWindow(pauseMenu);
+        {
+            if (selectedWindow != null)
+                ClearWindow();
+            else
+                TryToggleWindow(pauseMenu);
+        }
         if (Input.GetKeyDown(KeyCode.E))
             TryToggleWindow(statsWindow);
         if (Input.GetKeyDown(KeyCode.Q))
             TryToggleWindow(upgradeWindow);
+
+        //TODO delete if weapon system is implemented
+        if (Input.mouseScrollDelta.y > 0)
+            hud.weaponBar.SlotUp();
+        else if (Input.mouseScrollDelta.y < 0)
+            hud.weaponBar.SlotDown();
     }
 
     public void ClearWindow()
@@ -28,7 +39,17 @@ public class UserInterface : MonoBehaviour
             TryToggleWindow(selectedWindow);
     }
 
-    private void TryToggleWindow(GuiWindow window)
+    public void TryOpenWindow(GuiWindow window)
+    {
+        if (selectedWindow == null)
+        {
+            window.overlay.SetActive(true);
+            selectedWindow = window;
+            SetPause(true);
+        }
+    }
+
+    public void TryCloseWindow(GuiWindow window)
     {
         if (selectedWindow == window)
         {
@@ -36,12 +57,14 @@ public class UserInterface : MonoBehaviour
             selectedWindow = null;
             SetPause(false);
         }
-        else if (selectedWindow == null)
-        {
-            window.overlay.SetActive(true);
-            selectedWindow = window;
-            SetPause(true);
-        }
+    }
+
+    public void TryToggleWindow(GuiWindow window)
+    {
+        if (window == selectedWindow)
+            TryCloseWindow(window);
+        else
+            TryOpenWindow(window);
     }
 
     public void SetPause(bool pause)

@@ -8,27 +8,18 @@ public class HealthBar : MonoBehaviour
 {
     public Image fill;
     public TMP_Text text;
-    public float maxHealth = 1;
-    public float health = 1;
+    public HealthSystem healthSystem;
 
     public void Start()
     {
-        UpdateBar();
-    }
-
-    public void SetMaxHealth(float value)
-    { 
-        maxHealth = value;
-        UpdateBar();
-    }
-    public void SetHealth(float value)
-    { 
-        health = value;
+        healthSystem.HealthChanged += (sender, args) => UpdateBar();
         UpdateBar();
     }
 
     private void UpdateBar()
     {
+        float health = healthSystem.Health;
+        float maxHealth = healthSystem.MaxHealth;
         fill.transform.localScale = new Vector3(health / maxHealth, 1, 1);
 
         int displayHealth = Mathf.CeilToInt(health);

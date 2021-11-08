@@ -8,5 +8,6 @@ public class HeadUpDisplay : MonoBehaviour
     public ScoreBar scoreBar;
     public AmmoBar ammoBar;
     public HealthBar healthBar;
+    public WeaponBar weaponBar;
 
 }
