@@ -1,3 +1,5 @@
+using Assets.Scripts.Util;
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,31 +7,26 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Projectile projectilePrefab;
+
+    private CircularList<IWeapon> weapons = new CircularList<IWeapon>();
+
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
 
-    private ContinuousTrigger trigger = new ContinuousTrigger();
-
-    void Start()
+    private void Start()
     {
-        
+        weapons.Add(new Pistol(projectilePrefab));
+        weapons.Add(new Shotgun(projectilePrefab));
+        //weapons.Add(new Sword());
     }
-
     void Update()
     {
-        trigger.DecreaseTime(Time.deltaTime);
+        weapons.Current().DecreaseTime();
     }
-
+    public void NextWeapon() => weapons.Next();
+    public void PrevWeapon() => weapons.Prev();
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        int dischargeCount = trigger.PullTrigger(triggerTimeout);
-        if (projectilePrefab != null)
-        {
-            for(int i = 0; i < dischargeCount; i++)
-            {
-                Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
-                projectile.Launch(shooter, direction.normalized * projectileSpeed);
-            }
-        }
+        weapons.Current().TryShoot(shooter, position, direction, this);
     }
 }
