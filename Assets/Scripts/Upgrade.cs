@@ -18,7 +18,6 @@ public class Upgrade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
         Player player = other.gameObject.GetComponent<Player>();
         if(player != null)
         {

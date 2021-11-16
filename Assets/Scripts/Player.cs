@@ -6,21 +6,22 @@ public class Player : MonoBehaviour
 {
     private Shooting shooting;
     private PlayerMovement movement;
+    public HealthSystem healthSystem;
+    public UpgradeSystem upgradeSystem;
+    public AmmoSystem ammoSystem;
+    public ScoreSystem scoreSystem;
     void Start()
     {
         shooting = GetComponent<Shooting>();
         movement = GetComponent<PlayerMovement>();
-    }
-
-    void Update()
-    {
-        
+        healthSystem = GetComponent<HealthSystem>();
+        upgradeSystem = GetComponent<UpgradeSystem>();
+        ammoSystem = GetComponent<AmmoSystem>();
+        scoreSystem = GetComponent<ScoreSystem>();
     }
 
     public void Upgrade()
     {
-        shooting.triggerTimeout *= 0.9f;
-        shooting.projectileSpeed *= 1.1f;
-        movement.movementSpeed *= 1.1f;
+        upgradeSystem.AddUpgrade();
     }
 }

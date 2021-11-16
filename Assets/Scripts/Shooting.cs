@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
     public float triggerTimeout = 0.5f;
 
     private ContinuousTrigger trigger = new ContinuousTrigger();
+    public AmmoSystem ammoSystem;
 
     void Start()
     {
@@ -22,13 +23,19 @@ public class Shooting : MonoBehaviour
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
+        if (ammoSystem.Ammo == 0)
+            return;
         int dischargeCount = trigger.PullTrigger(triggerTimeout);
         if (projectilePrefab != null)
         {
             for(int i = 0; i < dischargeCount; i++)
             {
-                Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
-                projectile.Launch(shooter, direction.normalized * projectileSpeed);
+                if(ammoSystem.Ammo > 0)
+                {
+                    Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
+                    projectile.Launch(shooter, direction.normalized * projectileSpeed);
+                    ammoSystem.Ammo--;
+                }
             }
         }
     }
