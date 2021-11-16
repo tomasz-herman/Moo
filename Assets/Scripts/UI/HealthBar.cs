@@ -12,18 +12,16 @@ public class HealthBar : MonoBehaviour
 
     public void Start()
     {
-        healthSystem.HealthChanged += (sender, args) => UpdateBar();
-        UpdateBar();
+        healthSystem.HealthChanged += UpdateBar;
+        UpdateBar(this, (healthSystem.Health, healthSystem.MaxHealth));
     }
 
-    private void UpdateBar()
+    private void UpdateBar(object sender, (float health, float maxHealth) args)
     {
-        float health = healthSystem.Health;
-        float maxHealth = healthSystem.MaxHealth;
-        fill.transform.localScale = new Vector3(health / maxHealth, 1, 1);
+        fill.transform.localScale = new Vector3(args.health / args.maxHealth, 1, 1);
 
-        int displayHealth = Mathf.CeilToInt(health);
-        int displayMaxHealth = Mathf.CeilToInt(maxHealth);
+        int displayHealth = Mathf.CeilToInt(args.health);
+        int displayMaxHealth = Mathf.CeilToInt(args.maxHealth);
         text.text = $"{displayHealth}/{displayMaxHealth}";
     }
 }

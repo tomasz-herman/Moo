@@ -12,15 +12,13 @@ public class AmmoBar : MonoBehaviour
 
     public void Start()
     {
-        ammoSystem.AmmoChanged += (sender, args) => UpdateBar();
-        UpdateBar();
+        ammoSystem.AmmoChanged += UpdateBar;
+        UpdateBar(this, (ammoSystem.Ammo, ammoSystem.MaxAmmo));
     }
 
-    public void UpdateBar()
+    public void UpdateBar(object sender, (int ammo, int maxAmmo) args)
     {
-        int ammo = ammoSystem.Ammo;
-        int maxAmmo = ammoSystem.MaxAmmo;
-        fill.transform.localScale = new Vector3((float)ammo / maxAmmo, 1, 1);
-        text.text = $"{ammo}/{maxAmmo}";
+        fill.transform.localScale = new Vector3((float)args.ammo / args.maxAmmo, 1, 1);
+        text.text = $"{args.ammo}/{args.maxAmmo}";
     }
 }

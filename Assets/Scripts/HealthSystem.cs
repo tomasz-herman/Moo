@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public int defaultHealth = 100;
-    private int health, maxHealth;
-    public int Health
+    public float defaultHealth = 100f;
+    private float health, maxHealth;
+    public float Health
     {
         get { return health; }
         set
@@ -18,7 +18,7 @@ public class HealthSystem : MonoBehaviour
             HealthChanged?.Invoke(this, (health, maxHealth));
         }
     }
-    public int MaxHealth
+    public float MaxHealth
     {
         get { return maxHealth; }
         set
@@ -28,7 +28,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    public EventHandler<(float, float)> HealthChanged;
+    public EventHandler<(float health, float maxHealth)> HealthChanged;
 
     void Start()
     {

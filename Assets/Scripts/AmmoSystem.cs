@@ -29,7 +29,7 @@ public class AmmoSystem : MonoBehaviour
         }
     }
 
-    public EventHandler<(int, int)> AmmoChanged;
+    public EventHandler<(int ammo, int maxAmmo)> AmmoChanged;
 
     void Start()
     {

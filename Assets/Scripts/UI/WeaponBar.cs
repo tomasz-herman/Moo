@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WeaponBar : MonoBehaviour
 {
     public Image selector;
-    public Image slot1, slot2, slot3, slot4, slot5; //we need inspector access
+    public Image slot1, slot2, slot3, slot4, slot5;
     private Image[] images;
 
     private int slotCount;
