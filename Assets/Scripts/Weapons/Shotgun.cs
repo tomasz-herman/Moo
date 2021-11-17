@@ -13,6 +13,8 @@ namespace Assets.Scripts.Weapons
         public float projectileSpeed = 2f;
         public float triggerTimeout = 3f;
 
+        private int projectileCount = 7;
+
         private ContinuousTrigger trigger = new ContinuousTrigger();
         public Shotgun(Projectile projectileprefab)
         {
@@ -30,12 +32,10 @@ namespace Assets.Scripts.Weapons
             {
                 for (int i = 0; i < dischargeCount; i++)
                 {
-                    for (int k = 0; k < 7; k++)
+                    for (int k = 0; k < projectileCount; k++)
                     {
-                        var rand = new System.Random();
-
                         Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
-                        var dir = Quaternion.Euler(0, -30+(k*rand.Next(5,15)), 0) * direction.normalized;
+                        var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
                         projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
                     }
                 }
