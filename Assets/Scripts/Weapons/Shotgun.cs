@@ -21,19 +21,23 @@ namespace Assets.Scripts.Weapons
             projectilePrefab = projectileprefab;
         }
 
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
+        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
             int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
             {
                 for (int i = 0; i < dischargeCount; i++)
                 {
-                    for (int k = 0; k < projectileCount; k++)
+                    if (ammoSystem.Ammo > 0)
                     {
-                        Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
-                        projectile.color = color;
-                        var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
-                        projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
+                        for (int k = 0; k < projectileCount; k++)
+                        {
+                            Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+                            projectile.color = color;
+                            var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
+                            projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
+                        }
+                        ammoSystem.Ammo--;
                     }
                 }
             }

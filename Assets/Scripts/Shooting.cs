@@ -14,7 +14,10 @@ public class Shooting : MonoBehaviour
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
 
-    private void Start()
+    private ContinuousTrigger trigger = new ContinuousTrigger();
+    public AmmoSystem ammoSystem;
+
+    void Start()
     {
         weapons.Add(new Pistol(projectilePrefab));
         weapons.Add(new Shotgun(projectilePrefab));
@@ -28,6 +31,8 @@ public class Shooting : MonoBehaviour
     public void PrevWeapon() => weapons.Prev();
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        weapons.Current().TryShoot(shooter, position, direction, this);
+        if (ammoSystem.Ammo == 0)
+            return;
+        weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 }

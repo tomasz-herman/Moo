@@ -14,6 +14,6 @@ namespace Assets.Scripts.Weapons
         {
             trigger.DecreaseTime(Time.deltaTime);
         }
-        public abstract void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting);
+        public abstract void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem);
     }
 }

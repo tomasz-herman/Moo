@@ -19,16 +19,20 @@ namespace Assets.Scripts.Weapons
             bladePrefab = bladeprefab;
         }
 
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
+        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
             int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (bladePrefab != null)
             {
                 for (int i = 0; i < dischargeCount; i++)
                 {
-                    Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
-                    blade.color = color;
-                    blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
+                    if (ammoSystem.Ammo > 0)
+                    {
+                        Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
+                        blade.color = color;
+                        blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
+                        ammoSystem.Ammo--;
+                    }
                 }
             }
         }
