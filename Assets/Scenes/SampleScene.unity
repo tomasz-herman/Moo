@@ -6299,7 +6299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundsArray:
-  - SoundType: 0
+  - SoundType: 1
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: b1b367a88e9feeb459d6bdd6862e0bc6, type: 3}
@@ -6308,7 +6308,7 @@ MonoBehaviour:
       Loop: 0
       SpatialBlend: 0
       Source: {fileID: 0}
-  - SoundType: 1
+  - SoundType: 2
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: f53680b88836c7847bbd07ed9e0606e5, type: 3}
@@ -6317,7 +6317,7 @@ MonoBehaviour:
       Loop: 0
       SpatialBlend: 0.5
       Source: {fileID: 0}
-  - SoundType: 2
+  - SoundType: 3
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: d4a27773731b30748abc27f92ef7bb65, type: 3}
@@ -6326,7 +6326,7 @@ MonoBehaviour:
       Loop: 1
       SpatialBlend: 0
       Source: {fileID: 0}
-  - SoundType: 3
+  - SoundType: 4
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: 3cb8f8213bb580f4ba7b1b250f108c6d, type: 3}
