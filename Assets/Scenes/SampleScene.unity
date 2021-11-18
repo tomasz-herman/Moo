@@ -6326,7 +6326,7 @@ MonoBehaviour:
       Loop: 1
       SpatialBlend: 0
       Source: {fileID: 0}
-  - SoundType: 4
+  - SoundType: 3
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: 3cb8f8213bb580f4ba7b1b250f108c6d, type: 3}
