@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class MusicRoom : MonoBehaviour
 {
-    public bool IsInside;
-    public int ColliderCount;
+    public bool IsInside { get; private set; } 
+
+    public int ColliderCount { get; private set; }
 
     void OnTriggerEnter(Collider other)
     {
