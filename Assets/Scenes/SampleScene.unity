@@ -191,30 +191,34 @@ MonoBehaviour:
       Volume: 1
       Pitch: 1
       Loop: 0
+      SpatialBlend: 0.5
       Source: {fileID: 0}
   - SoundType: 0
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: b1b367a88e9feeb459d6bdd6862e0bc6, type: 3}
-      Volume: 1
+      Volume: 0.6
       Pitch: 1
       Loop: 0
+      SpatialBlend: 0
       Source: {fileID: 0}
   - SoundType: 2
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: d4a27773731b30748abc27f92ef7bb65, type: 3}
-      Volume: 0.3
+      Volume: 0.2
       Pitch: 1
       Loop: 1
+      SpatialBlend: 0
       Source: {fileID: 0}
   - SoundType: 4
     Sound:
       SoundType: 0
       Clip: {fileID: 8300000, guid: 3cb8f8213bb580f4ba7b1b250f108c6d, type: 3}
-      Volume: 0.4
+      Volume: 0.2
       Pitch: 1
       Loop: 1
+      SpatialBlend: 0
       Source: {fileID: 0}
 --- !u!4 &68400523
 Transform:
