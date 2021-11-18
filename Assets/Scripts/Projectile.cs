@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -9,7 +7,7 @@ public class Projectile : MonoBehaviour
     private GameObject owner;
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -28,10 +26,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != owner)
+        if (other.gameObject != owner)
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
+            if (enemy != null)
             {
                 enemy.GetKilled(owner.GetComponent<ScoreSystem>());
             }
