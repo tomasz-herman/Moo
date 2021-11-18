@@ -29,6 +29,8 @@ public class Shooting : MonoBehaviour
             {
                 Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
                 projectile.Launch(shooter, direction.normalized * projectileSpeed);
+
+                FindObjectOfType<AudioManager>()?.Play(Assets.Scripts.SoundManager.SoundType.LaserShot);
             }
         }
     }
