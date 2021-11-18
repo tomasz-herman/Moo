@@ -5,7 +5,6 @@
         LaserShot,
         EnemyKilled,
         BackgroundTheme,
-        BackgroundTheme2,
         MusicRoom
     }
 }
