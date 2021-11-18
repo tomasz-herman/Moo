@@ -14,6 +14,7 @@ namespace Assets.Scripts.Weapons
         public float triggerTimeout = 2f;
 
         private ContinuousTrigger trigger = new ContinuousTrigger();
+        private Color color = Color.green;
         public Sword(Blade bladeprefab)
         {
             bladePrefab = bladeprefab;
@@ -35,6 +36,7 @@ namespace Assets.Scripts.Weapons
                 for (int i = 0; i < dischargeCount; i++)
                 {
                     Blade blade = Instantiate(bladePrefab, position, Quaternion.identity);
+                    blade.color = color;
                     blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
                 }
             }

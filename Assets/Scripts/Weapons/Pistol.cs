@@ -14,6 +14,7 @@ namespace Assets.Scripts.Weapons
         public float triggerTimeout = 1f;
 
         private ContinuousTrigger trigger = new ContinuousTrigger();
+        private Color color = Color.red;
         public Pistol(Projectile projectileprefab)
         {
             projectilePrefab = projectileprefab;
@@ -35,6 +36,7 @@ namespace Assets.Scripts.Weapons
                 for (int i = 0; i < dischargeCount; i++)
                 {
                     Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
+                    projectile.color = color;
                     projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
                 }
             }

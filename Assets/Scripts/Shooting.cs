@@ -16,6 +16,7 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
+        //TODO: AddComponent<Pistol>()...
         weapons.Add(new Pistol(projectilePrefab));
         weapons.Add(new Shotgun(projectilePrefab));
         weapons.Add(new Sword(bladePrefab));

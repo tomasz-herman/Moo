@@ -15,9 +15,10 @@ public class Blade : MonoBehaviour
     private float speed;
 
     private GameObject owner;
+    public Color color;
     void Start()
     {
-
+        gameObject.GetComponent<MeshRenderer>().material.color = color;
     }
 
     void Update()
