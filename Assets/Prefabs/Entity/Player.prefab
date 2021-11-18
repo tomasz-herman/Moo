@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7884263693069889528, guid: 1750f5a51375e9f43a437f778a4799d3, type: 3}
+  bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   projectileSpeed: 10
   triggerTimeout: 0.5
 --- !u!114 &5724624748060603388

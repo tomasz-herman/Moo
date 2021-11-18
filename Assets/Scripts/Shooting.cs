@@ -7,6 +7,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Projectile projectilePrefab;
+    public Blade bladePrefab;
 
     private CircularList<IWeapon> weapons = new CircularList<IWeapon>();
 
@@ -17,7 +18,7 @@ public class Shooting : MonoBehaviour
     {
         weapons.Add(new Pistol(projectilePrefab));
         weapons.Add(new Shotgun(projectilePrefab));
-        //weapons.Add(new Sword());
+        weapons.Add(new Sword(bladePrefab));
     }
     void Update()
     {

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Weapons
     {
         public Projectile projectilePrefab;
         public float projectileSpeed = 2f;
-        public float triggerTimeout = 3f;
+        public float triggerTimeout = 5f;
 
         private int projectileCount = 7;
 

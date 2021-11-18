@@ -9,14 +9,35 @@ namespace Assets.Scripts.Weapons
 {
     public class Sword : MonoBehaviour, IWeapon
     {
-        public void DecreaseTime()
+        public Blade bladePrefab;
+        public float projectileSpeed = 1f;
+        public float triggerTimeout = 2f;
+
+        private ContinuousTrigger trigger = new ContinuousTrigger();
+        public Sword(Blade bladeprefab)
         {
-            throw new NotImplementedException();
+            bladePrefab = bladeprefab;
+        }
+        void Start()
+        {
+
         }
 
+        public void DecreaseTime()
+        {
+            trigger.DecreaseTime(Time.deltaTime);
+        }
         public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            throw new NotImplementedException();
+            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
+            if (bladePrefab != null)
+            {
+                for (int i = 0; i < dischargeCount; i++)
+                {
+                    Blade blade = Instantiate(bladePrefab, position, Quaternion.identity);
+                    blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
+                }
+            }
         }
     }
 }
