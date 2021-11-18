@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public class Shotgun : MonoBehaviour, IWeapon
+    public class Shotgun : Weapon
     {
         public Projectile projectilePrefab;
         public float projectileSpeed = 2f;
@@ -15,18 +15,13 @@ namespace Assets.Scripts.Weapons
 
         private int projectileCount = 7;
 
-        private ContinuousTrigger trigger = new ContinuousTrigger();
         private Color color = Color.blue;
         public Shotgun(Projectile projectileprefab)
         {
             projectilePrefab = projectileprefab;
         }
-        public void DecreaseTime()
-        {
-            trigger.DecreaseTime(Time.deltaTime);
-        }
 
-        public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
+        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
@@ -35,7 +30,7 @@ namespace Assets.Scripts.Weapons
                 {
                     for (int k = 0; k < projectileCount; k++)
                     {
-                        Projectile projectile = Instantiate(projectilePrefab, position, Quaternion.identity);
+                        Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                         projectile.color = color;
                         var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
                         projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);

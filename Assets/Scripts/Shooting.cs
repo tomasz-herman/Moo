@@ -9,14 +9,13 @@ public class Shooting : MonoBehaviour
     public Projectile projectilePrefab;
     public Blade bladePrefab;
 
-    private CircularList<IWeapon> weapons = new CircularList<IWeapon>();
+    private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
 
     private void Start()
     {
-        //TODO: AddComponent<Pistol>()...
         weapons.Add(new Pistol(projectilePrefab));
         weapons.Add(new Shotgun(projectilePrefab));
         weapons.Add(new Sword(bladePrefab));

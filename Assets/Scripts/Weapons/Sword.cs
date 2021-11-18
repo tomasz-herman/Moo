@@ -7,35 +7,26 @@ using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public class Sword : MonoBehaviour, IWeapon
+    public class Sword : Weapon
     {
         public Blade bladePrefab;
         public float projectileSpeed = 1f;
         public float triggerTimeout = 2f;
 
-        private ContinuousTrigger trigger = new ContinuousTrigger();
         private Color color = Color.green;
         public Sword(Blade bladeprefab)
         {
             bladePrefab = bladeprefab;
         }
-        void Start()
-        {
 
-        }
-
-        public void DecreaseTime()
-        {
-            trigger.DecreaseTime(Time.deltaTime);
-        }
-        public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
+        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (bladePrefab != null)
             {
                 for (int i = 0; i < dischargeCount; i++)
                 {
-                    Blade blade = Instantiate(bladePrefab, position, Quaternion.identity);
+                    Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
                     blade.color = color;
                     blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
                 }
