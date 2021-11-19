@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &200897739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -622,6 +622,12 @@ MonoBehaviour:
   leftButton: {fileID: 1231549387}
   middleButton: {fileID: 1597385854}
   rightButton: {fileID: 1752752298}
+  leftName: {fileID: 715956928}
+  middleName: {fileID: 1702252683}
+  rightName: {fileID: 677007951}
+  leftDescription: {fileID: 1205059539}
+  middleDescription: {fileID: 965540521}
+  rightDescription: {fileID: 1847939352}
   pendingUpgradesText: {fileID: 1469224946}
   upgradePendingColor: {r: 0.21787111, g: 0.59953123, b: 0.9056604, a: 1}
   noUpgradeColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
@@ -816,6 +822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeWindow: {fileID: 200897742}
   player: {fileID: 227210169}
+  upgradeImages:
+  - {fileID: 0}
 --- !u!114 &227210180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3414,6 +3422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6422453102647043586, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf23d1ed48d0ab6409d767b8a26c2e5b, type: 2}
     - target: {fileID: 6862490329964037916, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
       propertyPath: m_Name
       value: Wall (6)
