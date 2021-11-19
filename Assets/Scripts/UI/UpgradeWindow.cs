@@ -12,8 +12,9 @@ public class UpgradeWindow : GuiWindow
     public Color upgradePendingColor, noUpgradeColor;
     public UpgradeSystem upgradeSystem;
 
-    public void Start()
+    new void Start()
     {
+        base.Start();
         leftButton.onClick.AddListener(() => OnLeftButtonClicked());
         middleButton.onClick.AddListener(() => OnMiddleButtonClicked());
         rightButton.onClick.AddListener(() => OnRightButtonClicked());

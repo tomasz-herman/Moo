@@ -41,7 +41,10 @@ public class Enemy : MonoBehaviour
         {
             if (Utils.FloatBetween(0, 1) <= dropChance)
                 Instantiate(dropItem, transform.position, transform.rotation);
-        }    
+        }
         Destroy(gameObject);
+
+        //TODO: delete this when vignette use case is implemented
+        FindObjectOfType<DamagePostProcessing>().ApplyVignette();
     }
 }
