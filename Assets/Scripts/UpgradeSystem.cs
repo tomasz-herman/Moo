@@ -12,7 +12,8 @@ public class UpgradeSystem : MonoBehaviour
     {
         pendingUpgrades++;
         upgradeWindow.Recalculate();
-        upgradeWindow.Open();
+        if(pendingUpgrades == 1)
+            upgradeWindow.Open();
     }
 
     public void RemoveUpgrade()

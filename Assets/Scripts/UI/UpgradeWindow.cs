@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class UpgradeWindow : GuiWindow
 {
     public UserInterface ui;
     public Button leftButton, middleButton, rightButton;
+    public TMP_Text pendingUpgradesText;
+    public Color upgradePendingColor, noUpgradeColor;
     public UpgradeSystem upgradeSystem;
 
     public void Start()
@@ -20,7 +23,15 @@ public class UpgradeWindow : GuiWindow
 
     public void Recalculate()
     {
-        bool interactable = upgradeSystem.GetPendingUpgrades() > 0;
+        int pendingUpgrades = upgradeSystem.GetPendingUpgrades();
+        
+        pendingUpgradesText.text = $"({pendingUpgrades})";
+        if (pendingUpgrades == 0)
+            pendingUpgradesText.color = noUpgradeColor;
+        else
+            pendingUpgradesText.color = upgradePendingColor;
+
+        bool interactable = pendingUpgrades > 0;
         leftButton.interactable = interactable;
         middleButton.interactable = interactable;
         rightButton.interactable = interactable;
