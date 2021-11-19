@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ public class UpgradeSystem : MonoBehaviour
     public UpgradeWindow upgradeWindow;
     private int pendingUpgrades = 0;
     public Player player;
+
+    private Dictionary<UpgradeType, int> upgrades = new Dictionary<UpgradeType, int>();
+    public event EventHandler<(UpgradeType type, int Count)> Upgraded;
 
     //TODO remove when proper upgrade class is defined
     private UpgradeView upgrade1, upgrade2, upgrade3;
@@ -37,15 +41,31 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Upgrade(int index)
     {
+        //TODO change all of this when proper upgrade system is done
+        UpgradeType upgrade;
         if (index == 0)
+        {
             player.healthSystem.MaxHealth += 100;
+            upgrade = UpgradeType.TestUpgradeHealth;
+        }  
         else if (index == 1)
         {
             player.ammoSystem.MaxAmmo += 50;
             player.ammoSystem.Ammo += 100;
+            upgrade = UpgradeType.TestUpgradeAmmo;
         }
         else
+        {
             player.scoreSystem.AddScore(Utils.NumberBetween(1, 10));
+            upgrade = UpgradeType.TestUpgradeScore;
+        }
+
+        if (upgrades.ContainsKey(upgrade))
+            upgrades[upgrade]++;
+        else
+            upgrades[upgrade] = 1;
+        Upgraded?.Invoke(this, (upgrade, upgrades[upgrade]));
+
         GenerateRandomUpgrades();
     }
 
@@ -63,5 +83,10 @@ public class UpgradeSystem : MonoBehaviour
     {
         //TODO change when proper upgrade system is implemented
         return new UpgradeView[] { upgrade1, upgrade2, upgrade3 };
+    }
+
+    public IEnumerable<(UpgradeType type, int count)> GetUpgrades()
+    {
+        return upgrades.Select(stat => (stat.Key, stat.Value));
     }
 }
