@@ -11,4 +11,6 @@ public class GameWorld : MonoBehaviour
     {
         timer.SetTicking(true);
     }
+
+    public bool IsPaused() { return Time.timeScale == 0; }
 }
