@@ -27,7 +27,7 @@ public class UpgradeSystem : MonoBehaviour
     public void Upgrade(int index)
     {
         if (index == 0)
-            player.healthSystem.MaxHealth += 20;
+            player.healthSystem.MaxHealth += 100;
         else if (index == 1)
         {
             player.ammoSystem.MaxAmmo += 50;
