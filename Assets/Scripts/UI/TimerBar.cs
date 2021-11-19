@@ -7,12 +7,14 @@ using UnityEngine;
 public class TimerBar : MonoBehaviour
 {
     public TMP_Text text;
+    public Timer timer;
     
-    public void SetTime(TimeSpan ts)
+    void Update()
     {
+        TimeSpan ts = timer.GetElapsedTime();
         if (ts.TotalHours < 1)
-            text.text = ts.ToString("m:ss");
+            text.text = ts.ToString(@"m\:ss");
         else
-            text.text = ts.ToString("H:mm:ss");
+            text.text = ts.ToString(@"h\:mm\:ss");
     }
 }
