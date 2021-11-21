@@ -36,10 +36,10 @@ public class Enemy : MonoBehaviour
     public void GetKilled(ScoreSystem system = null)
     {
         system?.AddScore(pointsForKill);
-        //if (deathSummon != null)
-        //    Instantiate(deathSummon, new Vector3(Utils.FloatBetween(summonPos1.x, summonPos2.x),
-        //        Utils.FloatBetween(summonPos1.y, summonPos2.y), Utils.FloatBetween(summonPos1.z, summonPos2.z)), Quaternion.identity);
-        if(dropItem != null)
+        if (deathSummon != null)
+            Instantiate(deathSummon, new Vector3(Utils.FloatBetween(summonPos1.x, summonPos2.x),
+                Utils.FloatBetween(summonPos1.y, summonPos2.y), Utils.FloatBetween(summonPos1.z, summonPos2.z)), Quaternion.identity);
+        if (dropItem != null)
         {
             if (Utils.FloatBetween(0, 1) <= dropChance)
                 Instantiate(dropItem, transform.position, transform.rotation);
