@@ -26,13 +26,9 @@ namespace Assets.Scripts.Weapons
             {
                 for (int i = 0; i < dischargeCount; i++)
                 {
-                    if (ammoSystem.Ammo > 0)
-                    {
-                        Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
-                        blade.color = color;
-                        blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
-                        ammoSystem.Ammo--;
-                    }
+                    Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
+                    blade.color = color;
+                    blade.Launch(shooter, direction.normalized, projectileSpeed * shooting.projectileSpeed);
                 }
             }
         }

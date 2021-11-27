@@ -19,22 +19,21 @@ namespace Assets.Scripts.Util
 
         public void Add(T val)
         {
+
+            var node = new Node() { Val = val };
             if (Curr == null)
             {
-                Curr = new Node() { Val = val };
+                Curr = node;
                 Curr.Prev = Curr;
                 Curr.Next = Curr;
+                return;
             }
-            else
-            {
-                var node = new Node() { Val = val };
-                node.Prev = Curr.Prev;
-                node.Next = Curr;
-                Curr.Prev.Next = node;
-                Curr.Prev = node;
-                
-            }
-         }
+
+            node.Prev = Curr.Prev;
+            node.Next = Curr;
+            Curr.Prev.Next = node;
+            Curr.Prev = node;
+        }
         public T Current() => Curr.Val;
         public T Next()
         {

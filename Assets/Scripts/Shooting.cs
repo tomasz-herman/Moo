@@ -31,8 +31,6 @@ public class Shooting : MonoBehaviour
     public void PrevWeapon() => weapons.Prev();
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        if (ammoSystem.Ammo == 0)
-            return;
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 }

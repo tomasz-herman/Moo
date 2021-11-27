@@ -21,6 +21,8 @@ namespace Assets.Scripts.Weapons
 
         public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
+            if (ammoSystem.Ammo == 0)
+                return;
             int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
             {
