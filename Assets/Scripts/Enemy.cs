@@ -9,10 +9,24 @@ public class Enemy : MonoBehaviour
     public float dropChance = 0.5f;
     public Vector3 summonPos1, summonPos2;
     public int pointsForKill = 1;
-
+    
+    public HealthSystem healthSystem;
+    
     public UnityEngine.Events.UnityEvent KillEvent;
 
-    public void GetKilled(ScoreSystem system = null)
+    void Start()
+    {
+        healthSystem = GetComponent<HealthSystem>();
+    }
+
+    public void TakeDamage(float damage, ScoreSystem system = null)
+    {
+        healthSystem.Health -= damage;
+        if (healthSystem.Health > 0) return;
+        Die(system);
+    }
+
+    private void Die(ScoreSystem system = null)
     {
         system?.AddScore(pointsForKill);
         if (deathSummon != null)

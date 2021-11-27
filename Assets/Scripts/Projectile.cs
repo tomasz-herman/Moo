@@ -36,8 +36,7 @@ public class Projectile : MonoBehaviour
             {
                 if (enemyHit != null)
                 {
-                    enemyHit.GetKilled(owner.GetComponent<ScoreSystem>());
-                    
+                    enemyHit.TakeDamage(25, owner.GetComponent<ScoreSystem>());
                 }
             }
             if(owner != null && owner.GetComponent<Enemy>() != null) // Enemy was shooting
