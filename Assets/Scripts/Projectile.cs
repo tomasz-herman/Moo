@@ -30,10 +30,22 @@ public class Projectile : MonoBehaviour
     {
         if(other.gameObject != owner)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
+            Enemy enemyHit = other.gameObject.GetComponent<Enemy>();
+            Player playerHit = other.gameObject.GetComponent<Player>();
+            if(owner != null && owner.GetComponent<Player>() != null) // Player was shooting
             {
-                enemy.GetKilled(owner.GetComponent<ScoreSystem>());
+                if (enemyHit != null)
+                {
+                    enemyHit.GetKilled(owner.GetComponent<ScoreSystem>());
+                    
+                }
+            }
+            if(owner != null && owner.GetComponent<Enemy>() != null) // Enemy was shooting
+            {
+                if (playerHit != null)
+                {
+                    playerHit.healthSystem.Health -= 5;
+                }
             }
             Destroy(gameObject);
         }

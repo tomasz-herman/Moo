@@ -9,29 +9,8 @@ public class Enemy : MonoBehaviour
     public float dropChance = 0.5f;
     public Vector3 summonPos1, summonPos2;
     public int pointsForKill = 1;
-    public float movementSpeed = 1f;
-    private CharacterController characterController;
-
-    public Vector3 movementDirection;
-    public float remainingMovementTime = 0;
 
     public UnityEngine.Events.UnityEvent KillEvent;
-    void Start()
-    {
-        characterController = GetComponent<CharacterController>();
-    }
-
-    void Update()
-    {
-        characterController.Move(movementDirection * movementSpeed * Time.deltaTime);
-        gameObject.transform.LookAt(gameObject.transform.position + movementDirection);
-        remainingMovementTime -= Time.deltaTime;
-        if (remainingMovementTime <= 0)
-        {
-            remainingMovementTime = Utils.FloatBetween(2, 8);
-            movementDirection = new Vector3(Utils.FloatBetween(-1, 1), 0, Utils.FloatBetween(-1, 1)).normalized;
-        }
-    }
 
     public void GetKilled(ScoreSystem system = null)
     {
