@@ -7,9 +7,10 @@ public class Projectile : MonoBehaviour
     public float timeToLive = 10f;
     private float elapsedTime = 0f;
     private GameObject owner;
+    public Color color;
     void Start()
     {
-        
+        gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 
     void Update()
