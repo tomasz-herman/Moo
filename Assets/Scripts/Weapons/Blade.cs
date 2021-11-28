@@ -1,12 +1,10 @@
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blade : MonoBehaviour
+public class Blade : DamageApplier
 {
-    public float timeToLive = 10f;
-    private float elapsedTime = 0f;
-
     private float startAngle = -45;
     private float stopAngle = 45;
     private float angle;
@@ -14,18 +12,15 @@ public class Blade : MonoBehaviour
     private float basicSpeed = 15;
     private float speed;
 
-    private GameObject owner;
     public Color color;
     void Start()
     {
         gameObject.GetComponent<MeshRenderer>().material.color = color;
     }
 
-    void Update()
+    protected override void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime > timeToLive)
-            Destroy(gameObject);
+        base.Update();
 
         var dangle = speed * basicSpeed * Time.deltaTime;
         angle += dangle;
@@ -51,22 +46,7 @@ public class Blade : MonoBehaviour
     {
         if (other.gameObject != owner)
         {
-            Enemy enemyHit = other.gameObject.GetComponent<Enemy>();
-            Player playerHit = other.gameObject.GetComponent<Player>();
-            if (owner != null && owner.GetComponent<Player>() != null) // Player was shooting
-            {
-                if (enemyHit != null)
-                {
-                    enemyHit.TakeDamage(15, owner.GetComponent<ScoreSystem>());
-                }
-            }
-            if (owner == null || (owner != null && owner.GetComponent<Enemy>() != null)) // Enemy was shooting (if it is null it means it is dead enemy)
-            {
-                if (playerHit != null)
-                {
-                    playerHit.healthSystem.Health -= 10;
-                }
-            }
+            ApplyDamage(other);
             Destroy(gameObject);
         }
     }

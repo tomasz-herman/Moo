@@ -1,12 +1,10 @@
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : DamageApplier
 {
-    public float timeToLive = 10f;
-    private float elapsedTime = 0f;
-    private GameObject owner;
     public Color color;
 
     private float speed = 100f;
@@ -17,18 +15,15 @@ public class Grenade : MonoBehaviour
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 
-    void Update()
+    protected override void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime > timeToLive)
-            Destroy(gameObject);
+        base.Update();
 
         if(gameObject.transform.lossyScale.x > explosionRange)
             Destroy(gameObject);
 
         if (isExplosing)
             gameObject.transform.localScale += speed * Time.deltaTime * Vector3.one;
-
     }
 
     public void Launch(GameObject owner, Vector3 velocity)
@@ -51,22 +46,7 @@ public class Grenade : MonoBehaviour
 
             //TODO: damage is higher near the explosion
             //Vector3.Distance
-            Enemy enemyHit = other.gameObject.GetComponent<Enemy>();
-            Player playerHit = other.gameObject.GetComponent<Player>();
-            if (owner != null && owner.GetComponent<Player>() != null) // Player was shooting
-            {
-                if (enemyHit != null)
-                {
-                    enemyHit.TakeDamage(15, owner.GetComponent<ScoreSystem>());
-                }
-            }
-            if (owner == null || (owner != null && owner.GetComponent<Enemy>() != null)) // Enemy was shooting (if it is null it means it is dead enemy)
-            {
-                if (playerHit != null)
-                {
-                    playerHit.healthSystem.Health -= 10;
-                }
-            }
+            ApplyDamage(other);
         }
     }
 }
