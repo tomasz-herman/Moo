@@ -12,6 +12,8 @@ public class Chamber : MonoBehaviour
     private void Start()
     {
         remainingEnemies = Enemies.Count;
+        foreach (var enemy in Enemies)
+            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
     }
 
     public void OpenExits()
