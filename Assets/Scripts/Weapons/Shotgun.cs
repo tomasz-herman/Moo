@@ -9,38 +9,31 @@ namespace Assets.Scripts.Weapons
 {
     public class Shotgun : Weapon
     {
-        public Projectile projectilePrefab;
-        public float projectileSpeed = 2f;
-        public float triggerTimeout = 5f;
-
-        private int projectileCount = 7;
-
+        private readonly Projectile projectilePrefab;
         private Color color = Color.blue;
+
+        private float scatterFactor = 10f;
+        protected int projectileCount => 7;
+
+        protected override float projectileSpeed => 2f;
+        protected override float triggerTimeout => 5f;
+        protected override float baseDamage => 1f;
+        protected override int ammoConsumption => 3;
+
         public Shotgun(Projectile projectileprefab)
         {
             projectilePrefab = projectileprefab;
         }
-
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
+        public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (ammoSystem.Ammo == 0)
-                return;
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
             {
-                for (int i = 0; i < dischargeCount; i++)
+                for (int k = 0; k < projectileCount; k++)
                 {
-                    if (ammoSystem.Ammo > 0)
-                    {
-                        for (int k = 0; k < projectileCount; k++)
-                        {
-                            Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
-                            projectile.color = color;
-                            var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
-                            projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
-                        }
-                        ammoSystem.Ammo--;
-                    }
+                    Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+                    projectile.color = color;
+                    var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
+                    projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, baseDamage);
                 }
             }
         }

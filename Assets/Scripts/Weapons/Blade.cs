@@ -1,12 +1,10 @@
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blade : MonoBehaviour
+public class Blade : ProjectileBase
 {
-    public float timeToLive = 10f;
-    private float elapsedTime = 0f;
-
     private float startAngle = -45;
     private float stopAngle = 45;
     private float angle;
@@ -14,18 +12,18 @@ public class Blade : MonoBehaviour
     private float basicSpeed = 15;
     private float speed;
 
-    private GameObject owner;
     public Color color;
+    protected override float baseDamage => 30f;
+    private float extraDamage = 0;
+
     void Start()
     {
         gameObject.GetComponent<MeshRenderer>().material.color = color;
     }
 
-    void Update()
+    protected override void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime > timeToLive)
-            Destroy(gameObject);
+        base.Update();
 
         var dangle = speed * basicSpeed * Time.deltaTime;
         angle += dangle;
@@ -36,11 +34,12 @@ public class Blade : MonoBehaviour
         SetRotation();
     }
 
-    public void Launch(GameObject owner, Vector3 direction, float speed)
+    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
     {
         this.owner = owner;
         this.speed = speed;
         this.angle = startAngle;
+        this.extraDamage = extradamage;
 
         transform.SetParent(owner.transform);
         transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
@@ -51,11 +50,7 @@ public class Blade : MonoBehaviour
     {
         if (other.gameObject != owner)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.GetKilled(owner.GetComponent<ScoreSystem>());
-            }
+            ApplyDamage(other, baseDamage + extraDamage);
             Destroy(gameObject);
         }
     }
