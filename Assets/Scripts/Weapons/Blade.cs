@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blade : DamageApplier
+public class Blade : ProjectileBase
 {
     private float startAngle = -45;
     private float stopAngle = 45;
@@ -13,6 +13,9 @@ public class Blade : DamageApplier
     private float speed;
 
     public Color color;
+    protected override float baseDamage => 30f;
+    private float extraDamage = 0;
+
     void Start()
     {
         gameObject.GetComponent<MeshRenderer>().material.color = color;
@@ -31,11 +34,12 @@ public class Blade : DamageApplier
         SetRotation();
     }
 
-    public void Launch(GameObject owner, Vector3 direction, float speed)
+    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
     {
         this.owner = owner;
         this.speed = speed;
         this.angle = startAngle;
+        this.extraDamage = extradamage;
 
         transform.SetParent(owner.transform);
         transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
@@ -46,7 +50,7 @@ public class Blade : DamageApplier
     {
         if (other.gameObject != owner)
         {
-            ApplyDamage(other);
+            ApplyDamage(other, baseDamage + extraDamage);
             Destroy(gameObject);
         }
     }

@@ -15,7 +15,7 @@ namespace Assets.Scripts.Weapons
 
         protected override float projectileSpeed => 1.5f;
         protected override float triggerTimeout => 0.3f;
-        protected override float baseDamage => 1f;//TODO: refer to damagesystem
+        protected override float baseDamage => 1f;
         protected override int ammoConsumption => 1;
 
         public MachineGun(Projectile projectileprefab)
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Weapons
                 Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                 projectile.color = color;
                 var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 3), 0) * direction.normalized;
-                projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
+                projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, baseDamage);
             }
         }
     }

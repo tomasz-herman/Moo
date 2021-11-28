@@ -7,11 +7,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public abstract class DamageApplier : MonoBehaviour
+    public abstract class ProjectileBase : MonoBehaviour
     {
         protected GameObject owner;
         public float timeToLive = 10f;
         private float elapsedTime = 0f;
+
+        protected abstract float baseDamage { get; }
 
         protected virtual void Update()
         {
@@ -20,7 +22,7 @@ namespace Assets.Scripts.Weapons
                 Destroy(gameObject);
         }
 
-        public void ApplyDamage(Collider other)
+        public void ApplyDamage(Collider other, float damage)
         {
             Enemy enemyHit = other.gameObject.GetComponent<Enemy>();
             Player playerHit = other.gameObject.GetComponent<Player>();
@@ -28,14 +30,14 @@ namespace Assets.Scripts.Weapons
             {
                 if (enemyHit != null)
                 {
-                    enemyHit.TakeDamage(15, owner.GetComponent<ScoreSystem>());
+                    enemyHit.TakeDamage(damage, owner.GetComponent<ScoreSystem>());
                 }
             }
             if (owner == null || (owner != null && owner.GetComponent<Enemy>() != null)) // Enemy was shooting (if it is null it means it is dead enemy)
             {
                 if (playerHit != null)
                 {
-                    playerHit.healthSystem.Health -= 10;
+                    playerHit.healthSystem.Health -= damage;
                 }
             }
         }

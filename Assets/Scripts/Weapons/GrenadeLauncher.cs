@@ -14,7 +14,7 @@ namespace Assets.Scripts.Weapons
 
         protected override float projectileSpeed => 2f;
         protected override float triggerTimeout => 7f;
-        protected override float baseDamage => 10f;//TODO: refer to damagesystem
+        protected override float baseDamage => 10f;
         protected override int ammoConsumption => 7;
 
         public GrenadeLauncher(Grenade grenadeprefab)
@@ -25,9 +25,9 @@ namespace Assets.Scripts.Weapons
         {
             if (grenadePrefab != null)
             {
-                Grenade projectile = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
-                projectile.color = color;
-                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
+                Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
+                grenade.color = color;
+                grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, baseDamage);
             }
         }
     }

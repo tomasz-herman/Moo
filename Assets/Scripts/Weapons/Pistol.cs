@@ -14,7 +14,7 @@ namespace Assets.Scripts.Weapons
 
         protected override float projectileSpeed => 1f;
         protected override float triggerTimeout => 1f;
-        protected override float baseDamage => 1f; //TODO: refer to damagesystem
+        protected override float baseDamage => 1f;
         protected override int ammoConsumption => 1;
 
         public Pistol(Projectile projectileprefab)
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Weapons
             {
                 Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                 projectile.color = color;
-                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
+                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, baseDamage);
             }
         }
     }
