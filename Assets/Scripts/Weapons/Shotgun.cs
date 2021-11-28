@@ -12,6 +12,7 @@ namespace Assets.Scripts.Weapons
         private readonly Projectile projectilePrefab;
         private Color color = Color.blue;
 
+        private float scatterFactor = 10f;
         protected int projectileCount => 7;
 
         protected override float projectileSpeed => 2f;
@@ -31,7 +32,7 @@ namespace Assets.Scripts.Weapons
                 {
                     Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                     projectile.color = color;
-                    var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 10), 0) * direction.normalized;
+                    var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
                     projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, baseDamage);
                 }
             }

@@ -24,11 +24,11 @@ public class Grenade : ProjectileBase
     {
         base.Update();
 
-        if (gameObject.transform.lossyScale.x > 10 * explosionRange)
+        if (gameObject.transform.localScale.x > explosionRange)
             Destroy(gameObject);
 
         if (isExplosing)
-            gameObject.transform.localScale += 10 * explosionSpeed * Time.deltaTime * Vector3.one;
+            gameObject.transform.localScale += explosionSpeed * Time.deltaTime * Vector3.one;
     }
 
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)

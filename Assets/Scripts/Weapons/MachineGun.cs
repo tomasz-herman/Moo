@@ -12,6 +12,7 @@ namespace Assets.Scripts.Weapons
         private readonly Projectile projectilePrefab;
         private Color color = Color.cyan;
 
+        private float scatterFactor = 3f;
 
         protected override float projectileSpeed => 1.5f;
         protected override float triggerTimeout => 0.3f;
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Weapons
             {
                 Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                 projectile.color = color;
-                var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 3), 0) * direction.normalized;
+                var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
                 projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, baseDamage);
             }
         }
