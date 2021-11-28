@@ -8,7 +8,10 @@ public class Grenade : MonoBehaviour
     private float elapsedTime = 0f;
     private GameObject owner;
     public Color color;
-    public LayerMask enemyMask;
+
+    private float speed = 100f;
+    private float explosionRange = 50;
+    private bool isExplosing = false;
     void Start()
     {
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
@@ -19,6 +22,13 @@ public class Grenade : MonoBehaviour
         elapsedTime += Time.deltaTime;
         if (elapsedTime > timeToLive)
             Destroy(gameObject);
+
+        if(gameObject.transform.lossyScale.x > explosionRange)
+            Destroy(gameObject);
+
+        if (isExplosing)
+            gameObject.transform.localScale += speed * Time.deltaTime * Vector3.one;
+
     }
 
     public void Launch(GameObject owner, Vector3 velocity)
@@ -28,21 +38,24 @@ public class Grenade : MonoBehaviour
         gameObject.transform.LookAt(transform.position + velocity);
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject != owner)
         {
-            Detonate();
-        }
-    }
-    private void Detonate()
-    {
-        var others = Physics.OverlapSphere(gameObject.transform.position, 5, enemyMask);
-        foreach (var other in others)
-        {
+            if (!isExplosing)
+            {
+                isExplosing = true;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+
+            //TODO: damage is higher near the explosion
+            //Vector3.Distance
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            enemy.GetKilled(owner.GetComponent<ScoreSystem>());
+            if (enemy != null)
+            {
+                enemy.GetKilled(owner.GetComponent<ScoreSystem>());
+            }
         }
-        Destroy(gameObject);
     }
 }
