@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
 {
     public Projectile projectilePrefab;
     public Blade bladePrefab;
+    public Grenade grenadePrefab;
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
@@ -21,6 +22,8 @@ public class Shooting : MonoBehaviour
     {
         weapons.Add(new Pistol(projectilePrefab));
         weapons.Add(new Shotgun(projectilePrefab));
+        weapons.Add(new MachineGun(projectilePrefab));
+        weapons.Add(new GrenadeLauncher(grenadePrefab));
         weapons.Add(new Sword(bladePrefab));
     }
     void Update()
