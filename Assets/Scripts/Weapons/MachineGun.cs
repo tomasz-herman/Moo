@@ -9,34 +9,27 @@ namespace Assets.Scripts.Weapons
 {
     public class MachineGun : Weapon
     {
-        public Projectile projectilePrefab;
-        public float projectileSpeed = 1.5f;
-        public float triggerTimeout = 0.3f;
-
+        private readonly Projectile projectilePrefab;
         private Color color = Color.cyan;
+
+
+        protected override float projectileSpeed => 1.5f;
+        protected override float triggerTimeout => 0.3f;
+        protected override float baseDamage => 1f;//TODO: refer to damagesystem
+        protected override int ammoConsumption => 1;
+
         public MachineGun(Projectile projectileprefab)
         {
             projectilePrefab = projectileprefab;
         }
-
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
+        public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (ammoSystem.Ammo == 0)
-                return;
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
             {
-                for (int i = 0; i < dischargeCount; i++)
-                {
-                    if (ammoSystem.Ammo > 0)
-                    {
-                        Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
-                        projectile.color = color;
-                        var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 3), 0) * direction.normalized;
-                        projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
-                        ammoSystem.Ammo--;
-                    }
-                }
+                Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+                projectile.color = color;
+                var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, 3), 0) * direction.normalized;
+                projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed);
             }
         }
     }

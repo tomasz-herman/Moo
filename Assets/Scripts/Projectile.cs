@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float timeToLive = 10f;
+    private float timeToLive = 10f;
     private float elapsedTime = 0f;
     private GameObject owner;
     public Color color;

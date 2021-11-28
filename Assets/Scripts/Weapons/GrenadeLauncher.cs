@@ -9,33 +9,25 @@ namespace Assets.Scripts.Weapons
 {
     class GrenadeLauncher : Weapon
     {
-        public Grenade grenadePrefab;
-        public float projectileSpeed = 2f;
-        public float triggerTimeout = 7f;
-
+        private readonly Grenade grenadePrefab;
         private Color color = Color.magenta;
+
+        protected override float projectileSpeed => 2f;
+        protected override float triggerTimeout => 7f;
+        protected override float baseDamage => 10f;//TODO: refer to damagesystem
+        protected override int ammoConsumption => 7;
+
         public GrenadeLauncher(Grenade grenadeprefab)
         {
             grenadePrefab = grenadeprefab;
         }
-
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
+        public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (ammoSystem.Ammo == 0)
-                return;
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (grenadePrefab != null)
             {
-                for (int i = 0; i < dischargeCount; i++)
-                {
-                    if (ammoSystem.Ammo > 0)
-                    {
-                        Grenade projectile = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
-                        projectile.color = color;
-                        projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
-                        ammoSystem.Ammo--;
-                    }
-                }
+                Grenade projectile = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
+                projectile.color = color;
+                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
             }
         }
     }

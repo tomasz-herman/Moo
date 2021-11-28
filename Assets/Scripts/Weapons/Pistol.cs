@@ -9,33 +9,26 @@ namespace Assets.Scripts.Weapons
 {
     public class Pistol : Weapon
     {
-        public Projectile projectilePrefab;
-        public float projectileSpeed = 1f;
-        public float triggerTimeout = 1f;
-
+        private readonly Projectile projectilePrefab;
         private Color color = Color.red;
+
+        protected override float projectileSpeed => 1f;
+        protected override float triggerTimeout => 1f;
+        protected override float baseDamage => 1f; //TODO: refer to damagesystem
+        protected override int ammoConsumption => 1;
+
         public Pistol(Projectile projectileprefab)
         {
             projectilePrefab = projectileprefab;
         }
 
-        public override void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
+        public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (ammoSystem.Ammo == 0)
-                return;
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
             if (projectilePrefab != null)
             {
-                for (int i = 0; i < dischargeCount; i++)
-                {
-                    if (ammoSystem.Ammo > 0)
-                    {
-                        Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
-                        projectile.color = color;
-                        projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
-                        ammoSystem.Ammo--;
-                    }
-                }
+                Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+                projectile.color = color;
+                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed);
             }
         }
     }

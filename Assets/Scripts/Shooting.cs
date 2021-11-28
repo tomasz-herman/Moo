@@ -15,7 +15,6 @@ public class Shooting : MonoBehaviour
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
 
-    private ContinuousTrigger trigger = new ContinuousTrigger();
     public AmmoSystem ammoSystem;
 
     void Start()
