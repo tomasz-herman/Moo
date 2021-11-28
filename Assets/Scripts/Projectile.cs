@@ -36,14 +36,14 @@ public class Projectile : MonoBehaviour
             {
                 if (enemyHit != null)
                 {
-                    enemyHit.TakeDamage(25, owner.GetComponent<ScoreSystem>());
+                    enemyHit.TakeDamage(15, owner.GetComponent<ScoreSystem>());
                 }
             }
-            if(owner != null && owner.GetComponent<Enemy>() != null) // Enemy was shooting
+            if(owner == null || (owner != null && owner.GetComponent<Enemy>() != null)) // Enemy was shooting (if it is null it means it is dead enemy)
             {
                 if (playerHit != null)
                 {
-                    playerHit.healthSystem.Health -= 5;
+                    playerHit.healthSystem.Health -= 10;
                 }
             }
             Destroy(gameObject);
