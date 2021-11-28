@@ -3328,22 +3328,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1376632895}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -6106,22 +6090,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1961259472}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -6727,22 +6695,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1961259472}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
@@ -8386,22 +8338,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -9282,22 +9218,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1376632895}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
@@ -15258,22 +15178,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1961259472}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
@@ -23450,22 +23354,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -31255,6 +31143,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &931098141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+  m_PrefabInstance: {fileID: 1141994233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &931806643
 Mesh:
   m_ObjectHideFlags: 0
@@ -31761,22 +31654,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
@@ -37326,22 +37203,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1376632895}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -38892,7 +38753,7 @@ PrefabInstance:
       objectReference: {fileID: 2146942518}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Exits.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Enemies.Array.size
@@ -38901,7 +38762,7 @@ PrefabInstance:
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Exits.Array.data[0]
       value: 
-      objectReference: {fileID: 1794962550}
+      objectReference: {fileID: 0}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Entrances.Array.size
       value: 1
@@ -38909,15 +38770,15 @@ PrefabInstance:
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1329619072}
+      objectReference: {fileID: 931098141}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 469767437}
+      objectReference: {fileID: 1253263716}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Enemies.Array.data[2]
       value: 
-      objectReference: {fileID: 271026666}
+      objectReference: {fileID: 1570232497}
     - target: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
       propertyPath: Entrances.Array.data[0]
       value: 
@@ -43344,22 +43205,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -43734,6 +43579,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1253263716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+  m_PrefabInstance: {fileID: 359537224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1269764995
 Mesh:
   m_ObjectHideFlags: 0
@@ -49412,22 +49262,6 @@ PrefabInstance:
       propertyPath: deathSummon
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1961259472}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -50899,6 +50733,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1570232497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+  m_PrefabInstance: {fileID: 147285351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1570596122
 Mesh:
   m_ObjectHideFlags: 0
@@ -52225,22 +52064,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
@@ -58168,17 +57991,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1794962550 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 313285518064084266, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
-  m_PrefabInstance: {fileID: 1177591701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f95eabd49009834cb67ebb9c431e932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1807043256
 Mesh:
   m_ObjectHideFlags: 0
@@ -59953,6 +59765,10 @@ PrefabInstance:
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699320512004101983, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+      propertyPath: movementSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512156656962, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_Layer
@@ -63012,17 +62828,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1961259472 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2727262133850913762, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
-  m_PrefabInstance: {fileID: 4754808503955267568}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf448439df3710b4ba3df55c8b0514b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1968042283
 Mesh:
   m_ObjectHideFlags: 0
@@ -68390,22 +68195,6 @@ PrefabInstance:
     - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: deathSummon
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1833346296}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: KillEnemyEventHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chamber, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 584923067921654791, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-      propertyPath: KillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 584923067921654841, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
