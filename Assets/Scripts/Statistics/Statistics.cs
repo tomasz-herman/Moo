@@ -11,20 +11,21 @@ public class Statistics : MonoBehaviour
 
     public HealthSystem healthSystem;
 
-    public PlayerMovement pm;
+    public PlayerMovement playerMovement;
 
     void Start()
     {
         statisticsSystem = GetComponent<StatisticsSystem>();
         ammoSystem = GetComponent<AmmoSystem>();
         healthSystem = GetComponent<HealthSystem>();
-        pm = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>();
 
         ammoSystem.AmmoChanged += UpdateAmmo;
         healthSystem.HealthChanged += UpdateHealth;
+        playerMovement.SpeedChanged += UpdateMovement;
         UpdateAmmo(this, (ammoSystem.Ammo, ammoSystem.MaxAmmo));
         UpdateHealth(this, (healthSystem.Health, healthSystem.MaxHealth));
-        UpdateMovement(this, pm.movementSpeed);
+        UpdateMovement(this, playerMovement.Speed);
     }
 
 

@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController characterController;
     private new Camera camera;
     public float movementSpeed = 2f;
+    public EventHandler<float> SpeedChanged;
+
+    public float Speed
+    {
+        get { return movementSpeed; }
+        set
+        {
+            movementSpeed = value;
+            SpeedChanged?.Invoke(this, movementSpeed);
+        }
+    }
 
     void Start()
     {
@@ -36,4 +48,6 @@ public class PlayerMovement : MonoBehaviour
 
         characterController.Move(velocity);
     }
+
+    
 }
