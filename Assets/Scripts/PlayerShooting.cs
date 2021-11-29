@@ -20,10 +20,13 @@ public class PlayerShooting : MonoBehaviour
             leftClicked = true;
         if (Input.GetMouseButtonUp(0))
             leftClicked = false;
-        
-        if(leftClicked)
+
+        if (leftClicked)
         {
-           shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
+            shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
         }
+
+        if (Input.mouseScrollDelta.y > 0) shooting.NextWeapon();
+        else if (Input.mouseScrollDelta.y < 0) shooting.PrevWeapon();
     }
 }
