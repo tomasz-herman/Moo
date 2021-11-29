@@ -9,35 +9,30 @@ public class Enemy : MonoBehaviour
     public float dropChance = 0.5f;
     public Vector3 summonPos1, summonPos2;
     public int pointsForKill = 1;
-    public float movementSpeed = 1f;
-    private CharacterController characterController;
+    
+    public HealthSystem healthSystem;
+    
+    public UnityEngine.Events.UnityEvent KillEvent;
 
-    public Vector3 movementDirection;
-    public float remainingMovementTime = 0;
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        healthSystem = GetComponent<HealthSystem>();
     }
 
-    void Update()
+    public void TakeDamage(float damage, ScoreSystem system = null)
     {
-        characterController.Move(movementDirection * movementSpeed * Time.deltaTime);
-        gameObject.transform.LookAt(gameObject.transform.position + movementDirection);
-        remainingMovementTime -= Time.deltaTime;
-        if (remainingMovementTime <= 0)
-        {
-            remainingMovementTime = Utils.FloatBetween(2, 8);
-            movementDirection = new Vector3(Utils.FloatBetween(-1, 1), 0, Utils.FloatBetween(-1, 1)).normalized;
-        }
+        healthSystem.Health -= damage;
+        if (healthSystem.Health > 0) return;
+        Die(system);
     }
 
-    public void GetKilled(ScoreSystem system = null)
+    private void Die(ScoreSystem system = null)
     {
         system?.AddScore(pointsForKill);
         if (deathSummon != null)
             Instantiate(deathSummon, new Vector3(Utils.FloatBetween(summonPos1.x, summonPos2.x),
                 Utils.FloatBetween(summonPos1.y, summonPos2.y), Utils.FloatBetween(summonPos1.z, summonPos2.z)), Quaternion.identity);
-        if(dropItem != null)
+        if (dropItem != null)
         {
             if (Utils.FloatBetween(0, 1) <= dropChance)
                 Instantiate(dropItem, transform.position, transform.rotation);
@@ -46,5 +41,8 @@ public class Enemy : MonoBehaviour
 
         //TODO: delete this when vignette use case is implemented
         FindObjectOfType<DamagePostProcessing>().ApplyVignette();
+
+        KillEvent.Invoke();
+
     }
 }

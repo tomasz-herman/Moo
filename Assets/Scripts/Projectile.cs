@@ -1,27 +1,24 @@
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : ProjectileBase
 {
-    public float timeToLive = 10f;
-    private float elapsedTime = 0f;
-    private GameObject owner;
+    public Color color;
+
+    protected override float baseDamage => 10f;
+    private float extraDamage = 0;
+
     void Start()
     {
-        
+        gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 
-    void Update()
-    {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime > timeToLive)
-            Destroy(gameObject);
-    }
-
-    public void Launch(GameObject owner, Vector3 velocity)
+    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
         this.owner = owner;
+        extraDamage = extradamage;
         GetComponent<Rigidbody>().velocity = velocity;
         gameObject.transform.LookAt(transform.position + velocity);
     }
@@ -30,11 +27,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.gameObject != owner)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
-            {
-                enemy.GetKilled(owner.GetComponent<ScoreSystem>());
-            }
+            ApplyDamage(other, baseDamage + extraDamage);
             Destroy(gameObject);
         }
     }

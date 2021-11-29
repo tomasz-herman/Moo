@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController characterController;
     private new Camera camera;
     public float movementSpeed = 2f;
+    private bool iswalking = false;
+    public bool IsWalking { get { return iswalking; } }
     public EventHandler<float> SpeedChanged;
 
     public float Speed
@@ -46,8 +48,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = toCharacter * moveForward + toRight * moveRight;
         Vector3 velocity = direction.normalized * movementSpeed * Time.deltaTime;
 
+        iswalking = velocity != Vector3.zero;
+
         characterController.Move(velocity);
     }
 
+
+    
     
 }
