@@ -7,18 +7,24 @@ public class Chamber : MonoBehaviour
     [SerializeField] List<Door> Entrances = new List<Door>();
     [SerializeField] List<Door> Exits = new List<Door>();
     [SerializeField] List<GameObject> Enemies = new List<GameObject>();
+    [SerializeField] List<GameObject> Bosses = new List<GameObject>();
     private int remainingEnemies = -1;
+    private int remainingBosses = -1;
 
     private void Start()
     {
         remainingEnemies = Enemies.Count;
         foreach (var enemy in Enemies)
             enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
+
+        remainingBosses = Bosses.Count;
+        foreach (var enemy in Bosses)
+            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillBossEventHandler);
     }
 
     public void OpenExits()
     {
-        if (Exits != null && Exits.Count>0)
+        if (Exits != null && Exits.Count > 0)
             foreach (var door in Exits)
                 door.OpenDoor();
     }
@@ -46,7 +52,7 @@ public class Chamber : MonoBehaviour
 
     public bool isCleared()
     {
-        return remainingEnemies <= 0;
+        return remainingEnemies <= 0 && remainingBosses <= 0;
     }
 
     public List<Door> getExits()
@@ -62,6 +68,13 @@ public class Chamber : MonoBehaviour
     public void KillEnemyEventHandler()
     {
         remainingEnemies--;
+        if (isCleared())
+            OpenExits();
+    }
+
+    public void KillBossEventHandler()
+    {
+        remainingBosses--;
         if (isCleared())
             OpenExits();
     }
