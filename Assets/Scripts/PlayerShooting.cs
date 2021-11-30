@@ -12,9 +12,12 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.mouseScrollDelta.y > 0) shooting.NextWeapon();
+        else if (Input.mouseScrollDelta.y < 0) shooting.PrevWeapon();
+
+        if (Input.GetMouseButton(0))
         {
-           shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
+            shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
         }
     }
 }
