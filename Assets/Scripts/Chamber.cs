@@ -24,30 +24,30 @@ public class Chamber : MonoBehaviour
 
     public void OpenExits()
     {
-        if (Exits != null && Exits.Count > 0)
+        if (Exits != null)
             foreach (var door in Exits)
-                door.OpenDoor();
+                door?.OpenDoor();
     }
 
     public void CloseExits()
     {
-        if (Exits != null && Exits.Count > 0)
+        if (Exits != null)
             foreach (var door in Exits)
-                door.CloseDoor();
+                door?.CloseDoor();
     }
 
     public void OpenEntrances()
     {
-        if (Entrances != null && Entrances.Count > 0)
+        if (Entrances != null)
             foreach (var door in Entrances)
-                door.OpenDoor();
+                door?.OpenDoor();
     }
 
     public void CloseEntrances()
     {
-        if (Entrances != null && Entrances.Count > 0)
+        if (Entrances != null)
             foreach (var door in Entrances)
-                door.CloseDoor();
+                door?.CloseDoor();
     }
 
     public bool isCleared()
