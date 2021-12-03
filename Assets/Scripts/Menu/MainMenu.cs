@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     private static bool showEndgameScreen = false;
     private MainMenuView mainMenuView;
     private EndGameView endGameView;
+    private LeaderboardView leaderboardView;
 
     private MenuView activeView;
 
@@ -15,6 +16,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuView = GetComponentInChildren<MainMenuView>(true);
         endGameView = GetComponentInChildren<EndGameView>(true);
+        leaderboardView = GetComponentInChildren<LeaderboardView>(true);
 
         SetActiveView(mainMenuView);
 
@@ -44,6 +46,11 @@ public class MainMenu : MonoBehaviour
     {
         activeView.SetActive(false);
         Application.Quit();
+    }
+
+    public void ShowLeaderboard()
+    {
+        SetActiveView(leaderboardView);
     }
 
     public void ShowMainMenu() { SetActiveView(mainMenuView); }

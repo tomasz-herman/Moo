@@ -44,6 +44,6 @@ public class EndGameView : MenuView
 
     public void OnContinue()
     {
-        Menu.ShowMainMenu();
+        Menu.ShowLeaderboard();
     }
 }
