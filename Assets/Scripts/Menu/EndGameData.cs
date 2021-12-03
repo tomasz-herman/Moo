@@ -16,4 +16,18 @@ public struct EndGameData
         Timestamp = timestamp;
         Won = won;
     }
+
+    public EndGameData(string text)
+    {
+        string[] split = text.Split(';');
+        Score = int.Parse(split[0]);
+        ElapsedMilliseconds = int.Parse(split[1]);
+        Timestamp = long.Parse(split[2]);
+        Won = bool.Parse(split[3]);
+    }
+
+    public string Serialize()
+    {
+        return $"{Score};{ElapsedMilliseconds};{Timestamp};{Won}";
+    }
 }
