@@ -507,6 +507,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1046821579593444519, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1046821579593444519, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7777814994972377666, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1035,6 +1043,7 @@ MonoBehaviour:
   projectileSpeed: 3
   triggerTimeout: 0.5
   ammoSystem: {fileID: 0}
+  weaponBar: {fileID: 0}
 --- !u!1001 &1353232004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1328,6 +1337,17 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1575396971 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8248976422226341987, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
+  m_PrefabInstance: {fileID: 8248976421882827911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44373848d27cee04ba2b4b06e9e33f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1592312943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1953,6 +1973,10 @@ PrefabInstance:
       propertyPath: gameWorld
       value: 
       objectReference: {fileID: 999999807}
+    - target: {fileID: 5699320512004101977, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+      propertyPath: weaponBar
+      value: 
+      objectReference: {fileID: 1575396971}
     - target: {fileID: 5699320512004101977, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: ammoSystem
       value: 
