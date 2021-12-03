@@ -54,6 +54,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ShowMainMenu() { SetActiveView(mainMenuView); }
+    public LeaderboardView GetLeaderboardView() { return leaderboardView; }
 
     public static void ScheduleShowEndgameScreen() { showEndgameScreen = true; }
 }

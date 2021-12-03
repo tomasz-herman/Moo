@@ -18,7 +18,7 @@ public class GameWorld : MonoBehaviour
     {
         //TODO remove when there is no need to debug-trigger game win
         if (!IsPaused() && Input.GetKey(KeyCode.F))
-            EndGame(true, 999);
+            EndGame(true, Utils.NumberBetween(100,999));
     }
 
     public bool IsPaused() { return Time.timeScale == 0; }

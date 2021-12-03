@@ -10,7 +10,7 @@ public class StatsWindow : GuiWindow
     public UpgradeSystem upgradeSystem;
     public StatEntryList upgradeList;
 
-    void Start()
+    public override void Start()
     {
         base.Start();
         statSystem.StatisticUpdated += (e, tuple) => RecalculateStatistics();

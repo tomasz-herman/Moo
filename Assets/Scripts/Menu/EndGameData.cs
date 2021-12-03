@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,11 @@ public struct EndGameData
         ElapsedMilliseconds = int.Parse(split[1]);
         Timestamp = long.Parse(split[2]);
         Won = bool.Parse(split[3]);
+    }
+
+    public string GetElapsedTimeString()
+    {
+        return new TimeSpan(0, 0, 0, 0, ElapsedMilliseconds).ToString(@"h\:mm\:ss\.fff");
     }
 
     public string Serialize()

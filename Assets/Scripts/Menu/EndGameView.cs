@@ -17,7 +17,7 @@ public class EndGameView : MenuView
     private void Recalculate()
     {
         scoreText.text = endGameData.Score.ToString();
-        timeText.text = new TimeSpan(0, 0, 0, 0, endGameData.ElapsedMilliseconds).ToString(@"h\:mm\:ss\.fff");
+        timeText.text = endGameData.GetElapsedTimeString();
         nameInput.text = string.Empty;
         if(endGameData.Won)
         {
@@ -44,6 +44,11 @@ public class EndGameView : MenuView
 
     public void OnContinue()
     {
+        LeaderboardView view = Menu.GetLeaderboardView();
+        Leaderboard leaderboard = view.GetLeaderboard();
+        leaderboard.Add(new LeaderboardEntry(nameInput.text, endGameData));
+        leaderboard.Save();
+
         Menu.ShowLeaderboard();
     }
 }

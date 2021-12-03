@@ -6,7 +6,7 @@ public class MenuView : MonoBehaviour
 {
     public MainMenu Menu { get; private set; }
 
-    public void Awake()
+    public virtual void Awake()
     {
         Menu = GetComponentInParent<MainMenu>();
     }

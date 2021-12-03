@@ -14,7 +14,7 @@ public class Leaderboard
         LoadFromFile(path);
     }
 
-    private List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
+    private LinkedList<LeaderboardEntry> entries = new LinkedList<LeaderboardEntry>();
 
     private void LoadFromFile(string path)
     {
@@ -26,20 +26,55 @@ public class Leaderboard
                 try
                 {
                     LeaderboardEntry entry = new LeaderboardEntry(line);
-                    entries.Add(entry);
+                    entries.AddLast(entry);
                 }
-                catch (Exception) { }
+                catch (Exception e2) { Debug.LogError(e2.Message); }
             }
         }
-        catch (Exception) { }
+        catch (Exception e1) { Debug.LogError(e1.Message); }
+
+        var sorted = entries.ToList().OrderBy(e => e);
+        entries.Clear();
+        foreach (var entry in sorted)
+            entries.AddLast(entry);
+    }
+
+    public void Add(LeaderboardEntry entry)
+    {
+        if(entries.Count == 0)
+        {
+            entries.AddLast(entry);
+            return;
+        }
+        LinkedListNode<LeaderboardEntry> cur = entries.First;
+
+        while(true)
+        {
+            if(entry.CompareTo(cur.Value) < 0)
+            {
+                entries.AddBefore(cur, entry);
+                return;
+            }
+            if(cur.Next == null)
+            {
+                entries.AddLast(entry);
+                return;
+            }
+            cur = cur.Next;
+        }
     }
 
     public void Save()
     {
         try
         {
+            string dir = Path.GetDirectoryName(path);
+            Directory.CreateDirectory(dir);
+
             File.WriteAllLines(path, entries.Select(e => e.Serialize()));
         }
-        catch (Exception) { }
+        catch (Exception e) { Debug.LogError(e.Message); }
     }
+
+    public IEnumerable<LeaderboardEntry> GetEntries() { return entries; }
 }
