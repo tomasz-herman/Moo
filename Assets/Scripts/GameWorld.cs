@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,10 +16,12 @@ public class GameWorld : MonoBehaviour
 
     public bool IsPaused() { return Time.timeScale == 0; }
 
-    public void EndGame(EndGameData data)
+    public void EndGame(bool win, int playerBaseScore)
     {
+        //TODO don't forget about proper score calculation later on
+        EndGameData data = new EndGameData(playerBaseScore, win, (int)timer.GetElapsedTime().TotalMilliseconds, DateTimeOffset.Now.ToUnixTimeSeconds());
         EndGameView.SetEndGameData(data);
+        MainMenu.ScheduleShowEndgameScreen();
         SceneManager.LoadScene(Scenes.MainMenu);
-        //TODO think of how to show death screen from here
     }
 }

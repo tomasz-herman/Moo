@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class MenuView : MonoBehaviour
 {
+    public MainMenu Menu { get; private set; }
+
+    public void Awake()
+    {
+        Menu = GetComponentInParent<MainMenu>();
+    }
+
     public virtual void SetActive(bool active)
     {
         gameObject.SetActive(active);
