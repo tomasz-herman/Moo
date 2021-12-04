@@ -11,6 +11,10 @@ public class OptionsView : MenuView
     [SerializeField] private AudioMixer musicMixer, soundMixer;
 
     [SerializeField] private TMP_Dropdown qualityDropdown, resolutionDropdown;
+    [SerializeField] private Toggle fullscreenToggle;
+
+    private List<Resolution> resolutions;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +22,23 @@ public class OptionsView : MenuView
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(QualitySettings.names.ToList());
         qualityDropdown.value = QualitySettings.GetQualityLevel();
+
+        resolutions = Screen.resolutions.ToList();
+        resolutions.Reverse();
+        resolutionDropdown.ClearOptions();
+        resolutionDropdown.AddOptions(resolutions.Select(res => $"{res.width} x {res.height}").ToList());
+        Resolution current = Screen.currentResolution;
+        for(int i = 0; i < resolutions.Count; i++)
+        {
+            Resolution res = resolutions[i];
+            if(current.width == res.width && current.height == res.height)
+            {
+                resolutionDropdown.value = i;
+                break;
+            }
+        }
+
+        fullscreenToggle.isOn = Screen.fullScreen;
     }
 
     public void SetEffectsVolume(float volume)
@@ -32,12 +53,14 @@ public class OptionsView : MenuView
 
     public void SetResolution(int resIdx)
     {
-
+        Resolution resolution = resolutions[resIdx];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
-
+        Resolution resolution = Screen.currentResolution;
+        Screen.SetResolution(resolution.width, resolution.height, fullscreen);
     }
 
     public void SetQuality(int qualityIdx)
