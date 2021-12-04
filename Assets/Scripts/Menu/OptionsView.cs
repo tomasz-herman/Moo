@@ -26,6 +26,11 @@ public class OptionsView : MenuView
 
     }
 
+    public void SetQuality(int qualityIdx)
+    {
+
+    }
+
     public void Continue()
     {
         Menu.ShowMainMenu();
