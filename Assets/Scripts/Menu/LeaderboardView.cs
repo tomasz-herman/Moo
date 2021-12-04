@@ -11,7 +11,7 @@ public class LeaderboardView : MenuView
     private string leaderboardPath = "Playerdata/leaderboard.txt";
     private GameObject listObject;
     
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
         listObject = GetComponentInChildren<VerticalLayoutGroup>().gameObject;
