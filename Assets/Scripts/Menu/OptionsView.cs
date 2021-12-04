@@ -26,7 +26,7 @@ public class OptionsView : MenuView
         resolutions = Screen.resolutions.ToList();
         resolutions.Reverse();
         resolutionDropdown.ClearOptions();
-        resolutionDropdown.AddOptions(resolutions.Select(res => $"{res.width} x {res.height}").ToList());
+        resolutionDropdown.AddOptions(resolutions.Select(res => res.ToString()).ToList());
         Resolution current = Screen.currentResolution;
         for(int i = 0; i < resolutions.Count; i++)
         {
@@ -54,13 +54,13 @@ public class OptionsView : MenuView
     public void SetResolution(int resIdx)
     {
         Resolution resolution = resolutions[resIdx];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen, resolution.refreshRate);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
         Resolution resolution = Screen.currentResolution;
-        Screen.SetResolution(resolution.width, resolution.height, fullscreen);
+        Screen.SetResolution(resolution.width, resolution.height, fullscreen, resolution.refreshRate);
     }
 
     public void SetQuality(int qualityIdx)

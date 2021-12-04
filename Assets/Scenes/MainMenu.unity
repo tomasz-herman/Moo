@@ -7271,7 +7271,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 555157086}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
-        m_MethodName: SetQuality
+        m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
