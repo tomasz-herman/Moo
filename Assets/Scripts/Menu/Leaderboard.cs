@@ -76,5 +76,5 @@ public class Leaderboard
         catch (Exception e) { Debug.LogError(e.Message); }
     }
 
-    public IEnumerable<LeaderboardEntry> GetEntries() { return entries; }
+    public IEnumerable<LeaderboardEntry> GetEntries() { return entries.ToList(); }
 }
