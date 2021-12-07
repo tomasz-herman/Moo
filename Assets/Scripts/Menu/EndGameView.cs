@@ -47,7 +47,7 @@ public class EndGameView : MenuView
         LeaderboardView view = Menu.GetLeaderboardView();
         Leaderboard leaderboard = view.GetLeaderboard();
         leaderboard.Add(new LeaderboardEntry(nameInput.text, endGameData));
-        leaderboard.Save();
+        view.SaveLeaderboard();
 
         Menu.ShowLeaderboard();
     }

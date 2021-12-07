@@ -53,6 +53,14 @@ public class LeaderboardView : MenuView
         }
     }
 
+    public void SaveLeaderboard()
+    {
+        if(leaderboard != null)
+        {
+            leaderboard.SaveToFile(leaderboardPath);
+        }
+    }
+
     public Leaderboard GetLeaderboard()
     {
         TryLoadLeaderboard();
