@@ -16,12 +16,12 @@ public class Leaderboard
 
     private LinkedList<LeaderboardEntry> entries = new LinkedList<LeaderboardEntry>();
 
-    private void LoadFromFile(string path)
+    public void LoadFromFile(string path)
     {
         entries.Clear();
         try
         {
-            foreach (string line in File.ReadLines(path))
+            foreach (string line in LineFileHelper.Load(path))
             {
                 try
                 {
@@ -68,10 +68,7 @@ public class Leaderboard
     {
         try
         {
-            string dir = Path.GetDirectoryName(path);
-            Directory.CreateDirectory(dir);
-
-            File.WriteAllLines(path, entries.Select(e => e.Serialize()));
+            LineFileHelper.Save(path, entries.Select(e => e.Serialize()));
         }
         catch (Exception e) { Debug.LogError(e.Message); }
     }
