@@ -7,13 +7,6 @@ using UnityEngine;
 
 public class Leaderboard
 {
-    private string path;
-    public Leaderboard(string path)
-    {
-        this.path = path;
-        LoadFromFile(path);
-    }
-
     private LinkedList<LeaderboardEntry> entries = new LinkedList<LeaderboardEntry>();
 
     public void LoadFromFile(string path)
@@ -64,7 +57,7 @@ public class Leaderboard
         }
     }
 
-    public void Save()
+    public void SaveToFile(string path)
     {
         try
         {

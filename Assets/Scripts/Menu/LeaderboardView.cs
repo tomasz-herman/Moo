@@ -47,7 +47,10 @@ public class LeaderboardView : MenuView
     private void TryLoadLeaderboard()
     {
         if (leaderboard == null)
-            leaderboard = new Leaderboard(leaderboardPath);
+        {
+            leaderboard = new Leaderboard();
+            leaderboard.LoadFromFile(leaderboardPath);
+        }
     }
 
     public Leaderboard GetLeaderboard()
