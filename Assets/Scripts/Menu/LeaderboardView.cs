@@ -8,7 +8,6 @@ public class LeaderboardView : MenuView
     [SerializeField] private LeaderboardResult resultPrefab;
 
     private Leaderboard leaderboard = null;
-    private string leaderboardPath = "Playerdata/leaderboard.txt";
     private GameObject listObject;
     
     protected override void Awake()
@@ -49,7 +48,7 @@ public class LeaderboardView : MenuView
         if (leaderboard == null)
         {
             leaderboard = new Leaderboard();
-            leaderboard.LoadFromFile(leaderboardPath);
+            leaderboard.LoadFromFile(ApplicationData.leaderboardPath);
         }
     }
 
@@ -57,7 +56,7 @@ public class LeaderboardView : MenuView
     {
         if(leaderboard != null)
         {
-            leaderboard.SaveToFile(leaderboardPath);
+            leaderboard.SaveToFile(ApplicationData.leaderboardPath);
         }
     }
 
