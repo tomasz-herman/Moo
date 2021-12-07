@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public abstract class ProjectileBase : MonoBehaviour
+    public abstract class ProjectileBase : Entity
     {
         protected GameObject owner;
         public float timeToLive = 10f;

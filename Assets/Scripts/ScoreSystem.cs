@@ -21,4 +21,6 @@ public class ScoreSystem : MonoBehaviour
     {
         hud.scoreBar.SetScore(score);
     }
+
+    public int GetScore() { return score; }
 }
