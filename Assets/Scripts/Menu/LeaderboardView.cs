@@ -48,7 +48,12 @@ public class LeaderboardView : MenuView
         if (leaderboard == null)
         {
             leaderboard = new Leaderboard();
-            leaderboard.LoadFromFile(ApplicationData.leaderboardPath);
+            var entries = LeaderboardParser.LoadFromFile(ApplicationData.leaderboardPath);
+            if(entries != null)
+            {
+                foreach (var entry in entries)
+                    leaderboard.Add(entry);
+            }
         }
     }
 
@@ -56,7 +61,7 @@ public class LeaderboardView : MenuView
     {
         if(leaderboard != null)
         {
-            leaderboard.SaveToFile(ApplicationData.leaderboardPath);
+            LeaderboardParser.SaveToFile(ApplicationData.leaderboardPath, leaderboard.GetEntries());
         }
     }
 

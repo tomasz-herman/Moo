@@ -15,18 +15,6 @@ public struct LeaderboardEntry: IComparable<LeaderboardEntry>
         PlayerName = name;
     }
 
-    public LeaderboardEntry(string text)
-    {
-        string[] split = text.Split(';');
-        PlayerName = split[0];
-        GameData = new EndGameData(string.Join(";", split.Skip(1)));
-    }
-
-    public string Serialize()
-    {
-        return $"{PlayerName};{GameData.Serialize()}";
-    }
-
     public int CompareTo(LeaderboardEntry other)
     {
         int cmpScore = GameData.Score.CompareTo(other.GameData.Score);
