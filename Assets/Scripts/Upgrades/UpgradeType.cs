@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum UpgradeType
 {
-    MaxHealth, MaxAmmo, Score
+    MaxHealth, MaxAmmo, Score, MovementSpeed
 }
