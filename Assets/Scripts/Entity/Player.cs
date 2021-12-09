@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    private Shooting shooting;
+    public Shooting shooting;
     public PlayerMovement movement;
     public HealthSystem healthSystem;
     public UpgradeSystem upgradeSystem;

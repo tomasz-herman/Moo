@@ -83,6 +83,8 @@ public class UpgradeSystem : MonoBehaviour
                 return new AddScoreUpgrade(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
             case UpgradeType.MovementSpeed:
                 return new MovementSpeedUpdate(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
+            case UpgradeType.ShootingSpeed:
+                return new ShootingSpeedUpdate(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
             default:
                 throw new Exception("Upgrade type not implemented");
         }
