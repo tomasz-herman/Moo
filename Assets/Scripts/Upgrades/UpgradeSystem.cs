@@ -1,3 +1,4 @@
+using Assets.Scripts.Upgrades;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,6 @@ public class UpgradeSystem : MonoBehaviour
     private Dictionary<UpgradeType, int> upgrades = new Dictionary<UpgradeType, int>();
     public event EventHandler<(UpgradeType type, int Count)> Upgraded;
 
-    //TODO remove when proper upgrade class is defined
-    private UpgradeView upgrade1, upgrade2, upgrade3;
     public Sprite[] upgradeImages;
 
     void Start()
@@ -39,54 +38,51 @@ public class UpgradeSystem : MonoBehaviour
 
     public int GetPendingUpgrades() { return pendingUpgrades; }
 
-    public void Upgrade(int index)
+    public void Upgrade(UpgradeView upgrade)
     {
-        //TODO change all of this when proper upgrade system is done
-        UpgradeType upgrade;
-        if (index == 0)
-        {
-            player.healthSystem.MaxHealth += 100;
-            upgrade = UpgradeType.TestUpgradeHealth;
-        }  
-        else if (index == 1)
-        {
-            player.ammoSystem.MaxAmmo += 50;
-            player.ammoSystem.Ammo += 100;
-            upgrade = UpgradeType.TestUpgradeAmmo;
-        }
-        else
-        {
-            player.scoreSystem.AddScore(Utils.NumberBetween(1, 10));
-            upgrade = UpgradeType.TestUpgradeScore;
-        }
+        //TODO: ammo
+        var upgradetype = upgrade.CommitUpdate();
 
-        if (upgrades.ContainsKey(upgrade))
-            upgrades[upgrade]++;
+        if (upgrades.ContainsKey(upgradetype))
+            upgrades[upgradetype]++;
         else
-            upgrades[upgrade] = 1;
-        Upgraded?.Invoke(this, (upgrade, upgrades[upgrade]));
-
-        GenerateRandomUpgrades();
+            upgrades[upgradetype] = 1;
+        Upgraded?.Invoke(this, (upgradetype, upgrades[upgradetype]));
     }
 
-    private void GenerateRandomUpgrades()
+    public UpgradeView[] GenerateRandomUpgrades()
     {
-        //TODO change when proper upgrade system is implemented
-        var words = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.".Split(' ');
+        var views = new UpgradeView[3];
 
-        upgrade1 = new UpgradeView($"Name {Utils.NumberBetween(101, 999)}", string.Join(" ", words.OrderBy(w => Utils.FloatBetween(0, 1))), upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
-        upgrade2 = new UpgradeView($"Name {Utils.NumberBetween(101, 999)}", string.Join(" ", words.OrderBy(w => Utils.FloatBetween(0, 1))), upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
-        upgrade3 = new UpgradeView($"Name {Utils.NumberBetween(101, 999)}", string.Join(" ", words.OrderBy(w => Utils.FloatBetween(0, 1))), upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
-    }
+        var upgradeTypes = Enum.GetValues(typeof(UpgradeType));
 
-    public UpgradeView[] GetNextUpgrades()
-    {
-        //TODO change when proper upgrade system is implemented
-        return new UpgradeView[] { upgrade1, upgrade2, upgrade3 };
+        //TODO: random different upgrades
+        for (int i = 0; i < 3; i++)
+        {
+            var type = (UpgradeType)upgradeTypes.GetValue(Utils.NumberBetween(0, upgradeTypes.Length - 1));
+            views[i] = GetUpdateView(type);
+        }
+
+        return views;
     }
 
     public IEnumerable<(UpgradeType type, int count)> GetUpgrades()
     {
         return upgrades.Select(stat => (stat.Key, stat.Value));
+    }
+
+    private UpgradeView GetUpdateView(UpgradeType type)
+    {
+        switch (type)
+        {
+            case UpgradeType.MaxHealth:
+                return new MaxHealthUpgrade(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
+            case UpgradeType.MaxAmmo:
+                return new MaxAmmoUpgrade(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
+            case UpgradeType.Score:
+                return new AddScoreUpgrade(player, upgradeImages[Utils.NumberBetween(0, upgradeImages.Length - 1)]);
+            default:
+                throw new Exception("Upgrade type not implemented");
+        }
     }
 }

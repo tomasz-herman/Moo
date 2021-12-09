@@ -13,6 +13,7 @@ public class UpgradeWindow : GuiWindow
     public TMP_Text pendingUpgradesText;
     public Color upgradePendingColor, noUpgradeColor;
     public UpgradeSystem upgradeSystem;
+    private UpgradeView[] upgrades;
 
     new void Start()
     {
@@ -39,7 +40,7 @@ public class UpgradeWindow : GuiWindow
         middleButton.interactable = interactable;
         rightButton.interactable = interactable;
 
-        UpgradeView[] upgrades = upgradeSystem.GetNextUpgrades();
+        upgrades = upgradeSystem.GenerateRandomUpgrades();
         leftName.text = upgrades[0].GetName();
         leftDescription.text = upgrades[0].GetDescription();
         leftButton.image.sprite = upgrades[0].GetSprite();
@@ -55,17 +56,17 @@ public class UpgradeWindow : GuiWindow
 
     private void OnLeftButtonClicked()
     {
-        upgradeSystem.Upgrade(0);
+        upgradeSystem.Upgrade(upgrades[0]);
         OnAnyButtonClicked();
     }
     private void OnMiddleButtonClicked()
     {
-        upgradeSystem.Upgrade(1);
+        upgradeSystem.Upgrade(upgrades[1]);
         OnAnyButtonClicked();
     }
     private void OnRightButtonClicked()
     {
-        upgradeSystem.Upgrade(2);
+        upgradeSystem.Upgrade(upgrades[2]);
         OnAnyButtonClicked();
     }
     private void OnAnyButtonClicked()

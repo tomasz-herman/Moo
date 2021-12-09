@@ -23,6 +23,7 @@ public class Statistics : MonoBehaviour
         ammoSystem.AmmoChanged += UpdateAmmo;
         healthSystem.HealthChanged += UpdateHealth;
         playerMovement.SpeedChanged += UpdateMovement;
+
         UpdateAmmo(this, (ammoSystem.Ammo, ammoSystem.MaxAmmo));
         UpdateHealth(this, (healthSystem.Health, healthSystem.MaxHealth));
         UpdateMovement(this, playerMovement.Speed);
