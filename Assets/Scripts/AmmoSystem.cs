@@ -31,7 +31,7 @@ public class AmmoSystem : MonoBehaviour
 
     public EventHandler<(int ammo, int maxAmmo)> AmmoChanged;
 
-    void Start()
+    void Awake()
     {
         ammo = defaultAmmo;
         maxAmmo = defaultCapacity;
