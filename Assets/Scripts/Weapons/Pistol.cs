@@ -28,7 +28,7 @@ namespace Assets.Scripts.Weapons
             {
                 Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                 projectile.color = color;
-                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, baseDamage);
+                projectile.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed,shooting.weaponDamage* baseDamage);
             }
         }
     }

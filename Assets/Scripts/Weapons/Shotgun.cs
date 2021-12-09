@@ -33,7 +33,7 @@ namespace Assets.Scripts.Weapons
                     Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
                     projectile.color = color;
                     var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
-                    projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, baseDamage);
+                    projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
                 }
             }
         }

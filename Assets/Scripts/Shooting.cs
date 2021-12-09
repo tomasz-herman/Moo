@@ -14,6 +14,7 @@ public class Shooting : MonoBehaviour
 
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
+    public float weaponDamage = 1f;
 
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
