@@ -19,7 +19,7 @@ namespace Assets.Scripts.Upgrades
         public override UpgradeType CommitUpdate()
         {
             Player.movement.Speed += 0.2f;
-            return UpgradeType.MaxHealth;
+            return UpgradeType.MovementSpeed;
         }
     }
 }
