@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5724624748060603388}
   - component: {fileID: 4999639116163168770}
   - component: {fileID: 717938059912514948}
+  - component: {fileID: 4063650702846584660}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -165,6 +166,23 @@ MonoBehaviour:
   upgradeSystem: {fileID: 0}
   ammoSystem: {fileID: 0}
   scoreSystem: {fileID: 0}
+--- !u!114 &4063650702846584660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a863465fa9a3d468c668addcb83597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: {fileID: 21300000, guid: aa8e17fb9cea8404b98689f3ac75ac15, type: 3}
+  maxDamage: {fileID: 21300000, guid: 13bd3c62a964f864d88dc4cf698de040, type: 3}
+  maxHealth: {fileID: 21300000, guid: 621ecc0dd90c6e24393ad9773c725dc4, type: 3}
+  movementSpeed: {fileID: 21300000, guid: 80e5ef45856663448ae39543560b6093, type: 3}
+  shootingSpeed: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
 --- !u!1 &5699320512156656962
 GameObject:
   m_ObjectHideFlags: 0
