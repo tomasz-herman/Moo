@@ -5,18 +5,18 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public GameObject deathSummon;
-    public GameObject dropItem;
-    public float dropChance = 0.5f;
     public Vector3 summonPos1, summonPos2;
     public int pointsForKill = 1;
     
-    public HealthSystem healthSystem;
+    [HideInInspector] public HealthSystem healthSystem;
+    [HideInInspector] public DropSystem dropSystem;
     
     public UnityEngine.Events.UnityEvent KillEvent;
 
-    void Start()
+    void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
+        dropSystem = GetComponent<DropSystem>();
     }
 
     public void TakeDamage(float damage, ScoreSystem system = null)
@@ -29,14 +29,14 @@ public class Enemy : Entity
     private void Die(ScoreSystem system = null)
     {
         system?.AddScore(pointsForKill);
-        if (deathSummon != null)
-            Instantiate(deathSummon, new Vector3(Utils.FloatBetween(summonPos1.x, summonPos2.x),
-                Utils.FloatBetween(summonPos1.y, summonPos2.y), Utils.FloatBetween(summonPos1.z, summonPos2.z)), Quaternion.identity);
-        if (dropItem != null)
-        {
-            if (Utils.FloatBetween(0, 1) <= dropChance)
-                Instantiate(dropItem, transform.position, transform.rotation);
-        }
+
+        //spawn new enemy
+        Instantiate(deathSummon, new Vector3(Utils.FloatBetween(summonPos1.x, summonPos2.x),
+            Utils.FloatBetween(summonPos1.y, summonPos2.y), Utils.FloatBetween(summonPos1.z, summonPos2.z)), Quaternion.identity);
+
+        //drop loot
+        dropSystem.Drop();
+
         Destroy(gameObject);
 
         //TODO: delete this when vignette use case is implemented
