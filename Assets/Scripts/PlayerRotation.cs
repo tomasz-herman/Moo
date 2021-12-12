@@ -6,12 +6,12 @@ public class PlayerRotation : MonoBehaviour
 {
     private CharacterController characterController;
     private new Camera camera;
-    private int mouseRaycastLayerMask;
+    //private int mouseRaycastLayerMask;
     public GameWorld gameWorld;
 
     void Start()
     {
-        mouseRaycastLayerMask = LayerMask.GetMask(Layers.Enemy, Layers.Floor, Layers.Wall);
+        //mouseRaycastLayerMask = LayerMask.GetMask(Layers.Enemy, Layers.Floor, Layers.Wall);
         characterController = GetComponent<CharacterController>();
         camera = Camera.main;
     }
@@ -21,11 +21,11 @@ public class PlayerRotation : MonoBehaviour
         if(!gameWorld.IsPaused())
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, mouseRaycastLayerMask))
+            var plane = new Plane(Vector3.up, transform.position);
+            float distance;
+            if (plane.Raycast(ray, out distance))
             {
-                Vector3 lookAt = hit.point;
-                lookAt.y = gameObject.transform.position.y;
+                Vector3 lookAt = ray.GetPoint(distance);
                 gameObject.transform.LookAt(lookAt);
             }
         }
