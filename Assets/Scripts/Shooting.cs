@@ -16,6 +16,7 @@ public class Shooting : MonoBehaviour
     public float triggerTimeout = 0.5f;
 
     public AmmoSystem ammoSystem;
+    public WeaponBar weaponBar;
 
     void Start()
     {
@@ -29,8 +30,16 @@ public class Shooting : MonoBehaviour
     {
         weapons.Current().DecreaseTime();
     }
-    public void NextWeapon() => weapons.Next();
-    public void PrevWeapon() => weapons.Prev();
+    public void NextWeapon()
+    {
+        weapons.Next();
+        weaponBar.SlotUp();
+    }
+    public void PrevWeapon()
+    {
+        weapons.Prev();
+        weaponBar.SlotDown();
+    }
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);

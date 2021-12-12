@@ -25,12 +25,6 @@ public class UserInterface : MonoBehaviour
             TryToggleWindow(statsWindow);
         if (Input.GetKeyDown(KeyCode.Q))
             TryToggleWindow(upgradeWindow);
-
-        //TODO delete if weapon system is implemented
-        if (Input.mouseScrollDelta.y > 0)
-            hud.weaponBar.SlotUp();
-        else if (Input.mouseScrollDelta.y < 0)
-            hud.weaponBar.SlotDown();
     }
 
     public void ClearWindow()

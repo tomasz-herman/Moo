@@ -30,7 +30,7 @@ public class HealthSystem : MonoBehaviour
 
     public EventHandler<(float health, float maxHealth)> HealthChanged;
 
-    void Start()
+    void Awake()
     {
         health = maxHealth = defaultHealth;
     }
