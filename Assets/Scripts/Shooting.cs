@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
 using System.Collections;
@@ -26,20 +27,32 @@ public class Shooting : MonoBehaviour
         weapons.Add(new GrenadeLauncher(grenadePrefab));
         weapons.Add(new Sword(bladePrefab));
     }
+
     void Update()
     {
         weapons.Current().DecreaseTime();
     }
+
+    public void SelectWeapon(Type type)
+    {
+        while(weapons.Current().GetType() != type)
+        {
+            weapons.Next();
+        }
+    }
+
     public void NextWeapon()
     {
         weapons.Next();
         weaponBar.SlotUp();
     }
+
     public void PrevWeapon()
     {
         weapons.Prev();
         weaponBar.SlotDown();
     }
+
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);

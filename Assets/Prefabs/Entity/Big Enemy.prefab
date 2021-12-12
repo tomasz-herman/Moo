@@ -447,7 +447,7 @@ MonoBehaviour:
   dropChance: 0.5
   summonPos1: {x: -10, y: 10, z: -10}
   summonPos2: {x: 10, y: 10, z: 10}
-  pointsForKill: 1
+  pointsForKill: 100
   healthSystem: {fileID: 0}
   KillEvent:
     m_PersistentCalls:
@@ -489,12 +489,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f7ddffc188d6d72ac426c1cb4592c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 8
   sightRange: 15
   movementSpeed: 1
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
+  weaponAI: 2
 --- !u!114 &7777235469271342937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   bladePrefab: {fileID: 0}
   grenadePrefab: {fileID: 0}
   projectileSpeed: 5
-  triggerTimeout: 3
+  triggerTimeout: 0.5
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &-1757155267967381844

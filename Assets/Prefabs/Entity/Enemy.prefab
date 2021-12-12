@@ -447,7 +447,7 @@ MonoBehaviour:
   dropChance: 0.5
   summonPos1: {x: -10, y: 10, z: -10}
   summonPos2: {x: 10, y: 10, z: 10}
-  pointsForKill: 1
+  pointsForKill: 25
   healthSystem: {fileID: 0}
   KillEvent:
     m_PersistentCalls:
