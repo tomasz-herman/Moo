@@ -1042,6 +1042,7 @@ MonoBehaviour:
   grenadePrefab: {fileID: 0}
   projectileSpeed: 3
   triggerTimeout: 0.5
+  weaponDamage: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!1001 &1353232004
@@ -1116,6 +1117,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6862490329964037916, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3211173712449043039, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1171,10 +1176,6 @@ PrefabInstance:
     - target: {fileID: 6556664954144672361, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
       propertyPath: m_Name
       value: Grass
-      objectReference: {fileID: 0}
-    - target: {fileID: 6862490329964037916, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
@@ -1965,6 +1966,10 @@ PrefabInstance:
       propertyPath: upgradeSystem
       value: 
       objectReference: {fileID: 227210179}
+    - target: {fileID: 1812396143857026354, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d8df26a374c877418d8546cbecba4f3, type: 2}
     - target: {fileID: 5699320511812938249, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_Layer
       value: 8
