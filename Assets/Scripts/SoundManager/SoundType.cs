@@ -2,9 +2,21 @@
 {
     public enum SoundType
     {
-        LaserShot = 1,
-        EnemyKilled = 2,
-        BackgroundTheme = 3,
-        MusicRoom = 4
+        NoSound = 0,
+
+        //Sounds
+        LaserShot = 1000,
+        EnemyKilled = 1001,
+
+        //UI Sound
+
+        //Music
+        BackgroundTheme = 3000,
+        MusicRoom = 3001,
+        Music1 = 3002,
+        Music2 = 3003,
+        Music3 = 3004,
+        Music4 = 3005,
+        Music5 = 3006
     }
 }
