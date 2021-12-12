@@ -1,29 +1,39 @@
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 public class MusicRoom : MonoBehaviour
 {
+    public SoundTypeWithPlaybackSettings Sound;
+
+    [HideInInspector]
+    public Audio Audio;
+
     public bool IsInside { get; private set; } 
 
     public int ColliderCount { get; private set; }
 
-    void OnTriggerEnter(Collider other)
+    private AudioManager _audioManager;
+
+    private void Start()
     {
-        var player = other.gameObject.GetComponent<Player>();
-        if (player != null)
-        {
-            ColliderCount++;
-            UpdateState();            
-        }
+        _audioManager = AudioManager.Instance;
+        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         var player = other.gameObject.GetComponent<Player>();
-        if (player != null)
-        {
-            ColliderCount--;
-            UpdateState();
-        }
+        if (player == null) return;
+        ColliderCount++;
+        UpdateState();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        var player = other.gameObject.GetComponent<Player>();
+        if (player == null) return;
+        ColliderCount--;
+        UpdateState();
     }
 
     private void UpdateState()
@@ -32,17 +42,23 @@ public class MusicRoom : MonoBehaviour
         {
             IsInside = false;
 
-            var audioManager = FindObjectOfType<AudioManager>();
-            audioManager?.Pause(Assets.Scripts.SoundManager.SoundType.MusicRoom);
-            audioManager?.Play(Assets.Scripts.SoundManager.SoundType.BackgroundTheme);
+            Audio.Pause();
+            //TODO: add there way to play other music or invoke some event handler
         }
-        else if(ColliderCount > 0 && !IsInside)
+        else if (ColliderCount > 0 && !IsInside)
         {
             IsInside = true;
 
-            var audioManager = FindObjectOfType<AudioManager>();
-            audioManager?.Pause(Assets.Scripts.SoundManager.SoundType.BackgroundTheme);
-            audioManager?.Play(Assets.Scripts.SoundManager.SoundType.MusicRoom);
+            if (!Audio.IsPlaying)
+            {
+                Audio.Play();
+            }
+            else
+            {
+                Audio.UnPause();
+            }
+
+            //TODO: add there way to pause other music or invoke some event handler
         }
     }
 }
