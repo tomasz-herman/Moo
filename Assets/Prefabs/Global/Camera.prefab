@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followed: {fileID: 0}
-  toTarget: {x: 0, y: -7, z: -7}
+  toTarget: {x: 0, y: -10, z: -10}
 --- !u!114 &7736414036657206685
 MonoBehaviour:
   m_ObjectHideFlags: 0
