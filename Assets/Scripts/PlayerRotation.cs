@@ -22,8 +22,7 @@ public class PlayerRotation : MonoBehaviour
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             var plane = new Plane(Vector3.up, transform.position);
-            float distance;
-            if (plane.Raycast(ray, out distance))
+            if (plane.Raycast(ray, out float distance))
             {
                 Vector3 lookAt = ray.GetPoint(distance);
                 gameObject.transform.LookAt(lookAt);
