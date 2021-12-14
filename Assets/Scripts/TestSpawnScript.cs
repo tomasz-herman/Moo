@@ -53,10 +53,12 @@ public class TestSpawnScript : MonoBehaviour
             exits = newChamber.Exits;
             int ind = FindGoodRandomIndex(exits, current);
             door = exits[ind];
-            RandomAddSideChambers(exits, current, ind);
+            var addedDoor = RandomAddSideChambers(exits, current, ind);
 
-            //exits.Clear();
-            //exits.Add(door);
+            exits.Clear();
+            exits.Add(door);
+            if (addedDoor != null)
+                exits.Add(addedDoor);
         }
 
         exits.Clear();
@@ -84,10 +86,10 @@ public class TestSpawnScript : MonoBehaviour
         newChamber.Enemies.Add(en);
     }
 
-    private void RandomAddSideChambers(List<Door> exits, (int x, int y) current, int excludedIndex = -1)
+    private Door RandomAddSideChambers(List<Door> exits, (int x, int y) current, int excludedIndex = -1)
     {
         if (Random.value < 0.5f)
-            return;
+            return null;
 
         int ind = FindGoodRandomIndex(exits, current, excludedIndex);
         if (ind != -1)
@@ -100,7 +102,9 @@ public class TestSpawnScript : MonoBehaviour
             var newChamber = newRoom.GetComponent<Chamber>();
             PlaceChamberOnCorridor(newCorridorPlacement, newRoom, newChamber);
             newChamber.Exits.Clear();
+            return door;
         }
+        return null;
     }
 
     private int FindGoodRandomIndex(List<Door> doors, (int x, int y) current, int excludedIndex = -1)
