@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades
 {
-    class WeaponDamageUpgrade : UpgradeView
+    public class WeaponDamageUpgrade : UpgradeView
     {
+        private float bonus = 2f;
         private readonly Player Player;
         public WeaponDamageUpgrade(Player player, Sprite sprite)
             : base("Weapon damage", "Increase damage", sprite)
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Upgrades
 
         public override UpgradeType CommitUpdate()
         {
-            Player.shooting.weaponDamage += 2f;
+            Player.shooting.weaponDamage += bonus;
             return UpgradeType.WeaponDamage;
         }
     }

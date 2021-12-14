@@ -9,6 +9,7 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxHealthUpgrade : UpgradeView
     {
+        private int bonus = 50;
         private readonly Player Player;
         public MaxHealthUpgrade(Player player, Sprite sprite) 
             : base("Max health", "Increase max health", sprite) 
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Upgrades
 
         public override UpgradeType CommitUpdate()
         {
-            Player.healthSystem.MaxHealth += 100;
+            Player.healthSystem.MaxHealth += bonus;
             return UpgradeType.MaxHealth;
         }
     }

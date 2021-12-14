@@ -7,8 +7,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades
 {
-    class ShootingSpeedUpdate : UpgradeView
+    public class ShootingSpeedUpdate : UpgradeView
     {
+        private float bonus = 0.1f;
+
         private readonly Player Player;
         public ShootingSpeedUpdate(Player player, Sprite sprite)
             : base("Shooting speed", "Increase shooting speed", sprite)
@@ -18,7 +20,7 @@ namespace Assets.Scripts.Upgrades
 
         public override UpgradeType CommitUpdate()
         {
-            Player.shooting.triggerTimeout -= 0.05f;
+            Player.shooting.triggerTimeout *= (1 - bonus);
             return UpgradeType.ShootingSpeed;
         }
     }

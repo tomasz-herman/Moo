@@ -9,6 +9,8 @@ namespace Assets.Scripts.Upgrades
 {
     public class MovementSpeedUpdate : UpgradeView
     {
+        private float bonus = 0.2f;
+
         private readonly Player Player;
         public MovementSpeedUpdate(Player player, Sprite sprite)
             : base("Movement speed", "Increase movement speed", sprite)
@@ -18,7 +20,7 @@ namespace Assets.Scripts.Upgrades
 
         public override UpgradeType CommitUpdate()
         {
-            Player.movement.Speed += 0.2f;
+            Player.movement.Speed += bonus;
             return UpgradeType.MovementSpeed;
         }
     }
