@@ -6,7 +6,7 @@ public enum UpgradeType
 {
     MaxHealth, MaxAmmo, MovementSpeed,
     PistolDamage, PistolProjectileSpeed, PistolCooldown,
-    ShotgunDamage, ShotgunProjectileSpeed, ShotgunCooldown,
+    ShotgunDamage, ShotgunProjectileSpeed, ShotgunCooldown, ShotgunProjectileCount,
     MachineGunDamage, MachineGunProjectileSpeed, MachineGunCooldown,
     GrenadeLauncherDamage, GrenadeLauncherProjectileSpeed, GrenadeLauncherCooldown,
     SwordDamage, SwordProjectileSpeed, SwordCooldown

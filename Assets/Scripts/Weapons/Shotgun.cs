@@ -13,7 +13,7 @@ namespace Assets.Scripts.Weapons
         private Color color = Color.yellow;
 
         private float scatterFactor = 10f;
-        protected int projectileCount => 10;
+        public int projectileCount { get; set; } = 10;
 
         public override float projectileSpeed { get; set; } = 3f;
         public override float triggerTimeout { get; set; } = 5f;

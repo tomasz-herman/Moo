@@ -54,11 +54,14 @@ public class UpgradeSystem : MonoBehaviour
         var views = new UpgradeView[3];
 
         var upgradeTypes = Enum.GetValues(typeof(UpgradeType));
+        var isAdded = new bool[upgradeTypes.Length];
 
-        //TODO: random different upgrades
         for (int i = 0; i < 3; i++)
         {
-            var type = (UpgradeType)upgradeTypes.GetValue(Utils.NumberBetween(0, upgradeTypes.Length - 1));
+            var index = Utils.NumberBetween(0, upgradeTypes.Length - 1);
+            var type = (UpgradeType)upgradeTypes.GetValue(index);
+            if (isAdded[index]) continue;
+
             views[i] = upgradesProvider.GetUpgrade(type);
         }
 
