@@ -60,8 +60,13 @@ public class UpgradeSystem : MonoBehaviour
         {
             var index = Utils.NumberBetween(0, upgradeTypes.Length - 1);
             var type = (UpgradeType)upgradeTypes.GetValue(index);
-            if (isAdded[index]) continue;
+            if (isAdded[index])
+            {
+                i--;
+                continue;
+            }
 
+            isAdded[index] = true;
             views[i] = upgradesProvider.GetUpgrade(type);
         }
 

@@ -184,7 +184,9 @@ MonoBehaviour:
   movementSpeedIcon: {fileID: 21300000, guid: 80e5ef45856663448ae39543560b6093, type: 3}
   weaponDamageIcon: {fileID: 21300000, guid: 13bd3c62a964f864d88dc4cf698de040, type: 3}
   weaponProjectileSpeedIcon: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
-  weaponCooldownIcon: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
+  weaponCooldownIcon: {fileID: 21300000, guid: 0c411a9f8544b61458d7e501f1c4a77b, type: 3}
+  shotgunProjectileCountIcon: {fileID: 21300000, guid: 37c38d8a4c2036648b09de0be2352d42, type: 3}
+  shotgunProjectileDispersionIcon: {fileID: 21300000, guid: eb4a92dd8655fa34297fe19dc0d782d8, type: 3}
 --- !u!1 &5699320512156656962
 GameObject:
   m_ObjectHideFlags: 0

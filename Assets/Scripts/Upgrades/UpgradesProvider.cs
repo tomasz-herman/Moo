@@ -13,6 +13,8 @@ public class UpgradesProvider : MonoBehaviour
     [SerializeField] Sprite weaponDamageIcon;
     [SerializeField] Sprite weaponProjectileSpeedIcon;
     [SerializeField] Sprite weaponCooldownIcon;
+    [SerializeField] Sprite shotgunProjectileCountIcon;
+    [SerializeField] Sprite shotgunProjectileDispersionIcon;
 
     private HealthSystem healthSystem;
     private AmmoSystem ammoSystem;
@@ -44,18 +46,15 @@ public class UpgradesProvider : MonoBehaviour
         dict.Add(UpgradeType.GrenadeLauncherProjectileSpeed, new GrenadeLauncherProjectileSpeedUpgrade(shootingSystem.GrenadeLauncher, weaponProjectileSpeedIcon));
         dict.Add(UpgradeType.SwordProjectileSpeed, new SwordProjectileSpeedUpgrade(shootingSystem.Sword, weaponProjectileSpeedIcon));
 
-        //TODO: add cooldown upgrade icon
         dict.Add(UpgradeType.PistolCooldown, new PistolCooldownUpgrade(shootingSystem.Pistol, weaponCooldownIcon));
         dict.Add(UpgradeType.ShotgunCooldown, new ShotgunCooldownUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
         dict.Add(UpgradeType.MachineGunCooldown, new MachineGunCooldownUpgrade(shootingSystem.MachineGun, weaponCooldownIcon));
         dict.Add(UpgradeType.GrenadeLauncherCooldown, new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon));
         dict.Add(UpgradeType.SwordCooldown, new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon));
 
-        //TODO: add shotgun projectile count icon
-        dict.Add(UpgradeType.ShotgunProjectileCount, new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
+        dict.Add(UpgradeType.ShotgunProjectileCount, new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon));
 
-        //TODO: add shotgun projectile dispersion icon
-        dict.Add(UpgradeType.ShotgunProjectileDispersion, new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
+        dict.Add(UpgradeType.ShotgunProjectileDispersion, new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon));
 
         //rewrite values into array to improve performance
         upgrades = new UpgradeView[dict.Count];
