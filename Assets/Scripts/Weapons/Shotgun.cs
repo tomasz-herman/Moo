@@ -12,7 +12,7 @@ namespace Assets.Scripts.Weapons
         private readonly Bullet bulletPrefab;
         private Color color = Color.yellow;
 
-        private float scatterFactor = 10f;
+        public float scatterFactor { get; set; } = 10f;
         public int projectileCount { get; set; } = 10;
 
         public override float projectileSpeed { get; set; } = 3f;
