@@ -51,10 +51,12 @@ public class TestSpawnScript : MonoBehaviour
             newChamber = newRoom.GetComponent<Chamber>();
             PlaceChamberOnCorridor(newCorridorPlacement, newRoom, newChamber);
             exits = newChamber.Exits;
-            door = exits[FindGoodRandomIndex(exits, current)];
+            int ind = FindGoodRandomIndex(exits, current);
+            door = exits[ind];
+            RandomAddSideChambers(exits, current, ind);
 
-            exits.Clear();
-            exits.Add(door);
+            //exits.Clear();
+            //exits.Add(door);
         }
 
         exits.Clear();
@@ -82,12 +84,34 @@ public class TestSpawnScript : MonoBehaviour
         newChamber.Enemies.Add(en);
     }
 
-    private int FindGoodRandomIndex(List<Door> doors, (int x, int y) current)
+    private void RandomAddSideChambers(List<Door> exits, (int x, int y) current, int excludedIndex = -1)
+    {
+        if (Random.value < 0.5f)
+            return;
+
+        int ind = FindGoodRandomIndex(exits, current, excludedIndex);
+        if (ind != -1)
+        {
+            var door = exits[ind];
+            (int x, int y) tempCurrent = (current.x + (int)door.transform.forward.x, current.y + (int)door.transform.forward.z);
+            var newCorridorPlacement = Instantiate(Corridors[Mathf.FloorToInt(Random.Range(0, Corridors.Count))], door.transform.position - door.transform.forward, door.transform.rotation).GetComponent<CorridorPlacement>();
+            var newRoom = Instantiate(Chambers[Mathf.FloorToInt(Random.Range(0, Chambers.Count))], Vector3.zero, Quaternion.identity);
+            taken.Add((tempCurrent.x, tempCurrent.y));
+            var newChamber = newRoom.GetComponent<Chamber>();
+            PlaceChamberOnCorridor(newCorridorPlacement, newRoom, newChamber);
+            newChamber.Exits.Clear();
+        }
+    }
+
+    private int FindGoodRandomIndex(List<Door> doors, (int x, int y) current, int excludedIndex = -1)
     {
         foreach (int ind in GetRandomOrder(doors.Count))
         {
             if (!taken.Contains((current.x + (int)doors[ind].transform.forward.x, current.y + (int)doors[ind].transform.forward.z)))
-                return ind;
+                if (ind == excludedIndex)
+                    continue;
+                else
+                    return ind;
         }
         return -1;
     }
