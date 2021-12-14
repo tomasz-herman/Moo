@@ -6,14 +6,27 @@ public class Ammo : Entity
 {
     [SerializeField] int minAmmo;
     [SerializeField] int maxAmmo;
-
+    private int remainingAmmo;
+    private void Awake()
+    {
+        remainingAmmo = Utils.NumberBetween(minAmmo, maxAmmo);
+    }
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            player.ammoSystem.Ammo += Utils.NumberBetween(minAmmo, maxAmmo);
-            Destroy(gameObject);
+            var playerCapacity = player.ammoSystem.MaxAmmo - player.ammoSystem.Ammo;
+            if (playerCapacity > remainingAmmo)
+            {
+                player.ammoSystem.Ammo += remainingAmmo;
+                Destroy(gameObject);
+            }
+            else
+            {
+                player.ammoSystem.Ammo += playerCapacity;
+                remainingAmmo -= playerCapacity;
+            }
         }
     }
 }
