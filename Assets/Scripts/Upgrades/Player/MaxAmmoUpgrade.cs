@@ -10,16 +10,16 @@ namespace Assets.Scripts.Upgrades
     public class MaxAmmoUpgrade : UpgradeView
     {
         private int bonus = 50;
-        private readonly Player Player;
-        public MaxAmmoUpgrade(Player player, Sprite sprite)
+        private readonly AmmoSystem ammoSystem;
+        public MaxAmmoUpgrade(AmmoSystem ammosystem, Sprite sprite)
             : base("Max ammo", "Increase max ammo", sprite)
         {
-            Player = player;
+            ammoSystem = ammosystem;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            Player.ammoSystem.MaxAmmo += bonus;
+            ammoSystem.MaxAmmo += bonus;
             return UpgradeType.MaxAmmo;
         }
     }

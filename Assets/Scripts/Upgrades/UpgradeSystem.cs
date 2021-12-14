@@ -15,11 +15,11 @@ public class UpgradeSystem : MonoBehaviour
     private Dictionary<UpgradeType, int> upgrades = new Dictionary<UpgradeType, int>();
     public event EventHandler<(UpgradeType type, int Count)> Upgraded;
 
-    private UpgradeIconsProvider iconProvider;
+    private UpgradesProvider upgradesProvider;
 
     void Awake()
     {
-        iconProvider = GetComponent<UpgradeIconsProvider>();
+        upgradesProvider = GetComponent<UpgradesProvider>();
     }
 
     public void AddUpgrade()
@@ -40,7 +40,6 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Upgrade(UpgradeView upgrade)
     {
-        //TODO: ammo
         var upgradetype = upgrade.CommitUpdate();
 
         if (upgrades.ContainsKey(upgradetype))
@@ -60,7 +59,7 @@ public class UpgradeSystem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             var type = (UpgradeType)upgradeTypes.GetValue(Utils.NumberBetween(0, upgradeTypes.Length - 1));
-            views[i] = GetUpdateView(type);
+            views[i] = upgradesProvider.GetUpgrade(type);
         }
 
         return views;
@@ -71,22 +70,4 @@ public class UpgradeSystem : MonoBehaviour
         return upgrades.Select(stat => (stat.Key, stat.Value));
     }
 
-    private UpgradeView GetUpdateView(UpgradeType type)
-    {
-        switch (type)
-        {
-            case UpgradeType.MaxHealth:
-                return new MaxHealthUpgrade(player, iconProvider.GetIcon(UpgradeType.MaxHealth));
-            case UpgradeType.MaxAmmo:
-                return new MaxAmmoUpgrade(player, iconProvider.GetIcon(UpgradeType.MaxAmmo));
-            case UpgradeType.MovementSpeed:
-                return new MovementSpeedUpdate(player, iconProvider.GetIcon(UpgradeType.MovementSpeed));
-            case UpgradeType.ShootingSpeed:
-                return new ShootingSpeedUpdate(player, iconProvider.GetIcon(UpgradeType.ShootingSpeed));
-            case UpgradeType.WeaponDamage:
-                return new WeaponDamageUpgrade(player, iconProvider.GetIcon(UpgradeType.WeaponDamage));
-            default:
-                throw new Exception("Upgrade type not implemented");
-        }
-    }
 }

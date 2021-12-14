@@ -12,9 +12,9 @@ namespace Assets.Scripts.Weapons
         private readonly Projectile projectilePrefab;
         private Color color = Color.red;
 
-        protected override float projectileSpeed => 1f;
-        protected override float triggerTimeout => 1f;
-        protected override float baseDamage => 1f;
+        public override float projectileSpeed { get; set; } = 1f;
+        public override float triggerTimeout { get; set; } = 1f;
+        public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 1;
 
         public Pistol(Projectile projectileprefab)

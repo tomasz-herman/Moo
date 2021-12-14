@@ -4,5 +4,10 @@ using UnityEngine;
 
 public enum UpgradeType
 {
-    MaxHealth, MaxAmmo, MovementSpeed, ShootingSpeed, WeaponDamage
+    MaxHealth, MaxAmmo, MovementSpeed,
+    PistolDamage, PistolProjectileSpeed, PistolCooldown,
+    ShotgunDamage, ShotgunProjectileSpeed, ShotgunCooldown,
+    MachineGunDamage, MachineGunProjectileSpeed, MachineGunCooldown,
+    GrenadeLauncherDamage, GrenadeLauncherProjectileSpeed, GrenadeLauncherCooldown,
+    SwordDamage, SwordProjectileSpeed, SwordCooldown
 }
