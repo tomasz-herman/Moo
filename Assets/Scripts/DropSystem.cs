@@ -21,9 +21,9 @@ public class DropSystem : MonoBehaviour
         if (rand <= dropUpgradeChance)
             Instantiate(dropItem, transform.position, transform.rotation);
         else if (rand <= dropUpgradeChance + dropAmmoChance)
-            Instantiate(ammoPrefab, transform.position + Vector3.up / 2, transform.rotation);
+            Instantiate(ammoPrefab, transform.position, transform.rotation);
         else if (rand <= dropUpgradeChance + dropAmmoChance + dropHealthChance)
-            Instantiate(healthPrefab, transform.position + Vector3.up / 2, transform.rotation);
+            Instantiate(healthPrefab, transform.position, transform.rotation);
     }
 }
 
