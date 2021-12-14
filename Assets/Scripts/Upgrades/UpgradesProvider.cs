@@ -54,6 +54,8 @@ public class UpgradesProvider : MonoBehaviour
         //TODO: add shotgun projectile count icon
         dict.Add(UpgradeType.ShotgunProjectileCount, new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
 
+        //TODO: add shotgun projectile dispersion icon
+        dict.Add(UpgradeType.ShotgunProjectileDispersion, new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
 
         //rewrite values into array to improve performance
         upgrades = new UpgradeView[dict.Count];
