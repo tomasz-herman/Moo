@@ -25,13 +25,10 @@ namespace Assets.Scripts.Weapons
         }
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (projectilePrefab != null)
-            {
-                Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
-                projectile.color = color;
-                var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
-                projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
-            }
+            Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+            projectile.color = color;
+            var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
+            projectile.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
         }
     }
 }

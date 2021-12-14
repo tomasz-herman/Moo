@@ -23,12 +23,9 @@ namespace Assets.Scripts.Weapons
         }
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            if (grenadePrefab != null)
-            {
-                Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
-                grenade.color = color;
-                grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
-            }
+            Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
+            grenade.color = color;
+            grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
         }
     }
 }
