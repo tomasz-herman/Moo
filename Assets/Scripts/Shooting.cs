@@ -1,7 +1,5 @@
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
@@ -26,7 +24,7 @@ public class Shooting : MonoBehaviour
     public GrenadeLauncher GrenadeLauncher => new GrenadeLauncher(grenadePrefab);
     public Sword Sword => new Sword(bladePrefab);
 
-    void Awake()
+    void Start()
     {
         weapons.Add(Pistol);
         weapons.Add(Shotgun);
@@ -34,20 +32,24 @@ public class Shooting : MonoBehaviour
         weapons.Add(GrenadeLauncher);
         weapons.Add(Sword);
     }
+
     void Update()
     {
         weapons.Current().DecreaseTime();
     }
+
     public void NextWeapon()
     {
         weapons.Next();
         weaponBar.SlotUp();
     }
+
     public void PrevWeapon()
     {
         weapons.Prev();
         weaponBar.SlotDown();
     }
+
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
