@@ -125,6 +125,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="volume">The target volume.</param>
         public void Play(float volume)
         {
+            if (_disposed) return;
+
             if (SoundType == SoundType.NoSound) return;
 
             // Recreate audio source if it does not exist
@@ -156,6 +158,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="volumeScale">The scale of the volume (0-1).</param>
         public void PlayOneShot(float volumeScale)
         {
+            if (_disposed) return;
+
             if (SoundType == SoundType.NoSound) return;
 
             // Recreate audio source if it does not exist
@@ -190,6 +194,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="volume">The target volume.</param>
         public void PlayDelayed(float delay, float volume)
         {
+            if (_disposed) return;
+
             if (SoundType == SoundType.NoSound) return;
 
             // Recreate audio source if it does not exist
@@ -227,6 +233,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="volume">The target volume.</param>
         public void PlayScheduled(double time, float volume)
         {
+            if (_disposed) return;
+
             if (SoundType == SoundType.NoSound) return;
 
             // Recreate audio source if it does not exist
@@ -265,6 +273,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="forceStop">If true all audio will stop immediately. If false music will fade out with their own fade out seconds.</param>
         public void Stop(bool forceStop = false)
         {
+            if (_disposed || Source == null) return;
+
             if (forceStop)
             {
                 Source.Stop();
@@ -287,6 +297,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="fadeOutSeconds">How many seconds it needs for the audio to fade out and stop.</param>
         public void Stop(float fadeOutSeconds)
         {
+            if (_disposed || Source == null) return;
+
             _fadeInterpolator = 0f;
             _onFadeStartVolume = PlaybackSettings.Volume;
             _tempFadeSeconds = fadeOutSeconds;
@@ -300,8 +312,7 @@ namespace Assets.Scripts.SoundManager
         /// </summary>
         public void Pause()
         {
-            if (!IsPlaying)
-                return;
+            if (_disposed || !IsPlaying || Source == null) return;
 
             Source.Pause();
             IsPaused = true;
@@ -312,8 +323,7 @@ namespace Assets.Scripts.SoundManager
         /// </summary>
         public void UnPause()
         {
-            if (!IsPlaying)
-                return;
+            if (_disposed || !IsPlaying || Source == null) return;
 
             Source.UnPause();
             IsPaused = false;
@@ -346,6 +356,8 @@ namespace Assets.Scripts.SoundManager
         /// <param name="startVolume">Immediately set the volume to this value before beginning the fade.</param>
         public void SetVolume(float volume, float fadeSeconds, float startVolume)
         {
+            if (_disposed) return;
+
             _targetVolume = Mathf.Clamp01(volume);
             _fadeInterpolator = 0;
             _onFadeStartVolume = Mathf.Clamp01(startVolume);
@@ -357,10 +369,7 @@ namespace Assets.Scripts.SoundManager
         /// </summary>
         public void Update()
         {
-            if (Source == null)
-            {
-                return;
-            }
+            if (Source == null || _disposed) return; ;
 
             IsInitialized = true;
 
@@ -410,8 +419,7 @@ namespace Assets.Scripts.SoundManager
 
         public void Dispose()
         {
-            if (_disposed)
-                return;
+            if (_disposed) return;
 
             _disposed = true;
             _audioManager.DeleteAudio(AudioType, Id);
@@ -420,6 +428,8 @@ namespace Assets.Scripts.SoundManager
 
         private void CreateAudioSource()
         {
+            if (_disposed) return;
+
             Source = SourceTransform.gameObject.AddComponent<AudioSource>();
             Source.clip = Clip;
             Source.mute = Mute;
