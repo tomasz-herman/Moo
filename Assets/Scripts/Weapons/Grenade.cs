@@ -1,6 +1,5 @@
+using Assets.Scripts.SoundManager;
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Grenade : ProjectileBase
@@ -15,8 +14,28 @@ public class Grenade : ProjectileBase
     protected override float baseDamage => 50f;
     private float extraDamage = 0;
 
+    public SoundTypeWithPlaybackSettings Sound { get; protected set; }
+
+    public Audio Audio { get; protected set; }
+
+    protected AudioManager AudioManager;
+
     void Start()
     {
+        var soundType = SoundType.GrenadeExplosion;
+        AudioManager = AudioManager.Instance;
+        Sound = new SoundTypeWithPlaybackSettings
+        {
+            SoundType = soundType,
+            PlaybackSettings = new PlaybackSettings
+            {
+                SpatialBlend = 1f,
+                Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
+            }
+        };
+
+        Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
+
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 
@@ -48,11 +67,17 @@ public class Grenade : ProjectileBase
             {
                 isExplosing = true;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
+                Audio?.Play();
             }
 
             var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
             var damage = (baseDamage + extraDamage) / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
             ApplyDamage(other, damage);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Audio?.Dispose();
     }
 }
