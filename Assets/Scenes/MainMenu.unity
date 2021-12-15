@@ -1936,16 +1936,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 1178765355}
   m_HandleRect: {fileID: 1596331794}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 555157086}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
-        m_MethodName: SetEffectsVolume
+        m_MethodName: SetSoundVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2669,6 +2669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicMixer: {fileID: 24100000, guid: 59f3b5c56e987914598eac424b881464, type: 2}
   soundMixer: {fileID: 24100000, guid: 092c2c0eafc924f4aa0ecbbf7a8e4358, type: 2}
+  uiSoundMixer: {fileID: 24100000, guid: f7035baefc2df644884f2f97e104a793, type: 2}
   qualityDropdown: {fileID: 619649712}
   resolutionDropdown: {fileID: 1761129303}
   fullscreenToggle: {fileID: 653385356}
@@ -7639,10 +7640,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 734237846}
   m_HandleRect: {fileID: 792477679}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
