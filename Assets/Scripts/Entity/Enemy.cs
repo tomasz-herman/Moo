@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -9,19 +8,47 @@ public class Enemy : Entity
     public float dropChance = 0.5f;
     public Vector3 summonPos1, summonPos2;
     public int pointsForKill = 1;
-    
+
     public HealthSystem healthSystem;
-    
+
     public UnityEngine.Events.UnityEvent KillEvent;
+
+    public SoundTypeWithPlaybackSettings Sound;
+
+    [HideInInspector]
+    public Audio Audio;
+
+    private AudioManager _audioManager;
+
+    void Awake()
+    {
+        Sound = new SoundTypeWithPlaybackSettings
+        {
+            SoundType = SoundType.EnemyKilled,
+            PlaybackSettings = new PlaybackSettings
+            {
+                SpatialBlend = 1f,
+                Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.EnemyKilled)
+            }
+        };
+    }
 
     void Start()
     {
+        _audioManager = AudioManager.Instance;
+        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
         healthSystem = GetComponent<HealthSystem>();
+    }
+
+    void OnDestroy()
+    {
+        Audio?.Dispose();
     }
 
     public void TakeDamage(float damage, ScoreSystem system = null)
     {
         healthSystem.Health -= damage;
+        Audio.PlayOneShot();
         if (healthSystem.Health > 0) return;
         Die(system);
     }
@@ -43,6 +70,5 @@ public class Enemy : Entity
         FindObjectOfType<DamagePostProcessing>().ApplyVignette();
 
         KillEvent.Invoke();
-
     }
 }
