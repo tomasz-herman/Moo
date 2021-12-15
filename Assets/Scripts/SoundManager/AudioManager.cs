@@ -25,7 +25,7 @@ namespace Assets.Scripts.SoundManager
 
         public AudioMixerGroup SoundMixer;
         public AudioMixerGroup UISoundMixer;
-        public AudioMixerGr MusicMixer;
+        public AudioMixerGroup MusicMixer;
 
         private Dictionary<int, Audio> Sounds;
         private Dictionary<int, Audio> UISounds;
