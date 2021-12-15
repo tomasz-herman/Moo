@@ -59,6 +59,7 @@ MonoBehaviour:
       Max3DDistance: 0
       FadeInSeconds: 0
       FadeOutSeconds: 0
+      UseDefault: 1
   - SoundType: 3003
     PlaybackSettings:
       Volume: 0
@@ -74,6 +75,7 @@ MonoBehaviour:
       Max3DDistance: 0
       FadeInSeconds: 0
       FadeOutSeconds: 0
+      UseDefault: 1
   - SoundType: 3004
     PlaybackSettings:
       Volume: 0
@@ -89,6 +91,7 @@ MonoBehaviour:
       Max3DDistance: 0
       FadeInSeconds: 0
       FadeOutSeconds: 0
+      UseDefault: 1
   - SoundType: 3005
     PlaybackSettings:
       Volume: 0
@@ -104,6 +107,7 @@ MonoBehaviour:
       Max3DDistance: 0
       FadeInSeconds: 0
       FadeOutSeconds: 0
+      UseDefault: 1
   - SoundType: 3006
     PlaybackSettings:
       Volume: 0
@@ -119,4 +123,5 @@ MonoBehaviour:
       Max3DDistance: 0
       FadeInSeconds: 0
       FadeOutSeconds: 0
+      UseDefault: 1
   SwitchType: 0

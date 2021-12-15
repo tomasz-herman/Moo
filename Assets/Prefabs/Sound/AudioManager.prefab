@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ab611ea085bc54987df8153e4c626d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundMixer: {fileID: 24300002, guid: 092c2c0eafc924f4aa0ecbbf7a8e4358, type: 2}
+  UISoundMixer: {fileID: 24300002, guid: f7035baefc2df644884f2f97e104a793, type: 2}
+  MusicMixer: {fileID: 24300002, guid: 59f3b5c56e987914598eac424b881464, type: 2}
