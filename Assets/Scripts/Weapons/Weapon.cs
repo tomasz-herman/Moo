@@ -8,9 +8,9 @@ namespace Assets.Scripts.Weapons
     {
         protected ContinuousTrigger trigger = new ContinuousTrigger();
 
-        protected abstract float projectileSpeed { get; }
-        protected abstract float triggerTimeout { get; }
-        protected abstract float baseDamage { get; }
+        public abstract float projectileSpeed { get; set; }
+        public abstract float triggerTimeout { get; set; }
+        public abstract float baseDamage { get; set; }
         protected abstract int ammoConsumption { get; }
 
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }

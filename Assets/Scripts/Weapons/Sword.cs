@@ -13,9 +13,9 @@ namespace Assets.Scripts.Weapons
         private Color color = Color.green;
 
 
-        protected override float projectileSpeed => 2f;
-        protected override float triggerTimeout => 2f;
-        protected override float baseDamage => 1f;
+        public override float projectileSpeed { get; set; } = 2f;
+        public override float triggerTimeout { get; set; } = 2f;
+        public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 0;
 
         public Sword(Blade bladeprefab)
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Weapons
         {
             Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.Launch(shooter, direction.normalized, baseDamage, projectileSpeed * shooting.projectileSpeed);
+            blade.Launch(shooter, direction.normalized, shooting.weaponDamage * baseDamage, projectileSpeed * shooting.projectileSpeed);
         }
     }
 }

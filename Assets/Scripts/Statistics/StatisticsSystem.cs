@@ -10,7 +10,7 @@ public class StatisticsSystem : MonoBehaviour
     private Dictionary<StatisticType, float> statistics = new Dictionary<StatisticType, float>();
 
     public event EventHandler<(StatisticType type, double newValue)> StatisticUpdated;
-    void Start()
+    void Awake()
     {
         foreach(StatisticType type in Enum.GetValues(typeof(StatisticType)))
         {
