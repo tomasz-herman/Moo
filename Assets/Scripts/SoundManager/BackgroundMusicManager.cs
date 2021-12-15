@@ -101,15 +101,11 @@ namespace Assets.Scripts.SoundManager
             {
                 var music = BackgroundMusicQueue[i];
                 music.PlaybackSettings.Loop = false;
-                //_audioManager.CreateMusic(music.SoundType, music.PlaybackSettings);
-                BackgroundMusicAudio[i] = _audioManager.CreateMusic(music.SoundType, new PlaybackSettings());//TODO: tmp
+                BackgroundMusicAudio[i] = _audioManager.CreateMusic(music.SoundType, music.PlaybackSettings);
             }
 
             _currentlyPlayingIndex = -1;
             _nextPlayingIndex = -1;
-
-            //TODO: tmp
-            Play();
         }
 
         // Update is called once per frame
@@ -140,6 +136,12 @@ namespace Assets.Scripts.SoundManager
             }
         }
 
+        private void OnDestroy()
+        {
+            //TODO: there is some bug there when switch time comes
+            Stop(true);
+        }
+
         private static int GetNextAudioIndex(int currentlyPlayingIndex, int queueLength, BackgroundMusicSwitchType switchType)
         {
             switch (switchType)
@@ -147,10 +149,9 @@ namespace Assets.Scripts.SoundManager
                 case BackgroundMusicSwitchType.Linear:
                     return currentlyPlayingIndex + 1 < queueLength ? currentlyPlayingIndex + 1 : 0;
                 case BackgroundMusicSwitchType.Random:
-                    var next = Utils.NumberBetween(0, queueLength);
-                    //TODO: there is some bug here- fix it
-                    next = next == currentlyPlayingIndex ? next + 1 : next;
-                    return next < queueLength ? next : 0;
+                    var next = Utils.NumberBetween(0, queueLength - 1);
+                    next = next < currentlyPlayingIndex ? next : next + 1;
+                    return next;
                 default:
                     return currentlyPlayingIndex;
             }

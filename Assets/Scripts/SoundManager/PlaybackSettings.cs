@@ -15,7 +15,7 @@ namespace Assets.Scripts.SoundManager
         /// <summary>
         /// Whether the audio will be lopped. Default = false.
         /// </summary>
-        public bool Loop = false;
+        public bool Loop;
 
         /// <summary>
         /// The pitch of the audio. Default = 1.
@@ -33,25 +33,25 @@ namespace Assets.Scripts.SoundManager
         /// Sets how much this AudioSource is affected by 3D spatialisation calculations (attenuation, doppler etc). 0.0 makes the sound full 2D, 1.0 makes it full 3D. Default = 0.
         /// </summary>
         [Range(0f, 1f)]
-        public float SpatialBlend = 0f;
+        public float SpatialBlend;
 
         /// <summary>
         /// Pans a playing sound in a stereo way (left or right). This only applies to sounds that are Mono or Stereo. Default = 0.
         /// </summary>
         [Range(-1f, 1f)]
-        public float StereoPan = 0f;
+        public float StereoPan;
 
         /// <summary>
         /// The doppler scale of the audio. Default = 0.
         /// </summary>
         [Range(0f, 5f)]
-        public float DopplerLevel = 0f;
+        public float DopplerLevel;
 
         /// <summary>
         /// The spread angle (in degrees) of a 3d stereo or multichannel sound in speaker space. Default = 0;
         /// </summary>
         [Range(0f, 360f)]
-        public float Spread = 0f;
+        public float Spread;
 
         /// <summary>
         /// How the audio attenuates over distance. Default = Logarithmic.
@@ -74,13 +74,13 @@ namespace Assets.Scripts.SoundManager
         /// How many seconds it needs for the audio to fade in/ reach target volume (if higher than current). Default = 0.
         /// </summary>
         [Range(0f, 100f)]
-        public float FadeInSeconds = 0f;
+        public float FadeInSeconds;
 
         /// <summary>
         /// How many seconds it needs for the audio to fade out/ reach target volume (if lower than current). Default = 0.
         /// </summary>
         [Range(0f, 100f)]
-        public float FadeOutSeconds = 0f;
+        public float FadeOutSeconds;
 
         /// <summary>
         /// Ignore all settings and use default ones
@@ -98,9 +98,11 @@ namespace Assets.Scripts.SoundManager
                 return;
 
             if (UseDefault)
+            {
                 SetDefaultSettings();
+            }
 
-            audioSource.volume = Mathf.Clamp(Volume, 0f, 1f);
+            audioSource.volume = Mathf.Clamp01(Volume);
             audioSource.loop = Loop;
             audioSource.pitch = Mathf.Clamp(Pitch, -3f, 3f);
             audioSource.priority = Mathf.Clamp(Priority, 0, 256);
@@ -123,7 +125,7 @@ namespace Assets.Scripts.SoundManager
             StereoPan = 0f;
             DopplerLevel = 0f;
             Spread = 0f;
-            RolloffMode = AudioRolloffMode.Logarithmic;
+            RolloffMode = AudioRolloffMode.Linear;
             Min3DDistance = 1f;
             Max3DDistance = 500f;
             FadeInSeconds = 0f;
