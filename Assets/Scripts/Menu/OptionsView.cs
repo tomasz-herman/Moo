@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class OptionsView : MenuView
 {
-    [SerializeField] private AudioMixer musicMixer, soundMixer;
+    [SerializeField] private AudioMixer musicMixer, soundMixer, uiSoundMixer;
 
     [SerializeField] private TMP_Dropdown qualityDropdown, resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
@@ -41,14 +41,20 @@ public class OptionsView : MenuView
         fullscreenToggle.isOn = Screen.fullScreen;
     }
 
-    public void SetEffectsVolume(float volume)
+    public void SetSoundVolume(float volume)
     {
-        soundMixer.SetFloat("volume", volume);
+        soundMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetUISoundVolume(float volume)
+    {
+        //TODO: add slider in UI
+        uiSoundMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicMixer.SetFloat("volume", volume);
+        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
     }
 
     public void SetResolution(int resIdx)
