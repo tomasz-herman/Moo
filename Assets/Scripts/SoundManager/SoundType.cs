@@ -5,12 +5,11 @@
         NoSound = 0,
 
         //Sounds
-        LaserShot = 1000,
         EnemyKilled = 1001,
         GrenadeExplosion = 1002,
-        GrenadeLauncherShoot = 1003,
-        PistolSound = 1004,
-        ShotgunSound = 1005,
+        GrenadeLauncherShot = 1003,
+        PistolShot = 1004,
+        ShotgunShot = 1005,
 
 
         //UI Sound

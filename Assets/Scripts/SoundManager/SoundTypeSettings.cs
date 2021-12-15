@@ -10,9 +10,6 @@
             {
                 case SoundType.NoSound:
                     break;
-                case SoundType.LaserShot:
-                    volume = 0.5f;
-                    break;
                 case SoundType.EnemyKilled:
                     volume = 1f;
                     break;

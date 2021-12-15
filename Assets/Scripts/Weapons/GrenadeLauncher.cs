@@ -13,7 +13,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 10f;
         protected override int ammoConsumption => 7;
 
-        public GrenadeLauncher(Grenade grenadeprefab) : base(SoundType.GrenadeLauncherShoot)
+        public GrenadeLauncher(Grenade grenadeprefab) : base(SoundType.GrenadeLauncherShot)
         {
             grenadePrefab = grenadeprefab;
         }
