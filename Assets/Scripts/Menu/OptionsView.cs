@@ -15,6 +15,8 @@ public class OptionsView : MenuView
 
     private List<Resolution> resolutions;
 
+    private const float MixerVolumeMultiplier = 20f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -43,18 +45,18 @@ public class OptionsView : MenuView
 
     public void SetSoundVolume(float volume)
     {
-        soundMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        soundMixer.SetFloat("volume", CalculateMixerVolume(volume));
     }
 
     public void SetUISoundVolume(float volume)
     {
         //TODO: add slider in UI
-        uiSoundMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        uiSoundMixer.SetFloat("volume", CalculateMixerVolume(volume));
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        musicMixer.SetFloat("volume", CalculateMixerVolume(volume));
     }
 
     public void SetResolution(int resIdx)
@@ -77,5 +79,10 @@ public class OptionsView : MenuView
     public void Continue()
     {
         Menu.ShowMainMenu();
+    }
+
+    private static float CalculateMixerVolume(float volume)
+    {
+        return Mathf.Log10(volume) * MixerVolumeMultiplier;
     }
 }
