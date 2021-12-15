@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -19,10 +15,11 @@ namespace Assets.Scripts.Weapons
         protected override float baseDamage => 1f;
         protected override int ammoConsumption => 1;
 
-        public MachineGun(Projectile projectileprefab)
+        public MachineGun(Projectile projectileprefab) : base(SoundType.PistolSound)
         {
             projectilePrefab = projectileprefab;
         }
+
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             if (projectilePrefab != null)
