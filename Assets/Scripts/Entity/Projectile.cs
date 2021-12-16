@@ -1,6 +1,4 @@
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : ProjectileBase
@@ -10,14 +8,15 @@ public class Projectile : ProjectileBase
     protected override float baseDamage => 10f;
     private float extraDamage = 0;
 
-    void Start()
+    protected override void Start()
     {
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
+        base.Start();
     }
 
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
-        this.owner = owner;
+        this.Owner = owner;
         extraDamage = extradamage;
         GetComponent<Rigidbody>().velocity = velocity;
         gameObject.transform.LookAt(transform.position + velocity);
@@ -25,7 +24,7 @@ public class Projectile : ProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != owner)
+        if (other.gameObject != Owner)
         {
             ApplyDamage(other, baseDamage + extraDamage);
             Destroy(gameObject);
