@@ -7,5 +7,11 @@ namespace Assets.Scripts.SoundManager
     {
         public SoundType SoundType;
         public PlaybackSettings PlaybackSettings;
+
+        public SoundTypeWithPlaybackSettings()
+        {
+            SoundType = SoundType.NoSound;
+            PlaybackSettings = new PlaybackSettings();
+        }
     }
 }
