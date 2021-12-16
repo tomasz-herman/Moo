@@ -21,6 +21,7 @@ namespace Assets.Scripts.Weapons
 
         protected Weapon(SoundType soundType = SoundType.NoSound)
         {
+            //TODO: update this section when Weapon will derive from MonoBehaviour
             AudioManager = AudioManager.Instance;
             Sound = new SoundTypeWithPlaybackSettings
             {
