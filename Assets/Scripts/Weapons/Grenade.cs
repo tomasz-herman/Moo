@@ -14,29 +14,21 @@ public class Grenade : ProjectileBase
     protected override float baseDamage => 50f;
     private float extraDamage = 0;
 
-    public SoundTypeWithPlaybackSettings Sound { get; protected set; }
-
-    public Audio Audio { get; protected set; }
-
-    protected AudioManager AudioManager;
-
-    void Start()
+    protected override void Start()
     {
-        var soundType = SoundType.GrenadeExplosion;
-        AudioManager = AudioManager.Instance;
+        //TODO: move this to inspector when weapon will allow that
         Sound = new SoundTypeWithPlaybackSettings
         {
-            SoundType = soundType,
+            SoundType = SoundType.GrenadeExplosion,
             PlaybackSettings = new PlaybackSettings
             {
                 SpatialBlend = 1f,
-                Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
+                Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.GrenadeExplosion)
             }
         };
 
-        Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
-
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
+        base.Start();
     }
 
     protected override void Update()
@@ -50,24 +42,15 @@ public class Grenade : ProjectileBase
             gameObject.transform.localScale += explosionSpeed * Time.deltaTime * Vector3.one;
     }
 
-    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
-    {
-        this.owner = owner;
-        extraDamage = extradamage;
-        GetComponent<Rigidbody>().velocity = velocity;
-        gameObject.transform.LookAt(transform.position + velocity);
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != owner)
+        if (other.gameObject != Owner)
         {
             if (!isExplosing)
             {
                 isExplosing = true;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
-                Audio?.Play();
+                PlaySound();
             }
 
             var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
@@ -79,5 +62,13 @@ public class Grenade : ProjectileBase
     private void OnDestroy()
     {
         Audio?.Dispose();
+    }
+
+    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
+    {
+        this.Owner = owner;
+        extraDamage = extradamage;
+        GetComponent<Rigidbody>().velocity = velocity;
+        gameObject.transform.LookAt(transform.position + velocity);
     }
 }
