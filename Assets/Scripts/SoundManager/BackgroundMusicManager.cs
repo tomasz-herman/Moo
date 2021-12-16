@@ -29,6 +29,57 @@ namespace Assets.Scripts.SoundManager
 
         private AudioManager _audioManager;
 
+        // Use this for initialization
+        private void Start()
+        {
+            _audioManager = AudioManager.Instance;
+            BackgroundMusicAudio = new Audio[BackgroundMusicQueue.Length];
+            for (int i = 0; i < BackgroundMusicQueue.Length; i++)
+            {
+                var music = BackgroundMusicQueue[i];
+                music.PlaybackSettings.Loop = false;
+                BackgroundMusicAudio[i] = _audioManager.CreateMusic(music.SoundType, music.PlaybackSettings);
+            }
+
+            _currentlyPlayingIndex = -1;
+            _nextPlayingIndex = -1;
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (!IsPlaying || IsPaused)
+            {
+                return;
+            }
+
+            var dspTime = AudioSettings.dspTime;
+            if (dspTime > _nextStartTime - 1)
+            {
+                _nextPlayingIndex = GetNextAudioIndex(_currentlyPlayingIndex, BackgroundMusicQueue.Length, SwitchType);
+                var nextAudio = BackgroundMusicAudio[_nextPlayingIndex];
+
+                nextAudio.PlayScheduled(_nextStartTime);
+
+                _nextStartTime += nextAudio.ClipDuration;
+            }
+            if (dspTime > _startTime)
+            {
+                if (_currentlyPlayingIndex != _nextPlayingIndex)
+                {
+                    _currentlyPlayingIndex = _nextPlayingIndex;
+                    _startTime += BackgroundMusicAudio[_currentlyPlayingIndex].ClipDuration;
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            //TODO: there is some bug there when switch time comes
+            Stop(true);
+        }
+
+
         /// <summary>
         /// Plays background music in 0.1 second
         /// </summary>
@@ -90,56 +141,6 @@ namespace Assets.Scripts.SoundManager
             {
                 BackgroundMusicAudio[_currentlyPlayingIndex].Stop(forceStop);
             }
-        }
-
-        // Use this for initialization
-        private void Start()
-        {
-            _audioManager = AudioManager.Instance;
-            BackgroundMusicAudio = new Audio[BackgroundMusicQueue.Length];
-            for (int i = 0; i < BackgroundMusicQueue.Length; i++)
-            {
-                var music = BackgroundMusicQueue[i];
-                music.PlaybackSettings.Loop = false;
-                BackgroundMusicAudio[i] = _audioManager.CreateMusic(music.SoundType, music.PlaybackSettings);
-            }
-
-            _currentlyPlayingIndex = -1;
-            _nextPlayingIndex = -1;
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {            
-            if (!IsPlaying || IsPaused)
-            {
-                return;
-            }
-
-            var dspTime = AudioSettings.dspTime;
-            if (dspTime > _nextStartTime - 1)
-            {
-                _nextPlayingIndex = GetNextAudioIndex(_currentlyPlayingIndex, BackgroundMusicQueue.Length, SwitchType);
-                var nextAudio = BackgroundMusicAudio[_nextPlayingIndex];
-
-                nextAudio.PlayScheduled(_nextStartTime);
-
-                _nextStartTime += nextAudio.ClipDuration;
-            }
-            if (dspTime > _startTime)
-            {
-                if (_currentlyPlayingIndex != _nextPlayingIndex)
-                {
-                    _currentlyPlayingIndex = _nextPlayingIndex;
-                    _startTime += BackgroundMusicAudio[_currentlyPlayingIndex].ClipDuration;
-                }
-            }
-        }
-
-        private void OnDestroy()
-        {
-            //TODO: there is some bug there when switch time comes
-            Stop(true);
         }
 
         private static int GetNextAudioIndex(int currentlyPlayingIndex, int queueLength, BackgroundMusicSwitchType switchType)
