@@ -10,6 +10,7 @@
         GrenadeLauncherShot = 1003,
         PistolShot = 1004,
         ShotgunShot = 1005,
+        SwordSwing = 1006,
 
 
         //UI Sound
