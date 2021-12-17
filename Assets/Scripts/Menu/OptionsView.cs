@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class OptionsView : MenuView
 {
-    [SerializeField] private AudioMixer musicMixer, soundMixer;
+    [SerializeField] private AudioMixer musicMixer, soundMixer, uiMixer;
 
     [SerializeField] private TMP_Dropdown qualityDropdown, resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
@@ -49,6 +49,11 @@ public class OptionsView : MenuView
     public void SetMusicVolume(float volume)
     {
         musicMixer.SetFloat("volume", volume);
+    }
+
+    public void SetUiVolume(float volume)
+    {
+        uiMixer.SetFloat("volume", volume);
     }
 
     public void SetResolution(int resIdx)
