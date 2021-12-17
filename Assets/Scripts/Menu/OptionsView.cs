@@ -12,6 +12,7 @@ public class OptionsView : MenuView
 
     [SerializeField] private TMP_Dropdown qualityDropdown, resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Slider musicSlider, soundSlider, uiSlider;
 
     private List<Resolution> resolutions;
 
@@ -21,24 +22,11 @@ public class OptionsView : MenuView
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(QualitySettings.names.ToList());
-        qualityDropdown.value = QualitySettings.GetQualityLevel();
 
         resolutions = Screen.resolutions.ToList();
         resolutions.Reverse();
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(resolutions.Select(res => res.ToString()).ToList());
-        Resolution current = Screen.currentResolution;
-        for(int i = 0; i < resolutions.Count; i++)
-        {
-            Resolution res = resolutions[i];
-            if(current.width == res.width && current.height == res.height)
-            {
-                resolutionDropdown.value = i;
-                break;
-            }
-        }
-
-        fullscreenToggle.isOn = Screen.fullScreen;
     }
 
     public void SetEffectsVolume(float volume)
@@ -54,6 +42,35 @@ public class OptionsView : MenuView
     public void SetUiVolume(float volume)
     {
         uiMixer.SetFloat("volume", volume);
+    }
+
+    private void OnEnable()
+    {
+        float volume;
+
+        uiMixer.GetFloat("volume", out volume);
+        uiSlider.value = volume;
+
+        musicMixer.GetFloat("volume", out volume);
+        musicSlider.value = volume;
+
+        soundMixer.GetFloat("volume", out volume);
+        soundSlider.value = volume;
+
+        fullscreenToggle.isOn = Screen.fullScreen;
+
+        Resolution current = Screen.currentResolution;
+        for (int i = 0; i < resolutions.Count; i++)
+        {
+            Resolution res = resolutions[i];
+            if (current.width == res.width && current.height == res.height)
+            {
+                resolutionDropdown.value = i;
+                break;
+            }
+        }
+
+        qualityDropdown.value = QualitySettings.GetQualityLevel();
     }
 
     public void SetResolution(int resIdx)

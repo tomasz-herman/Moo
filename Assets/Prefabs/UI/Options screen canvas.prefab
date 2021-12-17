@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetEffectsVolume
         m_Mode: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -2257,6 +2257,9 @@ MonoBehaviour:
   qualityDropdown: {fileID: 2404699318904129994}
   resolutionDropdown: {fileID: 3654568919533593195}
   fullscreenToggle: {fileID: 311801054757801084}
+  musicSlider: {fileID: 4444467550106367275}
+  soundSlider: {fileID: 6453367547824242202}
+  uiSlider: {fileID: 5459292628809152793}
 --- !u!1 &5033999691043588134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3475,7 +3478,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetUiVolume
         m_Mode: 0
@@ -3794,7 +3797,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
@@ -4280,7 +4283,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522198448333576714, guid: 296403baf05249d4e8bf90d53cc0ca8e, type: 3}
+      - m_Target: {fileID: 8213663045841015596}
         m_TargetAssemblyTypeName: OptionsView, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
