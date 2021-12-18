@@ -150,6 +150,7 @@ namespace Assets.Scripts.SoundManager
                 case BackgroundMusicSwitchType.Linear:
                     return currentlyPlayingIndex + 1 < queueLength ? currentlyPlayingIndex + 1 : 0;
                 case BackgroundMusicSwitchType.Random:
+                    if (queueLength == 1) return 0;
                     var next = Utils.NumberBetween(0, queueLength - 2);
                     next = next < currentlyPlayingIndex ? next : next + 1;
                     return next;
