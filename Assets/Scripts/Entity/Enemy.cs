@@ -39,9 +39,6 @@ public class Enemy : Entity
 
         Destroy(gameObject);
 
-        //TODO: delete this when vignette use case is implemented
-        FindObjectOfType<DamagePostProcessing>().ApplyVignette();
-
         KillEvent.Invoke();
 
     }
