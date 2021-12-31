@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minHealth: 15
   maxHealth: 50
+  FloatingTextPrefab: {fileID: 1125675931467937535, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
 --- !u!65 &6194634764679441002
 BoxCollider:
   m_ObjectHideFlags: 0
