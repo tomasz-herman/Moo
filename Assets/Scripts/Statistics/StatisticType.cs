@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum StatisticType
 {
-    StatType1, StatType2, StatType3, StatType4
+    Health, MaxHealth, Ammo, MaxAmmo, Speed
 }

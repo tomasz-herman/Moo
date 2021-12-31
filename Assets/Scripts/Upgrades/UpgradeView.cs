@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeView
+public abstract class UpgradeView
 {
     private string name, description;
     private Sprite sprite;
@@ -16,4 +16,6 @@ public class UpgradeView
     public string GetName() { return name; }
     public string GetDescription() { return description; }
     public Sprite GetSprite() { return sprite; }
+
+    public abstract UpgradeType CommitUpdate();
 }

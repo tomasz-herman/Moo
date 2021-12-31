@@ -10,22 +10,30 @@ public class Shooting : MonoBehaviour
     public Projectile projectilePrefab;
     public Blade bladePrefab;
     public Grenade grenadePrefab;
+    public Bullet bulletPrefab;
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
     public float projectileSpeed = 3f;
     public float triggerTimeout = 0.5f;
+    public float weaponDamage = 1f;
 
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
 
-    void Start()
+    public Pistol Pistol => new Pistol(projectilePrefab);
+    public Shotgun Shotgun => new Shotgun(bulletPrefab);
+    public MachineGun MachineGun => new MachineGun(projectilePrefab);
+    public GrenadeLauncher GrenadeLauncher => new GrenadeLauncher(grenadePrefab);
+    public Sword Sword => new Sword(bladePrefab);
+
+    void Awake()
     {
-        weapons.Add(new Pistol(projectilePrefab));
-        weapons.Add(new Shotgun(projectilePrefab));
-        weapons.Add(new MachineGun(projectilePrefab));
-        weapons.Add(new GrenadeLauncher(grenadePrefab));
-        weapons.Add(new Sword(bladePrefab));
+        weapons.Add(Pistol);
+        weapons.Add(Shotgun);
+        weapons.Add(MachineGun);
+        weapons.Add(GrenadeLauncher);
+        weapons.Add(Sword);
     }
 
     void Update()
