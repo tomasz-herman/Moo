@@ -50,6 +50,6 @@ public class Shooting : MonoBehaviour
     }
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
+        weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
     }
 }
