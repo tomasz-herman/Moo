@@ -21,6 +21,8 @@ public class SimpleEnemyAI : MonoBehaviour
     protected HealthSystem healthSystem;
     public WeaponAI weaponAI;
     protected WeaponAIProperties weaponAIProperties;
+    private Vector3 lastPlayerPosition;
+
 
     protected void Start()
     {
@@ -73,8 +75,11 @@ public class SimpleEnemyAI : MonoBehaviour
     private void Attack()
     {
         var position = transform.position;
-        Vector3 toPlayer = (player.position - position).normalized;
+        var playerPosition = player.position;
+        var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
+        Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
         characterController.Move(toPlayer * Time.deltaTime * movementSpeed);
         shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
+        lastPlayerPosition = playerPosition;
     }
 }

@@ -38,36 +38,36 @@ namespace Assets.Scripts.Weapons
     
         private class PistolAIProperties : WeaponAIProperties
         {
-            public override float Range => 10;
-            public override float Timeout => 2;
+            public override float Range => 20;
+            public override float Timeout => 1.5f;
             public override Type Type => typeof(Pistol);
         }
     
         private class SwordAIProperties : WeaponAIProperties
         {
-            public override float Range => 2;
-            public override float Timeout => 2;
+            public override float Range => 2.5f;
+            public override float Timeout => 1.5f;
             public override Type Type => typeof(Sword);
         }
     
         private class GrenadeAIProperties : WeaponAIProperties
         {
             public override float Range => 15;
-            public override float Timeout => 6;
+            public override float Timeout => 4;
             public override Type Type => typeof(Grenade);
         }
     
         private class MachineGunAIProperties : WeaponAIProperties
         {
-            public override float Range => 12;
+            public override float Range => 25;
             public override float Timeout => 0.5f;
             public override Type Type => typeof(MachineGun);
         }
     
         private class ShotgunAIProperties : WeaponAIProperties
         {
-            public override float Range => 6;
-            public override float Timeout => 4;
+            public override float Range => 16;
+            public override float Timeout => 3;
             public override Type Type => typeof(Shotgun);
         }
     }

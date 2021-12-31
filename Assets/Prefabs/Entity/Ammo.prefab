@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162ec239ceaa52541be9645a742c5247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAmmo: 5
-  maxAmmo: 20
+  minAmmo: 50
+  maxAmmo: 100
 --- !u!65 &7486426635843230441
 BoxCollider:
   m_ObjectHideFlags: 0
