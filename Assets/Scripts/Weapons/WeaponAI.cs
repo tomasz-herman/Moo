@@ -30,38 +30,44 @@ namespace Assets.Scripts.Weapons
         private static readonly WeaponAIProperties MACHINEGUN_AI = new MachineGunAIProperties();
         private static readonly WeaponAIProperties SHOTGUN_AI = new ShotgunAIProperties();
     
-        public abstract double Range { get; }
+        public abstract float Range { get; }
+        public abstract float Timeout { get; }
         public abstract Type Type { get; }
     
         private WeaponAIProperties() { }
     
         private class PistolAIProperties : WeaponAIProperties
         {
-            public override double Range => 10;
+            public override float Range => 10;
+            public override float Timeout => 2;
             public override Type Type => typeof(Pistol);
         }
     
         private class SwordAIProperties : WeaponAIProperties
         {
-            public override double Range => 1;
+            public override float Range => 2;
+            public override float Timeout => 2;
             public override Type Type => typeof(Sword);
         }
     
         private class GrenadeAIProperties : WeaponAIProperties
         {
-            public override double Range => 15;
+            public override float Range => 15;
+            public override float Timeout => 6;
             public override Type Type => typeof(Grenade);
         }
     
         private class MachineGunAIProperties : WeaponAIProperties
         {
-            public override double Range => 12;
+            public override float Range => 12;
+            public override float Timeout => 0.5f;
             public override Type Type => typeof(MachineGun);
         }
     
         private class ShotgunAIProperties : WeaponAIProperties
         {
-            public override double Range => 6;
+            public override float Range => 6;
+            public override float Timeout => 4;
             public override Type Type => typeof(Shotgun);
         }
     }

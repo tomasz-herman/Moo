@@ -35,9 +35,10 @@ public class Shooting : MonoBehaviour
 
     public void SelectWeapon(Type type)
     {
+        Type first = weapons.Current().GetType();
         while(weapons.Current().GetType() != type)
         {
-            weapons.Next();
+            if (first == weapons.Next().GetType()) break;
         }
     }
 

@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 584923067921654840}
   - component: {fileID: 584923067921654791}
   - component: {fileID: 5250545107766033320}
-  - component: {fileID: 2180566402683429793}
+  - component: {fileID: 1519012071345514383}
   - component: {fileID: 7777235469271342937}
   - component: {fileID: -1757155267967381844}
   - component: {fileID: 2753961696640401444}
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 0.1
---- !u!114 &2180566402683429793
+--- !u!114 &1519012071345514383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,15 +486,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 584923067921654789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f7ddffc188d6d72ac426c1cb4592c2, type: 3}
+  m_Script: {fileID: 11500000, guid: a0793b9423da6e9ceb32af26fc88a59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 25
-  movementSpeed: 1.8
+  sightRange: 15
+  movementSpeed: 1
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
-  weaponAI: 3
+  weaponAI: 0
+  phases: 3
 --- !u!114 &7777235469271342937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,8 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7884263693069889528, guid: 1750f5a51375e9f43a437f778a4799d3, type: 3}
-  bladePrefab: {fileID: 0}
-  grenadePrefab: {fileID: 0}
+  bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
+  grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   projectileSpeed: 3
   triggerTimeout: 0.5
   ammoSystem: {fileID: 0}

@@ -18,11 +18,11 @@ public class SimpleEnemyAI : MonoBehaviour
     
     private Shooting shooting;
     public AmmoSystem ammoSystem;
-    private HealthSystem healthSystem;
+    protected HealthSystem healthSystem;
     public WeaponAI weaponAI;
-    private WeaponAIProperties weaponAIProperties;
+    protected WeaponAIProperties weaponAIProperties;
 
-    private void Start()
+    protected void Start()
     {
         characterController = GetComponent<CharacterController>();
         healthSystem = GetComponent<HealthSystem>();
@@ -33,9 +33,10 @@ public class SimpleEnemyAI : MonoBehaviour
         weaponAIProperties = WeaponAIProperties.Get(weaponAI);
     }
 
-    private void Update()
+    protected void Update()
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
+        shooting.triggerTimeout = weaponAIProperties.Timeout;
 
         var position = transform.position;
         var playerPosition = player.position;
