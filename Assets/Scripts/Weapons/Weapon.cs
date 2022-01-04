@@ -16,6 +16,7 @@ namespace Assets.Scripts.Weapons
         public abstract float baseDamage { get; set; }
         protected abstract int ammoConsumption { get; }
 
+        public EventHandler<float> WeaponShoot;
         public void DecreaseTime()
         {
             trigger.DecreaseTime(Time.deltaTime);
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Weapons
             {
                 if (ammoSystem.Ammo >= ammoConsumption)
                 {
+                    WeaponShoot?.Invoke(this, triggerTimeout);
                     Shoot(shooter, position, direction, shooting);
                     ammoSystem.Ammo -= ammoConsumption;
                 }
