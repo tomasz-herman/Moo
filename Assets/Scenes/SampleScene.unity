@@ -161,6 +161,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a96da793d373a4083d50262bab5261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &227210173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5699320512004101977, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+  m_PrefabInstance: {fileID: 5699320512196437220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227210168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eae81e582b4fb445b44953f855852ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &227210175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,12 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeWindow: {fileID: 200897742}
   player: {fileID: 227210169}
-  upgradeImages:
-  - {fileID: 21300000, guid: e676184011ba94a4f972b1822a697bdc, type: 3}
-  - {fileID: 21300000, guid: 3fb568f79d381104580787e1d994c4e4, type: 3}
-  - {fileID: 21300000, guid: 35d276838957fa740be5ec26471359c3, type: 3}
-  - {fileID: 21300000, guid: b0ee1c9a268de2f4e8133bf6fa6ca386, type: 3}
-  - {fileID: 21300000, guid: e79175541a6fc5941a35aa0cbb39e261, type: 3}
 --- !u!114 &227210180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,6 +1045,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   bladePrefab: {fileID: 0}
   grenadePrefab: {fileID: 0}
+  bulletPrefab: {fileID: 0}
   projectileSpeed: 3
   triggerTimeout: 0.5
   weaponDamage: 1
@@ -1117,10 +1123,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6862490329964037916, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 3211173712449043039, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1176,6 +1178,10 @@ PrefabInstance:
     - target: {fileID: 6556664954144672361, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
       propertyPath: m_Name
       value: Grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862490329964037916, guid: 6f57ced2f0b40d34aa51fb7b9f0a6fdb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e034fee9057774a44a9ea7b6b324ce51, type: 3}
@@ -2037,6 +2043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 8248976422226341987, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
+      propertyPath: shooting
+      value: 
+      objectReference: {fileID: 227210173}
     - target: {fileID: 8248976422468481446, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
       propertyPath: statSystem
       value: 
@@ -2045,5 +2055,9 @@ PrefabInstance:
       propertyPath: upgradeSystem
       value: 
       objectReference: {fileID: 227210179}
+    - target: {fileID: 9117816490293681939, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024414062
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
