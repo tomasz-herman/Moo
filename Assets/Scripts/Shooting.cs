@@ -20,14 +20,20 @@ public class Shooting : MonoBehaviour
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
 
-    public Pistol Pistol => new Pistol(projectilePrefab);
-    public Shotgun Shotgun => new Shotgun(bulletPrefab);
-    public MachineGun MachineGun => new MachineGun(projectilePrefab);
-    public GrenadeLauncher GrenadeLauncher => new GrenadeLauncher(grenadePrefab);
-    public Sword Sword => new Sword(bladePrefab);
+    public Pistol Pistol { get; private set; } 
+    public Shotgun Shotgun { get; private set; }
+    public MachineGun MachineGun { get; private set; }
+    public GrenadeLauncher GrenadeLauncher { get; private set; }
+    public Sword Sword { get; private set; }
 
     void Awake()
     {
+        Pistol = new Pistol(projectilePrefab);
+        Shotgun = new Shotgun(bulletPrefab);
+        MachineGun = new MachineGun(projectilePrefab);
+        GrenadeLauncher = new GrenadeLauncher(grenadePrefab);
+        Sword = new Sword(bladePrefab);
+
         weapons.Add(Pistol);
         weapons.Add(Shotgun);
         weapons.Add(MachineGun);
