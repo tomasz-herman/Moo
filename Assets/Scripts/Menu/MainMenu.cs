@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         activeView.SetActive(false);
-        SceneManager.LoadScene(Scenes.Game);
+        SceneManager.LoadScene(Scenes.ChamersTest);
     }
 
     public void Quit()
