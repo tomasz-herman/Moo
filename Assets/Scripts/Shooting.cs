@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
 using UnityEngine;
@@ -38,6 +39,15 @@ public class Shooting : MonoBehaviour
         weapons.Current().DecreaseTime();
     }
 
+    public void SelectWeapon(Type type)
+    {
+        Type first = weapons.Current().GetType();
+        while(weapons.Current().GetType() != type)
+        {
+            if (first == weapons.Next().GetType()) break;
+        }
+    }
+
     public void NextWeapon()
     {
         weapons.Next();
@@ -52,6 +62,6 @@ public class Shooting : MonoBehaviour
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
+        weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
     }
 }

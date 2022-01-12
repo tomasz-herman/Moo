@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : GuiWindow
 {
-    void Update()
+    [SerializeField] private GameObject options;
+    [SerializeField] private GameObject pausePanel;
+
+    public void SetShowOptions(bool show)
     {
-        
+        pausePanel.SetActive(!show);
+        options.SetActive(show);
     }
 }

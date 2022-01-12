@@ -10,6 +10,8 @@ public class Player : Entity
     public UpgradeSystem upgradeSystem;
     public AmmoSystem ammoSystem;
     public ScoreSystem scoreSystem;
+
+    private DamagePostProcessing damagePostProcessing;
     void Start()
     {
         shooting = GetComponent<Shooting>();
@@ -20,6 +22,9 @@ public class Player : Entity
         scoreSystem = GetComponent<ScoreSystem>();
 
         healthSystem.HealthChanged += CheckDeath;
+        healthSystem.DamageReceived += OnDamageReceived;
+
+        damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
     }
 
     public void Upgrade()
@@ -33,5 +38,10 @@ public class Player : Entity
         {
             GameWorld.EndGame(false, scoreSystem.GetScore());
         }
+    }
+
+    private void OnDamageReceived(object sender, float damage)
+    {
+        damagePostProcessing.ApplyVignette();
     }
 }

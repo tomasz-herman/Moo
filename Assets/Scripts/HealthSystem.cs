@@ -11,11 +11,15 @@ public class HealthSystem : MonoBehaviour
     {
         get { return health; }
         set
-        { 
+        {
+            float previousHealth = health;
             health = value;
             if (health > maxHealth)
                 health = maxHealth;
             HealthChanged?.Invoke(this, (health, maxHealth));
+
+            if (health < previousHealth)
+                DamageReceived?.Invoke(this, previousHealth - health);
         }
     }
     public float MaxHealth
@@ -29,6 +33,7 @@ public class HealthSystem : MonoBehaviour
     }
 
     public EventHandler<(float health, float maxHealth)> HealthChanged;
+    public EventHandler<float> DamageReceived;
 
     void Awake()
     {
