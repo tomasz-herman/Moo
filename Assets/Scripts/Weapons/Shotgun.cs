@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
     public class Shotgun : Weapon
     {
         private readonly Bullet bulletPrefab;
-        private Color color = Color.yellow;
+        private Color color = Color.yellow * 250;
 
         public float scatterFactor { get; set; } = 10f;
         public int projectileCount { get; set; } = 10;

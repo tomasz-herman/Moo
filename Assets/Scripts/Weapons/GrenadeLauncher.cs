@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
     public class GrenadeLauncher : Weapon
     {
         private readonly Grenade grenadePrefab;
-        private Color color = Color.magenta;
+        private Color color = Color.magenta * 100;
 
         public override float projectileSpeed { get; set; } = 2f;
         public override float triggerTimeout { get; set; } = 7f;

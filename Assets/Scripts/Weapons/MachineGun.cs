@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
     public class MachineGun : Weapon
     {
         private readonly Projectile projectilePrefab;
-        private Color color = Color.cyan;
+        private Color color = Color.cyan * 100;
 
         private float scatterFactor = 3f;
 

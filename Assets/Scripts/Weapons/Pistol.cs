@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
     public class Pistol : Weapon
     {
         private readonly Projectile projectilePrefab;
-        private Color color = Color.red;
+        private Color color = Color.red * 100;
 
         public override float projectileSpeed { get; set; } = 1f;
         public override float triggerTimeout { get; set; } = 1f;

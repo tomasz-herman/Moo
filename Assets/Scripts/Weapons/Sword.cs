@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
     public class Sword : Weapon
     {
         private readonly Blade bladePrefab;
-        private Color color = Color.green;
+        private Color color = Color.green * 100;
 
 
         public override float projectileSpeed { get; set; } = 2f;
