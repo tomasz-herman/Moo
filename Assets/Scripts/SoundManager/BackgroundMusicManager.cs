@@ -21,6 +21,11 @@ namespace Assets.Scripts.SoundManager
         /// </summary>
         public bool IsPaused { get; private set; }
 
+        /// <summary>
+        /// Whether play music after initialized.
+        /// </summary>
+        public bool PlayAtStart;
+
         private int _currentlyPlayingIndex = -1;
         private int _nextPlayingIndex = -1;
         private double _startTime;
@@ -43,6 +48,11 @@ namespace Assets.Scripts.SoundManager
 
             _currentlyPlayingIndex = -1;
             _nextPlayingIndex = -1;
+
+            if (PlayAtStart)
+            {
+                Play();
+            }
         }
 
         // Update is called once per frame
