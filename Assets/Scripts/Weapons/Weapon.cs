@@ -59,7 +59,7 @@ namespace Assets.Scripts.Weapons
 
         protected virtual void PlayGunfireSound(Vector3 position)
         {
-            //TODO: I don't like it, if it is possible weapon class should have player field or derive from MonoBehaviour
+            //TODO: I don't like it, if it is possible weapon class should have player field or derive from MonoBehaviour this also is not affected by volume sliders
             Audio?.PlayClipAtPoint(position, SoundTypeSettings.GetVolumeForSoundType(Sound.SoundType));
         }
 
