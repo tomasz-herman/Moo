@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -51,13 +50,13 @@ public class OptionsView : MenuView
         float volume;
 
         uiMixer.GetFloat("volume", out volume);
-        uiSlider.value = volume;
+        uiSlider.value = CalculateSliderValueFromMixerVolume(volume);
 
         musicMixer.GetFloat("volume", out volume);
-        musicSlider.value = volume;
+        musicSlider.value = CalculateSliderValueFromMixerVolume(volume);
 
         soundMixer.GetFloat("volume", out volume);
-        soundSlider.value = volume;
+        soundSlider.value = CalculateSliderValueFromMixerVolume(volume);
 
         fullscreenToggle.isOn = Screen.fullScreen;
 
@@ -100,5 +99,10 @@ public class OptionsView : MenuView
     private static float CalculateMixerVolume(float volume)
     {
         return Mathf.Log10(volume) * MixerVolumeMultiplier;
+    }
+
+    private static float CalculateSliderValueFromMixerVolume(float volume)
+    {
+        return Mathf.Pow(10f, volume / MixerVolumeMultiplier);
     }
 }
