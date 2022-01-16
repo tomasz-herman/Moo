@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -11,15 +10,43 @@ public class Enemy : Entity
     
     public UnityEngine.Events.UnityEvent KillEvent;
 
+    public SoundTypeWithPlaybackSettings Sound;
+
+    [HideInInspector]
+    public Audio Audio;
+
+    private AudioManager _audioManager;
+
     void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
         dropSystem = GetComponent<DropSystem>();
+        Sound = new SoundTypeWithPlaybackSettings
+        {
+            SoundType = SoundType.EnemyKilled,
+            PlaybackSettings = new PlaybackSettings
+            {
+                SpatialBlend = 1f,
+                Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.EnemyKilled)
+            }
+        };
+    }
+
+    void Start()
+    {
+        _audioManager = AudioManager.Instance;
+        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
+        healthSystem = GetComponent<HealthSystem>();
+    }
+
+    void OnDestroy()
+    {
+        Audio?.Dispose();
     }
 
     public void TakeDamage(float damage, ScoreSystem system = null)
     {
         healthSystem.Health -= damage;
+        Audio.PlayOneShot();
         if (healthSystem.Health > 0) return;
         Die(system);
     }
@@ -34,6 +61,5 @@ public class Enemy : Entity
         Destroy(gameObject);
 
         KillEvent.Invoke();
-
     }
 }

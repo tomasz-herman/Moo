@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -20,7 +16,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 3;
 
-        public Shotgun(Bullet bulletprefab)
+        public Shotgun(Bullet bulletprefab) : base(SoundType.ShotgunShot)
         {
             bulletPrefab = bulletprefab;
         }

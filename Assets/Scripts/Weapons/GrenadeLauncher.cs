@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -17,7 +13,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 10f;
         protected override int ammoConsumption => 7;
 
-        public GrenadeLauncher(Grenade grenadeprefab)
+        public GrenadeLauncher(Grenade grenadeprefab) : base(SoundType.GrenadeLauncherShot)
         {
             grenadePrefab = grenadeprefab;
         }

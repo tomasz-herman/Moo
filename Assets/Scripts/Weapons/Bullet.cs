@@ -1,6 +1,4 @@
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : ProjectileBase
@@ -12,13 +10,14 @@ public class Bullet : ProjectileBase
 
     private Vector3 initPosition;
 
-    void Start()
+    protected override void Start()
     {
         gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
+        base.Start();
     }
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
-        this.owner = owner;
+        this.Owner = owner;
         extraDamage = extradamage;
         initPosition = owner.transform.position;
         GetComponent<Rigidbody>().velocity = velocity;
@@ -26,7 +25,7 @@ public class Bullet : ProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != owner)
+        if (other.gameObject != Owner)
         {
             var distance = Vector3.Distance(gameObject.transform.position, initPosition);
             var damage = (baseDamage + extraDamage) / (1 + distance);

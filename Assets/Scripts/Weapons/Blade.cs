@@ -1,6 +1,4 @@
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Blade : ProjectileBase
@@ -16,9 +14,10 @@ public class Blade : ProjectileBase
     protected override float baseDamage => 30f;
     private float extraDamage = 0;
 
-    void Start()
+    protected override void Start()
     {
         gameObject.GetComponent<MeshRenderer>().material.color = color;
+        base.Start();
     }
 
     protected override void Update()
@@ -36,7 +35,7 @@ public class Blade : ProjectileBase
 
     public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
     {
-        this.owner = owner;
+        this.Owner = owner;
         this.speed = speed;
         this.angle = startAngle;
         this.extraDamage = extradamage;
@@ -48,7 +47,7 @@ public class Blade : ProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != owner)
+        if (other.gameObject != Owner)
         {
             ApplyDamage(other, baseDamage + extraDamage);
             Destroy(gameObject);
@@ -56,7 +55,7 @@ public class Blade : ProjectileBase
     }
     private void SetRotation()
     {
-        var direction = 2 * transform.position - owner.transform.position;
+        var direction = 2 * transform.position - Owner.transform.position;
         direction.y = transform.position.y;
         transform.LookAt(direction);
     }
