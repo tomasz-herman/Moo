@@ -27,9 +27,7 @@ public class ChamberNode
         Parent = parent;
         ParentDirection = DirectionFromVector2Int(parent.Location - Location);
         if (children.Count == 4)
-        {
             children.Remove(ParentDirection);
-        }
         else
         {
             children.Clear();
@@ -56,34 +54,6 @@ public class ChamberNode
         return null;
     }
 
-    public static Direction DirectionFromVector2Int(Vector2Int vector)
-    {
-        if (vector.x == 0 && vector.y == -1)
-            return Direction.Up;
-        else if (vector.x == 0 && vector.y == 1)
-            return Direction.Down;
-        else if (vector.x == -1 && vector.y == 0)
-            return Direction.Left;
-        return Direction.Right;
-    }
-
-    public static Vector2Int Vector2IntFromDirection(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.Up:
-                return new Vector2Int(0, -1);
-            case Direction.Down:
-                return new Vector2Int(0, 1);
-            case Direction.Left:
-                return new Vector2Int(-1, 0);
-            case Direction.Right:
-                return new Vector2Int(1, 0);
-            default:
-                return new Vector2Int(0, 0);
-        }
-    }
-
     public void AddChild(ChamberNode child)
     {
         children[DirectionFromVector2Int(child.Location - Location)] = child;
@@ -102,6 +72,42 @@ public class ChamberNode
         foreach (var item in children)
         {
             yield return item.Value;
+        }
+    }
+
+    public IEnumerable<KeyValuePair<Direction, ChamberNode>> ChildrenWithDirections()
+    {
+        foreach (var item in children)
+        {
+            yield return item;
+        }
+    }
+
+    private static Direction DirectionFromVector2Int(Vector2Int vector)
+    {
+        if (vector.x == 0 && vector.y == -1)
+            return Direction.Up;
+        else if (vector.x == 0 && vector.y == 1)
+            return Direction.Down;
+        else if (vector.x == -1 && vector.y == 0)
+            return Direction.Left;
+        return Direction.Right;
+    }
+
+    private static Vector2Int Vector2IntFromDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return new Vector2Int(0, -1);
+            case Direction.Down:
+                return new Vector2Int(0, 1);
+            case Direction.Left:
+                return new Vector2Int(-1, 0);
+            case Direction.Right:
+                return new Vector2Int(1, 0);
+            default:
+                return new Vector2Int(0, 0);
         }
     }
 

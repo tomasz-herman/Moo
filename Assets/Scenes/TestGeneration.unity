@@ -691,7 +691,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026174728}
-  - component: {fileID: 2026174727}
   - component: {fileID: 2026174729}
   m_Layer: 0
   m_Name: TestSpawn
@@ -700,30 +699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2026174727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026174726}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece81de86f9baf447bc9cef5a03339a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 916831193}
-  Chambers:
-  - {fileID: 4754808502552423998, guid: 1a452d930c27270449053b6b9cd8a4d9, type: 3}
-  - {fileID: 956640202832324232, guid: b43a85cf85f84a649bdc65b102d2fa21, type: 3}
-  BossChambers:
-  - {fileID: 8312504213155444425, guid: 0ab95b28f195a464f8a74fa99d9f6ad3, type: 3}
-  Corridors:
-  - {fileID: 3162688133419159922, guid: e3a5cbb03a7282b4db7d3a365bb547f4, type: 3}
-  Enemys:
-  - {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-  Boss: {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
-  GameWorld: {fileID: 524390514}
 --- !u!4 &2026174728
 Transform:
   m_ObjectHideFlags: 0
@@ -751,16 +726,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 916831193}
-  StartChambers:
-  - {fileID: 8140789307259307936, guid: 7b9e641072964fd40884fb849da7f5ef, type: 3}
-  NormalChambers:
-  - {fileID: 8140789307259307936, guid: b39c3b24501092c4ba28b5ebbd42ac50, type: 3}
-  OptionalChambers:
-  - {fileID: 8140789307259307936, guid: b3fd064a7f109ba4c832c3a140257348, type: 3}
-  BossChambers:
-  - {fileID: 8140789307259307936, guid: 1acc51e974c297a4da4ec4c8042b4df0, type: 3}
+  ChambersContainer: {fileID: 11400000, guid: ff64a3f5d7d78d74084e7cb1d4cc9b79, type: 2}
   ChamberSize: 60
   NumberOfOptionalChambers: 10
+  NumberOfBossChambers: 3
+  NumbersOfChambersBeforeBoss: 2
+  NumberOfTryBeforeOnlyForwardMode: 3
 --- !u!1 &2031909899
 GameObject:
   m_ObjectHideFlags: 0
