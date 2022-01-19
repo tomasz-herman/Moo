@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class SpawnScript : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
-    [SerializeField] float ChamberSize = 60;
+    [SerializeField] public float ChamberSize = 60;
     [SerializeField] int NumberOfOptionalChambers = 10;
     [SerializeField] int NumberOfBossChambers = 3;
     [SerializeField] int NumbersOfChambersBeforeBoss = 2;
@@ -24,12 +23,9 @@ public class SpawnScript : MonoBehaviour
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
 
-    void Start()
+    private void Awake()
     {
         LoadChamberPrefabs();
-        Player.transform.position = new Vector3(10, 10, 10);
-        GenerateTree();
-        BuildChambersRec(chambersTreeRoot);
     }
 
     public ChamberNode GenerateTree()
@@ -142,12 +138,14 @@ public class SpawnScript : MonoBehaviour
                 newRoom = Instantiate(OptionalChambers[Utils.NumberBetween(0, OptionalChambers.Count - 1)], Vector3.zero, Quaternion.identity);
                 break;
             case ChamberType.Start:
+                int dupa = Utils.NumberBetween(0, StartChambers.Count - 1);
                 newRoom = Instantiate(StartChambers[Utils.NumberBetween(0, StartChambers.Count - 1)], Vector3.zero, Quaternion.identity);
                 break;
             default:
                 break;
         }
         newRoom.transform.position = new Vector3(root.Location.x * ChamberSize, 0, root.Location.y * ChamberSize);
+        root.ChamberControl = newRoom.GetComponent<ChamberControl>();
         root.CreateBlocades(); // TODO: Delete
 
         foreach (var item in root.Children())

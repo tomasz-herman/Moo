@@ -11,6 +11,7 @@ public class ChamberNode
     public Vector2Int Location;
     public ChamberNode Parent = null;
     public Direction ParentDirection;
+    public ChamberControl ChamberControl;
     private Dictionary<Direction, ChamberNode> children;
 
     public ChamberNode(ChamberType type, Vector2Int location)
@@ -81,6 +82,25 @@ public class ChamberNode
         {
             yield return item;
         }
+    }
+
+    public ChamberNode GetNextNodeFromDirecion(Direction direction)
+    {
+        if (children.ContainsKey(direction))
+            return children[direction];
+        else if (direction == ParentDirection)
+            return Parent;
+        return null;
+    }
+
+    public ChamberNode GetNextNodeFromDirecion(Vector2Int vector)
+    {
+        Direction direction = ChamberNode.DirectionFromVector2Int(vector);
+        if (children.ContainsKey(direction))
+            return children[direction];
+        else if (direction == ParentDirection)
+            return Parent;
+        return null;
     }
 
     private static Direction DirectionFromVector2Int(Vector2Int vector)
