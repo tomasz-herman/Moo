@@ -17,6 +17,7 @@ namespace Assets.Scripts.Weapons
         protected abstract int ammoConsumption { get; }
 
         public EventHandler<float> WeaponShoot;
+        //public EventHandler<(float f1, string name)> WeaponShoot;
         public void DecreaseTime()
         {
             trigger.DecreaseTime(Time.deltaTime);
