@@ -25,6 +25,7 @@ public class Player : Entity
         healthSystem.DamageReceived += OnDamageReceived;
 
         damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
+        damagePostProcessing.healthSystem = healthSystem;
     }
 
     public void Upgrade()
@@ -42,6 +43,6 @@ public class Player : Entity
 
     private void OnDamageReceived(object sender, float damage)
     {
-        //damagePostProcessing.ApplyVignette();
+        damagePostProcessing.ApplyVignette();
     }
 }
