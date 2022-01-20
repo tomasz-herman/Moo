@@ -6,7 +6,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class DamagePostProcessing : MonoBehaviour
 {
-    public Volume volume;
+    private Volume volume;
     [HideInInspector] public HealthSystem healthSystem;
     private Vignette vignette;
     private ColorAdjustments colorGrading;
@@ -17,6 +17,7 @@ public class DamagePostProcessing : MonoBehaviour
     private float remainingTime = 0f;
     void Start()
     {
+        volume = gameObject.GetComponent<Volume>();
         volume.profile.TryGet(out vignette);
         volume.profile.TryGet(out colorGrading);
     }
