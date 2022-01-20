@@ -42,6 +42,6 @@ public class Player : Entity
 
     private void OnDamageReceived(object sender, float damage)
     {
-        damagePostProcessing.ApplyVignette();
+        //damagePostProcessing.ApplyVignette();
     }
 }
