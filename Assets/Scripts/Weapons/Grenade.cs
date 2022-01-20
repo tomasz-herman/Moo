@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grenade : ProjectileBase
 {
     public Color color;
+    public float Emission = 6;
 
     private float explosionSpeed = 40f;
     private float explosionRange = 10f;
@@ -27,7 +28,9 @@ public class Grenade : ProjectileBase
             }
         };
 
-        gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissiveColor", color * Emission);
+        material.SetColor("_BaseColor", color);
         base.Start();
     }
 

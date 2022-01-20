@@ -158,7 +158,8 @@ MonoBehaviour:
       FadeOutSeconds: 0
       UseDefault: 0
   TimeToLive: 10
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0.7599125, b: 0, a: 1}
+  Emission: 6
 --- !u!54 &3242960763279273743
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bullet : ProjectileBase
 {
     public Color color;
+    public float Emission = 6;
 
     protected override float baseDamage => 30f;
     private float extraDamage = 0;
@@ -12,7 +13,9 @@ public class Bullet : ProjectileBase
 
     protected override void Start()
     {
-        gameObject.GetComponentInChildren<MeshRenderer>().material.color = color;
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissiveColor", color * Emission);
+        material.SetColor("_BaseColor", color);
         base.Start();
     }
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)

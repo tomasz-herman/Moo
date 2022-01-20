@@ -11,12 +11,15 @@ public class Blade : ProjectileBase
     private float speed;
 
     public Color color;
+    public float Emission = 6;
     protected override float baseDamage => 30f;
     private float extraDamage = 0;
 
     protected override void Start()
     {
-        gameObject.GetComponent<MeshRenderer>().material.color = color;
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissiveColor", color * Emission);
+        material.SetColor("_BaseColor", color);
         base.Start();
     }
 
