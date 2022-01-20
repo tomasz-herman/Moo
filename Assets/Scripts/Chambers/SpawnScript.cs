@@ -19,7 +19,7 @@ public class SpawnScript : MonoBehaviour
 
     private Dictionary<Vector2Int, ChamberType> taken = new Dictionary<Vector2Int, ChamberType>();
     private int remainig;
-    private bool OnlyForward = false;
+    private bool OnlyForward = true;
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
 
@@ -64,6 +64,8 @@ public class SpawnScript : MonoBehaviour
                     i--;
                     if (i > 0)
                         j = NumbersOfChambersBeforeBoss;
+                    else
+                        tempNode.IsLast = true;
                 }
                 else
                 {
@@ -183,9 +185,9 @@ public class SpawnScript : MonoBehaviour
             case Direction.Down:
                 return current + new Vector2Int(0, 1);
             case Direction.Left:
-                return current + new Vector2Int(-1, 0);
-            case Direction.Right:
                 return current + new Vector2Int(1, 0);
+            case Direction.Right:
+                return current + new Vector2Int(-1, 0);
             default:
                 return new Vector2Int(0, 0);
         }
