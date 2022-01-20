@@ -25,6 +25,7 @@ public class Player : Entity
         healthSystem.DamageReceived += OnDamageReceived;
 
         damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
+        damagePostProcessing.healthSystem = healthSystem;
     }
 
     public void Upgrade()
