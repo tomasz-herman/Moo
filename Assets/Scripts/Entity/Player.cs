@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    private Shooting shooting;
-    private PlayerMovement movement;
+    public Shooting shooting;
+    public PlayerMovement movement;
     public HealthSystem healthSystem;
     public UpgradeSystem upgradeSystem;
     public AmmoSystem ammoSystem;
     public ScoreSystem scoreSystem;
+
+    private DamagePostProcessing damagePostProcessing;
     void Start()
     {
         shooting = GetComponent<Shooting>();
@@ -20,6 +22,10 @@ public class Player : Entity
         scoreSystem = GetComponent<ScoreSystem>();
 
         healthSystem.HealthChanged += CheckDeath;
+        healthSystem.DamageReceived += OnDamageReceived;
+
+        damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
+        damagePostProcessing.healthSystem = healthSystem;
     }
 
     public void Upgrade()
@@ -33,5 +39,10 @@ public class Player : Entity
         {
             GameWorld.EndGame(false, scoreSystem.GetScore());
         }
+    }
+
+    private void OnDamageReceived(object sender, float damage)
+    {
+        damagePostProcessing.ApplyVignette();
     }
 }

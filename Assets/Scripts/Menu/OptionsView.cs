@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -8,12 +7,15 @@ using UnityEngine.UI;
 
 public class OptionsView : MenuView
 {
-    [SerializeField] private AudioMixer musicMixer, soundMixer;
+    [SerializeField] private AudioMixer musicMixer, soundMixer, uiMixer;
 
     [SerializeField] private TMP_Dropdown qualityDropdown, resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Slider musicSlider, soundSlider, uiSlider;
 
     private List<Resolution> resolutions;
+
+    private const float MixerVolumeMultiplier = 20f;
 
     protected override void Awake()
     {
@@ -21,34 +23,55 @@ public class OptionsView : MenuView
 
         qualityDropdown.ClearOptions();
         qualityDropdown.AddOptions(QualitySettings.names.ToList());
-        qualityDropdown.value = QualitySettings.GetQualityLevel();
 
         resolutions = Screen.resolutions.ToList();
         resolutions.Reverse();
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(resolutions.Select(res => res.ToString()).ToList());
+    }
+
+    public void SetEffectsVolume(float volume)
+    {
+        soundMixer.SetFloat("volume", CalculateMixerVolume(volume));
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        musicMixer.SetFloat("volume", CalculateMixerVolume(volume));
+    }
+
+    public void SetUiVolume(float volume)
+    {
+        uiMixer.SetFloat("volume", CalculateMixerVolume(volume));
+    }
+
+    private void OnEnable()
+    {
+        float volume;
+
+        uiMixer.GetFloat("volume", out volume);
+        uiSlider.value = CalculateSliderValueFromMixerVolume(volume);
+
+        musicMixer.GetFloat("volume", out volume);
+        musicSlider.value = CalculateSliderValueFromMixerVolume(volume);
+
+        soundMixer.GetFloat("volume", out volume);
+        soundSlider.value = CalculateSliderValueFromMixerVolume(volume);
+
+        fullscreenToggle.isOn = Screen.fullScreen;
+
         Resolution current = Screen.currentResolution;
-        for(int i = 0; i < resolutions.Count; i++)
+        for (int i = 0; i < resolutions.Count; i++)
         {
             Resolution res = resolutions[i];
-            if(current.width == res.width && current.height == res.height)
+            if (current.width == res.width && current.height == res.height)
             {
                 resolutionDropdown.value = i;
                 break;
             }
         }
 
-        fullscreenToggle.isOn = Screen.fullScreen;
-    }
-
-    public void SetEffectsVolume(float volume)
-    {
-        soundMixer.SetFloat("volume", volume);
-    }
-
-    public void SetMusicVolume(float volume)
-    {
-        musicMixer.SetFloat("volume", volume);
+        qualityDropdown.value = QualitySettings.GetQualityLevel();
     }
 
     public void SetResolution(int resIdx)
@@ -71,5 +94,15 @@ public class OptionsView : MenuView
     public void Continue()
     {
         Menu.ShowMainMenu();
+    }
+
+    private static float CalculateMixerVolume(float volume)
+    {
+        return Mathf.Log10(volume) * MixerVolumeMultiplier;
+    }
+
+    private static float CalculateSliderValueFromMixerVolume(float volume)
+    {
+        return Mathf.Pow(10f, volume / MixerVolumeMultiplier);
     }
 }

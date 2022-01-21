@@ -1,4 +1,7 @@
+using System;
+using Assets.Scripts.Weapons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SimpleEnemyAI : MonoBehaviour
 {
@@ -6,7 +9,6 @@ public class SimpleEnemyAI : MonoBehaviour
     
     private Transform player;
     
-    public float attackRange;
     public float sightRange;
     private bool playerInAttackRange, playerInSight;
     
@@ -16,21 +18,32 @@ public class SimpleEnemyAI : MonoBehaviour
     
     private Shooting shooting;
     public AmmoSystem ammoSystem;
+    protected HealthSystem healthSystem;
+    public WeaponAI weaponAI;
+    protected WeaponAIProperties weaponAIProperties;
+    private Vector3 lastPlayerPosition;
 
-    private void Awake()
+
+    protected void Start()
     {
         characterController = GetComponent<CharacterController>();
+        healthSystem = GetComponent<HealthSystem>();
         player = GameObject.Find("Player").transform;
         shooting = GetComponent<Shooting>();
         ammoSystem = GetComponent<AmmoSystem>();
         shooting.ammoSystem = ammoSystem;
+        weaponAIProperties = WeaponAIProperties.Get(weaponAI);
     }
 
-    private void Update()
+    protected void Update()
     {
+        shooting.SelectWeapon(weaponAIProperties.Type);
+        shooting.triggerTimeout = weaponAIProperties.Timeout;
+
         var position = transform.position;
-        playerInAttackRange = Vector3.Distance(position, player.position) < attackRange;
-        playerInSight = Vector3.Distance(position, player.position) < sightRange;
+        var playerPosition = player.position;
+        playerInAttackRange = Vector3.Distance(position, playerPosition) < weaponAIProperties.Range;
+        playerInSight = Vector3.Distance(position, playerPosition) < sightRange;
 
         if(!playerInSight && !playerInAttackRange) Patrol();
         if(playerInSight && !playerInAttackRange) Chase();
@@ -61,8 +74,12 @@ public class SimpleEnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * Time.deltaTime * movementSpeed * 0.1f);
-        shooting.TryShoot(gameObject, transform.position + new Vector3(0, 1, 0), toPlayer);
+        var position = transform.position;
+        var playerPosition = player.position;
+        var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
+        Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
+        characterController.Move(toPlayer * Time.deltaTime * movementSpeed);
+        shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
+        lastPlayerPosition = playerPosition;
     }
 }

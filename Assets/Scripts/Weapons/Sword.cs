@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -13,20 +9,20 @@ namespace Assets.Scripts.Weapons
         private Color color = Color.green;
 
 
-        protected override float projectileSpeed => 2f;
-        protected override float triggerTimeout => 2f;
-        protected override float baseDamage => 1f;
+        public override float projectileSpeed { get; set; } = 2f;
+        public override float triggerTimeout { get; set; } = 2f;
+        public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 0;
 
-        public Sword(Blade bladeprefab)
+        public Sword(Blade bladePrefab): base(SoundType.SwordSwing)
         {
-            bladePrefab = bladeprefab;
+            this.bladePrefab = bladePrefab;
         }
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.Launch(shooter, direction.normalized, baseDamage, projectileSpeed * shooting.projectileSpeed);
+            blade.Launch(shooter, direction.normalized, shooting.weaponDamage * baseDamage, projectileSpeed * shooting.projectileSpeed);
         }
     }
 }

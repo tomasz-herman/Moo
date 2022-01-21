@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class AmmoSystem : MonoBehaviour
 {
-    public int defaultAmmo = 69;
-    public int defaultCapacity = 420;
+    public int defaultAmmo = 500;
+    public int defaultCapacity = 500;
     private int ammo, maxAmmo;
     public int Ammo
     {
