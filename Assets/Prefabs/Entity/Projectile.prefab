@@ -160,6 +160,7 @@ MonoBehaviour:
       UseDefault: 0
   TimeToLive: 10
   color: {r: 1, g: 1, b: 1, a: 1}
+  Emission: 6
 --- !u!54 &1227762693535133598
 Rigidbody:
   m_ObjectHideFlags: 0
