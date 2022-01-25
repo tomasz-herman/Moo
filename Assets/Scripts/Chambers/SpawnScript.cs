@@ -149,6 +149,7 @@ public class SpawnScript : MonoBehaviour
         newRoom.transform.position = new Vector3(root.Location.x * ChamberSize, 0, root.Location.y * ChamberSize);
         root.ChamberControl = newRoom.GetComponent<ChamberControl>();
         root.CreateBlocades(); // TODO: Delete
+        root.SetColors();
 
         foreach (var item in root.Children())
         {

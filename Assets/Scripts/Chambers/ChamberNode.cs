@@ -128,6 +128,29 @@ public class ChamberNode
         }
     }
 
+    public void SetColors()
+    {
+        foreach (var item in ChildrenWithDirections())
+        {
+            if(item.Value!=null)
+            {
+                if (item.Value.Type != ChamberType.Optional)
+                    ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.Main);
+                else
+                    ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.Optional);
+            }
+            else
+                ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.None);
+        }
+
+        if(Parent!=null)
+        {
+            ChamberControl.symbol.materials[ParentDirection] = PathMatirials.GetMaterialFromType(PathTypes.Main);
+        }
+
+        ChamberControl.SetNonActivePathsColors();
+    }
+
     // TODO: Delete
     public void CreateBlocades()
     {
