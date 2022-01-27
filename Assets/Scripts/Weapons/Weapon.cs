@@ -14,10 +14,11 @@ namespace Assets.Scripts.Weapons
         public abstract float projectileSpeed { get; set; }
         public abstract float triggerTimeout { get; set; }
         public abstract float baseDamage { get; set; }
+        public abstract string Name { get; set; }
         protected abstract int ammoConsumption { get; }
 
-        public EventHandler<float> WeaponShoot;
-        //public EventHandler<(float f1, string name)> WeaponShoot;
+        //public EventHandler<float> WeaponShoot;
+        public EventHandler<(float f1, string name)> WeaponShoot;
         public void DecreaseTime()
         {
             trigger.DecreaseTime(Time.deltaTime);
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Weapons
             {
                 if (ammoSystem.Ammo >= ammoConsumption)
                 {
-                    WeaponShoot?.Invoke(this, triggerTimeout);
+                    WeaponShoot?.Invoke(this, (triggerTimeout, Name));
                     Shoot(shooter, position, direction, shooting);
                     ammoSystem.Ammo -= ammoConsumption;
                 }
