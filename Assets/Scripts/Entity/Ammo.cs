@@ -14,6 +14,7 @@ public class Ammo : Entity
     private void Start()
     {
         camera = Camera.main;
+        transform.Rotate(0, Utils.FloatBetween(0, 360), 0);
     }
     
     private void Awake()
