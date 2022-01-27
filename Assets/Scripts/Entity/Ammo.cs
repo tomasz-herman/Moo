@@ -57,7 +57,7 @@ public class Ammo : Entity
             textObject.transform.LookAt(camera.transform.position);
             textObject.transform.Rotate(Vector3.up, 180);
             textObject.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(text);
-            Destroy(textObject, 1.4f);
+            Destroy(textObject, 3);
         }
     }
 }
