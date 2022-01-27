@@ -26,6 +26,10 @@ public class SegmentControler : MonoBehaviour
         {
             item.SetActive(isAcctive);
         }
+        foreach (var item in Path)
+        {
+            item.gameObject.SetActive(!isAcctive);
+        }
     }
 
     public void SetPathMaterial(Material material)
