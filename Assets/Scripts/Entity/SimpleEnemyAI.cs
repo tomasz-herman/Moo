@@ -10,9 +10,10 @@ public class SimpleEnemyAI : MonoBehaviour
     private Transform player;
     
     public float sightRange;
-    private bool playerInAttackRange, playerInSight;
+    private bool playerInAttackRange, playerInSight, playerInPrefferedRange;
     
     public float movementSpeed = 1f;
+    public float damageMultiplier = 1f;
     public Vector3 movementDirection;
     public float remainingMovementTime = 0;
     
@@ -39,14 +40,18 @@ public class SimpleEnemyAI : MonoBehaviour
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
         shooting.triggerTimeout = weaponAIProperties.Timeout;
+        shooting.projectileSpeed = weaponAIProperties.ProjectileSpeed;
+        shooting.weaponDamage = weaponAIProperties.BonusDamage * damageMultiplier;
 
         var position = transform.position;
         var playerPosition = player.position;
-        playerInAttackRange = Vector3.Distance(position, playerPosition) < weaponAIProperties.Range;
-        playerInSight = Vector3.Distance(position, playerPosition) < sightRange;
+        var distToPlayer = Vector3.Distance(position, playerPosition);
+        playerInAttackRange = distToPlayer < weaponAIProperties.MaximumRange;
+        playerInPrefferedRange = distToPlayer < weaponAIProperties.PreferredRange;
+        playerInSight = distToPlayer < sightRange;
 
         if(!playerInSight && !playerInAttackRange) Patrol();
-        if(playerInSight && !playerInAttackRange) Chase();
+        if(playerInSight && !playerInPrefferedRange) Chase();
         if(playerInSight && playerInAttackRange) Attack();
     }
 
@@ -69,7 +74,7 @@ public class SimpleEnemyAI : MonoBehaviour
     private void Chase()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * Time.deltaTime * movementSpeed);
+        characterController.Move(toPlayer * (Time.deltaTime * movementSpeed * weaponAIProperties.BonusMovementSpeed));
     }
 
     private void Attack()
@@ -78,7 +83,6 @@ public class SimpleEnemyAI : MonoBehaviour
         var playerPosition = player.position;
         var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
         Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
-        characterController.Move(toPlayer * Time.deltaTime * movementSpeed);
         shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
         lastPlayerPosition = playerPosition;
     }

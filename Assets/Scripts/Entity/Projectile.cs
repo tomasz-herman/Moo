@@ -29,7 +29,7 @@ public class Projectile : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, baseDamage + extraDamage);
+            ApplyDamage(other, baseDamage * extraDamage);
             Destroy(gameObject);
         }
     }
