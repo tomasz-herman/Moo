@@ -59,7 +59,7 @@ public class Health : Entity
             var textObject = Instantiate(FloatingTextPrefab, transform.position + Vector3.up, Quaternion.identity);
             textObject.transform.LookAt(camera.transform.position);
             textObject.transform.Rotate(Vector3.up, 180);
-            textObject.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(text);
+            textObject.transform.GetComponentInChildren<TextMeshPro>().SetText(text);
             Destroy(textObject, 3);
         }
     }
