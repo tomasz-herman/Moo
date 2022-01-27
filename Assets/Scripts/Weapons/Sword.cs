@@ -16,6 +16,8 @@ namespace Assets.Scripts.Weapons
         public override float projectileSpeed { get; set; } = 2f;
         public override float triggerTimeout { get; set; } = 2f;
         public override float baseDamage { get; set; } = 1f;
+
+        public override string Name { get; set; } = "Sword";
         protected override int ammoConsumption => 0;
 
         public Sword(Blade bladeprefab)

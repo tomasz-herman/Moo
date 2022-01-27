@@ -8,6 +8,7 @@ public class WeaponBar : MonoBehaviour
 {
     public Image selector;
     public Image overlay;
+    //public Image overlayMachineGun;
     public Image slot1, slot2, slot3, slot4, slot5;
     private Image[] images;
 
@@ -17,7 +18,7 @@ public class WeaponBar : MonoBehaviour
     public Shooting shooting;
     public float timeout=0;
     public float remainingtime=0;
-    public bool over1;
+    //public bool over1;
     void Start()
     {
         images = new Image[] { slot1, slot2, slot3, slot4, slot5 };
@@ -25,6 +26,7 @@ public class WeaponBar : MonoBehaviour
         selectedIndex = images.Length / 2;
         UpdateSelector();
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
+        //overlayMachineGun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
         shooting.Pistol.WeaponShoot += UpdateSprite;
         shooting.Shotgun.WeaponShoot += UpdateSprite;
         shooting.Sword.WeaponShoot += UpdateSprite;
@@ -34,24 +36,28 @@ public class WeaponBar : MonoBehaviour
     void Update()
     {
 
-        if (remainingtime < timeout && over1 == true)
+        if (remainingtime < timeout)
         {
             remainingtime += Time.deltaTime;
             //overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1f-remainingtime/timeout);
             overlay.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (remainingtime / timeout));
+            //overlayMachineGun.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (remainingtime / timeout));
             overlay.rectTransform.localPosition = new Vector3(0, -(-50 + (remainingtime / timeout) * 40), 0);
+            //overlayMachineGun.rectTransform.localPosition = new Vector3(0, -(-50 + (remainingtime / timeout) * 40), 0);
         }
-        else
-            over1 = false;
+        //else
+            //over1 = false;
             //overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
     }
     void UpdateSprite(object sender, float Timeout)
     {
         remainingtime = 0;
-        over1 = true;
+        //over1 = true;
         timeout = Timeout*shooting.triggerTimeout;
         overlay.transform.position = images[selectedIndex].transform.position;
+        //overlayMachineGun.transform.position = images[selectedIndex].transform.position;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+        //overlayMachineGun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
         
     }
 

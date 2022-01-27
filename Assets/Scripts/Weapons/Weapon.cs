@@ -16,6 +16,8 @@ namespace Assets.Scripts.Weapons
         public abstract float baseDamage { get; set; }
         protected abstract int ammoConsumption { get; }
 
+        public abstract string Name { get; set; }
+
         public EventHandler<float> WeaponShoot;
         //public EventHandler<(float f1, string name)> WeaponShoot;
         public void DecreaseTime()

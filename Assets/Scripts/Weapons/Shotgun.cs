@@ -19,7 +19,7 @@ namespace Assets.Scripts.Weapons
         public override float triggerTimeout { get; set; } = 5f;
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 3;
-
+        public override string Name { get; set; } = "Shotgun";
         public Shotgun(Bullet bulletprefab)
         {
             bulletPrefab = bulletprefab;
