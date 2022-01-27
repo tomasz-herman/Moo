@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Ammo : Entity
@@ -55,8 +56,8 @@ public class Ammo : Entity
             var textObject = Instantiate(FloatingTextPrefab, transform.position + Vector3.up, Quaternion.identity);
             textObject.transform.LookAt(camera.transform.position);
             textObject.transform.Rotate(Vector3.up, 180);
-            textObject.GetComponent<TextMesh>().text = text;
-            Destroy(textObject, 3);
+            textObject.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(text);
+            Destroy(textObject, 1.4f);
         }
     }
 }

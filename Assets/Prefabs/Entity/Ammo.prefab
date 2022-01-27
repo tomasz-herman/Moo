@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minAmmo: 50
   maxAmmo: 100
-  FloatingTextPrefab: {fileID: 1125675931467937535, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
+  FloatingTextPrefab: {fileID: 2313416263019860963, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
 --- !u!65 &7486426635843230441
 BoxCollider:
   m_ObjectHideFlags: 0
