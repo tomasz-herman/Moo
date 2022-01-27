@@ -16,13 +16,13 @@ public class Chamber : MonoBehaviour
 
     private void Start()
     {
-        remainingEnemies = Enemies.Count;
-        foreach (var enemy in Enemies)
-            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
+        //remainingEnemies = Enemies.Count;
+        //foreach (var enemy in Enemies)
+        //    enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
 
-        remainingBosses = Bosses.Count;
-        foreach (var enemy in Bosses)
-            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillBossEventHandler);
+        //remainingBosses = Bosses.Count;
+        //foreach (var enemy in Bosses)
+        //    enemy.GetComponent<Enemy>().KillEvent.AddListener(KillBossEventHandler);
     }
 
     public void OpenExits()

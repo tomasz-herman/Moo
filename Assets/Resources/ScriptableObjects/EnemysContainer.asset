@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d235ee7b6b75d4e83a3a708b41cf42, type: 3}
+  m_Name: EnemysContainer
+  m_EditorClassIdentifier: 
+  enemys:
+  - enemy: {fileID: 584923067921654789, guid: 241134a6d63fc4f3297e73fca5dd53e2, type: 3}
+    type: 0
+    teleporterScale: 1
+  - enemy: {fileID: 584923067921654789, guid: 92e9c4dd4b062144b8badb0de664f56c, type: 3}
+    type: 1
+    teleporterScale: 1.5
+  - enemy: {fileID: 584923067921654789, guid: 5261802eb2fd663dc9c079faee2392d1, type: 3}
+    type: 2
+    teleporterScale: 2
+  - enemy: {fileID: 584923067921654789, guid: 1770460cd07f13e3d94f875407a59ccc, type: 3}
+    type: 3
+    teleporterScale: 2.5
+  - enemy: {fileID: 584923067921654789, guid: 3baab7bf41572f8559e575b0044be673, type: 3}
+    type: 4
+    teleporterScale: 3

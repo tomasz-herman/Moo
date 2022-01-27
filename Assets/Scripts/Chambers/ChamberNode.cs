@@ -12,6 +12,7 @@ public class ChamberNode
     public ChamberNode Parent = null;
     public Direction ParentDirection;
     public ChamberControl ChamberControl;
+    public int Number = -1;
     public bool IsLast = false;
     private Dictionary<Direction, ChamberNode> children;
 
@@ -132,7 +133,7 @@ public class ChamberNode
     {
         foreach (var item in ChildrenWithDirections())
         {
-            if(item.Value!=null)
+            if (item.Value != null)
             {
                 if (item.Value.Type != ChamberType.Optional)
                     ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.Main);
@@ -143,7 +144,7 @@ public class ChamberNode
                 ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.None);
         }
 
-        if(Parent!=null)
+        if (Parent != null)
         {
             ChamberControl.symbol.materials[ParentDirection] = PathMatirials.GetMaterialFromType(PathTypes.Main);
         }
@@ -151,17 +152,17 @@ public class ChamberNode
         ChamberControl.SetNonActivePathsColors();
     }
 
-    // TODO: Delete
     public void CreateBlocades()
     {
         foreach (var item in children)
         {
             if (item.Value == null)
-            {
-                var blocade = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                blocade.transform.localScale = new Vector3(6, 6, 6);
-                blocade.transform.position = new Vector3(Location.x * 60 + 30 + Vector2IntFromDirection(item.Key).x * 27, 0, Location.y * 60 + 30 + Vector2IntFromDirection(item.Key).y * 27);
-            }
+                ChamberControl.SetBlocadeActive(item.Key, true);
+            else
+                ChamberControl.SetBlocadeActive(item.Key, false);
         }
+        if (Parent != null)
+            ChamberControl.SetBlocadeActive(ParentDirection, false);
+
     }
 }

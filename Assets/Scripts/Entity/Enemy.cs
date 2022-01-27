@@ -8,7 +8,7 @@ public class Enemy : Entity
     [HideInInspector] public HealthSystem healthSystem;
     [HideInInspector] public DropSystem dropSystem;
     
-    public UnityEngine.Events.UnityEvent KillEvent;
+    [HideInInspector] public UnityEngine.Events.UnityEvent<GameObject> KillEvent;
 
     public SoundTypeWithPlaybackSettings Sound;
 
@@ -58,8 +58,7 @@ public class Enemy : Entity
         //drop loot
         dropSystem.Drop();
 
+        KillEvent.Invoke(gameObject);
         Destroy(gameObject);
-
-        KillEvent.Invoke();
     }
 }

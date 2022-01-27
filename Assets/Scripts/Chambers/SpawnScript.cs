@@ -37,6 +37,7 @@ public class SpawnScript : MonoBehaviour
             if (i > NumberOfTryBeforeOnlyForwardMode)
                 OnlyForward = true;
         }
+        NumberTheChambers();
         return chambersTreeRoot;
     }
 
@@ -148,7 +149,8 @@ public class SpawnScript : MonoBehaviour
         }
         newRoom.transform.position = new Vector3(root.Location.x * ChamberSize, 0, root.Location.y * ChamberSize);
         root.ChamberControl = newRoom.GetComponent<ChamberControl>();
-        root.CreateBlocades(); // TODO: Delete
+        root.ChamberControl.node = root;
+        root.CreateBlocades();
         root.SetColors();
 
         foreach (var item in root.Children())
@@ -157,6 +159,46 @@ public class SpawnScript : MonoBehaviour
                 BuildChambersRec(item);
         }
 
+    }
+
+    private void NumberTheChambers()
+    {
+        int currNumber = 0;
+        ChamberNode currentNode = chambersTreeRoot;
+        ChamberNode tempNode;
+        while (currentNode != null)
+        {
+            if (currentNode.Type == ChamberType.Normal)
+                NumberTheOptionalChambersRec(currentNode);
+            else
+            {
+                currentNode.Number = currNumber;
+                currNumber++;
+            }
+
+            tempNode = null;
+            foreach (var item in currentNode.Children())
+            {
+                if (item != null && (item.Type == ChamberType.Boss || item.Type == ChamberType.Normal))
+                    tempNode = item;
+            }
+            currentNode = tempNode;
+        }
+        EnemySpawner.MaxNumber = currNumber-1;
+
+        void NumberTheOptionalChambersRec(ChamberNode root)
+        {
+            if (root == null)
+                return;
+
+            root.Number = currNumber;
+            currNumber++;
+            foreach (var item in root.Children())
+            {
+                if (item != null && item.Type == ChamberType.Optional)
+                    NumberTheOptionalChambersRec(item);
+            }
+        }
     }
 
     private Direction randomNext(ChamberNode current)
