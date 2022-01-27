@@ -54,7 +54,7 @@ namespace Assets.Scripts.Weapons
         {
             public override float Range => 15;
             public override float Timeout => 4;
-            public override Type Type => typeof(Grenade);
+            public override Type Type => typeof(GrenadeLauncher);
         }
     
         private class MachineGunAIProperties : WeaponAIProperties
