@@ -10,21 +10,24 @@ public class SpawnScript : MonoBehaviour
     [SerializeField] int NumberOfBossChambers = 3;
     [SerializeField] int NumbersOfChambersBeforeBoss = 2;
     [SerializeField] int NumberOfTryBeforeOnlyForwardMode = 3;
+    [SerializeField] float OptionalChamberSpawnPossibilityPercent = 50;
 
     private List<GameObject> StartChambers = new List<GameObject>();
     private List<GameObject> NormalChambers = new List<GameObject>();
     private List<GameObject> OptionalChambers = new List<GameObject>();
     private List<GameObject> BossChambers = new List<GameObject>();
-    [HideInInspector] public ChamberNode ChamersTreeRoot { get { return chambersTreeRoot; } }
+    [HideInInspector] public ChamberNode ChambersTreeRoot { get { return chambersTreeRoot; } }
 
     private Dictionary<Vector2Int, ChamberType> taken = new Dictionary<Vector2Int, ChamberType>();
-    private int remainig;
+    private int remaining;
     private bool OnlyForward = true;
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
+    private float optionalSpawnFloat = 0;
 
     private void Awake()
     {
+        optionalSpawnFloat = 1 - (float)OptionalChamberSpawnPossibilityPercent / 100;
         LoadChamberPrefabs();
     }
 
@@ -86,31 +89,31 @@ public class SpawnScript : MonoBehaviour
 
                 tempNode = null;
                 foreach (var item in currentNode.Children())
-                    tempNode ??= item;
+                    tempNode = item;
                 currentNode = tempNode;
             }
 
-            remainig = NumberOfOptionalChambers;
-            while (remainig > 0)
+            remaining = NumberOfOptionalChambers;
+            while (remaining > 0)
             {
                 var tempOptionals = possibleOptional.OrderBy(x => Utils.RandomNumber()).ToList();
 
                 foreach (var item in tempOptionals)
                 {
-                    if (remainig <= 0)
+                    if (remaining <= 0)
                         break;
                     if (!taken.ContainsKey(moveFromDirection(item.node.Location, item.direction)))
-                        if (Random.value >= 0.5)
+                        if (Random.value >= optionalSpawnFloat)
                         {
                             var newChamber = item.node.CreateChild(ChamberType.Optional, item.direction);
                             taken.Add(newChamber.Location, newChamber.Type);
-                            remainig--;
+                            remaining--;
                             FindOptionalFromNode(newChamber);
                         }
                     possibleOptional.Remove(item);
                 }
 
-                if (remainig > 0 && possibleOptional.Count == 0)
+                if (remaining > 0 && possibleOptional.Count == 0)
                     FindOptionalPositionsRec(chambersTreeRoot);
             }
 
@@ -141,7 +144,6 @@ public class SpawnScript : MonoBehaviour
                 newRoom = Instantiate(OptionalChambers[Utils.NumberBetween(0, OptionalChambers.Count - 1)], Vector3.zero, Quaternion.identity);
                 break;
             case ChamberType.Start:
-                int dupa = Utils.NumberBetween(0, StartChambers.Count - 1);
                 newRoom = Instantiate(StartChambers[Utils.NumberBetween(0, StartChambers.Count - 1)], Vector3.zero, Quaternion.identity);
                 break;
             default:
@@ -154,11 +156,7 @@ public class SpawnScript : MonoBehaviour
         root.SetColors();
 
         foreach (var item in root.Children())
-        {
-            if (item != null)
-                BuildChambersRec(item);
-        }
-
+            BuildChambersRec(item);
     }
 
     private void NumberTheChambers()
@@ -179,12 +177,12 @@ public class SpawnScript : MonoBehaviour
             tempNode = null;
             foreach (var item in currentNode.Children())
             {
-                if (item != null && (item.Type == ChamberType.Boss || item.Type == ChamberType.Normal))
+                if (item.Type == ChamberType.Boss || item.Type == ChamberType.Normal)
                     tempNode = item;
             }
             currentNode = tempNode;
         }
-        EnemySpawner.MaxNumber = currNumber-1;
+        EnemySpawner.MaxNumber = currNumber - 1;
 
         void NumberTheOptionalChambersRec(ChamberNode root)
         {
@@ -195,7 +193,7 @@ public class SpawnScript : MonoBehaviour
             currNumber++;
             foreach (var item in root.Children())
             {
-                if (item != null && item.Type == ChamberType.Optional)
+                if (item.Type == ChamberType.Optional)
                     NumberTheOptionalChambersRec(item);
             }
         }
@@ -221,19 +219,7 @@ public class SpawnScript : MonoBehaviour
 
     private Vector2Int moveFromDirection(Vector2Int current, Direction direction)
     {
-        switch (direction)
-        {
-            case Direction.Up:
-                return current + new Vector2Int(0, -1);
-            case Direction.Down:
-                return current + new Vector2Int(0, 1);
-            case Direction.Left:
-                return current + new Vector2Int(1, 0);
-            case Direction.Right:
-                return current + new Vector2Int(-1, 0);
-            default:
-                return new Vector2Int(0, 0);
-        }
+        return current + Directions.Vector2IntFromDirection(direction);
     }
 
     private void FindOptionalPositionsRec(ChamberNode root)
@@ -252,10 +238,7 @@ public class SpawnScript : MonoBehaviour
         }
 
         foreach (var item in root.Children())
-        {
-            if (item != null)
-                FindOptionalPositionsRec(item);
-        }
+            FindOptionalPositionsRec(item);
     }
 
     private void FindOptionalFromNode(ChamberNode current)

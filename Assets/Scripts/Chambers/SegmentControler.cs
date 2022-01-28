@@ -20,15 +20,15 @@ public class SegmentControler : MonoBehaviour
         }
     }
 
-    public void SetActive(bool isAcctive)
+    public void SetActive(bool isActive)
     {
         foreach (var item in SegmentObjects)
         {
-            item.SetActive(isAcctive);
+            item.SetActive(isActive);
         }
         foreach (var item in Path)
         {
-            item.gameObject.SetActive(!isAcctive);
+            item.gameObject.SetActive(!isActive);
         }
     }
 

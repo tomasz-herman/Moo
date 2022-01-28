@@ -249,31 +249,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.6
+      value: -75.20123
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 185.33907
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.7
+      value: 142.00737
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.23508443
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.10912216
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.88217324
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.39318967
       objectReference: {fileID: 0}
     - target: {fileID: 5699320512004101982, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -950,6 +950,7 @@ MonoBehaviour:
   NumberOfBossChambers: 3
   NumbersOfChambersBeforeBoss: 2
   NumberOfTryBeforeOnlyForwardMode: 3
+  OptionalChamberSpawnPossibilityPercent: 50
 --- !u!4 &2095628308
 Transform:
   m_ObjectHideFlags: 0
@@ -977,7 +978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 822649175}
-  SpawnEffect: {fileID: 749573225910250456, guid: 704257e3918dd3b4a9283e447c5b56f2, type: 3}
   gameWorld: {fileID: 1027701283}
 --- !u!1001 &2113982990
 PrefabInstance:

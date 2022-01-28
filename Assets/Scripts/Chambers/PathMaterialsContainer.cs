@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PathMatirialsContainer", menuName = "ScriptableObjects/PathMatirialsContainer")]
-public class PathMatirialsContainer : ScriptableObject
+[CreateAssetMenu(fileName = "PathMaterialsContainer", menuName = "ScriptableObjects/PathMaterialsContainer")]
+public class PathMaterialsContainer : ScriptableObject
 {
     [SerializeField] private List<PathMaterialInfo> Materials;
     [HideInInspector] public Dictionary<PathTypes, Material> MaterialsDict = new Dictionary<PathTypes, Material>();
@@ -26,14 +26,14 @@ public struct PathMaterialInfo
     public PathTypes type;
 }
 
-public static class PathMatirials
+public static class PathMaterials
 {
     private static Dictionary<PathTypes, Material> Materials = new Dictionary<PathTypes, Material>();
     public static Material GetMaterialFromType(PathTypes type)
     {
         if(Materials.Count==0)
         {
-            PathMatirialsContainer Container = Resources.Load<PathMatirialsContainer>("ScriptableObjects/PathMatirials");
+            PathMaterialsContainer Container = Resources.Load<PathMaterialsContainer>("ScriptableObjects/PathMaterials");
             Materials = Container.MaterialsDict;
         }
         return Materials[type];

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9d235ee7b6b75d4e83a3a708b41cf42, type: 3}
-  m_Name: EnemysContainer
+  m_Name: EnemiesContainer
   m_EditorClassIdentifier: 
-  enemys:
+  enemies:
   - enemy: {fileID: 584923067921654789, guid: 241134a6d63fc4f3297e73fca5dd53e2, type: 3}
     type: 0
     teleporterScale: 1

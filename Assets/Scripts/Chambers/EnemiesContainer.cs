@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemysContainer", menuName = "ScriptableObjects/EnemysContainer")]
-public class EnemysContainer : ScriptableObject
+[CreateAssetMenu(fileName = "EnemiesContainer", menuName = "ScriptableObjects/EnemiesContainer")]
+public class EnemiesContainer : ScriptableObject
 {
-    [SerializeField] private List<EnemyPrefabInfo> enemys;
+    [SerializeField] private List<EnemyPrefabInfo> enemies;
     [HideInInspector] public Dictionary<EnemyTypes, EnemyPrefabInfo> EnemysDict = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
 
     private void OnValidate()
     {
         EnemysDict.Clear();
-        foreach (var item in enemys)
+        foreach (var item in enemies)
         {
             EnemysDict.Add(item.type, item);
         }
@@ -30,14 +30,14 @@ public struct EnemyPrefabInfo
 
 public static class Enemys
 {
-    private static Dictionary<EnemyTypes, EnemyPrefabInfo> enemys = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
+    private static Dictionary<EnemyTypes, EnemyPrefabInfo> enemies = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
     public static EnemyPrefabInfo GetEnemyInfoFromType(EnemyTypes type)
     {
-        if (enemys.Count == 0)
+        if (enemies.Count == 0)
         {
-            EnemysContainer Container = Resources.Load<EnemysContainer>("ScriptableObjects/EnemysContainer");
-            enemys = Container.EnemysDict;
+            EnemiesContainer Container = Resources.Load<EnemiesContainer>("ScriptableObjects/EnemiesContainer");
+            enemies = Container.EnemysDict;
         }
-        return enemys[type];
+        return enemies[type];
     }
 }

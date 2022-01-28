@@ -24,6 +24,16 @@ public class ChamberControl : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        enemySpawner.AllEnemiesKilled.AddListener(AllEnemiesKilledHandler);
+    }
+
+    private void OnDestroy()
+    {
+        enemySpawner.AllEnemiesKilled.RemoveListener(AllEnemiesKilledHandler);
+    }
+
     public void ChamberUpdate()
     {
         switch (State)
@@ -42,7 +52,7 @@ public class ChamberControl : MonoBehaviour
 
     protected virtual void PreFight()
     {
-        if (Physics.CheckSphere(fightTrigger.transform.position, fightTrigger.TriggerRadius, 1 << LayerMask.NameToLayer(Layers.Player)))
+        if (Physics.CheckSphere(fightTrigger.transform.position, fightTrigger.TriggerRadius, LayerMask.GetMask(Layers.Player)))
         {
             State = States.Fight;
             SetFightPathsColors();
@@ -52,16 +62,11 @@ public class ChamberControl : MonoBehaviour
 
     protected virtual void Fight()
     {
-        if (enemySpawner.AllEnemysDead())
-        {
-            SetDefaultPathsColors();
-            State = States.Cleared;
-        }
     }
 
     public void SetFightPathsColors()
     {
-        Material fightMaterial = PathMatirials.GetMaterialFromType(PathTypes.Fight);
+        Material fightMaterial = PathMaterials.GetMaterialFromType(PathTypes.Fight);
         symbol.SetMaterials(fightMaterial);
         foreach (var item in segments)
         {
@@ -78,7 +83,7 @@ public class ChamberControl : MonoBehaviour
     }
     public void SetNonActivePathsColors()
     {
-        Material noneMaterial = PathMatirials.GetMaterialFromType(PathTypes.None);
+        Material noneMaterial = PathMaterials.GetMaterialFromType(PathTypes.None);
         symbol.SetMaterials(noneMaterial);
         foreach (var item in segments)
         {
@@ -99,5 +104,16 @@ public class ChamberControl : MonoBehaviour
     {
         if (segments.Count > 0)
             segments[direction].SetActive(isActive);
+    }
+
+    private void AllEnemiesKilledHandler()
+    {
+        SetDefaultPathsColors();
+        State = States.Cleared;
+    }
+
+    public void AddAllEnemiesKilledListener(UnityEngine.Events.UnityAction action)
+    {
+        enemySpawner.AllEnemiesKilled.AddListener(action);
     }
 }

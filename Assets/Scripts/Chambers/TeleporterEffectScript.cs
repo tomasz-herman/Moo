@@ -6,7 +6,8 @@ public class TeleporterEffectScript : MonoBehaviour
 {
     private Animator animator;
     private GameObject SpawnedObject;
-    // Start is called before the first frame update
+    private static GameObject TeleportEffect = null;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,5 +28,16 @@ public class TeleporterEffectScript : MonoBehaviour
     {
         animator.SetBool("Animate", false);
         Destroy(gameObject);
+    }
+
+    public static void CreateTeleporterForEntity(GameObject entity, float teleporterScale)
+    {
+        if (TeleportEffect == null)
+        {
+            TeleportEffect = Resources.Load<GameObject>("TeleporterEffect");
+        }
+        var tele = GameObject.Instantiate(TeleportEffect, entity.transform.position, Quaternion.identity).GetComponent<TeleporterEffectScript>();
+        tele.gameObject.transform.localScale *= teleporterScale;
+        tele.AddSpawnedObject(entity);
     }
 }

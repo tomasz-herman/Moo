@@ -6,7 +6,6 @@ using UnityEngine;
 public class ChambersControler : MonoBehaviour
 {
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject SpawnEffect;
     [SerializeField] GameWorld gameWorld;
 
     [HideInInspector] public ChamberNode CurrentChamber = null;
@@ -20,29 +19,32 @@ public class ChambersControler : MonoBehaviour
         Spawn.BuildChambersRec(ChamberTreeRoot);
         CurrentChamber = ChamberTreeRoot;
         Player.transform.position = ChamberTreeRoot.ChamberControl.SpawnLocations[0].transform.position;
-        Player.gameObject.SetActive(false);
-        var tele = Instantiate(SpawnEffect, Player.transform.position, Quaternion.identity).GetComponent<TeleporterEffectScript>();
-        tele.gameObject.transform.localScale = new Vector3(2, 2, 2);
-        tele.AddSpawnedObject(Player);
+        TeleporterEffectScript.CreateTeleporterForEntity(Player, Player.GetComponent<Player>().TeleporterScale);
     }
 
     void Update()
     {
         ChangeChamber();
         CurrentChamber.ChamberControl.ChamberUpdate();
-        if (EnemySpawner.MaxNumber == CurrentChamber.Number)
-            if (CurrentChamber.ChamberControl.IsCleared())
-                gameWorld.EndGame(true, Player.GetComponent<ScoreSystem>().GetScore());
     }
 
     private bool ChangeChamber()
     {
         Vector2Int playerPosition = new Vector2Int(Mathf.FloorToInt(Player.transform.position.x / (float)Spawn.ChamberSize), Mathf.FloorToInt(Player.transform.position.z / (float)Spawn.ChamberSize));
+        if ((playerPosition-CurrentChamber.Location).magnitude > 1)
+            return false;
         if (playerPosition != CurrentChamber.Location)
         {
             CurrentChamber = CurrentChamber.GetNextNodeFromDirecion(playerPosition - CurrentChamber.Location);
+            if (CurrentChamber.IsLast)
+                CurrentChamber.ChamberControl.AddAllEnemiesKilledListener(GameFinishedHandler);
             return true;
         }
         return false;
+    }
+
+    private void GameFinishedHandler()
+    {
+        gameWorld.EndGame(true, Player.GetComponent<ScoreSystem>().GetScore());
     }
 }

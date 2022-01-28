@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f657c9f7742deb4aa8b9574df581e46, type: 3}
-  m_Name: PathMatirials
+  m_Name: PathMaterials
   m_EditorClassIdentifier: 
   Materials:
   - material: {fileID: 2100000, guid: 9ce9f58049b9e124e9b84743586b73e3, type: 2}

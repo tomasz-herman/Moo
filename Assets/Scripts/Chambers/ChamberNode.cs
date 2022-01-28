@@ -21,23 +21,25 @@ public class ChamberNode
         Type = type;
         Location = location;
         children = new Dictionary<Direction, ChamberNode>();
-        foreach (Direction item in Enumerable.Range(0, 4))
+        foreach (Direction item in Enum.GetValues(typeof(Direction)))
             children.Add(item, null);
     }
 
     public void AddParent(ChamberNode parent)
     {
         Parent = parent;
-        ParentDirection = DirectionFromVector2Int(parent.Location - Location);
+        ParentDirection = Directions.DirectionFromVector2Int(parent.Location - Location);
         if (children.Count == 4)
             children.Remove(ParentDirection);
         else
         {
-            children.Clear();
-            foreach (Direction item in Enumerable.Range(0, 4))
+            foreach (Direction item in Enum.GetValues(typeof(Direction)))
                 if (item == ParentDirection)
-                    continue;
-                else
+                {
+                    if (children.ContainsKey(ParentDirection))
+                        children.Remove(ParentDirection);
+                }
+                else if (!children.ContainsKey(item))
                     children.Add(item, null);
         }
     }
@@ -51,21 +53,13 @@ public class ChamberNode
 
     public ChamberNode GetChildFromDirection(Vector2Int vector)
     {
-        Direction direction = ChamberNode.DirectionFromVector2Int(vector);
-        if (children.ContainsKey(direction))
-            return children[direction];
-        return null;
-    }
-
-    public void AddChild(ChamberNode child)
-    {
-        children[DirectionFromVector2Int(child.Location - Location)] = child;
-        child.AddParent(this);
+        Direction direction = Directions.DirectionFromVector2Int(vector);
+        return GetChildFromDirection(direction);
     }
 
     public ChamberNode CreateChild(ChamberType type, Direction direction)
     {
-        children[direction] = new ChamberNode(type, Location + Vector2IntFromDirection(direction));
+        children[direction] = new ChamberNode(type, Location + Directions.Vector2IntFromDirection(direction));
         children[direction].AddParent(this);
         return children[direction];
     }
@@ -74,6 +68,8 @@ public class ChamberNode
     {
         foreach (var item in children)
         {
+            if (item.Value == null)
+                continue;
             yield return item.Value;
         }
     }
@@ -97,36 +93,8 @@ public class ChamberNode
 
     public ChamberNode GetNextNodeFromDirecion(Vector2Int vector)
     {
-        Direction direction = ChamberNode.DirectionFromVector2Int(vector);
+        Direction direction = Directions.DirectionFromVector2Int(vector);
         return GetNextNodeFromDirecion(direction);
-    }
-
-    private static Direction DirectionFromVector2Int(Vector2Int vector)
-    {
-        if (vector.x == 0 && vector.y == -1)
-            return Direction.Up;
-        else if (vector.x == 0 && vector.y == 1)
-            return Direction.Down;
-        else if (vector.x == 1 && vector.y == 0)
-            return Direction.Left;
-        return Direction.Right;
-    }
-
-    private static Vector2Int Vector2IntFromDirection(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.Up:
-                return new Vector2Int(0, -1);
-            case Direction.Down:
-                return new Vector2Int(0, 1);
-            case Direction.Left:
-                return new Vector2Int(1, 0);
-            case Direction.Right:
-                return new Vector2Int(-1, 0);
-            default:
-                return new Vector2Int(0, 0);
-        }
     }
 
     public void SetColors()
@@ -136,17 +104,25 @@ public class ChamberNode
             if (item.Value != null)
             {
                 if (item.Value.Type != ChamberType.Optional)
-                    ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.Main);
+                {
+                    ChamberControl.symbol.SetBossDirection(item.Key);
+                    ChamberControl.symbol.materials[item.Key] = PathMaterials.GetMaterialFromType(PathTypes.Main);
+                }
                 else
-                    ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.Optional);
+                    ChamberControl.symbol.materials[item.Key] = PathMaterials.GetMaterialFromType(PathTypes.Optional);
             }
             else
-                ChamberControl.symbol.materials[item.Key] = PathMatirials.GetMaterialFromType(PathTypes.None);
+            {
+                ChamberControl.symbol.materials[item.Key] = PathMaterials.GetMaterialFromType(PathTypes.None);
+                ChamberControl.symbol.SetActive(item.Key, false);
+            }
         }
 
         if (Parent != null)
         {
-            ChamberControl.symbol.materials[ParentDirection] = PathMatirials.GetMaterialFromType(PathTypes.Main);
+            if (Type == ChamberType.Optional)
+                ChamberControl.symbol.SetBossDirection(ParentDirection);
+            ChamberControl.symbol.materials[ParentDirection] = PathMaterials.GetMaterialFromType(PathTypes.Main);
         }
 
         ChamberControl.SetNonActivePathsColors();
@@ -155,12 +131,7 @@ public class ChamberNode
     public void CreateBlocades()
     {
         foreach (var item in children)
-        {
-            if (item.Value == null)
-                ChamberControl.SetBlocadeActive(item.Key, true);
-            else
-                ChamberControl.SetBlocadeActive(item.Key, false);
-        }
+            ChamberControl.SetBlocadeActive(item.Key, item.Value == null);
         if (Parent != null)
             ChamberControl.SetBlocadeActive(ParentDirection, false);
 

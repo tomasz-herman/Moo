@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnemySpawner
 {
     public static int MaxNumber = 0;
-    private int numberOfAliveEnemys = 0;
-    private static GameObject TeleportEffect = null;
+    private int numberOfAliveEnemies = 0;
+    public UnityEngine.Events.UnityEvent AllEnemiesKilled = new UnityEngine.Events.UnityEvent();
     public void Spawn(List<SpawnLocationScript> spawnLocations, ChamberType chamberType, int chamberNumber)
     {
         int numberOfEnemys;
@@ -17,10 +17,10 @@ public class EnemySpawner
                 numberOfEnemys = Utils.NumberBetween(2, spawnLocations.Count-1);
                 foreach (var item in spawnLocations.OrderBy(x => Utils.RandomNumber()))
                 {
-                    SpawnEnemy(RandomEnemy(chamberNumber), item.transform.position);
-                    numberOfEnemys--;
                     if (numberOfEnemys <= 0)
                         return;
+                    SpawnEnemy(RandomEnemy(chamberNumber), item.transform.position);
+                    numberOfEnemys--;
                 }
                 break;
             case ChamberType.Boss:
@@ -30,13 +30,13 @@ public class EnemySpawner
                 numberOfEnemys = Utils.NumberBetween(1, spawnLocations.Count/2);
                 foreach (var item in spawnLocations.OrderBy(x => Utils.RandomNumber()))
                 {
+                    if (numberOfEnemys <= 0)
+                        return;
                     if(numberOfEnemys==1)
                         SpawnEnemy(EnemyTypes.MiniBoss, item.transform.position);
                     else
                     SpawnEnemy(RandomEnemy(chamberNumber), item.transform.position);
                     numberOfEnemys--;
-                    if (numberOfEnemys <= 0)
-                        return;
                 }
                 break;
             case ChamberType.Start:
@@ -47,41 +47,31 @@ public class EnemySpawner
 
     private void KillHandler(GameObject sender)
     {
-        numberOfAliveEnemys--;
+        sender.GetComponent<Enemy>().KillEvent.RemoveListener(KillHandler);
+        numberOfAliveEnemies--;
+        if (AllEnemiesDead())
+            AllEnemiesKilled.Invoke();
     }
 
-    public bool AllEnemysDead()
+    public bool AllEnemiesDead()
     {
-        if (numberOfAliveEnemys > 0)
-            return false;
-        return true;
+        return numberOfAliveEnemies <= 0;
     }
 
     private void SpawnEnemy(EnemyTypes type, Vector3 position)
     {
         EnemyPrefabInfo enemyinfo = Enemys.GetEnemyInfoFromType(type);
         var enemy = GameObject.Instantiate(enemyinfo.enemy, position, Quaternion.identity);
-        numberOfAliveEnemys++;
+        numberOfAliveEnemies++;
         enemy.GetComponent<Enemy>().KillEvent.AddListener(KillHandler);
-        var tele = GameObject.Instantiate(getTeleporterPrefab(), position, Quaternion.identity).GetComponent<TeleporterEffectScript>();
-        tele.gameObject.transform.localScale *= enemyinfo.teleporterScale;
-        tele.AddSpawnedObject(enemy);
-    }
-
-    private static GameObject getTeleporterPrefab()
-    {
-        if (TeleportEffect == null)
-        {
-            TeleportEffect = Resources.Load<GameObject>("TeleporterEffect");
-        }
-            return TeleportEffect;
+        TeleporterEffectScript.CreateTeleporterForEntity(enemy, enemyinfo.teleporterScale);
     }
 
     private EnemyTypes RandomEnemy(int chamberNumber)
     {
-        if (Utils.FloatBetween(0, chamberNumber*2 / MaxNumber) > 0.5)
+        if (Utils.FloatBetween(0, (float)chamberNumber / (float)MaxNumber) > 0.25)
             return EnemyTypes.Big;
-        if (Utils.FloatBetween(0, chamberNumber*4 / MaxNumber) > 0.5)
+        if (Utils.FloatBetween(0, (float)chamberNumber / (float)MaxNumber) > 0.125)
             return EnemyTypes.Medium;
         return EnemyTypes.Small;
     }
