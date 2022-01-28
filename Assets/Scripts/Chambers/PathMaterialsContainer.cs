@@ -5,9 +5,9 @@ using UnityEngine;
 public class PathMaterialsContainer : ScriptableObject
 {
     [SerializeField] private List<PathMaterialInfo> Materials;
-    [HideInInspector] public Dictionary<PathTypes, Material> MaterialsDict = new Dictionary<PathTypes, Material>();
+    [SerializeField][HideInInspector] public Dictionary<PathTypes, Material> MaterialsDict = new Dictionary<PathTypes, Material>();
 
-    private void OnValidate()
+    private void Awake()
     {
         MaterialsDict.Clear();
         foreach (var item in Materials)

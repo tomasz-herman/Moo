@@ -10,7 +10,7 @@ public class EnemySpawner
     public UnityEngine.Events.UnityEvent AllEnemiesKilled = new UnityEngine.Events.UnityEvent();
     public void Spawn(List<SpawnLocationScript> spawnLocations, ChamberType chamberType, int chamberNumber)
     {
-        EnemiesSpawnData currentSpawnData = EnemiesSpawnControl.GetData();
+        EnemiesSpawnData currentSpawnData = EnemiesData.GetData();
         int numberOfEnemys;
         switch (chamberType)
         {

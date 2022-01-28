@@ -8,7 +8,7 @@ public class EnemiesContainer : ScriptableObject
     [SerializeField] private List<EnemyPrefabInfo> enemies;
     [HideInInspector] public Dictionary<EnemyTypes, EnemyPrefabInfo> EnemiesDict = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
 
-    private void OnValidate()
+    private void Awake()
     {
         EnemiesDict.Clear();
         foreach (var item in enemies)

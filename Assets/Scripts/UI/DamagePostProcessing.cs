@@ -24,11 +24,18 @@ public class DamagePostProcessing : MonoBehaviour
 
     void Update()
     {
-        vignette.intensity.value = vignetteIntensity * remainingTime / vignetteTime;
-        remainingTime = Mathf.Max(remainingTime - Time.deltaTime, 0);
+        try
+        {
+            vignette.intensity.value = vignetteIntensity * remainingTime / vignetteTime;
+            remainingTime = Mathf.Max(remainingTime - Time.deltaTime, 0);
 
-        float factor = healthSystem.Health / healthSystem.MaxHealth;
-        colorGrading.saturation.value = Mathf.Clamp(100 * (factor / desaturateStartFactor - 1), -100, 0);
+            float factor = healthSystem.Health / healthSystem.MaxHealth;
+            colorGrading.saturation.value = Mathf.Clamp(100 * (factor / desaturateStartFactor - 1), -100, 0);
+        }
+        catch
+        {
+            // On scene start (in build) this throw null exception but later doesn't
+        }
     }
 
     public void ApplyVignette()
