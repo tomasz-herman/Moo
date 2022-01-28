@@ -114,7 +114,7 @@ public class ChamberNode
             else
             {
                 ChamberControl.symbol.materials[item.Key] = PathMaterials.GetMaterialFromType(PathTypes.None);
-                ChamberControl.symbol.SetActive(item.Key, false);
+                //ChamberControl.symbol.SetActive(item.Key, false); //path symbol visibility when there is no path in this direction
             }
         }
 
