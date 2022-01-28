@@ -28,12 +28,7 @@ public class BossEnemyAI : SimpleEnemyAI
             Debug.Log(availableWeapon);
         }
 
-
         weapons = availableWeapons.Take(phases).ToList();
-        foreach (var weapon in weapons)
-        {
-            Debug.Log("Got : " + weapon);
-        }    
     }
 
     private new void Update()

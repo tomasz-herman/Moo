@@ -239,8 +239,8 @@ MonoBehaviour:
   minHealth: 15
   maxHealth: 50
   FloatingTextPrefab: {fileID: 2313416263019860963, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
---- !u!65 &6194634764679441002
-BoxCollider:
+--- !u!135 &476181125106001831
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -250,5 +250,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 2}
+  m_Radius: 20
   m_Center: {x: 0, y: 10, z: 0}
