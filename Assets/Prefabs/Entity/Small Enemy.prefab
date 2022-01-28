@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 25
-  movementSpeed: 1.5
+  movementSpeed: 1
   damageMultiplier: 0.5
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
