@@ -10,6 +10,7 @@ public class Player : Entity
     public UpgradeSystem upgradeSystem;
     public AmmoSystem ammoSystem;
     public ScoreSystem scoreSystem;
+    public float TeleporterScale = 2;
 
     private DamagePostProcessing damagePostProcessing;
     void Start()

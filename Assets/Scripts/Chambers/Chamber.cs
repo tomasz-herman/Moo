@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Chamber : MonoBehaviour
 {
-    [SerializeField] List<Door> Entrances = new List<Door>();
-    [SerializeField] List<Door> Exits = new List<Door>();
-    [SerializeField] List<GameObject> Enemies = new List<GameObject>();
-    [SerializeField] List<GameObject> Bosses = new List<GameObject>();
+    [SerializeField] public Transform SafeSpawnLocation;
+    [SerializeField] public List<Door> Exits = new List<Door>();
+    [HideInInspector] public List<Door> Entrances = new List<Door>();
+    [HideInInspector] public List<GameObject> Enemies = new List<GameObject>();
+    [HideInInspector] public List<GameObject> Bosses = new List<GameObject>();
+    public bool IsLastCHamber = false;
+    [HideInInspector] public UnityEngine.Events.UnityEvent LastChamberCleared = new UnityEngine.Events.UnityEvent();
     private int remainingEnemies = -1;
     private int remainingBosses = -1;
 
     private void Start()
     {
-        remainingEnemies = Enemies.Count;
-        foreach (var enemy in Enemies)
-            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
+        //remainingEnemies = Enemies.Count;
+        //foreach (var enemy in Enemies)
+        //    enemy.GetComponent<Enemy>().KillEvent.AddListener(KillEnemyEventHandler);
 
-        remainingBosses = Bosses.Count;
-        foreach (var enemy in Bosses)
-            enemy.GetComponent<Enemy>().KillEvent.AddListener(KillBossEventHandler);
+        //remainingBosses = Bosses.Count;
+        //foreach (var enemy in Bosses)
+        //    enemy.GetComponent<Enemy>().KillEvent.AddListener(KillBossEventHandler);
     }
 
     public void OpenExits()
@@ -70,6 +73,8 @@ public class Chamber : MonoBehaviour
         remainingEnemies--;
         if (isCleared())
             OpenExits();
+        if (IsLastCHamber)
+            LastChamberCleared.Invoke();
     }
 
     public void KillBossEventHandler()
@@ -77,5 +82,7 @@ public class Chamber : MonoBehaviour
         remainingBosses--;
         if (isCleared())
             OpenExits();
+        if (IsLastCHamber)
+            LastChamberCleared.Invoke();
     }
 }
