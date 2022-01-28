@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Corridor : MonoBehaviour
 {
-    public UnityEngine.Events.UnityEvent CorridorCenterPassed;
+    [HideInInspector] public UnityEngine.Events.UnityEvent CorridorCenterPassed;
 }
