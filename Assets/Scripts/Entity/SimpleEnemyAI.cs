@@ -34,6 +34,7 @@ public class SimpleEnemyAI : MonoBehaviour
         ammoSystem = GetComponent<AmmoSystem>();
         shooting.ammoSystem = ammoSystem;
         weaponAIProperties = WeaponAIProperties.Get(weaponAI);
+        lastPlayerPosition = player.position;
     }
 
     protected void Update()
@@ -53,6 +54,7 @@ public class SimpleEnemyAI : MonoBehaviour
         if(!playerInSight && !playerInAttackRange) Patrol();
         if(playerInSight && !playerInPrefferedRange) Chase();
         if(playerInSight && playerInAttackRange) Attack();
+        lastPlayerPosition = playerPosition;
     }
 
     private void Patrol()
@@ -84,6 +86,5 @@ public class SimpleEnemyAI : MonoBehaviour
         var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
         Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
         shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
-        lastPlayerPosition = playerPosition;
     }
 }
