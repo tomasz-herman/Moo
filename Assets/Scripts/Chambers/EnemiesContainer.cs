@@ -6,14 +6,14 @@ using UnityEngine;
 public class EnemiesContainer : ScriptableObject
 {
     [SerializeField] private List<EnemyPrefabInfo> enemies;
-    [HideInInspector] public Dictionary<EnemyTypes, EnemyPrefabInfo> EnemysDict = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
+    [HideInInspector] public Dictionary<EnemyTypes, EnemyPrefabInfo> EnemiesDict = new Dictionary<EnemyTypes, EnemyPrefabInfo>();
 
     private void OnValidate()
     {
-        EnemysDict.Clear();
+        EnemiesDict.Clear();
         foreach (var item in enemies)
         {
-            EnemysDict.Add(item.type, item);
+            EnemiesDict.Add(item.type, item);
         }
     }
 }
@@ -36,7 +36,7 @@ public static class Enemys
         if (enemies.Count == 0)
         {
             EnemiesContainer Container = Resources.Load<EnemiesContainer>("ScriptableObjects/EnemiesContainer");
-            enemies = Container.EnemysDict;
+            enemies = Container.EnemiesDict;
         }
         return enemies[type];
     }

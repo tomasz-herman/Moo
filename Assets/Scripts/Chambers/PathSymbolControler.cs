@@ -20,20 +20,23 @@ public class PathSymbolControler : MonoBehaviour
         {
             Transform t = gameObject.transform.GetChild(i);
             float margin = 0.5f;
+            Renderer renderer = t.gameObject.GetComponent<Renderer>();
             if (Mathf.Abs(t.localPosition.x) > margin && Mathf.Abs(t.localPosition.z) <= margin)
             {
                 if (Mathf.Sign(t.localPosition.x) > 0)
-                    elements[Direction.Left].Add(t.gameObject.GetComponent<Renderer>());
+                    elements[Direction.Left].Add(renderer);
                 else
-                    elements[Direction.Right].Add(t.gameObject.GetComponent<Renderer>());
+                    elements[Direction.Right].Add(renderer);
             }
             else if (Mathf.Abs(t.localPosition.z) > margin)
             {
                 if (Mathf.Sign(t.localPosition.z) > 0 && Mathf.Abs(t.localPosition.x) <= margin)
-                    elements[Direction.Down].Add(t.gameObject.GetComponent<Renderer>());
+                    elements[Direction.Down].Add(renderer);
                 else
-                    elements[Direction.Up].Add(t.gameObject.GetComponent<Renderer>());
+                    elements[Direction.Up].Add(renderer);
             }
+            else
+                Debug.LogWarning($"Path symbol initialization error, object on position ({t.localPosition}) not added to 'elements' collection");
         }
     }
 
