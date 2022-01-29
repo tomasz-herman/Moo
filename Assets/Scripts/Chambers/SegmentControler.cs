@@ -5,7 +5,7 @@ using UnityEngine;
 public class SegmentControler : MonoBehaviour
 {
     public Direction direction;
-    List<GameObject> SegmentObjects = new List<GameObject>();
+    List<BlocadeTransition> SegmentObjects = new List<BlocadeTransition>();
     List<PathSegment> Path = new List<PathSegment>();
     private void Awake()
     {
@@ -16,15 +16,15 @@ public class SegmentControler : MonoBehaviour
             if (pathsegment != null)
                 Path.Add(pathsegment);
             else
-                SegmentObjects.Add(ob);
+                SegmentObjects.Add(ob.GetComponent<BlocadeTransition>());
         }
     }
 
-    public void SetActive(bool isActive)
+    public void SetPathBlocade(bool isActive)
     {
         foreach (var item in SegmentObjects)
         {
-            item.SetActive(isActive);
+            item.gameObject.SetActive(isActive==item.IsBlocade); // or (!(isActive^item.IsBlocade))
         }
         foreach (var item in Path)
         {

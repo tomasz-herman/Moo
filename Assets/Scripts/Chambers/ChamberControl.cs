@@ -103,7 +103,7 @@ public class ChamberControl : MonoBehaviour
     public void SetBlocadeActive(Direction direction, bool isActive)
     {
         if (segments.Count > 0)
-            segments[direction].SetActive(isActive);
+            segments[direction].SetPathBlocade(isActive);
     }
 
     private void AllEnemiesKilledHandler()
