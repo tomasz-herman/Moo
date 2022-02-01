@@ -55,11 +55,12 @@ public class OptionsView : MenuView
 
         fullscreenToggle.isOn = Screen.fullScreen;
 
-        Resolution current = Screen.currentResolution;
+        int currentWidth = Screen.width;
+        int currentHeight = Screen.height;
         for (int i = 0; i < resolutions.Count; i++)
         {
             Resolution res = resolutions[i];
-            if (current.width == res.width && current.height == res.height)
+            if (currentWidth == res.width && currentHeight == res.height)
             {
                 resolutionDropdown.value = i;
                 break;
