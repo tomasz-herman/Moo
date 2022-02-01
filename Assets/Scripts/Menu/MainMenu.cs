@@ -33,6 +33,7 @@ public class MainMenu : MonoBehaviour
         if(firstTimeLoading)
         {
             Config.Load(ApplicationData.configPath);
+            Application.quitting += () => Config.Save(ApplicationData.configPath);
             firstTimeLoading = false;
             ConfigEntry entry = Config.Entry;
 
@@ -61,9 +62,9 @@ public class MainMenu : MonoBehaviour
     public void Quit()
     {
         activeView.SetActive(false);
-        Config.Save(ApplicationData.configPath);
         Application.Quit();
     }
+
 
     public void ShowLeaderboard() { SetActiveView(leaderboardView); }
     public void ShowOptions() { SetActiveView(optionsView); }
