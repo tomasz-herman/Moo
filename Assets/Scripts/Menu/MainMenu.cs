@@ -1,3 +1,4 @@
+using Assets.Scripts.SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private OptionsView optionsView;
 
     private MenuView activeView;
+    private bool firstTimeLoading = true;
 
     public void Start()
     {
@@ -27,6 +29,18 @@ public class MainMenu : MonoBehaviour
             SetActiveView(endGameView);
             showEndgameScreen = false;
         } 
+
+        if(firstTimeLoading)
+        {
+            Config.Load(ApplicationData.configPath);
+            firstTimeLoading = false;
+            ConfigEntry entry = Config.Entry;
+
+            AudioManager audio = AudioManager.Instance;
+            audio.MusicVolume = entry.musicVolume;
+            audio.SoundVolume = entry.soundVolume;
+            audio.UiVolume = entry.uiVolume;
+        }
     }
 
     public void SetActiveView(MenuView view)
@@ -47,6 +61,7 @@ public class MainMenu : MonoBehaviour
     public void Quit()
     {
         activeView.SetActive(false);
+        Config.Save(ApplicationData.configPath);
         Application.Quit();
     }
 

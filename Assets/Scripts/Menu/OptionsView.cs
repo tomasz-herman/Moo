@@ -1,3 +1,4 @@
+using Assets.Scripts.SoundManager;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -32,31 +33,25 @@ public class OptionsView : MenuView
 
     public void SetEffectsVolume(float volume)
     {
-        soundMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.SoundVolume = CalculateMixerVolume(volume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.MusicVolume = CalculateMixerVolume(volume);
     }
 
     public void SetUiVolume(float volume)
     {
-        uiMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.UiVolume = CalculateMixerVolume(volume);
     }
 
     private void OnEnable()
     {
-        float volume;
+        uiSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.UiVolume);
+        soundSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.SoundVolume);
+        musicSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.MusicVolume);
 
-        uiMixer.GetFloat("volume", out volume);
-        uiSlider.value = CalculateSliderValueFromMixerVolume(volume);
-
-        musicMixer.GetFloat("volume", out volume);
-        musicSlider.value = CalculateSliderValueFromMixerVolume(volume);
-
-        soundMixer.GetFloat("volume", out volume);
-        soundSlider.value = CalculateSliderValueFromMixerVolume(volume);
 
         fullscreenToggle.isOn = Screen.fullScreen;
 
