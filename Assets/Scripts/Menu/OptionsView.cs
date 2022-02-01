@@ -73,13 +73,14 @@ public class OptionsView : MenuView
     public void SetResolution(int resIdx)
     {
         Resolution resolution = resolutions[resIdx];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen, resolution.refreshRate);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed, resolution.refreshRate);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
-        Resolution resolution = Screen.currentResolution;
-        Screen.SetResolution(resolution.width, resolution.height, fullscreen, resolution.refreshRate);
+        int width = Screen.width;
+        int height = Screen.height;
+        Screen.SetResolution(width, height, Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
     }
 
     public void SetQuality(int qualityIdx)
