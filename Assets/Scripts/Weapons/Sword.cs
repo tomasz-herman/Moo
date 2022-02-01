@@ -14,7 +14,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 0;
 
-        public Sword(Blade bladePrefab): base(SoundType.SwordSwing)
+        public Sword(Blade bladePrefab): base(WeaponType.Sword, SoundType.SwordSwing)
         {
             this.bladePrefab = bladePrefab;
         }

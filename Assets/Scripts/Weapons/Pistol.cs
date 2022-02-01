@@ -13,7 +13,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 1;
 
-        public Pistol(Projectile projectileprefab) : base(SoundType.PistolShot)
+        public Pistol(Projectile projectileprefab) : base(WeaponType.Pistol, SoundType.PistolShot)
         {
             projectilePrefab = projectileprefab;
         }

@@ -16,7 +16,7 @@ namespace Assets.Scripts.Weapons
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 3;
 
-        public Shotgun(Bullet bulletprefab) : base(SoundType.ShotgunShot)
+        public Shotgun(Bullet bulletprefab) : base(WeaponType.Shotgun, SoundType.ShotgunShot)
         {
             bulletPrefab = bulletprefab;
         }

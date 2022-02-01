@@ -1,3 +1,4 @@
+using Assets.Scripts.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,7 @@ public class BossBar : MonoBehaviour
     [SerializeField] public TMP_Text text;
 
     private HealthSystem healthSystem;
+    private Shooting shooting;
     private Enemy trackedEnemy;
     private bool visible;
 
@@ -31,6 +33,7 @@ public class BossBar : MonoBehaviour
             if (trackedEnemy != null)
             {
                 healthSystem.HealthChanged -= UpdateBar;
+                shooting.WeaponChanged -= OnWeaponChange;
                 trackedEnemy.KillEvent.RemoveListener(OnKill);
             }
             trackedEnemy = value;
@@ -38,8 +41,14 @@ public class BossBar : MonoBehaviour
             {
                 healthSystem = trackedEnemy.healthSystem;
                 healthSystem.HealthChanged += UpdateBar;
+
+                shooting = trackedEnemy.GetComponent<Shooting>();
+                shooting.WeaponChanged += OnWeaponChange;
+
                 trackedEnemy.KillEvent.AddListener(OnKill);
+
                 UpdateBar(this, (healthSystem.Health, healthSystem.MaxHealth));
+                SetWeaponSprite(shooting.CurrentWeapon.WeaponType);
             }
             CalculateVisibility();
         }
@@ -80,6 +89,16 @@ public class BossBar : MonoBehaviour
 
         int healthPercent = Mathf.CeilToInt(100 * args.health / args.maxHealth);
         text.text = $"{healthPercent}%";
+    }
+
+    private void OnWeaponChange(object sender, Weapon weapon)
+    {
+        SetWeaponSprite(weapon.WeaponType);
+    }
+
+    private void SetWeaponSprite(WeaponType type)
+    {
+        weapon.sprite = ApplicationData.WeaponData[type].image;
     }
 
     private void OnKill(GameObject obj)

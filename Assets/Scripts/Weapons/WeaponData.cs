@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public struct WeaponData
 {
     public WeaponType type;
-    public Texture2D image;
+    public Sprite image;
     public Color color;
 }
 
