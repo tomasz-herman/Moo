@@ -9,6 +9,7 @@ public class GameWorld : MonoBehaviour
     public Timer timer;
     public AudioManager audioManager;
     public BackgroundMusicManager BackgroundMusicManager;
+    public BackgroundMusicManager WarMusicManager;
 
     void Start()
     {

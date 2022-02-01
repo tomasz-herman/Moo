@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ChamberControl : MonoBehaviour
+public class ChamberControl : Entity
 {
     [HideInInspector] public List<SpawnLocationScript> SpawnLocations;
     [HideInInspector] public PathSymbolControler symbol;
@@ -12,6 +12,8 @@ public class ChamberControl : MonoBehaviour
     private EnemySpawner enemySpawner = new EnemySpawner();
     public ChamberNode node;
     private Dictionary<Direction, SegmentControler> segments = new Dictionary<Direction, SegmentControler>();
+
+    private Dictionary<States, bool> hasChangedState = new Dictionary<States, bool>();
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class ChamberControl : MonoBehaviour
         {
             State = States.Fight;
             SetFightPathsColors();
+            PlayFightMusic();
             enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
         }
     }
@@ -110,6 +113,19 @@ public class ChamberControl : MonoBehaviour
     {
         SetDefaultPathsColors();
         State = States.Cleared;
+        PlayBackgroundMusic();
+    }
+
+    private void PlayBackgroundMusic()
+    {
+        GameWorld.BackgroundMusicManager?.Play();
+        GameWorld.WarMusicManager?.Pause();
+    }
+
+    private void PlayFightMusic()
+    {
+        GameWorld.BackgroundMusicManager?.Pause();
+        GameWorld.WarMusicManager?.Play();
     }
 
     public void AddAllEnemiesKilledListener(UnityEngine.Events.UnityAction action)

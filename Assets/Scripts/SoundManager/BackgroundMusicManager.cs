@@ -95,6 +95,9 @@ namespace Assets.Scripts.SoundManager
         /// </summary>
         public void Play()
         {
+            if(IsPlaying && !IsPaused)
+                return;
+
             IsPlaying = true;
             IsPaused = false;
             _startTime = AudioSettings.dspTime + 0.1;
