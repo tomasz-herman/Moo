@@ -45,6 +45,8 @@ public class BossBar : MonoBehaviour
         }
     }
 
+    public Color Color { get { return bar.color; } set { bar.color = value; } }
+
     private void Start()
     {
         Visible = true;
@@ -57,6 +59,7 @@ public class BossBar : MonoBehaviour
         if (timeToSwap <= 0)
         {
             TrackedEnemy = FindObjectOfType<Enemy>();
+            Color = new Color(Random.value, Random.value, Random.value);
             timeToSwap = 5;
         }
         timeToSwap -= Time.deltaTime;
