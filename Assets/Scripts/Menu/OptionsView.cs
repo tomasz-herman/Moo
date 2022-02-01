@@ -80,7 +80,7 @@ public class OptionsView : MenuView
     {
         int width = Screen.width;
         int height = Screen.height;
-        Screen.SetResolution(width, height, Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
+        Screen.SetResolution(width, height, fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
     }
 
     public void SetQuality(int qualityIdx)
