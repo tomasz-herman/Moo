@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8584744388257169187}
   - component: {fileID: 5970832575779064031}
   m_Layer: 0
-  m_Name: ProjectileHitTerrainParticles
+  m_Name: ProjectileHitTerrainEmissive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.15
+      scalar: 0.1
       minScalar: 0.02
       maxCurve:
         serializedVersion: 2
