@@ -25,6 +25,9 @@ public class Shooting : MonoBehaviour
     public GrenadeLauncher GrenadeLauncher => new GrenadeLauncher(grenadePrefab);
     public Sword Sword => new Sword(bladePrefab);
 
+    public event EventHandler<Weapon> WeaponChanged;
+    public Weapon CurrentWeapon { get { return weapons.Current(); } }
+
     void Start()
     {
         weapons.Add(Pistol);
@@ -46,18 +49,21 @@ public class Shooting : MonoBehaviour
         {
             if (first == weapons.Next().GetType()) break;
         }
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void NextWeapon()
     {
         weapons.Next();
         weaponBar.SlotUp();
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void PrevWeapon()
     {
         weapons.Prev();
         weaponBar.SlotDown();
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)

@@ -1,3 +1,4 @@
+using Assets.Scripts.SoundManager;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -32,39 +33,34 @@ public class OptionsView : MenuView
 
     public void SetEffectsVolume(float volume)
     {
-        soundMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.SoundVolume = CalculateMixerVolume(volume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        musicMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.MusicVolume = CalculateMixerVolume(volume);
     }
 
     public void SetUiVolume(float volume)
     {
-        uiMixer.SetFloat("volume", CalculateMixerVolume(volume));
+        AudioManager.Instance.UiVolume = CalculateMixerVolume(volume);
     }
 
     private void OnEnable()
     {
-        float volume;
+        uiSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.UiVolume);
+        soundSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.SoundVolume);
+        musicSlider.value = CalculateSliderValueFromMixerVolume(AudioManager.Instance.MusicVolume);
 
-        uiMixer.GetFloat("volume", out volume);
-        uiSlider.value = CalculateSliderValueFromMixerVolume(volume);
-
-        musicMixer.GetFloat("volume", out volume);
-        musicSlider.value = CalculateSliderValueFromMixerVolume(volume);
-
-        soundMixer.GetFloat("volume", out volume);
-        soundSlider.value = CalculateSliderValueFromMixerVolume(volume);
 
         fullscreenToggle.isOn = Screen.fullScreen;
 
-        Resolution current = Screen.currentResolution;
+        int currentWidth = Screen.width;
+        int currentHeight = Screen.height;
         for (int i = 0; i < resolutions.Count; i++)
         {
             Resolution res = resolutions[i];
-            if (current.width == res.width && current.height == res.height)
+            if (currentWidth == res.width && currentHeight == res.height)
             {
                 resolutionDropdown.value = i;
                 break;
@@ -77,13 +73,14 @@ public class OptionsView : MenuView
     public void SetResolution(int resIdx)
     {
         Resolution resolution = resolutions[resIdx];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen, resolution.refreshRate);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed, resolution.refreshRate);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
-        Resolution resolution = Screen.currentResolution;
-        Screen.SetResolution(resolution.width, resolution.height, fullscreen, resolution.refreshRate);
+        int width = Screen.width;
+        int height = Screen.height;
+        Screen.SetResolution(width, height, fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
     }
 
     public void SetQuality(int qualityIdx)

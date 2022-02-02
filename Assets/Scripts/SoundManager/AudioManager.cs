@@ -502,5 +502,47 @@ namespace Assets.Scripts.SoundManager
             isInitialized = true;
             DontDestroyOnLoad(this);
         }
+
+        public float SoundVolume
+        {
+            get
+            {
+                SoundMixer.audioMixer.GetFloat("volume", out float volume);
+                return volume;
+            }
+            set
+            {
+                SoundMixer.audioMixer.SetFloat("volume", value);
+                Config.Entry.soundVolume = value;
+            }
+        }
+
+        public float MusicVolume
+        {
+            get
+            {
+                MusicMixer.audioMixer.GetFloat("volume", out float volume);
+                return volume;
+            }
+            set
+            {
+                MusicMixer.audioMixer.SetFloat("volume", value);
+                Config.Entry.musicVolume = value;
+            }
+        }
+
+        public float UiVolume
+        {
+            get
+            {
+                UISoundMixer.audioMixer.GetFloat("volume", out float volume);
+                return volume;
+            }
+            set
+            {
+                UISoundMixer.audioMixer.SetFloat("volume", value);
+                Config.Entry.uiVolume = value;
+            }
+        }
     }
 }
