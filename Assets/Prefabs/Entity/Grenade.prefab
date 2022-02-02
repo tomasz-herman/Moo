@@ -63,7 +63,9 @@ MonoBehaviour:
       FadeOutSeconds: 0
       UseDefault: 0
   TimeToLive: 10
+  explosionParticles: {fileID: 2844504297398201434, guid: 6dfa3ba071ec4eb49a163d019f741c9d, type: 3}
   color: {r: 0.6415094, g: 0, b: 0.52964926, a: 1}
+  Emission: 6
 --- !u!54 &1481721371994369965
 Rigidbody:
   m_ObjectHideFlags: 0
