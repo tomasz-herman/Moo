@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
 public class ConfigEntry
 {
     public float musicVolume, uiVolume, soundVolume;
+    public string graphicsQuality;
 }
 
 public static class Config
@@ -16,7 +18,8 @@ public static class Config
     {
         musicVolume = 1,
         uiVolume = 1,
-        soundVolume = 1
+        soundVolume = 1,
+        graphicsQuality = QualitySettings.names.Last(),
     };
 
     public static ConfigEntry Entry { get; private set; } = DefaultConfig;
