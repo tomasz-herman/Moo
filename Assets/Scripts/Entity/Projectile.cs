@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
-    [SerializeField] private Particles hitTerrainParticles;
+    [SerializeField] private BurstParticles hitTerrainParticles;
     public Color color;
     public float Emission = 6;
 
