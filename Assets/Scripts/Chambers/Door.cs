@@ -5,8 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Animator animator;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -26,5 +25,15 @@ public class Door : MonoBehaviour
     public void MoveOff()
     {
         animator.SetBool("DoorMove", false);
+    }
+
+    public bool IsOpen()
+    {
+        return !animator.GetBool("DoorMove") && !animator.GetBool("DoorClose");
+    }
+
+    public bool IsClosed()
+    {
+        return !animator.GetBool("DoorMove") && animator.GetBool("DoorClose");
     }
 }

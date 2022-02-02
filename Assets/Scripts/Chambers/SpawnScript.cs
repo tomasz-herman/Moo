@@ -20,7 +20,7 @@ public class SpawnScript : MonoBehaviour
 
     private Dictionary<Vector2Int, ChamberType> taken = new Dictionary<Vector2Int, ChamberType>();
     private int remaining;
-    private bool OnlyForward = true;
+    private bool OnlyForward = false;
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
     private float optionalSpawnFloat = 0;
@@ -255,7 +255,7 @@ public class SpawnScript : MonoBehaviour
 
     private void LoadChamberPrefabs()
     {
-        ChambersContainer ChambersContainer = Resources.Load<ChambersContainer>("ScriptableObjects/TestChambers"); // TODO: change to finished chambers
+        ChambersContainer ChambersContainer = Resources.Load<ChambersContainer>("ScriptableObjects/Chambers");
         foreach (var item in ChambersContainer.Chambers)
         {
             switch (item.type)
