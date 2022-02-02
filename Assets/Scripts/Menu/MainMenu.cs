@@ -41,6 +41,16 @@ public class MainMenu : MonoBehaviour
             audio.MusicVolume = entry.musicVolume;
             audio.SoundVolume = entry.soundVolume;
             audio.UiVolume = entry.uiVolume;
+
+            string[] qualityNames = QualitySettings.names;
+            for (int i = 0; i < qualityNames.Length; i++)
+            {
+                if (qualityNames[i] == entry.graphicsQuality)
+                {
+                    QualitySettings.SetQualityLevel(i);
+                    break;
+                }
+            }
         }
     }
 

@@ -86,6 +86,7 @@ public class OptionsView : MenuView
     public void SetQuality(int qualityIdx)
     {
         QualitySettings.SetQualityLevel(qualityIdx);
+        Config.Entry.graphicsQuality = QualitySettings.names[qualityIdx];
     }
 
     public void Continue()
