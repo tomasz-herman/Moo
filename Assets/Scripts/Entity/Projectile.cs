@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
+    [SerializeField] private Particles hitTerrainParticles;
     public Color color;
     public float Emission = 6;
 
@@ -30,6 +31,11 @@ public class Projectile : ProjectileBase
         if (other.gameObject != Owner)
         {
             ApplyDamage(other, baseDamage * extraDamage);
+
+            //TODO: Uncomment when chambers' terrain has proper layering
+            //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
+                Instantiate(hitTerrainParticles, transform.position, transform.rotation);
+
             Destroy(gameObject);
         }
     }

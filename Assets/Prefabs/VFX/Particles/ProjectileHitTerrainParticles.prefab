@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2724668985923232142}
   - component: {fileID: 4016586736288738115}
   - component: {fileID: 8584744388257169187}
+  - component: {fileID: 5970832575779064031}
   m_Layer: 0
   m_Name: ProjectileHitTerrainParticles
   m_TagString: Untagged
@@ -4862,3 +4863,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5970832575779064031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429880932260050568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37625bfb4de30e148944ff71049ad772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
