@@ -5,9 +5,28 @@ using UnityEngine;
 
 public class ExplosionParticles : MonoBehaviour
 {
+    [SerializeField] private float lightTimeToLive = 1;
+    [SerializeField] private float fullBrightnessFactor = 0.5f;
+    private new Light light;
+    private float elapsedTime = 0;
+    private float baseIntensity;
+    private float intensityDecreaseStartTime;
     void Start()
     {
-        float timeToLive = GetComponentsInChildren<ParticleSystem>().Max(ps => ps.main.duration);
-        Destroy(gameObject, timeToLive);
+        light = GetComponentInChildren<Light>();
+        baseIntensity = light.intensity;
+        elapsedTime = 0;
+        intensityDecreaseStartTime = fullBrightnessFactor * lightTimeToLive;
+        Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
+    }
+
+    private void Update()
+    {
+        elapsedTime += Time.deltaTime;
+        if(elapsedTime > intensityDecreaseStartTime)
+        {
+            float intensityFactor = (lightTimeToLive - (elapsedTime - intensityDecreaseStartTime)) / (lightTimeToLive - intensityDecreaseStartTime);
+            light.intensity = Mathf.Max(0, baseIntensity * intensityFactor);
+        }
     }
 }
