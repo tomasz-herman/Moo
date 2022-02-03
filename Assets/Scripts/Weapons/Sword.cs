@@ -22,7 +22,7 @@ namespace Assets.Scripts.Weapons
         {
             Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.Launch(shooter, direction.normalized, shooting.weaponDamage * baseDamage, projectileSpeed * shooting.projectileSpeed);
+            blade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, projectileSpeed * shooting.projectileSpeedMultiplier);
         }
     }
 }

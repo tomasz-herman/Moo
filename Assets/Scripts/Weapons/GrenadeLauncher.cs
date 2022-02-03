@@ -21,7 +21,7 @@ namespace Assets.Scripts.Weapons
         {
             Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
             grenade.color = color;
-            grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
+            grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
         }
     }
 }

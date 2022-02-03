@@ -27,7 +27,7 @@ namespace Assets.Scripts.Weapons
                 Bullet bullet = Shooting.Instantiate(bulletPrefab, position, Quaternion.identity);
                 bullet.color = color;
                 var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
-                bullet.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeed, shooting.weaponDamage * baseDamage);
+                bullet.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
             }
         }
     }
