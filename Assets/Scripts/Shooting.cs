@@ -12,9 +12,9 @@ public class Shooting : MonoBehaviour
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
-    [HideInInspector] public float projectileSpeedMultiplier = 1f;
-    [HideInInspector] public float triggerTimeoutMultiplier = 1f;
-    [HideInInspector] public float weaponDamageMultiplier = 1f;
+    public float projectileSpeedMultiplier = 1f;
+    public float triggerTimeoutMultiplier = 1f;
+    public float weaponDamageMultiplier = 1f;
 
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;

@@ -18,6 +18,7 @@ MonoBehaviour:
     BaseDamageMultiplier: 0.25
     BaseProjectileSpeedMultiplier: 1
     BaseMovementSpeed: 1.2
+    BaseTriggerTimeoutMultiplier: 1
     BaseScoreForKill: 1
     UpgradeDropCount: 0
     UpgradeDropChance: 1
@@ -32,6 +33,7 @@ MonoBehaviour:
     BaseDamageMultiplier: 0.5
     BaseProjectileSpeedMultiplier: 0.9
     BaseMovementSpeed: 1.1
+    BaseTriggerTimeoutMultiplier: 1.2
     BaseScoreForKill: 3
     UpgradeDropCount: 0
     UpgradeDropChance: 1
@@ -46,6 +48,7 @@ MonoBehaviour:
     BaseDamageMultiplier: 1
     BaseProjectileSpeedMultiplier: 0.75
     BaseMovementSpeed: 1
+    BaseTriggerTimeoutMultiplier: 1.4
     BaseScoreForKill: 10
     UpgradeDropCount: 0
     UpgradeDropChance: 1
@@ -60,6 +63,7 @@ MonoBehaviour:
     BaseDamageMultiplier: 1.5
     BaseProjectileSpeedMultiplier: 0.7
     BaseMovementSpeed: 0.9
+    BaseTriggerTimeoutMultiplier: 1.6
     BaseScoreForKill: 25
     UpgradeDropCount: 1
     UpgradeDropChance: 1
@@ -74,6 +78,7 @@ MonoBehaviour:
     BaseDamageMultiplier: 2.5
     BaseProjectileSpeedMultiplier: 0.6
     BaseMovementSpeed: 0.75
+    BaseTriggerTimeoutMultiplier: 2
     BaseScoreForKill: 100
     UpgradeDropCount: 5
     UpgradeDropChance: 1

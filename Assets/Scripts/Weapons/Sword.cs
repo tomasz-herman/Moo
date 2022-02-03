@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
 
 
         public override float projectileSpeed { get; set; } = 15f;
-        public override float triggerTimeout { get; set; } = 2f;
+        public override float triggerTimeout { get; set; } = 1f;
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 0;
 
