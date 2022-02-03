@@ -30,4 +30,12 @@ public class EnemyData
     public float BaseProjectileSpeedMultiplier = 1;
     public float BaseMovementSpeed = 1;
     public int BaseScoreForKill = 1;
+    public int UpgradeDropCount = 0;
+    public float UpgradeDropChance = 1;
+    public float HealthDropChance = 0;
+    public float BaseMinHealthDrop = 20;
+    public float BaseMaxHealthDrop = 50;
+    public float AmmoDropChance = 1;
+    public int BaseMinAmmoDrop = 10;
+    public int BaseMaxAmmoDrop = 25;
 }
