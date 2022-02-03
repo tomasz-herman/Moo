@@ -4,6 +4,7 @@ using UnityEngine;
 public class Projectile : ProjectileBase
 {
     [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
+    [SerializeField] private int particleCount = 30;
     public Color color;
     public float Emission = 6;
 
@@ -37,6 +38,7 @@ public class Projectile : ProjectileBase
             {
                 var particles = Instantiate(hitTerrainParticles, transform.position, transform.rotation);
                 particles.SparkColor = color;
+                particles.ParticleCount = particleCount;
             }
                 
 

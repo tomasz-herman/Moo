@@ -22,4 +22,18 @@ public class ProjectileHitTerrainParticles : BurstParticles
             colorOverLifetime.color = new Gradient() { alphaKeys = oldGradient.alphaKeys, colorKeys = newColors };
         }
     }
+
+    public int ParticleCount
+    {
+        set
+        {
+            var emission = GetComponent<ParticleSystem>().emission;
+            var burst = emission.GetBurst(0);
+            var curve = new ParticleSystem.MinMaxCurve();
+            curve.mode = ParticleSystemCurveMode.Constant;
+            curve.constant = value;
+            burst.count = curve;
+            emission.SetBurst(0, burst);
+        }
+    }
 }
