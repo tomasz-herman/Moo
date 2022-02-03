@@ -62,29 +62,6 @@ public class BossBar : MonoBehaviour
         CalculateVisibility();
     }
 
-    //TODO delete this region when there is a way to access current chamber's boss, preferably with EnterChamberEvent/ExitChamberEvent
-    #region DELETE_WHEN_BOSSBAR_IMPLEMENTATION_IS_READY
-    private float timeToSwap = 0;
-    private void Update()
-    {
-        if (timeToSwap <= 0)
-        {
-            //Temporary implementation to give example on how to use it
-            var possibleEnemies = FindObjectsOfType<Enemy>();
-            TrackedEnemy = possibleEnemies.Length == 0 ? null : possibleEnemies[Utils.NumberBetween(0, possibleEnemies.Length - 1)];
-            if(TrackedEnemy != null)
-            {
-                if (TrackedEnemy.GetComponent<BossEnemyAI>() != null)
-                    Color = Color.red;
-                else if (TrackedEnemy.GetComponent<SimpleEnemyAI>() != null)
-                    Color = Color.grey;
-            }
-            timeToSwap = 5;
-        }
-        timeToSwap -= Time.deltaTime;
-    }
-    #endregion
-
     private void CalculateVisibility()
     {
         bool show = visible && trackedEnemy != null;
