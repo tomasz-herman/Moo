@@ -11,7 +11,8 @@ public class DropSystem : MonoBehaviour
     [SerializeField] Ammo ammoPrefab;
     [SerializeField] Health healthPrefab;
     [SerializeField] Upgrade dropItem;
-    [SerializeField] private float maxDropSpeed = 0.1f;
+
+    [HideInInspector] public float maxDropSpeed = 10f;
 
     [HideInInspector] public float upgradeDropCount;
     [HideInInspector] public float upgradeDropChance;
@@ -52,7 +53,7 @@ public class DropSystem : MonoBehaviour
     private void Throw(MonoBehaviour obj)
     {
         Vector3 dropDirection = new Vector3(Utils.FloatBetween(-1, 1), Utils.FloatBetween(0, 1), Utils.FloatBetween(-1, 1)).normalized;
-        obj.GetComponent<Rigidbody>().velocity = dropDirection * Utils.FloatBetween(0, maxDropSpeed);
+        obj.GetComponent<Rigidbody>().velocity = dropDirection * maxDropSpeed; // Utils.FloatBetween(0, maxDropSpeed);
     }
 }
 
