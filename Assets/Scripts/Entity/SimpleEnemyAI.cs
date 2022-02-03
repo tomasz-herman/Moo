@@ -12,7 +12,6 @@ public class SimpleEnemyAI : MonoBehaviour
     public float sightRange;
     private bool playerInAttackRange, playerInSight, playerInPrefferedRange;
     
-    public float damageMultiplier = 1f;
     public Vector3 movementDirection;
     public float remainingMovementTime = 0;
     
@@ -43,7 +42,7 @@ public class SimpleEnemyAI : MonoBehaviour
         shooting.SelectWeapon(weaponAIProperties.Type);
         shooting.triggerTimeout = weaponAIProperties.Timeout;
         shooting.projectileSpeed = weaponAIProperties.ProjectileSpeed;
-        shooting.weaponDamage = weaponAIProperties.BonusDamage * damageMultiplier;
+        //TODO weaponAIProperties.BonusDamage is unused, make sure it has no purpose before deleting this TODO
 
         var position = transform.position;
         var playerPosition = player.position;
