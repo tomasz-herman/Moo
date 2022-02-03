@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class UpgradeView
 {
-    private string name, description;
+    //i think there should be field  upgrade type
+    private string name;
+    private string description;
     private Sprite sprite;
-    public UpgradeView(string name, string description, Sprite sprite)
+
+    protected UpgradeView(string name, string description, Sprite sprite)
     {
         this.name = name;
         this.description = description;

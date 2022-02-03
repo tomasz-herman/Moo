@@ -1,9 +1,4 @@
 ﻿using Assets.Scripts.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.Weapons
@@ -13,7 +8,8 @@ namespace Assets.Scripts.Upgrades.Weapons
         private float multiplier = 0.9f;
 
         private readonly Weapon weapon;
-        public WeaponCooldownUpgrade(Weapon w, Sprite sprite, string weaponName)
+
+        protected WeaponCooldownUpgrade(Weapon w, Sprite sprite, string weaponName)
             : base($"{weaponName} cooldown", $"Decrease cooldown of {weaponName} by 10%", sprite)
         {
             weapon = w;
