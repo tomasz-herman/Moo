@@ -32,14 +32,14 @@ MonoBehaviour:
     BaseMovementSpeed: 1
     BaseScoreForKill: 20
   - Type: 3
-    BaseHealth: 0
-    BaseDamageMultiplier: 0
-    BaseProjectileSpeedMultiplier: 0
-    BaseMovementSpeed: 0
-    BaseScoreForKill: 1
+    BaseHealth: 300
+    BaseDamageMultiplier: 1.5
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1.25
+    BaseScoreForKill: 200
   - Type: 4
-    BaseHealth: 0
-    BaseDamageMultiplier: 0
-    BaseProjectileSpeedMultiplier: 0
-    BaseMovementSpeed: 0
-    BaseScoreForKill: 1
+    BaseHealth: 1000
+    BaseDamageMultiplier: 2.5
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1.5
+    BaseScoreForKill: 1000
