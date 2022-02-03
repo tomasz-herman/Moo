@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ChamberControl : MonoBehaviour
+public class ChamberControl : Entity
 {
     [HideInInspector] public List<SpawnLocationScript> SpawnLocations;
     [HideInInspector] public PathSymbolControler symbol;
@@ -56,7 +56,9 @@ public class ChamberControl : MonoBehaviour
         {
             State = States.Fight;
             SetFightPathsColors();
-            enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
+            Enemy boss = enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
+            if (boss != null)
+                GameWorld.userInterface.hud.bossBar.TrackedEnemy = boss;
         }
     }
 
