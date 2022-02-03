@@ -12,7 +12,6 @@ public class SimpleEnemyAI : MonoBehaviour
     public float sightRange;
     private bool playerInAttackRange, playerInSight, playerInPrefferedRange;
     
-    public float movementSpeed = 1f;
     public float damageMultiplier = 1f;
     public Vector3 movementDirection;
     public float remainingMovementTime = 0;
@@ -23,6 +22,7 @@ public class SimpleEnemyAI : MonoBehaviour
     public WeaponAI weaponAI;
     protected WeaponAIProperties weaponAIProperties;
     private Vector3 lastPlayerPosition;
+    protected Enemy enemy;
 
 
     protected void Start()
@@ -32,6 +32,7 @@ public class SimpleEnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         shooting = GetComponent<Shooting>();
         ammoSystem = GetComponent<AmmoSystem>();
+        enemy = GetComponent<Enemy>();
         shooting.ammoSystem = ammoSystem;
         weaponAIProperties = WeaponAIProperties.Get(weaponAI);
         lastPlayerPosition = player.position;
@@ -69,14 +70,14 @@ public class SimpleEnemyAI : MonoBehaviour
             remainingMovementTime = Random.Range(2, 8);
         }
         
-        characterController.Move(movementDirection * Time.deltaTime * movementSpeed);
+        characterController.Move(movementDirection * Time.deltaTime * enemy.movementSpeed);
         remainingMovementTime -= Time.deltaTime;
     }
 
     private void Chase()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * (Time.deltaTime * movementSpeed * weaponAIProperties.BonusMovementSpeed));
+        characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.BonusMovementSpeed));
     }
 
     private void Attack()
