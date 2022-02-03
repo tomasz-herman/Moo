@@ -8,7 +8,7 @@ public class Projectile : ProjectileBase
     public float Emission = 6;
 
     protected override float baseDamage => 10f;
-    private float extraDamage = 0;
+    protected float extraDamage = 0;
 
     protected override void Start()
     {
@@ -18,7 +18,7 @@ public class Projectile : ProjectileBase
         base.Start();
     }
 
-    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
+    public virtual void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
         this.Owner = owner;
         extraDamage = extradamage;
@@ -30,7 +30,7 @@ public class Projectile : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, baseDamage * extraDamage);
+            ApplyDamage(other, CalculateDamage(other));
 
             //TODO: Uncomment when chambers' terrain has proper layering
             //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
@@ -42,5 +42,10 @@ public class Projectile : ProjectileBase
 
             Destroy(gameObject);
         }
+    }
+
+    protected virtual float CalculateDamage(Collider other)
+    {
+        return baseDamage * extraDamage;
     }
 }
