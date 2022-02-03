@@ -15,7 +15,7 @@ MonoBehaviour:
   Data:
   - Type: 0
     BaseHealth: 25
-    BaseDamageMultiplier: 0.5
+    BaseDamageMultiplier: 0.25
     BaseProjectileSpeedMultiplier: 1
     BaseMovementSpeed: 1.2
     BaseScoreForKill: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 10
   - Type: 1
     BaseHealth: 50
-    BaseDamageMultiplier: 0.75
+    BaseDamageMultiplier: 0.5
     BaseProjectileSpeedMultiplier: 0.9
     BaseMovementSpeed: 1.1
     BaseScoreForKill: 3
@@ -44,7 +44,7 @@ MonoBehaviour:
   - Type: 2
     BaseHealth: 150
     BaseDamageMultiplier: 1
-    BaseProjectileSpeedMultiplier: 0.8
+    BaseProjectileSpeedMultiplier: 0.75
     BaseMovementSpeed: 1
     BaseScoreForKill: 10
     UpgradeDropCount: 0

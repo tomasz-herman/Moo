@@ -40,7 +40,7 @@ public class SimpleEnemyAI : MonoBehaviour
     protected void Update()
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
-        shooting.triggerTimeout = weaponAIProperties.Timeout;
+        shooting.triggerTimeoutMultiplier = weaponAIProperties.Timeout;
         //TODO weaponAIProperties.ProjectileSpeed see below
         //TODO weaponAIProperties.BonusDamage is unused, make sure it has no purpose before deleting this TODO
 

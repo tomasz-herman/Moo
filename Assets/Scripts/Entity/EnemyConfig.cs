@@ -29,6 +29,7 @@ public class EnemyData
     public float BaseDamageMultiplier = 1;
     public float BaseProjectileSpeedMultiplier = 1;
     public float BaseMovementSpeed = 1;
+    public float BaseTriggerTimeoutMultiplier = 1;
     public int BaseScoreForKill = 1;
     public int UpgradeDropCount = 0;
     public float UpgradeDropChance = 1;

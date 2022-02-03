@@ -43,6 +43,7 @@ public abstract class Enemy : Entity
 
         shooting.weaponDamageMultiplier = data.BaseDamageMultiplier;
         shooting.projectileSpeedMultiplier = data.BaseProjectileSpeedMultiplier;
+        shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier;
 
         movementSpeed = data.BaseMovementSpeed;
         pointsForKill = data.BaseScoreForKill;
