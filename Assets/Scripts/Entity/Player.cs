@@ -31,7 +31,7 @@ public class Player : Entity
         damagePostProcessing.healthSystem = healthSystem;
 
         ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
-        ammoSystem.Ammo = ammoSystem.Ammo;
+        ammoSystem.Ammo = ammoSystem.MaxAmmo;
     }
 
     public void Upgrade()
