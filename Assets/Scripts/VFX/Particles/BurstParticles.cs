@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BurstParticles : MonoBehaviour
 {
-    void Start()
+    protected virtual void Start()
     {
         Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
     }

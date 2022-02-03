@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
-    [SerializeField] private BurstParticles hitTerrainParticles;
+    [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
     public Color color;
     public float Emission = 6;
 
@@ -34,7 +34,11 @@ public class Projectile : ProjectileBase
 
             //TODO: Uncomment when chambers' terrain has proper layering
             //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
-                Instantiate(hitTerrainParticles, transform.position, transform.rotation);
+            {
+                var particles = Instantiate(hitTerrainParticles, transform.position, transform.rotation);
+                particles.SparkColor = color;
+            }
+                
 
             Destroy(gameObject);
         }
