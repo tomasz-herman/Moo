@@ -44,9 +44,16 @@ public abstract class Enemy : Entity
 
         movementSpeed = data.BaseMovementSpeed;
         pointsForKill = data.BaseScoreForKill;
-        
-        //TODO setup drops
-    }
+
+        dropSystem.healthDropChance = data.HealthDropChance;
+        dropSystem.minHealth = data.BaseMinHealthDrop;
+        dropSystem.maxHealth = data.BaseMaxHealthDrop;
+        dropSystem.ammoDropChance = data.AmmoDropChance;
+        dropSystem.minAmmo = data.BaseMinAmmoDrop;
+        dropSystem.maxAmmo = data.BaseMaxAmmoDrop;
+        dropSystem.upgradeDropChance = data.UpgradeDropChance;
+        dropSystem.upgradeDropCount = data.UpgradeDropCount;
+}
 
     void Start()
     {

@@ -34,9 +34,9 @@ public class Player : Entity
         ammoSystem.Ammo = ammoSystem.MaxAmmo;
     }
 
-    public void Upgrade()
+    public void Upgrade(int upgradeCount = 1)
     {
-        upgradeSystem.AddUpgrade();
+        upgradeSystem.AddUpgrade(upgradeCount);
     }
 
     public void CheckDeath(object sender, (float health, float maxHealth) args)
