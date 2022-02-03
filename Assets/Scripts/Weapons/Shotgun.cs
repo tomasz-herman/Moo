@@ -11,9 +11,9 @@ namespace Assets.Scripts.Weapons
         public float scatterFactor { get; set; } = 10f;
         public int projectileCount { get; set; } = 10;
 
-        public override float projectileSpeed { get; set; } = 3f;
-        public override float triggerTimeout { get; set; } = 5f;
-        public override float baseDamage { get; set; } = 1f;
+        public override float projectileSpeed { get; set; } = 30f;
+        public override float triggerTimeout { get; set; } = 3f;
+        public override float baseDamage { get; set; } = 0.75f;
         protected override int ammoConsumption => 3;
 
         public Shotgun(Bullet bulletprefab) : base(WeaponType.Shotgun, SoundType.ShotgunShot)

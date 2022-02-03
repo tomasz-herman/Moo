@@ -30,9 +30,9 @@ MonoBehaviour:
   - Type: 1
     BaseHealth: 50
     BaseDamageMultiplier: 0.75
-    BaseProjectileSpeedMultiplier: 1
+    BaseProjectileSpeedMultiplier: 0.9
     BaseMovementSpeed: 1.1
-    BaseScoreForKill: 5
+    BaseScoreForKill: 3
     UpgradeDropCount: 0
     UpgradeDropChance: 1
     HealthDropChance: 0.5
@@ -44,9 +44,9 @@ MonoBehaviour:
   - Type: 2
     BaseHealth: 150
     BaseDamageMultiplier: 1
-    BaseProjectileSpeedMultiplier: 1
+    BaseProjectileSpeedMultiplier: 0.8
     BaseMovementSpeed: 1
-    BaseScoreForKill: 20
+    BaseScoreForKill: 10
     UpgradeDropCount: 0
     UpgradeDropChance: 1
     HealthDropChance: 0.75
@@ -58,10 +58,10 @@ MonoBehaviour:
   - Type: 3
     BaseHealth: 300
     BaseDamageMultiplier: 1.5
-    BaseProjectileSpeedMultiplier: 1
-    BaseMovementSpeed: 1.25
-    BaseScoreForKill: 200
-    UpgradeDropCount: 0
+    BaseProjectileSpeedMultiplier: 0.7
+    BaseMovementSpeed: 0.9
+    BaseScoreForKill: 25
+    UpgradeDropCount: 1
     UpgradeDropChance: 1
     HealthDropChance: 1
     BaseMinHealthDrop: 40
@@ -72,10 +72,10 @@ MonoBehaviour:
   - Type: 4
     BaseHealth: 1000
     BaseDamageMultiplier: 2.5
-    BaseProjectileSpeedMultiplier: 1
-    BaseMovementSpeed: 1.5
-    BaseScoreForKill: 1000
-    UpgradeDropCount: 0
+    BaseProjectileSpeedMultiplier: 0.6
+    BaseMovementSpeed: 0.75
+    BaseScoreForKill: 100
+    UpgradeDropCount: 5
     UpgradeDropChance: 1
     HealthDropChance: 1
     BaseMinHealthDrop: 60

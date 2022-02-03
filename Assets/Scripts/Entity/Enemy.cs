@@ -20,6 +20,8 @@ public abstract class Enemy : Entity
     [HideInInspector] public float movementSpeed;
     [HideInInspector] public int pointsForKill;
 
+    private bool isDead = false;
+
     void Awake()
     {
         dropSystem = GetComponent<DropSystem>();
@@ -68,10 +70,12 @@ public abstract class Enemy : Entity
 
     public void TakeDamage(float damage, ScoreSystem system = null)
     {
+        if (isDead)
+            return;
         healthSystem.Health -= damage;
         Audio.PlayOneShot();
-        if (healthSystem.Health > 0) return;
-        Die(system);
+        if (healthSystem.Health <= 0)
+            Die(system);
     }
 
     private void Die(ScoreSystem system = null)
@@ -82,6 +86,7 @@ public abstract class Enemy : Entity
         dropSystem.Drop();
 
         KillEvent.Invoke(gameObject);
+        isDead = true;
         Destroy(gameObject);
     }
 

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Weapons
         private readonly Grenade grenadePrefab;
         private Color color = Color.magenta;
 
-        public override float projectileSpeed { get; set; } = 2f;
+        public override float projectileSpeed { get; set; } = 20f;
         public override float triggerTimeout { get; set; } = 7f;
         public override float baseDamage { get; set; } = 10f;
         protected override int ammoConsumption => 7;
