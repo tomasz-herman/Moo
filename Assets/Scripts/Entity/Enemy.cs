@@ -39,7 +39,9 @@ public abstract class Enemy : Entity
         healthSystem.MaxHealth = data.BaseHealth;
         healthSystem.Health = healthSystem.MaxHealth;
 
-        //TODO setup basedamagemultiplier, baseprojectilespeedmultiplier
+        shooting.weaponDamage = data.BaseDamageMultiplier;
+        shooting.projectileSpeed = data.BaseProjectileSpeedMultiplier;
+
         movementSpeed = data.BaseMovementSpeed;
         pointsForKill = data.BaseScoreForKill;
         
