@@ -29,4 +29,5 @@ public class EnemyData
     public float BaseDamageMultiplier = 1;
     public float BaseProjectileSpeedMultiplier = 1;
     public float BaseMovementSpeed = 1;
+    public int BaseScoreForKill = 1;
 }

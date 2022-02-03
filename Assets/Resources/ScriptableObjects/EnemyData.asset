@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b970b991da99c3e44be331f754ac88bc, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  Data: []
+  Data:
+  - Type: 0
+    BaseHealth: 25
+    BaseDamageMultiplier: 0.5
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 2
+    BaseScoreForKill: 1
+  - Type: 1
+    BaseHealth: 50
+    BaseDamageMultiplier: 0.75
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1.5
+    BaseScoreForKill: 5
+  - Type: 2
+    BaseHealth: 150
+    BaseDamageMultiplier: 1
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1
+    BaseScoreForKill: 20
+  - Type: 3
+    BaseHealth: 0
+    BaseDamageMultiplier: 0
+    BaseProjectileSpeedMultiplier: 0
+    BaseMovementSpeed: 0
+    BaseScoreForKill: 1
+  - Type: 4
+    BaseHealth: 0
+    BaseDamageMultiplier: 0
+    BaseProjectileSpeedMultiplier: 0
+    BaseMovementSpeed: 0
+    BaseScoreForKill: 1
