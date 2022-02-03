@@ -12,7 +12,8 @@ public class DropSystem : MonoBehaviour
     [SerializeField] Health healthPrefab;
     [SerializeField] Upgrade dropItem;
 
-    [HideInInspector] public float maxDropSpeed = 10f;
+    private static float minDropSpeed = 3f;
+    private static float maxDropSpeed = 6f;
 
     [HideInInspector] public float upgradeDropCount;
     [HideInInspector] public float upgradeDropChance;
@@ -25,13 +26,13 @@ public class DropSystem : MonoBehaviour
 
     public void Drop()
     {
-        if(Random.value < healthDropChance)
+        if (Random.value < healthDropChance)
         {
             Health health = Instantiate(healthPrefab, transform.position, transform.rotation);
             health.remainingHealth = Utils.FloatBetween(minHealth, maxHealth);
             Throw(health);
         }
-        if(Random.value < ammoDropChance)
+        if (Random.value < ammoDropChance)
         {
             Ammo ammo = Instantiate(ammoPrefab, transform.position, transform.rotation);
             ammo.remainingAmmo = Utils.NumberBetween(minAmmo, maxAmmo);
@@ -52,8 +53,8 @@ public class DropSystem : MonoBehaviour
 
     private void Throw(MonoBehaviour obj)
     {
-        Vector3 dropDirection = new Vector3(Utils.FloatBetween(-1, 1), Utils.FloatBetween(0, 1), Utils.FloatBetween(-1, 1)).normalized;
-        obj.GetComponent<Rigidbody>().velocity = dropDirection * maxDropSpeed; // Utils.FloatBetween(0, maxDropSpeed);
+        Vector3 dropDirection = new Vector3(Utils.FloatBetween(-1, 1), Utils.FloatBetween(0, 0.5f), Utils.FloatBetween(-1, 1)).normalized;
+        obj.GetComponent<Rigidbody>().velocity = dropDirection * Utils.FloatBetween(minDropSpeed, maxDropSpeed);
     }
 }
 
