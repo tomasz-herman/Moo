@@ -28,7 +28,7 @@ public class Shooting : MonoBehaviour
     public event EventHandler<Weapon> WeaponChanged;
     public Weapon CurrentWeapon { get { return weapons.Current(); } }
 
-    void Start()
+    void Awake()
     {
         weapons.Add(Pistol);
         weapons.Add(Shotgun);

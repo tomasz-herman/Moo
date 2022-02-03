@@ -20,6 +20,7 @@ public class Enemy : Entity
     void Awake()
     {
         dropSystem = GetComponent<DropSystem>();
+        healthSystem = GetComponent<HealthSystem>();
         Sound = new SoundTypeWithPlaybackSettings
         {
             SoundType = SoundType.EnemyKilled,
@@ -35,7 +36,6 @@ public class Enemy : Entity
     {
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
-        healthSystem = GetComponent<HealthSystem>();
     }
 
     void OnDestroy()
