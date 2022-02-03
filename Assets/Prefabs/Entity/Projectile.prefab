@@ -159,7 +159,7 @@ MonoBehaviour:
       FadeOutSeconds: 0
       UseDefault: 0
   TimeToLive: 10
-  hitTerrainParticles: {fileID: 5970832575779064031, guid: 1194af6b97a2a3446bf582ff2a9a4d9a, type: 3}
+  hitTerrainParticles: {fileID: 5970832575779064031, guid: 794dc7c86688b7f4a83bb739d4367588, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   Emission: 6
 --- !u!54 &1227762693535133598
