@@ -1,10 +1,10 @@
 using Assets.Scripts.SoundManager;
 using UnityEngine;
 
-public class Enemy : Entity
+public abstract class Enemy : Entity
 {
-    public int pointsForKill = 1;
-    
+    private EnemyData data;
+
     [HideInInspector] public HealthSystem healthSystem;
     [HideInInspector] public DropSystem dropSystem;
     
@@ -16,11 +16,15 @@ public class Enemy : Entity
     public Audio Audio;
 
     private AudioManager _audioManager;
+    [HideInInspector] public Shooting shooting;
+    [HideInInspector] public float movementSpeed;
+    [HideInInspector] public int pointsForKill;
 
     void Awake()
     {
         dropSystem = GetComponent<DropSystem>();
         healthSystem = GetComponent<HealthSystem>();
+        shooting = GetComponent<Shooting>();
         Sound = new SoundTypeWithPlaybackSettings
         {
             SoundType = SoundType.EnemyKilled,
@@ -30,6 +34,16 @@ public class Enemy : Entity
                 Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.EnemyKilled)
             }
         };
+
+        data = ApplicationData.EnemyData[EnemyType];
+        healthSystem.MaxHealth = data.BaseHealth;
+        healthSystem.Health = healthSystem.MaxHealth;
+
+        //TODO setup basedamagemultiplier, baseprojectilespeedmultiplier
+        movementSpeed = data.BaseMovementSpeed;
+        pointsForKill = data.BaseScoreForKill;
+        
+        //TODO setup drops
     }
 
     void Start()
@@ -61,4 +75,6 @@ public class Enemy : Entity
         KillEvent.Invoke(gameObject);
         Destroy(gameObject);
     }
+
+    public abstract EnemyTypes EnemyType { get; }
 }
