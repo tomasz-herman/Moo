@@ -333,7 +333,7 @@ figcaption {
 .heading-jumbo {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-family: Amazdoomright, sans-serif;
+  font-family: Amazdoomleft, sans-serif;
   font-size: 128px;
   line-height: 80px;
   font-weight: 400;
@@ -583,7 +583,7 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 620px;
+  height: 480px;
   margin-bottom: 100px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -959,7 +959,7 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 620px;
+  height: 480px;
   margin-bottom: 100px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -1324,6 +1324,11 @@ figcaption {
   margin-bottom: 0px;
 }
 
+.columns {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 991px) {
   .section.cc-cta {
     padding-right: 0px;
@@ -1346,7 +1351,7 @@ figcaption {
   }
 
   .heading-jumbo {
-    font-size: 56px;
+    font-size: 96px;
     line-height: 70px;
   }
 
@@ -1589,7 +1594,7 @@ figcaption {
   }
 
   .heading-jumbo {
-    font-size: 50px;
+    font-size: 80px;
     line-height: 64px;
   }
 
@@ -1705,7 +1710,7 @@ figcaption {
   }
 
   .heading-jumbo {
-    font-size: 36px;
+    font-size: 72px;
     line-height: 48px;
   }
 
@@ -2092,6 +2097,27 @@ figcaption {
 @font-face {
   font-family: 'Amazdoomright';
   src: url('../fonts/AmazDooMRight.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amazdoomleft';
+  src: url('../fonts/AmazDooMLeft.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amazdoomleftoutline';
+  src: url('../fonts/AmazDooMLeftOutline.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amazdoomrightoutline';
+  src: url('../fonts/AmazDooMRightOutline.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
