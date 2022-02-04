@@ -14,6 +14,24 @@ public class EndGameView : MenuView
     [SerializeField] private Text timeText;
     [SerializeField] private TMP_InputField nameInput;
 
+    private bool selectionForced = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        selectionForced = false;
+    }
+
+    protected void Update()
+    {
+        //ActivateInputField() didn't work in Start, Awake and OnEnable, so we have this workaround to select the textbox
+        if(!selectionForced)
+        {
+            selectionForced = true;
+            nameInput.ActivateInputField();
+        }
+    }
+
     private void Recalculate()
     {
         scoreText.text = endGameData.Score.ToString();

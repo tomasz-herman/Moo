@@ -461,6 +461,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Sound:
+    SoundType: 0
+    PlaybackSettings:
+      Volume: 1
+      Loop: 0
+      Pitch: 1
+      Priority: 128
+      SpatialBlend: 0
+      StereoPan: 0
+      DopplerLevel: 0
+      Spread: 0
+      RolloffMode: 1
+      Min3DDistance: 1
+      Max3DDistance: 500
+      FadeInSeconds: 0
+      FadeOutSeconds: 0
+      UseDefault: 0
 --- !u!114 &5250545107766033320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,7 +504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 25
-  movementSpeed: 1
+  movementSpeed: 1.25
+  damageMultiplier: 1.75
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
@@ -510,7 +528,7 @@ MonoBehaviour:
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
   projectileSpeed: 5
-  triggerTimeout: 3
+  triggerTimeout: 0.5
   weaponDamage: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
@@ -540,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e99fa591a7f37041a36bdbe8b039a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultHealth: 1000
+  defaultHealth: 200
 --- !u!114 &717185852922523951
 MonoBehaviour:
   m_ObjectHideFlags: 0

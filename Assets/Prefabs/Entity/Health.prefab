@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5150731352885442142}
   - component: {fileID: 8289166888256426857}
   - component: {fileID: 7856445806173159149}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8229505884842649140}
   - component: {fileID: 2006212565927455787}
   - component: {fileID: 5929107929657346436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 7559235932926227065}
   - component: {fileID: 709617650000426603}
   - component: {fileID: 6194634764679441002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,9 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minHealth: 15
   maxHealth: 50
-  FloatingTextPrefab: {fileID: 1125675931467937535, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
---- !u!65 &6194634764679441002
-BoxCollider:
+  FloatingTextPrefab: {fileID: 2313416263019860963, guid: 93e4d81a68e60adf09fac49b0e0fa48f, type: 3}
+--- !u!135 &476181125106001831
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -250,5 +250,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 2}
+  m_Radius: 20
   m_Center: {x: 0, y: 10, z: 0}

@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool iswalking = false;
     public bool IsWalking { get { return iswalking; } }
     public EventHandler<float> SpeedChanged;
+    private Vector3 direction;
 
     public float Speed
     {
@@ -45,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
             moveForward--;
 
-        Vector3 direction = toCharacter * moveForward + toRight * moveRight;
+        direction = toCharacter * moveForward + toRight * moveRight;
+    }
+
+    private void FixedUpdate()
+    {
         Vector3 velocity = direction.normalized * movementSpeed * Time.deltaTime;
 
         iswalking = velocity != Vector3.zero;
@@ -54,6 +59,4 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    
-    
 }

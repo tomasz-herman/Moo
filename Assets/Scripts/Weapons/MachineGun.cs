@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -20,10 +16,11 @@ namespace Assets.Scripts.Weapons
         public override string Name { get; set; } = "MachineGun";
         protected override int ammoConsumption => 1;
 
-        public MachineGun(Projectile projectileprefab)
+        public MachineGun(Projectile projectileprefab) : base(WeaponType.MachineGun, SoundType.PistolShot)
         {
             projectilePrefab = projectileprefab;
         }
+
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);

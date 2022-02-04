@@ -14,7 +14,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         private readonly Weapon weapon;
         public WeaponDamageUpgrade(Weapon w, Sprite sprite, string weaponName)
-            : base($"{weaponName} damage", $"Increase damage delt by {weaponName} by 20%", sprite)
+            : base($"{weaponName} damage", $"Increase damage dealt by {weaponName} by 20%", sprite)
         {
             weapon = w;
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Health : Entity
@@ -14,6 +15,7 @@ public class Health : Entity
     private void Start()
     {
         camera = Camera.main;
+        transform.Rotate(0, Utils.FloatBetween(0, 360), 0);
     }
 
     private void Awake()
@@ -57,7 +59,8 @@ public class Health : Entity
             var textObject = Instantiate(FloatingTextPrefab, transform.position + Vector3.up, Quaternion.identity);
             textObject.transform.LookAt(camera.transform.position);
             textObject.transform.Rotate(Vector3.up, 180);
-            textObject.GetComponent<TextMesh>().text = text;
+            textObject.transform.GetComponentInChildren<TextMeshPro>().color = Color.green;
+            textObject.transform.GetComponentInChildren<TextMeshPro>().SetText(text);
             Destroy(textObject, 3);
         }
     }

@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    private GameWorld gameWorld = null;
+    private GameWorld _gameWorld = null;
     public GameWorld GameWorld
     { 
         get
         {
-            if (gameWorld == null)
-                gameWorld = FindObjectOfType<GameWorld>();
-            return gameWorld;
+            if (_gameWorld == null)
+                _gameWorld = FindObjectOfType<GameWorld>();
+            return _gameWorld;
         }
-        private set { gameWorld = value; }
+        private set => _gameWorld = value;
     }
 }

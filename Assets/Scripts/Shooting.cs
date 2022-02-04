@@ -1,8 +1,6 @@
 using System;
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
@@ -26,6 +24,9 @@ public class Shooting : MonoBehaviour
     public MachineGun MachineGun { get; private set; }
     public GrenadeLauncher GrenadeLauncher { get; private set; }
     public Sword Sword { get; private set; }
+
+    public event EventHandler<Weapon> WeaponChanged;
+    public Weapon CurrentWeapon { get { return weapons.Current(); } }
 
     void Awake()
     {
@@ -54,18 +55,21 @@ public class Shooting : MonoBehaviour
         {
             if (first == weapons.Next().GetType()) break;
         }
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void NextWeapon()
     {
         weapons.Next();
         weaponBar.SlotUp();
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void PrevWeapon()
     {
         weapons.Prev();
         weaponBar.SlotDown();
+        WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)

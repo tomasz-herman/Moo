@@ -1,8 +1,6 @@
 using Assets.Scripts.Upgrades;
 using Assets.Scripts.Upgrades.Weapons;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class UpgradesProvider : MonoBehaviour
@@ -22,7 +20,7 @@ public class UpgradesProvider : MonoBehaviour
     private Shooting shootingSystem;
 
     private UpgradeView[] upgrades;
-    void Awake()
+    void Start()
     {
         healthSystem = GetComponent<HealthSystem>();
         ammoSystem = GetComponent<AmmoSystem>();

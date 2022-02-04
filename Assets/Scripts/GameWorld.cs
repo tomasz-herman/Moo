@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +7,13 @@ public class GameWorld : MonoBehaviour
 {
     public UserInterface userInterface;
     public Timer timer;
+    public AudioManager audioManager;
+    public BackgroundMusicManager BackgroundMusicManager;
 
     void Start()
     {
         timer.SetTicking(true);
+        BackgroundMusicManager?.Play();
     }
 
     private void Update()

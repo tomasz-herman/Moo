@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Ammo : Entity
@@ -13,6 +14,7 @@ public class Ammo : Entity
     private void Start()
     {
         camera = Camera.main;
+        transform.Rotate(0, Utils.FloatBetween(0, 360), 0);
     }
     
     private void Awake()
@@ -55,7 +57,8 @@ public class Ammo : Entity
             var textObject = Instantiate(FloatingTextPrefab, transform.position + Vector3.up, Quaternion.identity);
             textObject.transform.LookAt(camera.transform.position);
             textObject.transform.Rotate(Vector3.up, 180);
-            textObject.GetComponent<TextMesh>().text = text;
+            textObject.transform.GetComponentInChildren<TextMeshPro>().color = Color.cyan;
+            textObject.transform.GetComponentInChildren<TextMeshPro>().SetText(text);
             Destroy(textObject, 3);
         }
     }
