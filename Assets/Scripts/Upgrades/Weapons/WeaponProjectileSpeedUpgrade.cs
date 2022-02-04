@@ -21,7 +21,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         public override UpgradeType CommitUpdate()
         {
-            weapon.projectileSpeed *= multiplier;
+            weapon.baseProjectileSpeed *= multiplier;
             return GetUpgradeType();
         }
         protected abstract UpgradeType GetUpgradeType();

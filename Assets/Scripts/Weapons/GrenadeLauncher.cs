@@ -6,13 +6,6 @@ namespace Assets.Scripts.Weapons
     public class GrenadeLauncher : Weapon
     {
         private readonly Grenade grenadePrefab;
-        private Color color = Color.magenta;
-
-        public override string Name { get; set; } = "GrenadeLauncher";
-        public override float projectileSpeed { get; set; } = 20f;
-        public override float triggerTimeout { get; set; } = 3f;
-        public override float baseDamage { get; set; } = 12f;
-        protected override int ammoConsumption => 7;
 
         public GrenadeLauncher(Grenade grenadeprefab) : base(WeaponType.GrenadeLauncher, SoundType.GrenadeLauncherShot)
         {
@@ -22,7 +15,7 @@ namespace Assets.Scripts.Weapons
         {
             Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
             grenade.color = color;
-            grenade.Launch(shooter, direction.normalized * projectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
+            grenade.Launch(shooter, direction.normalized * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
         }
     }
 }

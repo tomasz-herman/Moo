@@ -6,16 +6,10 @@ namespace Assets.Scripts.Weapons
     public class Shotgun : Weapon
     {
         private readonly Bullet bulletPrefab;
-        private Color color = Color.yellow;
 
         public float scatterFactor { get; set; } = 10f;
         public int projectileCount { get; set; } = 10;
 
-        public override string Name { get; set; } = "Shotgun";
-        public override float projectileSpeed { get; set; } = 30f;
-        public override float triggerTimeout { get; set; } = 1.5f;
-        public override float baseDamage { get; set; } = 0.75f;
-        protected override int ammoConsumption => 3;
 
         public Shotgun(Bullet bulletprefab) : base(WeaponType.Shotgun, SoundType.ShotgunShot)
         {
@@ -28,7 +22,7 @@ namespace Assets.Scripts.Weapons
                 Bullet bullet = Shooting.Instantiate(bulletPrefab, position, Quaternion.identity);
                 bullet.color = color;
                 var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
-                bullet.Launch(shooter, dir * projectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
+                bullet.Launch(shooter, dir * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
             }
         }
     }

@@ -8,11 +8,12 @@ namespace Assets.Scripts.Weapons
     {
         protected ContinuousTrigger trigger = new ContinuousTrigger();
 
-        public abstract float projectileSpeed { get; set; }
-        public abstract float triggerTimeout { get; set; }
-        public abstract float baseDamage { get; set; }
-        public abstract string Name { get; set; }
-        protected abstract int ammoConsumption { get; }
+        public float baseProjectileSpeed { get; set; }
+        public float basetriggerTimeout { get; set; }
+        public float baseDamage { get; set; }
+        public string Name { get; set; }
+        public int baseAmmoConsumption { get; set; }
+        public Color color { get; set; }
 
         //public EventHandler<float> WeaponShoot;
         public EventHandler<(float f1, string name)> WeaponShoot;
@@ -39,6 +40,14 @@ namespace Assets.Scripts.Weapons
             };
 
             Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, null);
+
+            WeaponData data = ApplicationData.WeaponData[WeaponType];
+            baseAmmoConsumption = data.ammoConsumption;
+            baseDamage = data.damage;
+            baseProjectileSpeed = data.projectileSpeed;
+            basetriggerTimeout = data.triggerTimeout;
+            Name = data.name;
+            color = data.color;
         }
 
         public void DecreaseTime()
@@ -48,15 +57,15 @@ namespace Assets.Scripts.Weapons
 
         public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeoutMultiplier * triggerTimeout);
+            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeoutMultiplier * basetriggerTimeout);
             for (int i = 0; i < dischargeCount; i++)
             {
-                if (ammoSystem.Ammo >= ammoConsumption)
+                if (ammoSystem.Ammo >= baseAmmoConsumption)
                 {
-                    WeaponShoot?.Invoke(this, (triggerTimeout, Name));
+                    WeaponShoot?.Invoke(this, (basetriggerTimeout, Name));
                     Shoot(shooter, position, direction, shooting);
                     PlayGunfireSound(position);
-                    ammoSystem.Ammo -= ammoConsumption;
+                    ammoSystem.Ammo -= baseAmmoConsumption;
                 }
             }
         }
