@@ -15,7 +15,7 @@ namespace Assets.Scripts.Weapons
         protected abstract int ammoConsumption { get; }
 
         //public EventHandler<float> WeaponShoot;
-        public EventHandler<(float f1, string name)> WeaponShoot;
+        public EventHandler<(float timeout, string name)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
 
         public Audio Audio { get; protected set; }

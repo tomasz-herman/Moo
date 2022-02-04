@@ -10,7 +10,7 @@ namespace Assets.Scripts.Weapons
 
         private float scatterFactor = 3f;
 
-        public override string Name { get; set; } = "MachineGun";
+        public override string Name { get; set; } = "Machine Gun";
         public override float projectileSpeed { get; set; } = 15f;
         public override float triggerTimeout { get; set; } = 0.15f;
         public override float baseDamage { get; set; } = 0.85f;

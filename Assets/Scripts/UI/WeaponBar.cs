@@ -44,7 +44,7 @@ public class WeaponBar : MonoBehaviour
         if(PistolCooldown)
         {
             overlay.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (PistolRemainingTime / PistolTimeout));
-            overlay.rectTransform.localPosition = new Vector3(0, -(-50 + (PistolRemainingTime / PistolTimeout) * 40), 0);
+            //overlay.rectTransform.localPosition = new Vector3(0, -(-50 + (PistolRemainingTime / PistolTimeout) * 40), 0);
             PistolRemainingTime += Time.deltaTime;
             if (PistolRemainingTime > PistolTimeout)
                 PistolCooldown = false;
@@ -52,7 +52,7 @@ public class WeaponBar : MonoBehaviour
         if (ShotgunCooldown)
         {
             overlayShotgun.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (ShotgunRemainingTime / ShotgunTimeout));
-            overlayShotgun.rectTransform.localPosition = new Vector3(-100, -(-50 + (ShotgunRemainingTime / ShotgunTimeout) * 40), 0);
+            //overlayShotgun.rectTransform.localPosition = new Vector3(-100, -(-50 + (ShotgunRemainingTime / ShotgunTimeout) * 40), 0);
             ShotgunRemainingTime += Time.deltaTime;
             if (ShotgunRemainingTime > ShotgunTimeout)
                 ShotgunCooldown = false;
@@ -60,7 +60,7 @@ public class WeaponBar : MonoBehaviour
         if (MachineCooldown)
         {
             overlayMachine.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (MachineRemainingTime / MachineTimeout));
-            overlayMachine.rectTransform.localPosition = new Vector3(-200, -(-50 + (MachineRemainingTime / MachineTimeout) * 40), 0);
+            //overlayMachine.rectTransform.localPosition = new Vector3(-200, -(-50 + (MachineRemainingTime / MachineTimeout) * 40), 0);
             MachineRemainingTime += Time.deltaTime;
             if (MachineRemainingTime > MachineTimeout)
                 MachineCooldown = false;
@@ -68,7 +68,7 @@ public class WeaponBar : MonoBehaviour
         if (LauncherCooldown)
         {
             overlayLauncher.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (LauncherRemaningTime / LauncherTimeout));
-            overlayLauncher.rectTransform.localPosition = new Vector3(200, -(-50 + (LauncherRemaningTime / LauncherTimeout) * 40), 0);
+            //overlayLauncher.rectTransform.localPosition = new Vector3(200, -(-50 + (LauncherRemaningTime / LauncherTimeout) * 40), 0);
             LauncherRemaningTime += Time.deltaTime;
             if (LauncherRemaningTime > LauncherTimeout)
                 LauncherCooldown = false;
@@ -76,17 +76,18 @@ public class WeaponBar : MonoBehaviour
         if (SwordCooldown)
         {
             overlaySword.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (SwordRemaningTime / SwordTimeout));
-            overlaySword.rectTransform.localPosition = new Vector3(100, -(-50 + (SwordRemaningTime / SwordTimeout) * 40), 0);
+            //overlaySword.rectTransform.localPosition = new Vector3(100, -(-50 + (SwordRemaningTime / SwordTimeout) * 40), 0);
             SwordRemaningTime += Time.deltaTime;
             if (SwordRemaningTime > SwordTimeout)
                 SwordCooldown = false;
         }
 
     }
-    void UpdateSprite(object sender, (float Timeout, string nazwa) args)
+    void UpdateSprite(object sender, (float Timeout, string WeaponName) args)
     {
         
-        switch (args.nazwa)
+        
+        switch (args.WeaponName)
         {
             case "Pistol":
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
@@ -100,13 +101,13 @@ public class WeaponBar : MonoBehaviour
                 ShotgunRemainingTime = 0;
                 ShotgunTimeout = args.Timeout * shooting.Shotgun.triggerTimeout;
                 break;
-            case "MachineGun":
+            case "Machine Gun":
                 overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 MachineCooldown = true;
                 MachineRemainingTime = 0;
                 MachineTimeout = args.Timeout * shooting.MachineGun.triggerTimeout;
                 break;
-            case "GrenadeLauncher":
+            case "Grenade Launcher":
                 overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 LauncherCooldown = true;
                 LauncherRemaningTime = 0;
