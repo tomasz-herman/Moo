@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b970b991da99c3e44be331f754ac88bc, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: 
+  Data:
+  - Type: 0
+    BaseHealth: 25
+    BaseDamageMultiplier: 0.25
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1.2
+    BaseTriggerTimeoutMultiplier: 1
+    BaseScoreForKill: 1
+    UpgradeDropCount: 0
+    UpgradeDropChance: 1
+    HealthDropChance: 0.2
+    BaseMinHealthDrop: 10
+    BaseMaxHealthDrop: 20
+    AmmoDropChance: 0.2
+    BaseMinAmmoDrop: 5
+    BaseMaxAmmoDrop: 10
+  - Type: 1
+    BaseHealth: 50
+    BaseDamageMultiplier: 0.5
+    BaseProjectileSpeedMultiplier: 0.9
+    BaseMovementSpeed: 1.1
+    BaseTriggerTimeoutMultiplier: 1.2
+    BaseScoreForKill: 3
+    UpgradeDropCount: 0
+    UpgradeDropChance: 1
+    HealthDropChance: 0.5
+    BaseMinHealthDrop: 15
+    BaseMaxHealthDrop: 30
+    AmmoDropChance: 0.5
+    BaseMinAmmoDrop: 10
+    BaseMaxAmmoDrop: 20
+  - Type: 2
+    BaseHealth: 150
+    BaseDamageMultiplier: 1
+    BaseProjectileSpeedMultiplier: 0.75
+    BaseMovementSpeed: 1
+    BaseTriggerTimeoutMultiplier: 1.4
+    BaseScoreForKill: 10
+    UpgradeDropCount: 0
+    UpgradeDropChance: 1
+    HealthDropChance: 0.75
+    BaseMinHealthDrop: 25
+    BaseMaxHealthDrop: 50
+    AmmoDropChance: 0.75
+    BaseMinAmmoDrop: 20
+    BaseMaxAmmoDrop: 40
+  - Type: 3
+    BaseHealth: 300
+    BaseDamageMultiplier: 1.5
+    BaseProjectileSpeedMultiplier: 0.7
+    BaseMovementSpeed: 0.9
+    BaseTriggerTimeoutMultiplier: 1.6
+    BaseScoreForKill: 25
+    UpgradeDropCount: 1
+    UpgradeDropChance: 1
+    HealthDropChance: 1
+    BaseMinHealthDrop: 40
+    BaseMaxHealthDrop: 60
+    AmmoDropChance: 1
+    BaseMinAmmoDrop: 30
+    BaseMaxAmmoDrop: 50
+  - Type: 4
+    BaseHealth: 1000
+    BaseDamageMultiplier: 2.5
+    BaseProjectileSpeedMultiplier: 0.6
+    BaseMovementSpeed: 0.75
+    BaseTriggerTimeoutMultiplier: 2
+    BaseScoreForKill: 100
+    UpgradeDropCount: 5
+    UpgradeDropChance: 1
+    HealthDropChance: 1
+    BaseMinHealthDrop: 60
+    BaseMaxHealthDrop: 80
+    AmmoDropChance: 1
+    BaseMinAmmoDrop: 50
+    BaseMaxAmmoDrop: 80
