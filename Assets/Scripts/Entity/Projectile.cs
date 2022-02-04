@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
+    [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
+    [SerializeField] private int particleCount = 30;
     public Color color;
     public float Emission = 6;
 
     protected override float baseDamage => 10f;
-    private float extraDamage = 1;
+    protected float extraDamage = 1;
 
     protected override void Start()
     {
@@ -17,7 +19,7 @@ public class Projectile : ProjectileBase
         base.Start();
     }
 
-    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
+    public virtual void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
         this.Owner = owner;
         extraDamage = extradamage;
@@ -29,8 +31,23 @@ public class Projectile : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, baseDamage * extraDamage);
+            ApplyDamage(other, CalculateDamage(other));
+
+            //TODO: Uncomment when chambers' terrain has proper layering
+            //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
+            {
+                var particles = Instantiate(hitTerrainParticles, transform.position, transform.rotation);
+                particles.SparkColor = color;
+                particles.ParticleCount = particleCount;
+            }
+                
+
             Destroy(gameObject);
         }
+    }
+
+    protected virtual float CalculateDamage(Collider other)
+    {
+        return baseDamage * extraDamage;
     }
 }

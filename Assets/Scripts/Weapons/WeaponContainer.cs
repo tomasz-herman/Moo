@@ -5,16 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public struct WeaponData
-{
-    public WeaponType type;
-    public Sprite image;
-    public Color color;
-}
-
 [CreateAssetMenu(fileName = "WeaponContainer", menuName = "ScriptableObjects/WeaponContainer")]
-public class WeaponContainer: ScriptableObject
+public class WeaponContainer : ScriptableObject
 {
     public List<WeaponData> Weapons;
 
@@ -28,6 +20,14 @@ public class WeaponContainer: ScriptableObject
             return mapping[type];
         }
     }
+}
+
+[Serializable]
+public struct WeaponData
+{
+    public WeaponType type;
+    public Sprite image;
+    public Color color;
 }
 
 public enum WeaponType { MachineGun, Shotgun, Pistol, Sword, GrenadeLauncher };
