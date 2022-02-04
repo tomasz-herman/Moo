@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class Health : Entity
 {
-    [SerializeField] int minHealth;
-    [SerializeField] int maxHealth;
-    private float remainingHealth;
+    [HideInInspector] public float remainingHealth;
     public GameObject FloatingTextPrefab;
     private new Camera camera;
     
@@ -16,11 +14,6 @@ public class Health : Entity
     {
         camera = Camera.main;
         transform.Rotate(0, Utils.FloatBetween(0, 360), 0);
-    }
-
-    private void Awake()
-    {
-        remainingHealth = Utils.NumberBetween(minHealth, maxHealth);
     }
 
     private void Update()

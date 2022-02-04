@@ -440,27 +440,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 584923067921654789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d5a622310e89ff438d349b990cc2744, type: 3}
+  m_Script: {fileID: 11500000, guid: 1383970d6a8c4df418bcf84cef661085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsForKill: 25
   healthSystem: {fileID: 0}
   dropSystem: {fileID: 0}
   KillEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   Sound:
     SoundType: 0
     PlaybackSettings:
@@ -478,6 +465,9 @@ MonoBehaviour:
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
+  shooting: {fileID: 0}
+  movementSpeed: 0
+  pointsForKill: 0
 --- !u!114 &3193863609078801253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,10 +483,14 @@ MonoBehaviour:
   ammoPrefab: {fileID: 769122989822789483, guid: 5bc2290714847f84fac8cc2a559c597b, type: 3}
   healthPrefab: {fileID: 709617650000426603, guid: 34fc7f2e75e36af4cb55dc1e5420a55d, type: 3}
   dropItem: {fileID: 1207376928025762238, guid: 3929c05bbbdd6c242add540fb2f619fd, type: 3}
-  dropUpgradeChance: 0.01
-  dropAmmoChance: 0.3
-  dropHealthChance: 0.2
-  drops: 1
+  upgradeDropCount: 0
+  upgradeDropChance: 0
+  healthDropChance: 0
+  minHealth: 0
+  maxHealth: 0
+  ammoDropChance: 0
+  minAmmo: 0
+  maxAmmo: 0
 --- !u!114 &5250545107766033320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,12 +517,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 25
-  movementSpeed: 1
-  damageMultiplier: 0.6
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
-  weaponAI: 0
+  weapon: 2
 --- !u!114 &7777235469271342937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,9 +537,9 @@ MonoBehaviour:
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  projectileSpeed: 5
-  triggerTimeout: 3
-  weaponDamage: 1
+  projectileSpeedMultiplier: 1
+  triggerTimeoutMultiplier: 1
+  weaponDamageMultiplier: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &-1757155267967381844

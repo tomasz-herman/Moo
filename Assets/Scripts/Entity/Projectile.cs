@@ -9,7 +9,7 @@ public class Projectile : ProjectileBase
     public float Emission = 6;
 
     protected override float baseDamage => 10f;
-    protected float extraDamage = 0;
+    protected float extraDamage = 1;
 
     protected override void Start()
     {

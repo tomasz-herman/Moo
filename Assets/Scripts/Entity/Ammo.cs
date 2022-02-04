@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Ammo : Entity
 {
-    [SerializeField] int minAmmo;
-    [SerializeField] int maxAmmo;
-    private int remainingAmmo;
+    [HideInInspector] public int remainingAmmo;
     public GameObject FloatingTextPrefab;
     private new Camera camera;
 
@@ -15,11 +13,6 @@ public class Ammo : Entity
     {
         camera = Camera.main;
         transform.Rotate(0, Utils.FloatBetween(0, 360), 0);
-    }
-    
-    private void Awake()
-    {
-        remainingAmmo = Utils.NumberBetween(minAmmo, maxAmmo);
     }
     
     private void Update()

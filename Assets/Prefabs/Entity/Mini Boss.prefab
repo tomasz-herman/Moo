@@ -440,27 +440,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 584923067921654789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d5a622310e89ff438d349b990cc2744, type: 3}
+  m_Script: {fileID: 11500000, guid: c9afb5bf07426b9489f161f47caf01db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsForKill: 1000
   healthSystem: {fileID: 0}
   dropSystem: {fileID: 0}
   KillEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   Sound:
     SoundType: 0
     PlaybackSettings:
@@ -478,6 +465,9 @@ MonoBehaviour:
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
+  shooting: {fileID: 0}
+  movementSpeed: 0
+  pointsForKill: 0
 --- !u!114 &5250545107766033320
 MonoBehaviour:
   m_ObjectHideFlags: 0
