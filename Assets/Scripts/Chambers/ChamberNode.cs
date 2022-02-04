@@ -136,4 +136,24 @@ public class ChamberNode
             ChamberControl.SetBlocadeActive(ParentDirection, false);
 
     }
+    private void ChamberClearedHandler()
+    {
+        Parent.ChamberControl.SetClearedPathColor(Directions.GetOpposite(ParentDirection));
+        Parent.ChamberControl.SetDefaultPathsColors();
+        ChamberControl.SetClearedPathColor(ParentDirection);
+    }
+
+    public void ActivateClearedHandler()
+    {
+        ChamberControl.AddAllEnemiesKilledListener(ChamberClearedHandler);
+    }
+
+    public void ActivateNode(ChamberControl control)
+    {
+        ChamberControl = control;
+        ChamberControl.node = this;
+        CreateBlocades();
+        SetColors();
+        ActivateClearedHandler();
+    }
 }

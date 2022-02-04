@@ -150,10 +150,7 @@ public class SpawnScript : MonoBehaviour
                 break;
         }
         newRoom.transform.position = new Vector3(root.Location.x * ChamberSize, 0, root.Location.y * ChamberSize);
-        root.ChamberControl = newRoom.GetComponent<ChamberControl>();
-        root.ChamberControl.node = root;
-        root.CreateBlocades();
-        root.SetColors();
+        root.ActivateNode(newRoom.GetComponent<ChamberControl>());
 
         foreach (var item in root.Children())
             BuildChambersRec(item);

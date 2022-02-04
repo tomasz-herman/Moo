@@ -43,7 +43,7 @@ namespace Assets.Scripts.SoundManager
                 IsInside = false;
 
                 Audio.Pause();
-                GameWorld.BackgroundMusicManager.UnPause();
+                GameWorld.IdleMusicManager.UnPause();
             }
             else if (ColliderCount > 0 && !IsInside)
             {
@@ -58,7 +58,7 @@ namespace Assets.Scripts.SoundManager
                     Audio.UnPause();
                 }
 
-                GameWorld.BackgroundMusicManager.Pause();
+                GameWorld.IdleMusicManager.Pause();
             }
         }
     }

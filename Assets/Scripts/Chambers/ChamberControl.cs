@@ -26,7 +26,7 @@ public class ChamberControl : Entity
 
     private void Start()
     {
-        enemySpawner.AllEnemiesKilled.AddListener(AllEnemiesKilledHandler);
+        AddAllEnemiesKilledListener(AllEnemiesKilledHandler);
     }
 
     private void OnDestroy()
@@ -59,6 +59,8 @@ public class ChamberControl : Entity
             Enemy boss = enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
             if (boss != null)
                 GameWorld.userInterface.hud.bossBar.TrackedEnemy = boss;
+            GameWorld.FightMusicManager.Play();
+            GameWorld.IdleMusicManager.Stop(true);
         }
     }
 
@@ -93,6 +95,14 @@ public class ChamberControl : Entity
         }
     }
 
+    public void SetClearedPathColor(Direction direction)
+    {
+        if (segments.ContainsKey(direction))
+        {
+            symbol.materials[direction] = PathMaterials.GetMaterialFromType(PathTypes.Cleared);
+        }
+    }
+
     protected enum States { PreFight, Fight, Cleared }
 
     public bool IsCleared()
@@ -111,6 +121,8 @@ public class ChamberControl : Entity
     private void AllEnemiesKilledHandler()
     {
         SetDefaultPathsColors();
+        GameWorld.FightMusicManager.Stop(true);
+        GameWorld.IdleMusicManager.Play();
         State = States.Cleared;
     }
 

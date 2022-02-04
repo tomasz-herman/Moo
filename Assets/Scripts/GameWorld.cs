@@ -8,12 +8,13 @@ public class GameWorld : MonoBehaviour
     public UserInterface userInterface;
     public Timer timer;
     public AudioManager audioManager;
-    public BackgroundMusicManager BackgroundMusicManager;
+    public BackgroundMusicManager FightMusicManager;
+    public BackgroundMusicManager IdleMusicManager;
 
     void Start()
     {
         timer.SetTicking(true);
-        BackgroundMusicManager?.Play();
+        IdleMusicManager?.Play();
     }
 
     private void Update()
