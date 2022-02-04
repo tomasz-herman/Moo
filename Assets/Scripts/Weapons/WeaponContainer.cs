@@ -26,8 +26,13 @@ public class WeaponContainer : ScriptableObject
 public struct WeaponData
 {
     public WeaponType type;
+    public string name;
     public Sprite image;
     public Color color;
+    public float projectileSpeed;
+    public float triggerTimeout;
+    public float damage;
+    public int ammoConsumption;
 }
 
 public enum WeaponType { MachineGun, Shotgun, Pistol, Sword, GrenadeLauncher };

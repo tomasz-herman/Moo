@@ -14,17 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapons:
   - type: 0
+    name: Machine Gun
     image: {fileID: 21300000, guid: f5545b59e70fa8b4e8c1bf8dc37efe10, type: 3}
     color: {r: 0.21048418, g: 0.2780194, b: 0.8113208, a: 0}
+    projectileSpeed: 15
+    triggerTimeout: 0.2
+    damage: 0.85
+    ammoConsumption: 1
   - type: 1
+    name: Shotgun
     image: {fileID: 21300000, guid: df8e719dcb5260547b6446fb47026d2b, type: 3}
     color: {r: 0.7655286, g: 0.8018868, b: 0.11725702, a: 0}
+    projectileSpeed: 30
+    triggerTimeout: 2
+    damage: 0.75
+    ammoConsumption: 5
   - type: 2
+    name: Pistol
     image: {fileID: 21300000, guid: edecf7af29726fb4193264bb53f33d37, type: 3}
     color: {r: 0.8773585, g: 0.2145177, b: 0.053800307, a: 0}
+    projectileSpeed: 10
+    triggerTimeout: 0.5
+    damage: 1
+    ammoConsumption: 1
   - type: 3
+    name: Sword
     image: {fileID: 21300000, guid: 630766c922ba6c346a0b4f355cf7dd73, type: 3}
     color: {r: 0.1653443, g: 0.6886792, b: 0.08770915, a: 0}
+    projectileSpeed: 30
+    triggerTimeout: 1
+    damage: 1
+    ammoConsumption: 0
   - type: 4
+    name: Grenade Launcher
     image: {fileID: 21300000, guid: 29647c9c64c787346bd1d74f518cb760, type: 3}
     color: {r: 0.9056604, g: 0.06407974, b: 0.4887771, a: 0}
+    projectileSpeed: 20
+    triggerTimeout: 3
+    damage: 12
+    ammoConsumption: 8
