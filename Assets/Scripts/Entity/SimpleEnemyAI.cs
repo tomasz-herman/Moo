@@ -41,9 +41,9 @@ public class SimpleEnemyAI : MonoBehaviour
     protected void Update()
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
-        shooting.triggerTimeoutMultiplier = weaponAIProperties.TriggerTimeoutMultiplier;
-        shooting.weaponDamageMultiplier = weaponAIProperties.DamageMultiplier;
-        shooting.projectileSpeedMultiplier = weaponAIProperties.ProjectileSpeedMultiplier;
+        shooting.triggerTimeoutMultiplier = enemy.data.BaseTriggerTimeoutMultiplier * weaponAIProperties.TriggerTimeoutMultiplier;
+        shooting.weaponDamageMultiplier = enemy.data.BaseDamageMultiplier * weaponAIProperties.DamageMultiplier;
+        shooting.projectileSpeedMultiplier = enemy.data.BaseProjectileSpeedMultiplier * weaponAIProperties.ProjectileSpeedMultiplier;
 
         var position = transform.position;
         var playerPosition = player.position;
