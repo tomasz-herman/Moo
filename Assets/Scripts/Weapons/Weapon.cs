@@ -57,12 +57,13 @@ namespace Assets.Scripts.Weapons
 
         public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeoutMultiplier * basetriggerTimeout);
+            float triggerTimeout = shooting.GetTriggerTimeout(WeaponType);
+            int dischargeCount = trigger.PullTrigger(triggerTimeout);
             for (int i = 0; i < dischargeCount; i++)
             {
                 if (ammoSystem.Ammo >= baseAmmoConsumption)
                 {
-                    WeaponShoot?.Invoke(this, (basetriggerTimeout, Name));
+                    WeaponShoot?.Invoke(this, (triggerTimeout, Name));
                     Shoot(shooter, position, direction, shooting);
                     PlayGunfireSound(position);
                     ammoSystem.Ammo -= baseAmmoConsumption;

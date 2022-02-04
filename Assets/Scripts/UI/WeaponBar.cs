@@ -92,31 +92,31 @@ public class WeaponBar : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 PistolCooldown = true;
                 PistolRemainingTime = 0;
-                PistolTimeout = args.Timeout * shooting.GetTriggerTimeout(WeaponType.Pistol);
+                PistolTimeout = args.Timeout;
                 break;
             case "Shotgun":
                 overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 ShotgunCooldown = true;
                 ShotgunRemainingTime = 0;
-                ShotgunTimeout = args.Timeout * shooting.GetTriggerTimeout(WeaponType.Shotgun);
+                ShotgunTimeout = args.Timeout;
                 break;
             case "MachineGun":
                 overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 MachineCooldown = true;
                 MachineRemainingTime = 0;
-                MachineTimeout = args.Timeout * shooting.GetTriggerTimeout(WeaponType.MachineGun);
+                MachineTimeout = args.Timeout;
                 break;
             case "GrenadeLauncher":
                 overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 LauncherCooldown = true;
                 LauncherRemaningTime = 0;
-                LauncherTimeout = args.Timeout * shooting.GetTriggerTimeout(WeaponType.GrenadeLauncher);
+                LauncherTimeout = args.Timeout;
                 break;
             case "Sword":
                 overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 SwordCooldown = true;
                 SwordRemaningTime = 0;
-                SwordTimeout = args.Timeout * shooting.GetTriggerTimeout(WeaponType.Sword);
+                SwordTimeout = args.Timeout;
                 break;
         }
         
