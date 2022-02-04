@@ -15,15 +15,22 @@ public class DropSystem : MonoBehaviour
     [SerializeField] float dropUpgradeChance;
     [SerializeField] float dropAmmoChance;
     [SerializeField] float dropHealthChance;
+
+    [SerializeField] int drops = 1;
+
     public void Drop()
     {
-        var rand = Utils.FloatBetween(0, 1);
-        if (rand <= dropUpgradeChance)
-            Instantiate(dropItem, transform.position, transform.rotation);
-        else if (rand <= dropUpgradeChance + dropAmmoChance)
-            Instantiate(ammoPrefab, transform.position, transform.rotation);
-        else if (rand <= dropUpgradeChance + dropAmmoChance + dropHealthChance)
-            Instantiate(healthPrefab, transform.position, transform.rotation);
+        for (int i = 0; i < drops; i++)
+        {
+            var rand = Utils.FloatBetween(0, 1);
+            if (rand <= dropUpgradeChance)
+                Instantiate(dropItem, transform.position, transform.rotation);
+            else if (rand <= dropUpgradeChance + dropAmmoChance)
+                Instantiate(ammoPrefab, transform.position, transform.rotation);
+            else if (rand <= dropUpgradeChance + dropAmmoChance + dropHealthChance)
+                Instantiate(healthPrefab, transform.position, transform.rotation);
+        }
+        
     }
 }
 

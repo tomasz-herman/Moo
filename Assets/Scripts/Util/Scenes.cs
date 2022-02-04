@@ -6,4 +6,5 @@ public static class Scenes
 {
     public static readonly string MainMenu = "MainMenu";
     public static readonly string Game = "SampleScene";
+    public static readonly string ChamersTest = "ChamersTest";
 }

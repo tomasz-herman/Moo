@@ -7,7 +7,8 @@ using UnityEngine;
 public class AnimationStateController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    Animator animation;
+
+    new Animator animation;
     // Start is called before the first frame update
     void Start()
     {

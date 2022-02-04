@@ -186,7 +186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_AnchoredPosition: {x: 0, y: 3.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1694686141443280994
@@ -312,8 +312,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584923066955293290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 0.75, y: 3, z: 0.75}
   m_Children: []
   m_Father: {fileID: 7777814994972377666}
   m_RootOrder: 0
@@ -378,15 +378,15 @@ GameObject:
   - component: {fileID: 7777814994972377666}
   - component: {fileID: 584923067921654840}
   - component: {fileID: 584923067921654791}
-  - component: {fileID: 3193863609078801253}
   - component: {fileID: 5250545107766033320}
-  - component: {fileID: 2180566402683429793}
+  - component: {fileID: 5700105132958274062}
   - component: {fileID: 7777235469271342937}
   - component: {fileID: -1757155267967381844}
   - component: {fileID: 2753961696640401444}
   - component: {fileID: 717185852922523951}
+  - component: {fileID: 9216024674240050861}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Mini Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,13 +424,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.3
+  m_Height: 3
+  m_Radius: 0.75
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &584923067921654791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5a622310e89ff438d349b990cc2744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsForKill: 25
+  pointsForKill: 1000
   healthSystem: {fileID: 0}
   dropSystem: {fileID: 0}
   KillEvent:
@@ -461,25 +461,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3193863609078801253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584923067921654789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65765d6d98010e445a4ff74d7e877edf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoPrefab: {fileID: 769122989822789483, guid: 5bc2290714847f84fac8cc2a559c597b, type: 3}
-  healthPrefab: {fileID: 709617650000426603, guid: 34fc7f2e75e36af4cb55dc1e5420a55d, type: 3}
-  dropItem: {fileID: 1207376928025762238, guid: 3929c05bbbdd6c242add540fb2f619fd, type: 3}
-  dropUpgradeChance: 0.01
-  dropAmmoChance: 0.3
-  dropHealthChance: 0.2
-  drops: 1
 --- !u!114 &5250545107766033320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 0.1
---- !u!114 &2180566402683429793
+--- !u!114 &5700105132958274062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,7 +483,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 584923067921654789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f7ddffc188d6d72ac426c1cb4592c2, type: 3}
+  m_Script: {fileID: 11500000, guid: a0793b9423da6e9ceb32af26fc88a59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 25
@@ -511,6 +492,7 @@ MonoBehaviour:
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
   weaponAI: 0
+  phases: 1
 --- !u!114 &7777235469271342937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e99fa591a7f37041a36bdbe8b039a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultHealth: 100
+  defaultHealth: 1000
 --- !u!114 &717185852922523951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +555,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 2753961696640401444}
   healthSlider: {fileID: 8807149380131699349}
+--- !u!114 &9216024674240050861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584923067921654789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65765d6d98010e445a4ff74d7e877edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 769122989822789483, guid: 5bc2290714847f84fac8cc2a559c597b, type: 3}
+  healthPrefab: {fileID: 709617650000426603, guid: 34fc7f2e75e36af4cb55dc1e5420a55d, type: 3}
+  dropItem: {fileID: 1207376928025762238, guid: 3929c05bbbdd6c242add540fb2f619fd, type: 3}
+  dropUpgradeChance: 1
+  dropAmmoChance: 0
+  dropHealthChance: 0
+  drops: 1
 --- !u!1 &1653182828857183468
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +646,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 320, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8807149380131699349
 MonoBehaviour:
