@@ -9,9 +9,13 @@ public class PlayerShooting : MonoBehaviour
 
     private bool leftClicked = false;
 
+    private GameObject gun;
+
     void Start()
     {
         shooting = GetComponent<Shooting>();
+
+        gun = GameObject.Find("Gun");
     }
 
     void Update()
@@ -23,7 +27,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (leftClicked)
         {
-            shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
+            shooting.TryShoot(gameObject, gun.transform.position, gameObject.transform.forward);
         }
 
         if (Input.mouseScrollDelta.y > 0) shooting.NextWeapon();
