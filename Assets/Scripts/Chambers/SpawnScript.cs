@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] public float ChamberSize = 60;
-    [SerializeField] int NumberOfOptionalChambers = 10;
+    [SerializeField] int NumberOfOptionalChambersBeforeBoss = 5;
     [SerializeField] int NumberOfBossChambers = 3;
     [SerializeField] int NumbersOfChambersBeforeBoss = 2;
     [SerializeField] int NumberOfTryBeforeOnlyForwardMode = 3;
@@ -20,14 +20,16 @@ public class SpawnScript : MonoBehaviour
 
     private Dictionary<Vector2Int, ChamberType> taken = new Dictionary<Vector2Int, ChamberType>();
     private int remaining;
-    private bool OnlyForward = true;
+    private bool OnlyForward = false;
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
     private float optionalSpawnFloat = 0;
+    private int InfiniteLoopCheck = 0;
 
     private void Awake()
     {
         optionalSpawnFloat = 1 - (float)OptionalChamberSpawnPossibilityPercent / 100;
+        InfiniteLoopCheck = (NumberOfBossChambers * NumbersOfChambersBeforeBoss + NumberOfBossChambers * NumberOfOptionalChambersBeforeBoss + NumberOfBossChambers + 1); // this is not any concrete boundary but big enough number to check this
         LoadChamberPrefabs();
     }
 
@@ -82,39 +84,52 @@ public class SpawnScript : MonoBehaviour
 
             currentNode = chambersTreeRoot;
             tempNode = null;
+            remaining = 0;
+            int safetyCheck = 0;
             while (currentNode != null)
             {
-                if (currentNode.Type == ChamberType.Normal)
-                    FindOptionalFromNode(currentNode);
-
-                tempNode = null;
-                foreach (var item in currentNode.Children())
-                    tempNode = item;
-                currentNode = tempNode;
-            }
-
-            remaining = NumberOfOptionalChambers;
-            while (remaining > 0)
-            {
-                var tempOptionals = possibleOptional.OrderBy(x => Utils.RandomNumber()).ToList();
-
-                foreach (var item in tempOptionals)
+                if (remaining <= 0)
                 {
-                    if (remaining <= 0)
-                        break;
-                    if (!taken.ContainsKey(moveFromDirection(item.node.Location, item.direction)))
-                        if (Random.value >= optionalSpawnFloat)
-                        {
-                            var newChamber = item.node.CreateChild(ChamberType.Optional, item.direction);
-                            taken.Add(newChamber.Location, newChamber.Type);
-                            remaining--;
-                            FindOptionalFromNode(newChamber);
-                        }
-                    possibleOptional.Remove(item);
-                }
+                    if (currentNode.Type == ChamberType.Start || currentNode.Type == ChamberType.Boss)
+                        remaining = NumberOfOptionalChambersBeforeBoss;
+                    tempNode = null;
+                    foreach (var item in currentNode.Children())
+                        if (item.Type != ChamberType.Optional)
+                            tempNode = item;
+                    currentNode = tempNode;
 
-                if (remaining > 0 && possibleOptional.Count == 0)
-                    FindOptionalPositionsRec(chambersTreeRoot);
+                    if (remaining > 0 && currentNode != null)
+                    {
+                        possibleOptional.Clear();
+                        FindOptionalPositionsRec(currentNode);
+                        safetyCheck = 0;
+                    }
+                }
+                else
+                {
+                    var tempOptionals = possibleOptional.OrderBy(x => Utils.RandomNumber()).ToList();
+
+                    foreach (var item in tempOptionals)
+                    {
+                        if (remaining <= 0)
+                            break;
+                        if (!taken.ContainsKey(moveFromDirection(item.node.Location, item.direction)))
+                            if (Random.value >= optionalSpawnFloat)
+                            {
+                                var newChamber = item.node.CreateChild(ChamberType.Optional, item.direction);
+                                taken.Add(newChamber.Location, newChamber.Type);
+                                remaining--;
+                                FindOptionalFromNode(newChamber);
+                            }
+                        possibleOptional.Remove(item);
+                    }
+
+                    if (remaining > 0 && possibleOptional.Count == 0)
+                        FindOptionalPositionsRec(currentNode);
+                    safetyCheck++;
+                    if (safetyCheck > InfiniteLoopCheck)
+                        throw new System.Exception("Infinite Loop"); // Highly improbable but this happened to me once so this stays :)
+                }
             }
 
             return true;
@@ -233,6 +248,8 @@ public class SpawnScript : MonoBehaviour
             case ChamberType.Optional:
                 FindOptionalFromNode(root);
                 break;
+            case ChamberType.Boss:
+                return;
             default:
                 break;
         }
