@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    private EnemyData data;
+    public EnemyData data;
 
     [HideInInspector] public HealthSystem healthSystem;
     [HideInInspector] public DropSystem dropSystem;

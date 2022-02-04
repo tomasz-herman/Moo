@@ -14,7 +14,7 @@ public class Blade : ProjectileBase
     public Color color;
     public float Emission = 6;
     protected override float baseDamage => 30f;
-    private float extraDamage = 0;
+    private float extraDamage = 1;
 
     private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
@@ -58,7 +58,7 @@ public class Blade : ProjectileBase
             Entity entity = other.GetComponent<Entity>();
             if(entity != null && !hitEntities.Contains(entity))
             {
-                ApplyDamage(other, baseDamage + extraDamage);
+                ApplyDamage(other, baseDamage * extraDamage);
                 hitEntities.Add(entity);
             }
         }
