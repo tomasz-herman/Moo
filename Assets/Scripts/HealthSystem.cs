@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float defaultHealth = 100f;
+    [HideInInspector] public float defaultHealth = 100f;
     private float health, maxHealth;
     public float Health
     {

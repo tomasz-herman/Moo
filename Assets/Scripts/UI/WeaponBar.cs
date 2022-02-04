@@ -92,31 +92,31 @@ public class WeaponBar : MonoBehaviour
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 PistolCooldown = true;
                 PistolRemainingTime = 0;
-                PistolTimeout = args.Timeout * shooting.triggerTimeout;
+                PistolTimeout = args.Timeout * shooting.Pistol.triggerTimeout;
                 break;
             case "Shotgun":
                 overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 ShotgunCooldown = true;
                 ShotgunRemainingTime = 0;
-                ShotgunTimeout = args.Timeout * shooting.triggerTimeout;
+                ShotgunTimeout = args.Timeout * shooting.Shotgun.triggerTimeout;
                 break;
             case "MachineGun":
                 overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 MachineCooldown = true;
                 MachineRemainingTime = 0;
-                MachineTimeout = args.Timeout * shooting.triggerTimeout;
+                MachineTimeout = args.Timeout * shooting.MachineGun.triggerTimeout;
                 break;
             case "GrenadeLauncher":
                 overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 LauncherCooldown = true;
                 LauncherRemaningTime = 0;
-                LauncherTimeout = args.Timeout * shooting.triggerTimeout;
+                LauncherTimeout = args.Timeout * shooting.GrenadeLauncher.triggerTimeout;
                 break;
             case "Sword":
                 overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 SwordCooldown = true;
                 SwordRemaningTime = 0;
-                SwordTimeout = args.Timeout * shooting.triggerTimeout;
+                SwordTimeout = args.Timeout * shooting.Sword.triggerTimeout;
                 break;
         }
         

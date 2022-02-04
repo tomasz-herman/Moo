@@ -22,11 +22,12 @@ public class UpgradeSystem : MonoBehaviour
         upgradesProvider = GetComponent<UpgradesProvider>();
     }
 
-    public void AddUpgrade()
+    public void AddUpgrade(int upgradeCount = 1)
     {
-        pendingUpgrades++;
+        bool wasZero = pendingUpgrades == 0;
+        pendingUpgrades += upgradeCount;
         upgradeWindow.Recalculate();
-        if(pendingUpgrades == 1)
+        if(wasZero)
             upgradeWindow.Open();
     }
 

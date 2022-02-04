@@ -1,6 +1,7 @@
 using System;
 using Assets.Scripts.Weapons;
 using UnityEngine;
+using Weapons;
 using Random = UnityEngine.Random;
 
 public class SimpleEnemyAI : MonoBehaviour
@@ -12,17 +13,16 @@ public class SimpleEnemyAI : MonoBehaviour
     public float sightRange;
     private bool playerInAttackRange, playerInSight, playerInPrefferedRange;
     
-    public float movementSpeed = 1f;
-    public float damageMultiplier = 1f;
     public Vector3 movementDirection;
     public float remainingMovementTime = 0;
     
     private Shooting shooting;
     public AmmoSystem ammoSystem;
     protected HealthSystem healthSystem;
-    public WeaponAI weaponAI;
+    public WeaponType weapon;
     protected WeaponAIProperties weaponAIProperties;
     private Vector3 lastPlayerPosition;
+    protected Enemy enemy;
 
 
     protected void Start()
@@ -32,17 +32,18 @@ public class SimpleEnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         shooting = GetComponent<Shooting>();
         ammoSystem = GetComponent<AmmoSystem>();
+        enemy = GetComponent<Enemy>();
         shooting.ammoSystem = ammoSystem;
-        weaponAIProperties = WeaponAIProperties.Get(weaponAI);
+        weaponAIProperties = ApplicationData.WeaponAIData[weapon];
         lastPlayerPosition = player.position;
     }
 
     protected void Update()
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
-        shooting.triggerTimeout = weaponAIProperties.Timeout;
-        shooting.projectileSpeed = weaponAIProperties.ProjectileSpeed;
-        shooting.weaponDamage = weaponAIProperties.BonusDamage * damageMultiplier;
+        shooting.triggerTimeoutMultiplier = enemy.data.BaseTriggerTimeoutMultiplier * weaponAIProperties.TriggerTimeoutMultiplier;
+        shooting.weaponDamageMultiplier = enemy.data.BaseDamageMultiplier * weaponAIProperties.DamageMultiplier;
+        shooting.projectileSpeedMultiplier = enemy.data.BaseProjectileSpeedMultiplier * weaponAIProperties.ProjectileSpeedMultiplier;
 
         var position = transform.position;
         var playerPosition = player.position;
@@ -69,14 +70,14 @@ public class SimpleEnemyAI : MonoBehaviour
             remainingMovementTime = Random.Range(2, 8);
         }
         
-        characterController.Move(movementDirection * Time.deltaTime * movementSpeed);
+        characterController.Move(movementDirection * Time.deltaTime * enemy.movementSpeed);
         remainingMovementTime -= Time.deltaTime;
     }
 
     private void Chase()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * (Time.deltaTime * movementSpeed * weaponAIProperties.BonusMovementSpeed));
+        characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
     }
 
     private void Attack()
