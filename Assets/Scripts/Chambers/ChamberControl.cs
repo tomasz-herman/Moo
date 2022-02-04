@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 public class ChamberControl : Entity
@@ -59,8 +59,8 @@ public class ChamberControl : Entity
             Enemy boss = enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
             if (boss != null)
                 GameWorld.userInterface.hud.bossBar.TrackedEnemy = boss;
-            GameWorld.FightMusicManager.Play();
-            GameWorld.IdleMusicManager.Stop(true);
+
+            BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.FightMusicManager, GameWorld.IdleMusicManager);
         }
     }
 
@@ -121,8 +121,7 @@ public class ChamberControl : Entity
     private void AllEnemiesKilledHandler()
     {
         SetDefaultPathsColors();
-        GameWorld.FightMusicManager.Stop(true);
-        GameWorld.IdleMusicManager.Play();
+        BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.IdleMusicManager, GameWorld.FightMusicManager);
         State = States.Cleared;
     }
 

@@ -15,6 +15,8 @@ public class GameWorld : MonoBehaviour
     {
         timer.SetTicking(true);
         IdleMusicManager?.Play();
+
+        audioManager = AudioManager.Instance;
     }
 
     private void Update()
