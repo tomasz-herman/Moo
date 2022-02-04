@@ -15,8 +15,7 @@ namespace Assets.Scripts.Weapons
         public int baseAmmoConsumption { get; set; }
         public Color color { get; set; }
 
-        //public EventHandler<float> WeaponShoot;
-        public EventHandler<(float timeout, WeaponType type)> WeaponShoot;
+        public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
 
         public Audio Audio { get; protected set; }
