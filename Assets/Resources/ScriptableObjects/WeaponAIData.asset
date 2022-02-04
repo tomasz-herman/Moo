@@ -12,4 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf976abdc3847b3ae6fadd96c3f88bc, type: 3}
   m_Name: WeaponAIData
   m_EditorClassIdentifier: 
-  Data: []
+  Data:
+  - Type: 2
+    PreferredRange: 7.5
+    MaximumRange: 40
+    TriggerTimeoutMultiplier: 1
+    ProjectileSpeedMultiplier: 1
+    DamageMultiplier: 0.65
+    MovementSpeedMultiplier: 1
+  - Type: 3
+    PreferredRange: 1.5
+    MaximumRange: 3
+    TriggerTimeoutMultiplier: 1
+    ProjectileSpeedMultiplier: 1
+    DamageMultiplier: 0.5
+    MovementSpeedMultiplier: 2.5
+  - Type: 4
+    PreferredRange: 15
+    MaximumRange: 25
+    TriggerTimeoutMultiplier: 0.5
+    ProjectileSpeedMultiplier: 2
+    DamageMultiplier: 0.75
+    MovementSpeedMultiplier: 1
+  - Type: 0
+    PreferredRange: 15
+    MaximumRange: 40
+    TriggerTimeoutMultiplier: 1
+    ProjectileSpeedMultiplier: 0.8
+    DamageMultiplier: 0.35
+    MovementSpeedMultiplier: 1
+  - Type: 1
+    PreferredRange: 2
+    MaximumRange: 16
+    TriggerTimeoutMultiplier: 0.75
+    ProjectileSpeedMultiplier: 0.8
+    DamageMultiplier: 2
+    MovementSpeedMultiplier: 1
