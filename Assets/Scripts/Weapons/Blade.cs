@@ -15,7 +15,8 @@ public class Blade : ProjectileBase
     public float Emission = 6;
     protected override float baseDamage => 30f;
     private float extraDamage = 1;
-
+    private float length;
+    private Vector3 ownerToBlade;
     private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
     protected override void Start()
@@ -24,6 +25,13 @@ public class Blade : ProjectileBase
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
         base.Start();
+
+        UpdateTransform();
+    }
+
+    protected void Awake()
+    {
+        length = GetComponent<BoxCollider>().transform.localScale.z;
     }
 
     protected override void Update()
@@ -32,11 +40,11 @@ public class Blade : ProjectileBase
 
         var dangle = speed * basicSpeed * Time.deltaTime;
         angle += dangle;
+
+        UpdateTransform();
+
         if (angle > stopAngle)
             Destroy(gameObject);
-
-        transform.localPosition = Quaternion.Euler(0, dangle, 0) * transform.localPosition;
-        SetRotation();
     }
 
     public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
@@ -47,8 +55,8 @@ public class Blade : ProjectileBase
         this.extraDamage = extradamage;
 
         transform.SetParent(owner.transform);
-        transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
-        SetRotation();
+        ownerToBlade = new Vector3(0, transform.localPosition.y, length / 2);
+        UpdateTransform();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -63,11 +71,11 @@ public class Blade : ProjectileBase
             }
         }
     }
-    private void SetRotation()
+    private void UpdateTransform()
     {
-        var direction = 2 * transform.position - Owner.transform.position;
-        direction.y = transform.position.y;
-        transform.LookAt(direction);
+        Quaternion rotation = Quaternion.Euler(0, -angle, 0);
+        transform.localRotation = rotation;
+        transform.localPosition = rotation * ownerToBlade;
     }
 
 }
