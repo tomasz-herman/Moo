@@ -12,7 +12,6 @@ public class Blade : ProjectileBase
     private float speed;
 
     public float Emission = 6;
-    protected override float baseDamage => 30f;
     private float extraDamage = 1;
     private float length;
     private Vector3 ownerToBlade;
@@ -46,12 +45,11 @@ public class Blade : ProjectileBase
             Destroy(gameObject);
     }
 
-    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
+    public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
     {
-        this.Owner = owner;
+        Launch(owner, damage);
         this.speed = speed;
         this.angle = startAngle;
-        this.extraDamage = extradamage;
 
         transform.SetParent(owner.transform);
         ownerToBlade = new Vector3(0, transform.localPosition.y, length / 2);
@@ -65,7 +63,7 @@ public class Blade : ProjectileBase
             Entity entity = other.GetComponent<Entity>();
             if(entity != null && !hitEntities.Contains(entity))
             {
-                ApplyDamage(other, baseDamage * extraDamage);
+                ApplyDamage(other, damage);
 
                 bool raycastSuccess = false;
                 foreach(var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2*length))

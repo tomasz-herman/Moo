@@ -21,7 +21,7 @@ namespace Assets.Scripts.Weapons
 
         private float _elapsedTime = 0f;
 
-        protected abstract float baseDamage { get; }
+        public float damage = 1;
 
         protected virtual void Start()
         {
@@ -34,6 +34,12 @@ namespace Assets.Scripts.Weapons
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime > TimeToLive)
                 Destroy(gameObject);
+        }
+
+        protected virtual void Launch(GameObject owner, float damage)
+        {
+            Owner = owner;
+            this.damage = damage;
         }
 
         public void ApplyDamage(Collider other, float damage)

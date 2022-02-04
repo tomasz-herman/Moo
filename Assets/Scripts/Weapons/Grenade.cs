@@ -12,9 +12,6 @@ public class Grenade : ProjectileBase
     private float damageDecay = 7f; // how many times damage drops on the edge of explosionRange
     private bool isExplosing = false;
 
-    protected override float baseDamage => 50f;
-    private float extraDamage = 0;
-
     protected override void Start()
     {
         //TODO: move this to inspector when weapon will allow that
@@ -60,8 +57,8 @@ public class Grenade : ProjectileBase
             }
 
             var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
-            var damage = (baseDamage + extraDamage) / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
-            ApplyDamage(other, damage);
+            var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
+            ApplyDamage(other, dmg);
         }
     }
 
@@ -72,8 +69,7 @@ public class Grenade : ProjectileBase
 
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
-        this.Owner = owner;
-        extraDamage = extradamage;
+        Launch(owner, extradamage);
         GetComponent<Rigidbody>().velocity = velocity;
         gameObject.transform.LookAt(transform.position + velocity);
     }
