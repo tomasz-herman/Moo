@@ -83,36 +83,36 @@ public class WeaponBar : MonoBehaviour
         }
 
     }
-    void UpdateSprite(object sender, (float Timeout, string nazwa) args)
+    void UpdateSprite(object sender, (float Timeout, WeaponType type) args)
     {
         
-        switch (args.nazwa)
+        switch (args.type)
         {
-            case "Pistol":
+            case WeaponType.Pistol:
                 overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 PistolCooldown = true;
                 PistolRemainingTime = 0;
                 PistolTimeout = args.Timeout;
                 break;
-            case "Shotgun":
+            case WeaponType.Shotgun:
                 overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 ShotgunCooldown = true;
                 ShotgunRemainingTime = 0;
                 ShotgunTimeout = args.Timeout;
                 break;
-            case "MachineGun":
+            case WeaponType.MachineGun:
                 overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 MachineCooldown = true;
                 MachineRemainingTime = 0;
                 MachineTimeout = args.Timeout;
                 break;
-            case "GrenadeLauncher":
+            case WeaponType.GrenadeLauncher:
                 overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 LauncherCooldown = true;
                 LauncherRemaningTime = 0;
                 LauncherTimeout = args.Timeout;
                 break;
-            case "Sword":
+            case WeaponType.Sword:
                 overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
                 SwordCooldown = true;
                 SwordRemaningTime = 0;
