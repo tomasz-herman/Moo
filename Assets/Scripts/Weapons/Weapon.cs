@@ -15,7 +15,7 @@ namespace Assets.Scripts.Weapons
         protected abstract int ammoConsumption { get; }
 
         //public EventHandler<float> WeaponShoot;
-        public EventHandler<(float timeout, string name)> WeaponShoot;
+        public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
 
         public Audio Audio { get; protected set; }
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Weapons
             {
                 if (ammoSystem.Ammo >= ammoConsumption)
                 {
-                    WeaponShoot?.Invoke(this, (triggerTimeout, Name));
+                    WeaponShoot?.Invoke(this, (triggerTimeout, WeaponType));
                     Shoot(shooter, position, direction, shooting);
                     PlayGunfireSound(position);
                     ammoSystem.Ammo -= ammoConsumption;
