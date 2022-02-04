@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
-    [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
-    [SerializeField] private int particleCount = 30;
-    public Color color;
     public float Emission = 6;
 
     protected override float baseDamage => 10f;
@@ -13,10 +10,10 @@ public class Projectile : ProjectileBase
 
     protected override void Start()
     {
+        base.Start();
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color*Emission);
         material.SetColor("_BaseColor", color);
-        base.Start();
     }
 
     public virtual void Launch(GameObject owner, Vector3 velocity, float extradamage)
@@ -36,9 +33,7 @@ public class Projectile : ProjectileBase
             //TODO: Uncomment when chambers' terrain has proper layering
             //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
             {
-                var particles = Instantiate(hitTerrainParticles, transform.position, transform.rotation);
-                particles.SparkColor = color;
-                particles.ParticleCount = particleCount;
+                SpawnParticles(transform.position);
             }
                 
 

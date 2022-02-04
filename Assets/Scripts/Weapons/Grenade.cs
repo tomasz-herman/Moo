@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grenade : ProjectileBase
 {
     [SerializeField] private ExplosionParticles explosionParticles;
-    public Color color;
     public float Emission = 6;
 
     private float explosionSpeed = 40f;

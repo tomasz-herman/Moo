@@ -113,8 +113,10 @@ MonoBehaviour:
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
-  TimeToLive: 10
+  hitTerrainParticles: {fileID: 8109755569039797874, guid: 794dc7c86688b7f4a83bb739d4367588, type: 3}
+  particleCount: 30
   color: {r: 0.033296235, g: 0.8490566, b: 0, a: 1}
+  TimeToLive: 10
   Emission: 6
 --- !u!54 &7634124727677545987
 Rigidbody:

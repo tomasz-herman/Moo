@@ -7,6 +7,10 @@ namespace Assets.Scripts.Weapons
     {
         public SoundTypeWithPlaybackSettings Sound;
 
+        [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
+        [SerializeField] private int particleCount = 30;
+        public Color color;
+
         [HideInInspector]
         public Audio Audio;
 
@@ -55,6 +59,13 @@ namespace Assets.Scripts.Weapons
         protected virtual void PlaySound()
         {
             Audio?.PlayOneShot();
+        }
+
+        public void SpawnParticles(Vector3 position)
+        {
+            var particles = Instantiate(hitTerrainParticles, position, Quaternion.identity);
+            particles.SparkColor = color;
+            particles.ParticleCount = particleCount;
         }
 
     }

@@ -11,7 +11,6 @@ public class Blade : ProjectileBase
     private float basicSpeed = 15;
     private float speed;
 
-    public Color color;
     public float Emission = 6;
     protected override float baseDamage => 30f;
     private float extraDamage = 1;
@@ -67,6 +66,20 @@ public class Blade : ProjectileBase
             if(entity != null && !hitEntities.Contains(entity))
             {
                 ApplyDamage(other, baseDamage * extraDamage);
+
+                bool raycastSuccess = false;
+                foreach(var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2*length))
+                {
+                    if(hit.transform.GetComponent<Entity>() == entity)
+                    {
+                        SpawnParticles(hit.transform.position);
+                        raycastSuccess = true;
+                        break;
+                    }
+                }
+                if (!raycastSuccess)
+                    SpawnParticles((entity.transform.position + transform.position)/2);
+                
                 hitEntities.Add(entity);
             }
         }
@@ -77,5 +90,4 @@ public class Blade : ProjectileBase
         transform.localRotation = rotation;
         transform.localPosition = rotation * ownerToBlade;
     }
-
 }
