@@ -7,7 +7,7 @@ public class Bullet : ProjectileBase
     public float Emission = 6;
 
     protected override float baseDamage => 30f;
-    private float extraDamage = 0;
+    private float extraDamage = 1;
 
     private Vector3 initPosition;
 
@@ -31,7 +31,7 @@ public class Bullet : ProjectileBase
         if (other.gameObject != Owner)
         {
             var distance = Vector3.Distance(gameObject.transform.position, initPosition);
-            var damage = (baseDamage + extraDamage) / (1 + distance);
+            var damage = (baseDamage * extraDamage) / (1 + distance);
             ApplyDamage(other, damage);
             Destroy(gameObject);
         }

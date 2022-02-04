@@ -1,6 +1,7 @@
 using System;
 using Assets.Scripts.Weapons;
 using UnityEngine;
+using Weapons;
 using Random = UnityEngine.Random;
 
 public class SimpleEnemyAI : MonoBehaviour
@@ -18,7 +19,7 @@ public class SimpleEnemyAI : MonoBehaviour
     private Shooting shooting;
     public AmmoSystem ammoSystem;
     protected HealthSystem healthSystem;
-    public WeaponAI weaponAI;
+    public WeaponType weapon;
     protected WeaponAIProperties weaponAIProperties;
     private Vector3 lastPlayerPosition;
     protected Enemy enemy;
@@ -33,16 +34,16 @@ public class SimpleEnemyAI : MonoBehaviour
         ammoSystem = GetComponent<AmmoSystem>();
         enemy = GetComponent<Enemy>();
         shooting.ammoSystem = ammoSystem;
-        weaponAIProperties = WeaponAIProperties.Get(weaponAI);
+        weaponAIProperties = ApplicationData.WeaponAIData[weapon];
         lastPlayerPosition = player.position;
     }
 
     protected void Update()
     {
         shooting.SelectWeapon(weaponAIProperties.Type);
-        //TODO weaponAIProperties.Timeout see below
-        //TODO weaponAIProperties.ProjectileSpeed see below
-        //TODO weaponAIProperties.BonusDamage is unused, make sure it has no purpose before deleting this TODO
+        shooting.triggerTimeoutMultiplier = weaponAIProperties.TriggerTimeoutMultiplier;
+        shooting.weaponDamageMultiplier = weaponAIProperties.DamageMultiplier;
+        shooting.projectileSpeedMultiplier = weaponAIProperties.ProjectileSpeedMultiplier;
 
         var position = transform.position;
         var playerPosition = player.position;
@@ -76,7 +77,7 @@ public class SimpleEnemyAI : MonoBehaviour
     private void Chase()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.BonusMovementSpeed));
+        characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
     }
 
     private void Attack()
