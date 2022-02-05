@@ -24,12 +24,10 @@ public class SpawnScript : MonoBehaviour
     private ChamberNode chambersTreeRoot;
     private List<(ChamberNode node, Direction direction)> possibleOptional = new List<(ChamberNode node, Direction direction)>();
     private float optionalSpawnFloat = 0;
-    private int InfiniteLoopCheck = 0;
 
     private void Awake()
     {
         optionalSpawnFloat = 1 - (float)OptionalChamberSpawnPossibilityPercent / 100;
-        InfiniteLoopCheck = (NumberOfBossChambers * NumbersOfChambersBeforeBoss + NumberOfBossChambers * NumberOfOptionalChambersBeforeBoss + NumberOfBossChambers + 1); // this is not any concrete boundary but big enough number to check this
         LoadChamberPrefabs();
     }
 
@@ -85,7 +83,6 @@ public class SpawnScript : MonoBehaviour
             currentNode = chambersTreeRoot;
             tempNode = null;
             remaining = 0;
-            int safetyCheck = 0;
             while (currentNode != null)
             {
                 if (remaining <= 0)
@@ -102,7 +99,6 @@ public class SpawnScript : MonoBehaviour
                     {
                         possibleOptional.Clear();
                         FindOptionalPositionsRec(currentNode);
-                        safetyCheck = 0;
                     }
                 }
                 else
@@ -125,10 +121,11 @@ public class SpawnScript : MonoBehaviour
                     }
 
                     if (remaining > 0 && possibleOptional.Count == 0)
+                    {
                         FindOptionalPositionsRec(currentNode);
-                    safetyCheck++;
-                    if (safetyCheck > InfiniteLoopCheck)
-                        throw new System.Exception("Infinite Loop"); // Highly improbable but this happened to me once so this stays :)
+                        if (possibleOptional.Count <= 0)
+                            throw new System.Exception("Infinite Loop"); // Highly improbable but this happened to me once so this stays :)
+                    }
                 }
             }
 
