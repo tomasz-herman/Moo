@@ -15,7 +15,8 @@ public class SimpleEnemyAI : MonoBehaviour
     public Vector3 movementDirection;
     public float dodgeDirection;
     public float remainingMovementTime = 0;
-    public float remainingDodgeDirectionTime = 0;
+    public float remainingDodgeTime = 0;
+    public float remainingTumbleTime = 0;
     private float remainingAmmoRechargeTime = 0;
     public float remainingLagTime = 0;
 
@@ -80,12 +81,12 @@ public class SimpleEnemyAI : MonoBehaviour
 
     private void Dodge()
     {
-        if (remainingDodgeDirectionTime <= 0)
+        if (remainingDodgeTime <= 0)
         {
             // Left or right
             dodgeDirection = Utils.RandomBool() ? -1 : 1;
 
-            remainingDodgeDirectionTime = Utils.FloatBetween(0.25f, 1.25f);
+            remainingDodgeTime = Utils.FloatBetween(0.25f, 1.25f);
         }
         
         var position = transform.position;
@@ -95,7 +96,7 @@ public class SimpleEnemyAI : MonoBehaviour
         movementDirection = Vector3.Cross(toPlayer, Vector3.up).normalized * dodgeDirection;
         
         characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed * 2));
-        remainingDodgeDirectionTime -= Time.deltaTime;
+        remainingDodgeTime -= Time.deltaTime;
     }
 
     private void Recharge()
@@ -116,7 +117,7 @@ public class SimpleEnemyAI : MonoBehaviour
             remainingMovementTime = Random.Range(2, 8);
         }
         
-        characterController.Move(movementDirection * Time.deltaTime * enemy.movementSpeed);
+        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed));
         remainingMovementTime -= Time.deltaTime;
     }
 
@@ -134,8 +135,12 @@ public class SimpleEnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        if (remainingDodgeDirectionTime <= 0) Dodge();
-        if (Random.value < 0.1 * Time.deltaTime) remainingDodgeDirectionTime += Utils.FloatBetween(0.25f, 1.25f);
+        if (remainingTumbleTime > 0)
+        {
+            Dodge();
+            remainingTumbleTime -= Time.deltaTime;
+        }
+        if (Random.value < 0.1 * Time.deltaTime) remainingTumbleTime += Utils.FloatBetween(0.25f, 1.25f);
         
         var position = transform.position;
         var playerPosition = player.position;
