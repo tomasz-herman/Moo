@@ -27,16 +27,19 @@ public class Ammo : Entity
         {
             var playerCapacity = player.ammoSystem.MaxAmmo - player.ammoSystem.Ammo;
             if(playerCapacity <= 0) return;
-            if (playerCapacity > remainingAmmo)
+            if (playerCapacity >= remainingAmmo)
             {
-                ShowText("+" + (int)remainingAmmo);
+                int displayedValue = Mathf.CeilToInt(remainingAmmo);
+                ShowText("+" + displayedValue);
 
                 player.ammoSystem.Ammo += remainingAmmo;
                 Destroy(gameObject);
             }
             else
             {
-                ShowText("+" + (int)playerCapacity);
+                int displayedValue = Mathf.CeilToInt(playerCapacity);
+                ShowText("+" + displayedValue);
+
                 player.ammoSystem.Ammo += playerCapacity;
                 remainingAmmo -= playerCapacity;
             }
