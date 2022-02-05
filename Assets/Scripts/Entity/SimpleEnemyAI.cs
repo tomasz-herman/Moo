@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -138,7 +139,8 @@ public class SimpleEnemyAI : MonoBehaviour
         
         var position = transform.position;
         var playerPosition = player.position;
-        var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
+        var distance = Vector3.Distance(position, playerPosition);
+        var playerVelocity = (playerPosition - lastPlayerPosition) * (distance * Utils.RandomGaussNumber(1, 1) / (Time.deltaTime * 25));
         Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
         shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
     }
