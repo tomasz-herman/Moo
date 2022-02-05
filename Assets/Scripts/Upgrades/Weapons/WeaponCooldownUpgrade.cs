@@ -17,7 +17,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         public override UpgradeType CommitUpdate()
         {
-            weapon.triggerTimeout *= multiplier;
+            weapon.basetriggerTimeout *= multiplier;
             return GetUpgradeType();
         }
         protected abstract UpgradeType GetUpgradeType();

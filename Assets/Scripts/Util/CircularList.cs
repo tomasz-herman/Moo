@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Util
 {
-    public class CircularList<T>
+    public class CircularList<T>: IEnumerable<T>
         where T : class
     {
         private class Node
@@ -46,6 +46,24 @@ namespace Assets.Scripts.Util
         {
             Curr = Curr.Prev;
             return Curr.Val;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var cur = Curr;
+            var ret = new List<T>();
+            do
+            {
+                ret.Add(cur.Val);
+                cur = cur.Next;
+            }
+            while (cur != Curr);
+            return ret.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

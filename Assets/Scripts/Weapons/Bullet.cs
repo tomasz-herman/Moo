@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-    protected override float baseDamage => 30f;
-
     private Vector3 initPosition;
+    private float damageDecayFactor = 0.1f;
 
     protected override void Start()
     {
@@ -20,7 +19,7 @@ public class Bullet : Projectile
     protected override float CalculateDamage(Collider other)
     {
         var distance = Vector3.Distance(gameObject.transform.position, initPosition);
-        var damage = (baseDamage * extraDamage) / (1 + distance);
-        return damage;
+        var dmg = (damage) / (1 + damageDecayFactor * distance);
+        return dmg;
     }
 }

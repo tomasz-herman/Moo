@@ -12,6 +12,10 @@ namespace Assets.Scripts.Weapons
 
         public SoundTypeWithPlaybackSettings Sound;
 
+        [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
+        [SerializeField] private int particleCount = 30;
+        public Color color;
+
         [HideInInspector]
         public Audio Audio;
 
@@ -22,12 +26,7 @@ namespace Assets.Scripts.Weapons
 
         private float _elapsedTime = 0f;
 
-        protected abstract float baseDamage { get; }
-
-        protected virtual void Awake()
-        {
-            //ProjectileUpgrades = new List<IOneTimeProjectileUpgradeHandler>();
-        }
+        public float damage = 1;
 
         protected virtual void Start()
         {
@@ -46,6 +45,12 @@ namespace Assets.Scripts.Weapons
 
             if (_elapsedTime > TimeToLive)
                 Destroy(gameObject);
+        }
+
+        protected virtual void Launch(GameObject owner, float damage)
+        {
+            Owner = owner;
+            this.damage = damage;
         }
 
         protected virtual void OnDestroy()
@@ -80,5 +85,13 @@ namespace Assets.Scripts.Weapons
         {
             Audio?.PlayOneShot();
         }
+
+        public void SpawnParticles(Vector3 position)
+        {
+            var particles = Instantiate(hitTerrainParticles, position, Quaternion.identity);
+            particles.SparkColor = color;
+            particles.ParticleCount = particleCount;
+        }
+
     }
 }

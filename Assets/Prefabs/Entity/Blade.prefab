@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973725694611849758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.01, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,8 +113,10 @@ MonoBehaviour:
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
-  TimeToLive: 10
+  hitTerrainParticles: {fileID: 8109755569039797874, guid: 794dc7c86688b7f4a83bb739d4367588, type: 3}
+  particleCount: 30
   color: {r: 0.033296235, g: 0.8490566, b: 0, a: 1}
+  TimeToLive: 10
   Emission: 6
 --- !u!54 &7634124727677545987
 Rigidbody:
@@ -143,5 +145,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.01, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

@@ -5,16 +5,12 @@ using UnityEngine;
 public class Grenade : ProjectileBase
 {
     [SerializeField] private ExplosionParticles explosionParticles;
-    public Color color;
     public float Emission = 6;
 
     private float explosionSpeed = 40f;
     private float explosionRange = 10f;
     private float damageDecay = 7f; // how many times damage drops on the edge of explosionRange
     private bool isExplosing = false;
-
-    protected override float baseDamage => 50f;
-    private float extraDamage = 0;
 
     protected override void Start()
     {
@@ -61,8 +57,8 @@ public class Grenade : ProjectileBase
             }
 
             var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
-            var damage = (baseDamage + extraDamage) / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
-            ApplyDamage(other, damage);
+            var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
+            ApplyDamage(other, dmg);
         }
     }
 
@@ -75,8 +71,7 @@ public class Grenade : ProjectileBase
 
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)
     {
-        this.Owner = owner;
-        extraDamage = extradamage;
+        Launch(owner, extradamage);
         GetComponent<Rigidbody>().velocity = velocity;
         gameObject.transform.LookAt(transform.position + velocity);
     }
