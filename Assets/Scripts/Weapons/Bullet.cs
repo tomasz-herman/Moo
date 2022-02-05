@@ -20,7 +20,7 @@ public class Bullet : Projectile
     protected override float CalculateDamage(Collider other)
     {
         var distance = Vector3.Distance(gameObject.transform.position, initPosition);
-        var damage = (baseDamage + extraDamage) / (1 + distance);
+        var damage = (baseDamage * extraDamage) / (1 + distance);
         return damage;
     }
 }

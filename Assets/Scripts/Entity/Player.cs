@@ -24,14 +24,19 @@ public class Player : Entity
 
         healthSystem.HealthChanged += CheckDeath;
         healthSystem.DamageReceived += OnDamageReceived;
+        healthSystem.MaxHealth = ApplicationData.GameplayData.DefaultPlayerHealth;
+        healthSystem.Health = healthSystem.MaxHealth;
 
         damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
         damagePostProcessing.healthSystem = healthSystem;
+
+        ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
+        ammoSystem.Ammo = ammoSystem.MaxAmmo;
     }
 
-    public void Upgrade()
+    public void Upgrade(int upgradeCount = 1)
     {
-        upgradeSystem.AddUpgrade();
+        upgradeSystem.AddUpgrade(upgradeCount);
     }
 
     public void CheckDeath(object sender, (float health, float maxHealth) args)

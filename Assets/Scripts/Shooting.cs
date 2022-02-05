@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
 using UnityEngine;
@@ -12,24 +13,30 @@ public class Shooting : MonoBehaviour
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
-    public float projectileSpeed = 3f;
-    public float triggerTimeout = 0.5f;
-    public float weaponDamage = 1f;
+    public float projectileSpeedMultiplier = 1f;
+    public float triggerTimeoutMultiplier = 1f;
+    public float weaponDamageMultiplier = 1f;
 
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
 
-    public Pistol Pistol => new Pistol(projectilePrefab);
-    public Shotgun Shotgun => new Shotgun(bulletPrefab);
-    public MachineGun MachineGun => new MachineGun(projectilePrefab);
-    public GrenadeLauncher GrenadeLauncher => new GrenadeLauncher(grenadePrefab);
-    public Sword Sword => new Sword(bladePrefab);
+    public Pistol Pistol { get; private set; }
+    public Shotgun Shotgun { get; private set; }
+    public MachineGun MachineGun { get; private set; }
+    public GrenadeLauncher GrenadeLauncher { get; private set; }
+    public Sword Sword { get; private set; }
 
     public event EventHandler<Weapon> WeaponChanged;
     public Weapon CurrentWeapon { get { return weapons.Current(); } }
 
     void Awake()
     {
+        Pistol = new Pistol(projectilePrefab);
+        Shotgun = new Shotgun(bulletPrefab);
+        MachineGun = new MachineGun(projectilePrefab);
+        GrenadeLauncher = new GrenadeLauncher(grenadePrefab);
+        Sword = new Sword(bladePrefab);
+        
         weapons.Add(Pistol);
         weapons.Add(Shotgun);
         weapons.Add(MachineGun);
@@ -42,12 +49,21 @@ public class Shooting : MonoBehaviour
         weapons.Current().DecreaseTime();
     }
 
-    public void SelectWeapon(Type type)
+    public void SelectWeapon(WeaponType type)
     {
-        Type first = weapons.Current().GetType();
-        while(weapons.Current().GetType() != type)
+        Weapon searched = type switch
         {
-            if (first == weapons.Next().GetType()) break;
+            WeaponType.Pistol => Pistol,
+            WeaponType.Shotgun => Shotgun,
+            WeaponType.MachineGun => MachineGun,
+            WeaponType.GrenadeLauncher => GrenadeLauncher,
+            WeaponType.Sword => Sword,
+            _ => null
+        };
+        Weapon first = weapons.Current();
+        while(weapons.Current() != searched)
+        {
+            if (first == weapons.Next()) break;
         }
         WeaponChanged?.Invoke(this, weapons.Current());
     }

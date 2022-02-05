@@ -25,11 +25,12 @@ public class UpgradeSystem : MonoBehaviour
         _oneTimeUpgradesUsed = UpgradeTypeExtensions.OneTimeUpgrades.ToDictionary(x => x, x => false);
     }
 
-    public void AddUpgrade()
+    public void AddUpgrade(int upgradeCount = 1)
     {
-        pendingUpgrades++;
+        bool wasZero = pendingUpgrades == 0;
+        pendingUpgrades += upgradeCount;
         upgradeWindow.Recalculate();
-        if(pendingUpgrades == 1)
+        if(wasZero)
             upgradeWindow.Open();
     }
 

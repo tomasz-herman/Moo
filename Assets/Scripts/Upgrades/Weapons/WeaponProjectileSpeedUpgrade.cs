@@ -13,8 +13,8 @@ namespace Assets.Scripts.Upgrades.Weapons
         private float multiplier = 1.1f;
 
         private readonly Weapon weapon;
-        public WeaponProjectileSpeedUpgrade(Weapon w, Sprite sprite, string weaponName)
-            : base($"{weaponName} projectile speed", $"Increase velocity of {weaponName} projectiles by 10%", sprite)
+        public WeaponProjectileSpeedUpgrade(Weapon w, Sprite sprite, string weaponName, string name = null, string description = null)
+            : base(name ?? $"{weaponName} projectile speed", description ?? $"Increase velocity of {weaponName} projectiles by 10%", sprite)
         {
             weapon = w;
         }
@@ -58,7 +58,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     public class SwordProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
     {
         public SwordProjectileSpeedUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, "SWORD") { }
+            : base(weapon, sprite, "SWORD", "Increase SWORD sweep speed", "Increase SWORD sweep velocity by 10%") { }
 
         protected override UpgradeType GetUpgradeType() => UpgradeType.SwordProjectileSpeed;
     }

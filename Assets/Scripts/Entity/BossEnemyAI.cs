@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Weapons;
 using UnityEngine;
+using Weapons;
 
 public class BossEnemyAI : SimpleEnemyAI
 {
     public int phases = 3;
-    private List<WeaponAI> weapons;
+    private List<WeaponAIProperties> weapons;
     
     private new void Start()
     {
@@ -17,7 +18,7 @@ public class BossEnemyAI : SimpleEnemyAI
 
     private void GetRandomWeapons()
     {
-        WeaponAI[] availableWeapons = (WeaponAI[])Enum.GetValues(typeof(WeaponAI));
+        WeaponAIProperties[] availableWeapons = ApplicationData.WeaponAIData.Data.ToArray();
         for (var n = 0; n < availableWeapons.Length; n++)
         {
             var k = Utils.NumberBetween(0, availableWeapons.Length - 1);
@@ -33,8 +34,7 @@ public class BossEnemyAI : SimpleEnemyAI
 
     private new void Update()
     {
-        weaponAI = weapons[GetPhase()];
-        weaponAIProperties = WeaponAIProperties.Get(weaponAI);
+        weaponAIProperties = weapons[GetPhase()];
         base.Update();
     }
 

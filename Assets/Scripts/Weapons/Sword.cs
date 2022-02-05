@@ -9,8 +9,8 @@ namespace Assets.Scripts.Weapons
         private Color color = Color.green;
 
 
-        public override float projectileSpeed { get; set; } = 2f;
-        public override float triggerTimeout { get; set; } = 2f;
+        public override float projectileSpeed { get; set; } = 30f;
+        public override float triggerTimeout { get; set; } = 1f;
         public override float baseDamage { get; set; } = 1f;
         protected override int ammoConsumption => 0;
 
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Weapons
         {
             Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.Launch(shooter, direction.normalized, shooting.weaponDamage * baseDamage, projectileSpeed * shooting.projectileSpeed);
+            blade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, projectileSpeed * shooting.projectileSpeedMultiplier);
         }
     }
 }

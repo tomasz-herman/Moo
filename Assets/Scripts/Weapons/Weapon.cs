@@ -45,7 +45,7 @@ namespace Assets.Scripts.Weapons
 
         public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
+            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeoutMultiplier * triggerTimeout);
             for (int i = 0; i < dischargeCount; i++)
             {
                 if (ammoSystem.Ammo >= ammoConsumption)
