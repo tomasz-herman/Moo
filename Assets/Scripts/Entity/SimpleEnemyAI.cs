@@ -26,6 +26,8 @@ public class SimpleEnemyAI : MonoBehaviour
     protected WeaponAIProperties weaponAIProperties;
     private Vector3 lastPlayerPosition;
     protected Enemy enemy;
+    
+    private float TotalMovementSpeed => enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier;
 
     protected void Start()
     {
@@ -94,7 +96,7 @@ public class SimpleEnemyAI : MonoBehaviour
         // Perpendicular to player
         movementDirection = Vector3.Cross(toPlayer, Vector3.up).normalized * dodgeDirection;
         
-        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed));
+        characterController.Move(movementDirection * (Time.deltaTime * TotalMovementSpeed));
         remainingDodgeTime -= Time.deltaTime;
     }
 
@@ -116,20 +118,20 @@ public class SimpleEnemyAI : MonoBehaviour
             remainingMovementTime = Random.Range(2, 8);
         }
         
-        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed));
+        characterController.Move(movementDirection * (Time.deltaTime * TotalMovementSpeed));
         remainingMovementTime -= Time.deltaTime;
     }
 
     private void Chase()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
+        characterController.Move(toPlayer * (Time.deltaTime * TotalMovementSpeed));
     }
     
     private void Escape()
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
-        characterController.Move(-toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
+        characterController.Move(-toPlayer * (Time.deltaTime * TotalMovementSpeed));
     }
 
     private void Attack()
