@@ -16,6 +16,7 @@ public class SimpleEnemyAI : MonoBehaviour
     public float remainingMovementTime = 0;
     public float remainingDodgeDirectionTime = 0;
     private float remainingAmmoRechargeTime = 0;
+    public float remainingLagTime = 0;
 
     private Shooting shooting;
     public AmmoSystem ammoSystem;
@@ -24,7 +25,6 @@ public class SimpleEnemyAI : MonoBehaviour
     protected WeaponAIProperties weaponAIProperties;
     private Vector3 lastPlayerPosition;
     protected Enemy enemy;
-
 
     protected void Start()
     {
@@ -37,6 +37,7 @@ public class SimpleEnemyAI : MonoBehaviour
         shooting.ammoSystem = ammoSystem;
         weaponAIProperties = ApplicationData.WeaponAIData[weapon];
         lastPlayerPosition = player.position;
+        remainingLagTime = Random.value;
     }
 
     protected void Update()
@@ -46,6 +47,13 @@ public class SimpleEnemyAI : MonoBehaviour
         shooting.weaponDamageMultiplier = enemy.data.BaseDamageMultiplier * weaponAIProperties.DamageMultiplier;
         shooting.projectileSpeedMultiplier = enemy.data.BaseProjectileSpeedMultiplier * weaponAIProperties.ProjectileSpeedMultiplier;
 
+        if (remainingLagTime > 0)
+        {
+            remainingLagTime -= Time.deltaTime;
+            lastPlayerPosition = player.position;
+            return;
+        }
+        
         var position = transform.position;
         var playerPosition = player.position;
         var distToPlayer = Vector3.Distance(position, playerPosition);
@@ -125,6 +133,9 @@ public class SimpleEnemyAI : MonoBehaviour
 
     private void Attack()
     {
+        if (remainingDodgeDirectionTime <= 0) Dodge();
+        if (Random.value < 0.1 * Time.deltaTime) remainingDodgeDirectionTime += Utils.FloatBetween(0.25f, 1.25f);
+        
         var position = transform.position;
         var playerPosition = player.position;
         var playerVelocity = (playerPosition - lastPlayerPosition) *  (Utils.FloatBetween(0, 2) / Time.deltaTime);
