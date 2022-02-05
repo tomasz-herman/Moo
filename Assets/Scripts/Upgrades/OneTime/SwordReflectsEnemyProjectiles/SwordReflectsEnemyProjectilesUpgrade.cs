@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
+using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles
 {
@@ -13,6 +16,13 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles
 
         public override UpgradeType CommitUpdate()
         {
+            var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(_shootingSystem.Sword);
+            //_shootingSystem.Sword.bladePrefab.ProjectileUpgrades ??= new List<IOneTimeProjectileUpgradeHandler>();
+            if (!_shootingSystem.Sword.BladeUpgrades.OfType<SwordReflectsEnemyProjectilesUpgradeHandler>().Any())
+            {
+                _shootingSystem.Sword.BladeUpgrades.Add(projectileUpgrade);
+            }
+
             return UpgradeType.SwordReflectsEnemyProjectiles;
         }
     }

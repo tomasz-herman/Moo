@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
+using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles;
+using Assets.Scripts.Weapons;
 using UnityEngine;
 
 public class Player : Entity
@@ -32,6 +35,15 @@ public class Player : Entity
 
         ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
         ammoSystem.Ammo = ammoSystem.MaxAmmo;
+
+        //TODO: delete
+        var currweap = shooting.CurrentWeapon;
+        shooting.SelectWeapon(WeaponType.Sword);
+        var sword = shooting.CurrentWeapon as Sword;
+        var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(sword);
+
+        sword?.BladeUpgrades.Add(projectileUpgrade);
+        shooting.SelectWeapon(currweap.WeaponType);
     }
 
     public void Upgrade(int upgradeCount = 1)

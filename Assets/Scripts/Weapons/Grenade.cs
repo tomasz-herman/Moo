@@ -35,9 +35,9 @@ public class Grenade : ProjectileBase
         base.Start();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         if (gameObject.transform.localScale.x > explosionRange)
             Destroy(gameObject);
@@ -66,9 +66,11 @@ public class Grenade : ProjectileBase
         }
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        Audio?.Dispose();
+        //Audio?.Dispose();
+
+        base.OnDestroy();
     }
 
     public void Launch(GameObject owner, Vector3 velocity, float extradamage)

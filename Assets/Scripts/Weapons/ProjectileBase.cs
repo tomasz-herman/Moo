@@ -1,10 +1,15 @@
-﻿using Assets.Scripts.SoundManager;
+﻿using System.Collections.Generic;
+using Assets.Scripts.SoundManager;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
+using Assets.Scripts.Upgrades.OneTime.Upgradables;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public abstract class ProjectileBase : Entity
+    public abstract class ProjectileBase : Entity, IOneTimeProjectileUpgradable
     {
+        public List<IOneTimeProjectileUpgradeHandler> ProjectileUpgrades { get; set; } = new List<IOneTimeProjectileUpgradeHandler>();
+
         public SoundTypeWithPlaybackSettings Sound;
 
         [HideInInspector]
@@ -12,12 +17,17 @@ namespace Assets.Scripts.Weapons
 
         public float TimeToLive = 10f;
 
-        protected GameObject Owner;
+        public GameObject Owner;
         protected AudioManager AudioManager;
 
         private float _elapsedTime = 0f;
 
         protected abstract float baseDamage { get; }
+
+        protected virtual void Awake()
+        {
+            //ProjectileUpgrades = new List<IOneTimeProjectileUpgradeHandler>();
+        }
 
         protected virtual void Start()
         {
@@ -25,11 +35,25 @@ namespace Assets.Scripts.Weapons
             Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
         }
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             _elapsedTime += Time.deltaTime;
+
+            foreach (var upgrade in ProjectileUpgrades)
+            {
+                upgrade.OnUpdate(this);
+            }
+
             if (_elapsedTime > TimeToLive)
                 Destroy(gameObject);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            foreach (var upgrade in ProjectileUpgrades)
+            {
+                upgrade.OnDestroy(this);
+            }
         }
 
         public void ApplyDamage(Collider other, float damage)
@@ -56,6 +80,5 @@ namespace Assets.Scripts.Weapons
         {
             Audio?.PlayOneShot();
         }
-
     }
 }

@@ -5,6 +5,6 @@ namespace Assets.Scripts.Upgrades.OneTime.Upgradables
 {
     internal interface IOneTimeProjectileUpgradable
     {
-        List<IOneTimeProjectileUpgradeHandler> ProjectileUpgrades { get; }
+        List<IOneTimeProjectileUpgradeHandler> ProjectileUpgrades { get; set; }
     }
 }

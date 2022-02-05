@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Blade : ProjectileBase
 {
-    private float startAngle = -45;
-    private float stopAngle = 45;
+    public float startAngle = -45;
+    public float stopAngle = 45;
     private float angle;
 
     private float basicSpeed = 15;
@@ -18,17 +18,45 @@ public class Blade : ProjectileBase
 
     private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
+    public Vector3 direction;
+
+    private bool isStarted = false;
+
+    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
+    {
+        Start();
+
+        this.Owner = owner;
+        this.speed = speed;
+        this.angle = startAngle;
+        this.extraDamage = extradamage;
+        this.direction = direction;
+
+        transform.SetParent(owner.transform);
+        transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
+        SetRotation();
+
+        foreach (var upgrade in ProjectileUpgrades)
+        {
+            upgrade.OnLaunch(this);
+        }
+    }
+
     protected override void Start()
     {
+        if (isStarted)
+            return;
+
+        isStarted = true;
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
         base.Start();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         var dangle = speed * basicSpeed * Time.deltaTime;
         angle += dangle;
@@ -39,16 +67,12 @@ public class Blade : ProjectileBase
         SetRotation();
     }
 
-    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
+    private void OnDrawGizmos()
     {
-        this.Owner = owner;
-        this.speed = speed;
-        this.angle = startAngle;
-        this.extraDamage = extradamage;
-
-        transform.SetParent(owner.transform);
-        transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
-        SetRotation();
+        foreach (var upgrade in ProjectileUpgrades)
+        {
+            upgrade.OnDrawGizmos(this);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -63,11 +87,11 @@ public class Blade : ProjectileBase
             }
         }
     }
+
     private void SetRotation()
     {
         var direction = 2 * transform.position - Owner.transform.position;
         direction.y = transform.position.y;
         transform.LookAt(direction);
     }
-
 }
