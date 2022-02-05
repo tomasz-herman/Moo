@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ammo : Entity
 {
-    [HideInInspector] public int remainingAmmo;
+    [HideInInspector] public float remainingAmmo;
     public GameObject FloatingTextPrefab;
     private new Camera camera;
 
@@ -29,14 +29,14 @@ public class Ammo : Entity
             if(playerCapacity <= 0) return;
             if (playerCapacity > remainingAmmo)
             {
-                ShowText("+" + remainingAmmo);
+                ShowText("+" + (int)remainingAmmo);
 
                 player.ammoSystem.Ammo += remainingAmmo;
                 Destroy(gameObject);
             }
             else
             {
-                ShowText("+" + playerCapacity);
+                ShowText("+" + (int)playerCapacity);
                 player.ammoSystem.Ammo += playerCapacity;
                 remainingAmmo -= playerCapacity;
             }

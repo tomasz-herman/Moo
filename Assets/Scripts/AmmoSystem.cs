@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AmmoSystem : MonoBehaviour
 {
-    public int defaultAmmo = 500;
-    public int defaultCapacity = 500;
-    private int ammo, maxAmmo;
-    public int Ammo
+    public float defaultAmmo = 100;
+    public float defaultCapacity = 100;
+    private float ammo, maxAmmo;
+    public float Ammo
     {
         get { return ammo; }
         set
@@ -19,7 +17,7 @@ public class AmmoSystem : MonoBehaviour
             AmmoChanged?.Invoke(this, (ammo, maxAmmo));
         }
     }
-    public int MaxAmmo
+    public float MaxAmmo
     {
         get { return maxAmmo; }
         set
@@ -29,7 +27,7 @@ public class AmmoSystem : MonoBehaviour
         }
     }
 
-    public EventHandler<(int ammo, int maxAmmo)> AmmoChanged;
+    public EventHandler<(float ammo, float maxAmmo)> AmmoChanged;
 
     void Awake()
     {

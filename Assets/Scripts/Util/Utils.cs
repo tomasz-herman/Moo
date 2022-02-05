@@ -9,6 +9,7 @@ public static class Utils
     public static int NumberBetween(int i, int j) { return random.Next(i, j + 1); }
     public static float FloatBetween(float i, float j) { return (float)random.NextDouble() * (j - i) + i; }
     public static int RandomNumber() { return random.Next(); }
+    public static bool RandomBool() { return (random.Next() & 1) == 0; }
 
     public static float RandomGaussNumber(float mean, float stdev)
     {

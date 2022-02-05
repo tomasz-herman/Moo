@@ -20,6 +20,8 @@ MonoBehaviour:
     ProjectileSpeedMultiplier: 1
     DamageMultiplier: 0.65
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 1
+    AmmoRechargeAmmount: 8
   - Type: 3
     PreferredRange: 1.5
     MaximumRange: 3
@@ -27,6 +29,8 @@ MonoBehaviour:
     ProjectileSpeedMultiplier: 1
     DamageMultiplier: 0.5
     MovementSpeedMultiplier: 2.5
+    AmmoRechargeTime: 0
+    AmmoRechargeAmmount: 0
   - Type: 4
     PreferredRange: 15
     MaximumRange: 25
@@ -34,6 +38,8 @@ MonoBehaviour:
     ProjectileSpeedMultiplier: 2
     DamageMultiplier: 0.75
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 5
+    AmmoRechargeAmmount: 40
   - Type: 0
     PreferredRange: 15
     MaximumRange: 40
@@ -41,6 +47,8 @@ MonoBehaviour:
     ProjectileSpeedMultiplier: 0.8
     DamageMultiplier: 0.35
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 4
+    AmmoRechargeAmmount: 25
   - Type: 1
     PreferredRange: 2
     MaximumRange: 16
@@ -48,3 +56,5 @@ MonoBehaviour:
     ProjectileSpeedMultiplier: 0.8
     DamageMultiplier: 2
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 4
+    AmmoRechargeAmmount: 25

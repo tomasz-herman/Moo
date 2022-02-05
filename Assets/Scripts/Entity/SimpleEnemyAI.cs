@@ -1,5 +1,3 @@
-using System;
-using Assets.Scripts.Weapons;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -11,11 +9,14 @@ public class SimpleEnemyAI : MonoBehaviour
     private Transform player;
     
     public float sightRange;
-    private bool playerInAttackRange, playerInSight, playerInPrefferedRange;
+    private bool playerInAttackRange, playerInSight, playerInPrefferedRange, playerTooClose, outOfAmmo;
     
     public Vector3 movementDirection;
+    public float dodgeDirection;
     public float remainingMovementTime = 0;
-    
+    public float remainingDodgeDirectionTime = 0;
+    private float remainingAmmoRechargeTime = 0;
+
     private Shooting shooting;
     public AmmoSystem ammoSystem;
     protected HealthSystem healthSystem;
@@ -51,11 +52,47 @@ public class SimpleEnemyAI : MonoBehaviour
         playerInAttackRange = distToPlayer < weaponAIProperties.MaximumRange;
         playerInPrefferedRange = distToPlayer < weaponAIProperties.PreferredRange;
         playerInSight = distToPlayer < sightRange;
+        playerTooClose = distToPlayer < weaponAIProperties.MinimumRange;
+        outOfAmmo = !shooting.HasEnoughAmmo();
+
+        if (outOfAmmo)
+        {
+            remainingAmmoRechargeTime -= Time.deltaTime;
+            if (remainingAmmoRechargeTime <= 0) Recharge();
+            else Dodge();
+        }
 
         if(!playerInSight && !playerInAttackRange) Patrol();
         if(playerInSight && !playerInPrefferedRange) Chase();
         if(playerInSight && playerInAttackRange) Attack();
+        if(playerTooClose) Escape(); 
         lastPlayerPosition = playerPosition;
+    }
+
+    private void Dodge()
+    {
+        if (remainingDodgeDirectionTime <= 0)
+        {
+            // Left or right
+            dodgeDirection = Utils.RandomBool() ? -1 : 1;
+
+            remainingDodgeDirectionTime = Utils.FloatBetween(0.25f, 1.25f);
+        }
+        
+        var position = transform.position;
+        var playerPosition = player.position;
+        Vector3 toPlayer = (playerPosition - position).normalized;
+        // Perpendicular to player
+        movementDirection = Vector3.Cross(toPlayer, Vector3.up).normalized * dodgeDirection;
+        
+        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed * 2));
+        remainingDodgeDirectionTime -= Time.deltaTime;
+    }
+
+    private void Recharge()
+    {
+        remainingAmmoRechargeTime += weaponAIProperties.AmmoRechargeTime;
+        shooting.ammoSystem.Ammo += weaponAIProperties.AmmoRechargeAmmount;
     }
 
     private void Patrol()
@@ -78,6 +115,12 @@ public class SimpleEnemyAI : MonoBehaviour
     {
         Vector3 toPlayer = (player.position - transform.position).normalized;
         characterController.Move(toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
+    }
+    
+    private void Escape()
+    {
+        Vector3 toPlayer = (player.position - transform.position).normalized;
+        characterController.Move(-toPlayer * (Time.deltaTime * enemy.movementSpeed * weaponAIProperties.MovementSpeedMultiplier));
     }
 
     private void Attack()

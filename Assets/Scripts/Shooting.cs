@@ -86,4 +86,9 @@ public class Shooting : MonoBehaviour
     {
         weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
     }
+
+    public bool HasEnoughAmmo()
+    {
+        return weapons.Current().HasEnoughAmmo(ammoSystem);
+    }
 }

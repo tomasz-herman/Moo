@@ -25,11 +25,14 @@ namespace Weapons
     public class WeaponAIProperties
     {
         public WeaponType Type;
+        public float MinimumRange;
         public float PreferredRange;
         public float MaximumRange;
         public float TriggerTimeoutMultiplier;
         public float ProjectileSpeedMultiplier;
         public float DamageMultiplier;
         public float MovementSpeedMultiplier;
+        public float AmmoRechargeTime;
+        public float AmmoRechargeAmmount;
     }
 }
