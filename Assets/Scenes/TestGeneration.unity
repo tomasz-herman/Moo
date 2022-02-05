@@ -946,7 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChamberSize: 60
-  NumberOfOptionalChambers: 10
+  NumberOfOptionalChambersBeforeBoss: 3
   NumberOfBossChambers: 3
   NumbersOfChambersBeforeBoss: 2
   NumberOfTryBeforeOnlyForwardMode: 3
