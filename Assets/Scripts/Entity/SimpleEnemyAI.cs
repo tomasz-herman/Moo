@@ -16,7 +16,6 @@ public class SimpleEnemyAI : MonoBehaviour
     public float dodgeDirection;
     public float remainingMovementTime = 0;
     public float remainingDodgeTime = 0;
-    public float remainingTumbleTime = 0;
     private float remainingAmmoRechargeTime = 0;
     public float remainingLagTime = 0;
 
@@ -95,7 +94,7 @@ public class SimpleEnemyAI : MonoBehaviour
         // Perpendicular to player
         movementDirection = Vector3.Cross(toPlayer, Vector3.up).normalized * dodgeDirection;
         
-        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed * 2));
+        characterController.Move(movementDirection * (Time.deltaTime * enemy.movementSpeed));
         remainingDodgeTime -= Time.deltaTime;
     }
 
@@ -135,18 +134,11 @@ public class SimpleEnemyAI : MonoBehaviour
 
     private void Attack()
     {
-        if (remainingTumbleTime > 0)
-        {
-            Dodge();
-            remainingTumbleTime -= Time.deltaTime;
-        }
-        if (Random.value < 0.1 * Time.deltaTime) remainingTumbleTime += Utils.FloatBetween(0.25f, 1.25f);
-        
         var position = transform.position;
         var playerPosition = player.position;
         var distance = Vector3.Distance(position, playerPosition);
-        var playerVelocity = (playerPosition - lastPlayerPosition) * (distance * Utils.RandomGaussNumber(1, 1) / (Time.deltaTime * 25));
-        Vector3 toPlayer = (playerPosition + playerVelocity - position).normalized;
+        var aimingDirection = (playerPosition - lastPlayerPosition) * (distance * Utils.RandomGaussNumber(1, 1) / (Time.deltaTime * 25));
+        Vector3 toPlayer = (playerPosition + aimingDirection - position).normalized;
         shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
     }
 }
