@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts.Upgrades.OneTime.Handlers;
-using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles;
+using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers;
 using Assets.Scripts.Weapons;
-using UnityEngine;
 
 public class Player : Entity
 {
@@ -36,7 +32,7 @@ public class Player : Entity
         ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
         ammoSystem.Ammo = ammoSystem.MaxAmmo;
 
-        //TODO: delete
+        //TODO: delete (if you see this in PR let MichalR know)
         var currweap = shooting.CurrentWeapon;
         shooting.SelectWeapon(WeaponType.Sword);
         var sword = shooting.CurrentWeapon as Sword;
