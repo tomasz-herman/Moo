@@ -13,7 +13,7 @@ public class HealthSystem : MonoBehaviour
         get => health;
         set
         {
-            if(godMode) return;
+            if(godMode && value < health) return;
             float previousHealth = health;
             health = value;
             if (health > maxHealth)
