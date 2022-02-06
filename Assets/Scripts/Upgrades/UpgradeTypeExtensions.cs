@@ -1,15 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Assets.Scripts.Upgrades
 {
     internal static class UpgradeTypeExtensions
     {
-        public static readonly UpgradeType[] OneTimeUpgrades =
+        private static readonly UpgradeType FirstOneTimeUpgrade = UpgradeType.SwordReflectsEnemyProjectiles;
+
+        public static readonly UpgradeType[] OneTimeUpgrades;
+
+        static UpgradeTypeExtensions()
         {
-            UpgradeType.SwordReflectsEnemyProjectiles,
-            UpgradeType.ProjectilesExplodeAfterHittingEnemy,
-            UpgradeType.ProjectileChainsToNearestEnemy
-        };
+            var upgrades = Enum.GetValues(typeof(UpgradeType)).Cast<UpgradeType>();
+            OneTimeUpgrades = upgrades.Where(x => (int)x >= (int)FirstOneTimeUpgrade).ToArray();
+        }
 
         public static bool IsOneTimeUpgrade(this UpgradeType upgrade)
         {
