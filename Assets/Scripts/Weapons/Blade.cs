@@ -13,27 +13,21 @@ public class Blade : ProjectileBase
 
     public float Emission = 6;
     private float extraDamage = 1;
-    private float length;
+    public float length;
     private Vector3 ownerToBlade;
     private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
-    public Vector3 direction;
 
-    private bool isStarted = false;
-
-    public void Launch(GameObject owner, Vector3 direction, float extradamage, float speed)
+    public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
     {
-        Start();
+        base.Launch(owner, damage);
 
-        this.Owner = owner;
         this.speed = speed;
         this.angle = startAngle;
-        this.extraDamage = extradamage;
-        this.direction = direction;
 
         transform.SetParent(owner.transform);
-        transform.position = transform.position + Quaternion.Euler(0, 360 + startAngle, 0) * direction;
-        SetRotation();
+        ownerToBlade = new Vector3(0, transform.localPosition.y, length / 2);
+        UpdateTransform();
 
         foreach (var upgrade in ProjectileUpgrades)
         {
@@ -41,12 +35,13 @@ public class Blade : ProjectileBase
         }
     }
 
+    protected void Awake()
+    {
+        length = GetComponent<BoxCollider>().transform.localScale.z;
+    }
+
     protected override void Start()
     {
-        if (isStarted)
-            return;
-
-        isStarted = true;
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
@@ -55,12 +50,7 @@ public class Blade : ProjectileBase
         UpdateTransform();
     }
 
-    protected void Awake()
-    {
-        length = GetComponent<BoxCollider>().transform.localScale.z;
-    }
-
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
@@ -68,6 +58,11 @@ public class Blade : ProjectileBase
         angle += dangle;
 
         UpdateTransform();
+
+        foreach (var upgrade in ProjectileUpgrades)
+        {
+            upgrade.OnUpdate(this);
+        }
 
         if (angle > stopAngle)
             Destroy(gameObject);
@@ -83,28 +78,32 @@ public class Blade : ProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Owner)
-        {
-            Entity entity = other.GetComponent<Entity>();
-            if(entity != null && !hitEntities.Contains(entity))
-            {
-                ApplyDamage(other, damage);
+        if (other.gameObject == Owner) return;
 
-                bool raycastSuccess = false;
-                foreach(var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2*length))
+        Entity entity = other.GetComponent<Entity>();
+        if (entity != null && !hitEntities.Contains(entity))
+        {
+            ApplyDamage(other, damage);
+
+            //why is this needed?
+            bool raycastSuccess = false;
+            foreach (var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2 * length))
+            {
+                if (hit.transform.GetComponent<Entity>() == entity)
                 {
-                    if(hit.transform.GetComponent<Entity>() == entity)
-                    {
-                        SpawnParticles(hit.transform.position);
-                        raycastSuccess = true;
-                        break;
-                    }
+                    SpawnParticles(hit.transform.position);
+                    raycastSuccess = true;
+                    break;
                 }
-                if (!raycastSuccess)
-                    SpawnParticles((entity.transform.position + transform.position)/2);
-                
-                hitEntities.Add(entity);
             }
+
+            if (!raycastSuccess)
+                SpawnParticles((entity.transform.position + transform.position) / 2);
+
+            hitEntities.Add(entity);
+        }
+    }
+
     private void UpdateTransform()
     {
         Quaternion rotation = Quaternion.Euler(0, -angle, 0);
