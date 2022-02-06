@@ -19,7 +19,7 @@ public class WeaponBar : MonoBehaviour
     private int selectedIndex;
 
     public Shooting shooting;
-    public float PistolTimeout, ShotgunTimeout, MachineTimeout, LauncherTimeout, SwordTimeout=0;
+    public float PistolTimeout, ShotgunTimeout, MachineTimeout, LauncherTimeout, SwordTimeout = 0;
     public float PistolRemainingTime, ShotgunRemainingTime, MachineRemainingTime, LauncherRemaningTime, SwordRemaningTime = 0;
     public bool PistolCooldown, ShotgunCooldown, MachineCooldown, SwordCooldown, LauncherCooldown = false;
     void Start()
@@ -27,7 +27,6 @@ public class WeaponBar : MonoBehaviour
         images = new Image[] { slot1, slot2, slot3, slot4, slot5 };
         slotCount = images.Length;
         selectedIndex = images.Length / 2;
-        UpdateSelector();
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
         overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
         overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
@@ -38,10 +37,12 @@ public class WeaponBar : MonoBehaviour
         shooting.Sword.WeaponShoot += UpdateSprite;
         shooting.GrenadeLauncher.WeaponShoot += UpdateSprite;
         shooting.MachineGun.WeaponShoot += UpdateSprite;
+        setAllwhite();
+        UpdateSelector();
     }
     void Update()
     {
-        if(PistolCooldown)
+        if (PistolCooldown)
         {
             overlay.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (PistolRemainingTime / PistolTimeout));
             //overlay.rectTransform.localPosition = new Vector3(0, -(-50 + (PistolRemainingTime / PistolTimeout) * 40), 0);
@@ -88,42 +89,43 @@ public class WeaponBar : MonoBehaviour
         switch (args.type)
         {
             case WeaponType.Pistol:
-                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
                 PistolCooldown = true;
                 PistolRemainingTime = 0;
                 PistolTimeout = args.Timeout;
                 break;
             case WeaponType.Shotgun:
-                overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+                overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
                 ShotgunCooldown = true;
                 ShotgunRemainingTime = 0;
                 ShotgunTimeout = args.Timeout;
                 break;
             case WeaponType.MachineGun:
-                overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+                overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
                 MachineCooldown = true;
                 MachineRemainingTime = 0;
                 MachineTimeout = args.Timeout;
                 break;
             case WeaponType.GrenadeLauncher:
-                overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+                overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
                 LauncherCooldown = true;
                 LauncherRemaningTime = 0;
                 LauncherTimeout = args.Timeout;
                 break;
             case WeaponType.Sword:
-                overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.75f);
+                overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
                 SwordCooldown = true;
                 SwordRemaningTime = 0;
                 SwordTimeout = args.Timeout;
                 break;
         }
-        
-        
+
+
     }
 
     public void SelectSlot(int slot)
     {
+        images[selectedIndex].color = Color.white;
         selectedIndex = slot;
         UpdateSelector();
     }
@@ -135,6 +137,16 @@ public class WeaponBar : MonoBehaviour
     public void UpdateSelector()
     {
         selector.transform.position = images[selectedIndex].transform.position;
+        selector.color = ApplicationData.WeaponData[shooting.CurrentWeapon.WeaponType].color;
+        images[selectedIndex].color = ApplicationData.WeaponData[shooting.CurrentWeapon.WeaponType].color;
+    }
+
+    public void setAllwhite()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            images[i].color = Color.white;
+        }
     }
 
 }
