@@ -7,11 +7,13 @@ public class HealthSystem : MonoBehaviour
 {
     [HideInInspector] public float defaultHealth = 100f;
     private float health, maxHealth;
+    public bool godMode;
     public float Health
     {
-        get { return health; }
+        get => health;
         set
         {
+            if(godMode) return;
             float previousHealth = health;
             health = value;
             if (health > maxHealth)
