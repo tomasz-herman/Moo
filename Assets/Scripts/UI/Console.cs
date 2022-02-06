@@ -76,13 +76,30 @@ public class Console : MonoBehaviour
                 };
 
                 EnemyPrefabInfo enemyInfo = Enemys.GetEnemyInfoFromType(type);
-                Instantiate(enemyInfo.enemy, playerTransform.position + Vector3.up * 10, Quaternion.identity);
+                Instantiate(enemyInfo.enemy, playerTransform.position + playerTransform.forward * 5, Quaternion.identity);
             });
         ActionCommand<float> setTimeScale = new ActionCommand<float>(
             "set-time-scale", 
             "Sets time scale", 
             "set-time-scale <scale>", 
             scale => Time.timeScale = scale);
+        ActionCommand<string> endGame = new ActionCommand<string>(
+            "end", 
+            "Ends the game", 
+            "end <win|lose>",
+            result =>
+            {
+                GameWorld gameWorld = GameObject.Find("GameWorld").GetComponent<GameWorld>();
+                ScoreSystem scoreSystem = GameObject.Find("Player").GetComponent<ScoreSystem>();
+                bool win = result switch
+                {
+                    "win" => true,
+                    "lose" => false,
+                    _ => throw new ArgumentOutOfRangeException(nameof(result), result, 
+                        "Should be one of: win, lose")
+                };
+                gameWorld.EndGame(win, scoreSystem.GetScore());
+            });
         Commands = new Dictionary<string, Command>
         {
             [log.Id] = log, 
@@ -91,7 +108,8 @@ public class Console : MonoBehaviour
             [restore.Id] = restore,
             [setHealth.Id] = setHealth,
             [spawn.Id] = spawn,
-            [godMode.Id] = godMode
+            [godMode.Id] = godMode,
+            [endGame.Id] = endGame
         };
     }
 
