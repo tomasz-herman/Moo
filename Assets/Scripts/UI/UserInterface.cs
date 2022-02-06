@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +8,7 @@ public class UserInterface : MonoBehaviour
     public StatsWindow statsWindow;
     public PauseMenu pauseMenu;
 
-    private GuiWindow selectedWindow;
+    public GuiWindow selectedWindow;
 
     void Update()
     {
