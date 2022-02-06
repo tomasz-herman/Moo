@@ -20,6 +20,7 @@ namespace Assets.Scripts.Upgrades
         public override UpgradeType CommitUpdate()
         {
             healthSystem.MaxHealth += bonus;
+            healthSystem.Health += bonus;
             return UpgradeType.MaxHealth;
         }
     }
