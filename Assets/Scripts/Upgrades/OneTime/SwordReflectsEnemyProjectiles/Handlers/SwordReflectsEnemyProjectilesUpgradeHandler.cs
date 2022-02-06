@@ -5,7 +5,7 @@ using Assets.Scripts.Weapons;
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles
+namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 {
     public class SwordReflectsEnemyProjectilesUpgradeHandler : IOneTimeProjectileUpgradeHandler
     {
@@ -34,6 +34,10 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles
         public SwordReflectsEnemyProjectilesUpgradeHandler(Sword sword)
         {
             _sword = sword;
+        }
+
+        public void ApplyUpgrade()
+        {
             if (!_sword.BladeUpgrades.OfType<SwordReflectsEnemyProjectilesUpgradeHandler>().Any())
             {
                 _sword.BladeUpgrades.Add(this);
