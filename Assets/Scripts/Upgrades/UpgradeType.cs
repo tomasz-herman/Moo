@@ -9,5 +9,5 @@ public enum UpgradeType
     //One time upgrades (do not place anything below if it's not one time upgrade)
     SwordReflectsEnemyProjectiles, 
     PistolProjectilesExplodeAfterHittingEnemy, ShotgunProjectilesExplodeAfterHittingEnemy, MachineGunProjectilesExplodeAfterHittingEnemy,
-    PistolProjectileChainsToNearestEnemy, ShotgunProjectileChainsToNearestEnemy, MachineGunProjectileChainsToNearestEnemy, GrenadeLauncherProjectileChainsToNearestEnemy
+    PistolProjectilesChainToNearestEnemy, ShotgunProjectilesChainToNearestEnemy, MachineGunProjectilesChainToNearestEnemy, GrenadeLauncherProjectilesChainToNearestEnemy
 }
