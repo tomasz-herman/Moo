@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.SoundManager;
 using Assets.Scripts.Upgrades.OneTime.Handlers;
-using Assets.Scripts.Upgrades.OneTime.Upgradables;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -9,8 +8,9 @@ namespace Assets.Scripts.Weapons
     public class Sword : Weapon
     {
         private readonly Blade bladePrefab;
+        public List<IOneTimeProjectileUpgradeHandler> BladeUpgrades { get; set; } = new List<IOneTimeProjectileUpgradeHandler>();
 
-        public Sword(Blade bladePrefab): base(WeaponType.Sword, SoundType.SwordSwing)
+        public Sword(Blade bladePrefab) : base(WeaponType.Sword, SoundType.SwordSwing)
         {
             this.bladePrefab = bladePrefab;
         }
@@ -23,7 +23,5 @@ namespace Assets.Scripts.Weapons
             blade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, baseProjectileSpeed * shooting.projectileSpeedMultiplier);
         }
 
-        //unfortunately
-        public List<IOneTimeProjectileUpgradeHandler> BladeUpgrades { get; set; } = new List<IOneTimeProjectileUpgradeHandler>();
     }
 }

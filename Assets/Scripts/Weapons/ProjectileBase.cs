@@ -38,11 +38,6 @@ namespace Assets.Scripts.Weapons
         {
             _elapsedTime += Time.deltaTime;
 
-            foreach (var upgrade in ProjectileUpgrades)
-            {
-                upgrade.OnUpdate(this);
-            }
-
             if (_elapsedTime > TimeToLive)
                 Destroy(gameObject);
         }
@@ -92,6 +87,5 @@ namespace Assets.Scripts.Weapons
             particles.SparkColor = color;
             particles.ParticleCount = particleCount;
         }
-
     }
 }
