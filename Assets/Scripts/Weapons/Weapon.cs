@@ -82,5 +82,24 @@ namespace Assets.Scripts.Weapons
         {
             Audio?.Dispose();
         }
+
+        public static string GetWeaponName(WeaponType type)
+        {
+            switch (type)
+            {
+                case WeaponType.MachineGun:
+                    return "MACHINEGUN";
+                case WeaponType.Shotgun:
+                    return "SHOTGUN";
+                case WeaponType.Pistol:
+                    return "PISTOL";
+                case WeaponType.Sword:
+                    return "SWORD";
+                case WeaponType.GrenadeLauncher:
+                    return "GRENADE LAUNCHER";
+                default:
+                    return "";
+            }
+        }
     }
 }
