@@ -38,9 +38,9 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
         public void ApplyUpgrade()
         {
-            if (!_sword.BladeUpgrades.OfType<SwordReflectsEnemyProjectilesUpgradeHandler>().Any())
+            if (!_sword.ProjectileUpgrades.OfType<SwordReflectsEnemyProjectilesUpgradeHandler>().Any())
             {
-                _sword.BladeUpgrades.Add(this);
+                _sword.ProjectileUpgrades.Add(this);
             }
         }
 
@@ -142,6 +142,7 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
         public static void DrawWireCapsule(Vector3 _pos, Vector3 _pos2, float _radius, Color _color = default)
         {
+#if UNITY_EDITOR
             if (_color != default) Handles.color = _color;
 
             var forward = _pos2 - _pos;
@@ -166,11 +167,14 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
                 DrawLine(0f, _radius, length);
                 DrawLine(0f, -_radius, length);
             }
+#endif
         }
 
         private static void DrawLine(float arg1, float arg2, float forward)
         {
+#if UNITY_EDITOR
             Handles.DrawLine(new Vector3(arg1, arg2, 0f), new Vector3(arg1, arg2, forward));
+#endif
         }
     }
 }
