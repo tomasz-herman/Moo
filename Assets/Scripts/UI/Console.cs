@@ -32,7 +32,7 @@ public class Console : MonoBehaviour
         ActionCommand<float> setHealth = new ActionCommand<float>(
             "set-h",
             "Sets health to given value",
-            "set-health <health>",
+            "set-h <health>",
             health =>
             {
                 HealthSystem healthSystem = GameObject.Find("Player").GetComponent<HealthSystem>();
