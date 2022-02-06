@@ -1,6 +1,8 @@
+using System;
 using Assets.Scripts.Upgrades;
 using Assets.Scripts.Upgrades.Weapons;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrades;
 using Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Upgrades;
 using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Upgrades;
@@ -84,9 +86,18 @@ public class UpgradesProvider : MonoBehaviour
             new GrenadeLauncherProjectilesChainToNearestEnemyUpgrade(shootingSystem.GrenadeLauncher, projectilesChainToNearestEnemy)
         };
 
+        try
+        {
+            _ = upgradesList.ToDictionary(x => x.upgradeType);
+        }
+        catch (ArgumentException)
+        {
+            Debug.LogError("Upgrades do not have unique types.");
+        }
+
         if (upgradesList.Count != UpgradeTypeExtensions.AllUpgrades.Length)
         {
-            Debug.LogError("Some upgrades are not in the upgrades list.");
+            Debug.LogError("Some upgrades are not (or there are too many upgrades) in the upgrades list.");
         }
 
         //rewrite values into array to improve performance
