@@ -145,9 +145,6 @@ public class ChamberNode
     }
     private void ChamberClearedHandler()
     {
-        //Parent.ChamberControl.SetClearedPathColor(Directions.GetOpposite(ParentDirection));
-        //Parent.ChamberControl.SetDefaultPathsColors();
-        //ChamberControl.SetClearedPathColor(ParentDirection);
         isCleared = true;
         ClearedPathSetFromeOptional(this);
     }
@@ -186,9 +183,11 @@ public class ChamberNode
         root.Parent.ChamberControl.SetClearedPathColor(Directions.GetOpposite(root.ParentDirection));
         if (root.Parent.isCleared)
             root.Parent.ChamberControl.SetDefaultPathsColors();
-        //root.ChamberControl.SetClearedPathColor(ParentDirection);
-        //root.ChamberControl.SetDefaultPathsColors();
 
+        // // Path to boss
+        //root.ChamberControl.SetClearedPathColor(root.ParentDirection);
+        //if (root.isCleared)
+        //    root.ChamberControl.SetDefaultPathsColors();
 
         ClearedPathSetFromeOptional(root.Parent);
     }
@@ -200,9 +199,16 @@ public class ChamberNode
         if (root.isPathCleared)
             return;
 
+        if(root.Parent.Type==ChamberType.Start)
+        {
+            root.ChamberControl.SetClearedPathColor(root.ParentDirection);
+            root.ChamberControl.SetDefaultPathsColors();
+        }
+
         root.isPathCleared = root.IsChamberAndParentCleared();
         if (!root.isPathCleared)
             return;
+
 
         foreach (var item in root.Children())
             if (item.Type != ChamberType.Optional)
@@ -210,13 +216,14 @@ public class ChamberNode
                 item.ChamberControl.SetClearedPathColor(item.ParentDirection);
                 if (item.isCleared)
                     item.ChamberControl.SetDefaultPathsColors();
+                ClearedPathSetToBoss(item);
             }
     }
 
     private bool IsChildrenCleared()
     {
         foreach (var item in Children())
-            if (!isPathCleared)
+            if (!item.isPathCleared)
                 return false;
         return true;
     }
@@ -225,7 +232,7 @@ public class ChamberNode
     {
         foreach (var item in Children())
             if (item.Type == ChamberType.Optional)
-                if (!isPathCleared)
+                if (!item.isPathCleared)
                     return false;
         if (!Parent.isPathCleared)
             return false;
