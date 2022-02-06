@@ -11,11 +11,17 @@ public static class Layers
     public static readonly string Enemy = "Enemy";
     public static readonly string Projectile = "Projectile";
     public static readonly string ItemSolid = "ItemSolid";
+    public static readonly string Blade = "Blade";
 
     public static readonly LayerMask TerrainLayers = LayerMask.GetMask(Wall, Floor);
 
     public static bool Contains(this LayerMask mask, int layer)
     {
         return mask == (mask | (1 << layer));
+    }
+
+    public static int GetLayer(string layerName)
+    {
+        return LayerMask.NameToLayer(layerName);
     }
 }
