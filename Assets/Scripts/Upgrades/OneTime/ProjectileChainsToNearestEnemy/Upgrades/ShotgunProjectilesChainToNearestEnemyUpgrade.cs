@@ -5,7 +5,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrade
 {
     public class ShotgunProjectilesChainToNearestEnemyUpgrade : ProjectilesChainToNearestEnemyUpgradeBase
     {
-        protected ShotgunProjectilesChainToNearestEnemyUpgrade(Shotgun shotgun, Sprite sprite)
+        public ShotgunProjectilesChainToNearestEnemyUpgrade(Shotgun shotgun, Sprite sprite)
             : base(shotgun, sprite, UpgradeType.ShotgunProjectilesChainToNearestEnemy) {}
 
         public override UpgradeType CommitUpdate()
