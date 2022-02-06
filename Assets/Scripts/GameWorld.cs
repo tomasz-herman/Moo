@@ -20,17 +20,6 @@ public class GameWorld : MonoBehaviour
 
     private void Update()
     {
-        //TODO remove when there is no need to debug-trigger game win
-        if (!IsPaused())
-        {
-            if (Input.GetKey(KeyCode.F))
-                EndGame(true, Utils.NumberBetween(100, 999));
-            else if (Input.GetKey(KeyCode.RightBracket))
-                Time.timeScale *= 1.01f;
-            else if (Input.GetKey(KeyCode.LeftBracket))
-                Time.timeScale *= 0.99f;
-        }
-
         if (!Debug.isDebugBuild)
         {
             if (!Application.isFocused && !IsPaused())
