@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers
 {
-    public class ProjectileChainsToNearestEnemyUpgradeHandlerBase : IOneTimeProjectileUpgradeHandler
+    public class ProjectilesChainToNearestEnemyUpgradeHandlerBase : IOneTimeProjectileUpgradeHandler
     {
         public void OnEnemyHit(ProjectileBase projectile, Enemy enemy)
         {
