@@ -31,26 +31,20 @@ public class PlayerMovement : MonoBehaviour
         camera = Camera.main;
     }
 
-    void Update()
+    void OnMove(InputValue movementValue)
     {
         if(GameWorld.IsPaused()) return;
+
+        Vector2 movementVector = movementValue.Get<Vector2>();
+        float right = movementVector.x;
+        float forward = movementVector.y;
         
         Vector3 toCharacter = characterController.transform.position - camera.transform.position;
         toCharacter.y = 0;
         toCharacter.Normalize();
         Vector3 toRight = Quaternion.Euler(0, 90, 0) * toCharacter;
 
-        float moveForward = 0, moveRight = 0;
-        if (Keyboard.current.dKey.isPressed)
-            moveRight++;
-        if (Keyboard.current.aKey.isPressed)
-            moveRight--;
-        if (Keyboard.current.wKey.isPressed)
-            moveForward++;
-        if (Keyboard.current.sKey.isPressed)
-            moveForward--;
-
-        direction = toCharacter * moveForward + toRight * moveRight;
+        direction = toCharacter * forward + toRight * right;
     }
 
     private void FixedUpdate()

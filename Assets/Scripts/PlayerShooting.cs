@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
     private Shooting shooting;
+    private bool isShooting = false;
 
     void Start()
     {
@@ -16,12 +18,22 @@ public class PlayerShooting : MonoBehaviour
     {
         if (GameWorld.IsPaused()) return;
         
-        if (Mouse.current.leftButton.isPressed)
+        if (isShooting)
         {
             shooting.TryShoot(gameObject, gameObject.transform.position + new Vector3(0, 1, 0), gameObject.transform.forward);
         }
+    }
 
-        if (Mouse.current.scroll.y.ReadValue() > 0) shooting.NextWeapon();
-        else if (Mouse.current.scroll.y.ReadValue() < 0) shooting.PrevWeapon();
+    void OnSelectWeapon(InputValue nextWeaponValue)
+    {
+        float next = nextWeaponValue.Get<float>();
+        
+        if (next > 0) shooting.NextWeapon();
+        else if (next < 0) shooting.PrevWeapon();
+    }
+    
+    void OnFire()
+    {
+        isShooting = !isShooting;
     }
 }
