@@ -168,5 +168,19 @@ namespace Assets.Scripts.SoundManager
                     return currentlyPlayingIndex;
             }
         }
+
+        public static void SwapBackgroundMusicPlaying(BackgroundMusicManager managerToStartPlaying, BackgroundMusicManager managerToStopPlaying)
+        {
+            managerToStopPlaying.Pause();
+
+            if (managerToStartPlaying.IsPlaying)
+            {
+                managerToStartPlaying.UnPause();
+            }
+            else
+            {
+                managerToStartPlaying.Play();
+            }
+        }
     }
 }

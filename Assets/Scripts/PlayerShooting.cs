@@ -1,11 +1,10 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerShooting : MonoBehaviour
 {
     private Shooting shooting;
     public GameWorld gameWorld;
-
-    private bool leftClicked = false;
 
     private GameObject gun;
 
@@ -19,13 +18,9 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         if (!Application.isFocused) return;
+        if (gameWorld.IsPaused()) return;
 
-        if (Input.GetMouseButtonDown(0) && !gameWorld.IsPaused())
-            leftClicked = true;
-        if (Input.GetMouseButtonUp(0))
-            leftClicked = false;
-
-        if (leftClicked)
+        if (Input.GetMouseButton((int)MouseButton.LeftMouse))
         {
             shooting.TryShoot(gameObject, gun.transform.position, gameObject.transform.forward);
         }
