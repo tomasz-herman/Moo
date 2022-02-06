@@ -13,11 +13,6 @@ public class Console : MonoBehaviour
 
     private void Awake()
     {
-        ActionCommand<string> log = new ActionCommand<string>(
-            "log", 
-            "Logs given message", 
-            "log <message>", 
-            message => Debug.Log("Log"));
         ActionCommand help = new ActionCommand(
             "help",
             "Shows all commands",
@@ -35,7 +30,7 @@ public class Console : MonoBehaviour
                 ammoSystem.Ammo = ammoSystem.MaxAmmo;
             });
         ActionCommand<float> setHealth = new ActionCommand<float>(
-            "set-health",
+            "set-h",
             "Sets health to given value",
             "set-health <health>",
             health =>
@@ -79,9 +74,9 @@ public class Console : MonoBehaviour
                 Instantiate(enemyInfo.enemy, playerTransform.position + playerTransform.forward * 5, Quaternion.identity);
             });
         ActionCommand<float> setTimeScale = new ActionCommand<float>(
-            "set-time-scale", 
+            "sts", 
             "Sets time scale", 
-            "set-time-scale <scale>", 
+            "sts <scale>", 
             scale => Time.timeScale = scale);
         ActionCommand<string> endGame = new ActionCommand<string>(
             "end", 
@@ -102,7 +97,6 @@ public class Console : MonoBehaviour
             });
         Commands = new Dictionary<string, Command>
         {
-            [log.Id] = log, 
             [help.Id] = help, 
             [setTimeScale.Id] = setTimeScale,
             [restore.Id] = restore,
