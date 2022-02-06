@@ -31,6 +31,7 @@ public class UpgradesProvider : MonoBehaviour
         movementSystem = GetComponent<PlayerMovement>();
         shootingSystem = GetComponent<Shooting>();
 
+        //TODO: switch dict to list
         var dict = new Dictionary<UpgradeType, UpgradeView>();
         dict.Add(UpgradeType.MaxHealth, new MaxHealthUpgrade(healthSystem, maxHealthIcon));
         dict.Add(UpgradeType.MaxAmmo, new MaxAmmoUpgrade(ammoSystem, maxAmmoIcon));
@@ -62,15 +63,15 @@ public class UpgradesProvider : MonoBehaviour
         dict.Add(UpgradeType.SwordReflectsEnemyProjectiles, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
 
         //TODO:
-        dict.Add(UpgradeType.PistolProjectilesExplodeAfterHittingEnemy, null/*new ProjectilesExplodeAfterHittingEnemyUpgradeBase(shootingSystem, projectilesExplodeAfterHittingEnemyIcon)*/);
-        dict.Add(UpgradeType.ShotgunProjectilesExplodeAfterHittingEnemy, null);
-        dict.Add(UpgradeType.MachineGunProjectilesExplodeAfterHittingEnemy, null);
+        dict.Add(UpgradeType.PistolProjectilesExplodeAfterHittingEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon)/*new ProjectilesExplodeAfterHittingEnemyUpgradeBase(shootingSystem, projectilesExplodeAfterHittingEnemyIcon)*/);
+        dict.Add(UpgradeType.ShotgunProjectilesExplodeAfterHittingEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
+        dict.Add(UpgradeType.MachineGunProjectilesExplodeAfterHittingEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
 
         //TODO:
-        dict.Add(UpgradeType.PistolProjectileChainsToNearestEnemy, null/*new ProjectileChainsToNearestEnemyUpgradeBase(shootingSystem, projectileChainsToNearestEnemy*/);
-        dict.Add(UpgradeType.ShotgunProjectileChainsToNearestEnemy, null);
-        dict.Add(UpgradeType.MachineGunProjectileChainsToNearestEnemy, null);
-        dict.Add(UpgradeType.GrenadeLauncherProjectileChainsToNearestEnemy, null);
+        dict.Add(UpgradeType.PistolProjectileChainsToNearestEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon)/*new ProjectileChainsToNearestEnemyUpgradeBase(shootingSystem, projectileChainsToNearestEnemy*/);
+        dict.Add(UpgradeType.ShotgunProjectileChainsToNearestEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
+        dict.Add(UpgradeType.MachineGunProjectileChainsToNearestEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
+        dict.Add(UpgradeType.GrenadeLauncherProjectileChainsToNearestEnemy, new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon));
 
         //rewrite values into array to improve performance
         upgrades = new UpgradeView[dict.Count];
