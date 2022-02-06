@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,19 +33,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(GameWorld.IsPaused()) return;
+        
         Vector3 toCharacter = characterController.transform.position - camera.transform.position;
         toCharacter.y = 0;
         toCharacter.Normalize();
         Vector3 toRight = Quaternion.Euler(0, 90, 0) * toCharacter;
 
         float moveForward = 0, moveRight = 0;
-        if (Input.GetKey(KeyCode.D))
+        if (Keyboard.current.dKey.isPressed)
             moveRight++;
-        if (Input.GetKey(KeyCode.A))
+        if (Keyboard.current.aKey.isPressed)
             moveRight--;
-        if (Input.GetKey(KeyCode.W))
+        if (Keyboard.current.wKey.isPressed)
             moveForward++;
-        if (Input.GetKey(KeyCode.S))
+        if (Keyboard.current.sKey.isPressed)
             moveForward--;
 
         direction = toCharacter * moveForward + toRight * moveRight;

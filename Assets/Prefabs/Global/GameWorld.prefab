@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userInterface: {fileID: 0}
   timer: {fileID: 295459154561307030}
+  audioManager: {fileID: 0}
+  BackgroundMusicManager: {fileID: 0}
 --- !u!114 &295459154561307030
 MonoBehaviour:
   m_ObjectHideFlags: 0

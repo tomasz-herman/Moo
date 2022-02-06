@@ -1,6 +1,7 @@
 using System;
 using Assets.Scripts.SoundManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameWorld : MonoBehaviour
@@ -19,11 +20,11 @@ public class GameWorld : MonoBehaviour
     private void Update()
     {
         //TODO remove when there is no need to debug-trigger game win
-        if (!IsPaused() && Input.GetKey(KeyCode.F))
+        if (!IsPaused() && Keyboard.current.fKey.isPressed)
             EndGame(true, Utils.NumberBetween(100,999));
     }
 
-    public bool IsPaused() { return Time.timeScale == 0; }
+    public static bool IsPaused() { return Time.timeScale == 0; }
 
     public void EndGame(bool win, int playerBaseScore)
     {

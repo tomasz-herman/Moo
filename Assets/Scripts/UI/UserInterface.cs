@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class UserInterface : MonoBehaviour
@@ -14,16 +15,16 @@ public class UserInterface : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (selectedWindow != null)
                 ClearWindow();
             else
                 TryToggleWindow(pauseMenu);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current.eKey.wasPressedThisFrame)
             TryToggleWindow(statsWindow);
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Keyboard.current.qKey.wasPressedThisFrame)
             TryToggleWindow(upgradeWindow);
     }
 
@@ -63,10 +64,7 @@ public class UserInterface : MonoBehaviour
 
     public void SetPause(bool pause)
     {
-        if (pause)
-            Time.timeScale = 0f;
-        else
-            Time.timeScale = 1f;
+        Time.timeScale = pause ? 0f : 1f;
     }
 
     public void Quit()
