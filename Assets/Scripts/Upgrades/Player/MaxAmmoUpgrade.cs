@@ -20,6 +20,7 @@ namespace Assets.Scripts.Upgrades
         public override UpgradeType CommitUpdate()
         {
             ammoSystem.MaxAmmo += bonus;
+            ammoSystem.Ammo += bonus;
             return UpgradeType.MaxAmmo;
         }
     }
