@@ -5,57 +5,50 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponCooldownUpgrade : UpgradeView
     {
-        private float multiplier = 0.9f;
+        private const float Multiplier = 0.9f;
 
-        private readonly Weapon weapon;
+        private readonly Weapon _weapon;
 
-        protected WeaponCooldownUpgrade(Weapon w, Sprite sprite, string weaponName)
-            : base($"{weaponName} cooldown", $"Decrease cooldown of {weaponName} by 10%", sprite)
+        protected WeaponCooldownUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(w.WeaponType)} cooldown", $"Decrease cooldown of {Weapon.GetWeaponName(w.WeaponType)} by 10%", sprite, upgradeType)
         {
-            weapon = w;
+            _weapon = w;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            weapon.basetriggerTimeout *= multiplier;
-            return GetUpgradeType();
+            _weapon.basetriggerTimeout *= Multiplier;
+            return this.upgradeType;
         }
-        protected abstract UpgradeType GetUpgradeType();
     }
 
     public class PistolCooldownUpgrade : WeaponCooldownUpgrade
     {
         public PistolCooldownUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, "PISTOL") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.PistolCooldown;
+            : base(weapon, sprite, UpgradeType.PistolCooldown) { }
     }
+
     public class ShotgunCooldownUpgrade : WeaponCooldownUpgrade
     {
         public ShotgunCooldownUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, "SHOTGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.ShotgunCooldown;
+            : base(weapon, sprite, UpgradeType.ShotgunCooldown) { }
     }
+
     public class MachineGunCooldownUpgrade : WeaponCooldownUpgrade
     {
         public MachineGunCooldownUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, "MACHINEGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.MachineGunCooldown;
+            : base(weapon, sprite, UpgradeType.MachineGunCooldown) { }
     }
+
     public class GrenadeLauncherCooldownUpgrade : WeaponCooldownUpgrade
     {
         public GrenadeLauncherCooldownUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, "GRENADE LAUNCHER") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.GrenadeLauncherCooldown;
+            : base(weapon, sprite, UpgradeType.GrenadeLauncherCooldown) { }
     }
+
     public class SwordCooldownUpgrade : WeaponCooldownUpgrade
     {
         public SwordCooldownUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, "SWORD") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.SwordCooldown;
+            : base(weapon, sprite, UpgradeType.SwordCooldown) { }
     }
 }
