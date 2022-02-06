@@ -5,8 +5,8 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Up
 {
     public class MachineGunProjectilesExplodeAfterHittingEnemyUpgrade : ProjectilesExplodeAfterHittingEnemyUpgradeBase
     {
-        public MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(Shotgun shotgun, Sprite sprite)
-            : base(shotgun, sprite, UpgradeType.MachineGunProjectilesExplodeAfterHittingEnemy) {}
+        public MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(MachineGun machineGun, Sprite sprite)
+            : base(machineGun, sprite, UpgradeType.MachineGunProjectilesExplodeAfterHittingEnemy) {}
 
         public override UpgradeType CommitUpdate()
         {
