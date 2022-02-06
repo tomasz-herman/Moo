@@ -169,7 +169,7 @@ public class ChamberNode
             return;
         if (root.isPathCleared)
             return;
-        if(root.Type!=ChamberType.Optional)
+        if (root.Type != ChamberType.Optional)
         {
             ClearedPathToBoss(root);
             return;
@@ -180,10 +180,12 @@ public class ChamberNode
 
     private void ClearedPathToBoss(ChamberNode root)
     {
-        if (root.Parent.Type == ChamberType.Start)
+        if (root.Parent.isPathCleared)
         {
             root.ChamberControl.SetClearedPathColor(root.ParentDirection);
             root.ChamberControl.SetDefaultPathsColors();
+            root.Parent.ChamberControl.SetClearedPathColor(Directions.GetOpposite(root.ParentDirection));
+            root.Parent.ChamberControl.SetDefaultPathsColors();
         }
 
         root.isPathCleared = root.IsChamberAndParentCleared();
@@ -196,6 +198,14 @@ public class ChamberNode
                 item.ChamberControl.SetClearedPathColor(item.ParentDirection);
                 if (item.isCleared)
                     item.ChamberControl.SetDefaultPathsColors();
+
+                // Path to boss
+                if (item.isCleared)
+                {
+                    item.Parent.ChamberControl.SetClearedPathColor(Directions.GetOpposite(item.ParentDirection));
+                    item.Parent.ChamberControl.SetDefaultPathsColors();
+                }
+
                 ClearedPathSet(item);
             }
     }
@@ -211,10 +221,10 @@ public class ChamberNode
         if (root.Parent.isCleared)
             root.Parent.ChamberControl.SetDefaultPathsColors();
 
-        // // Path to boss
-        //root.ChamberControl.SetClearedPathColor(root.ParentDirection);
-        //if (root.isCleared)
-        //    root.ChamberControl.SetDefaultPathsColors();
+        // Path to boss
+        root.ChamberControl.SetClearedPathColor(root.ParentDirection);
+        if (root.isCleared)
+            root.ChamberControl.SetDefaultPathsColors();
 
         ClearedPathSet(root.Parent);
     }
