@@ -7,12 +7,13 @@ namespace Assets.Scripts.Upgrades
     {
         private static readonly UpgradeType FirstOneTimeUpgrade = UpgradeType.SwordReflectsEnemyProjectiles;
 
+        public static readonly UpgradeType[] AllUpgrades;
         public static readonly UpgradeType[] OneTimeUpgrades;
 
         static UpgradeTypeExtensions()
         {
-            var upgrades = Enum.GetValues(typeof(UpgradeType)).Cast<UpgradeType>();
-            OneTimeUpgrades = upgrades.Where(x => (int)x >= (int)FirstOneTimeUpgrade).ToArray();
+            AllUpgrades = Enum.GetValues(typeof(UpgradeType)).Cast<UpgradeType>().ToArray();
+            OneTimeUpgrades = AllUpgrades.Where(x => (int)x >= (int)FirstOneTimeUpgrade).ToArray();
         }
 
         public static bool IsOneTimeUpgrade(this UpgradeType upgrade)
