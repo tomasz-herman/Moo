@@ -28,6 +28,17 @@ public class GameWorld : MonoBehaviour
             else if (Input.GetKey(KeyCode.LeftBracket))
                 Time.timeScale *= 0.99f;
         }
+
+        if (!Debug.isDebugBuild)
+        {
+            if (!Application.isFocused && !IsPaused())
+            {
+                if (userInterface.selectedWindow != null)
+                    userInterface.ClearWindow();
+                else
+                    userInterface.TryToggleWindow(userInterface.pauseMenu);
+            }
+        }
     }
 
     public bool IsPaused() { return Time.timeScale == 0; }
