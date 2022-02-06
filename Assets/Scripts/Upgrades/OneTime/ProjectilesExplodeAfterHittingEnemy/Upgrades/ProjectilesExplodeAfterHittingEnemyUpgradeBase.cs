@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Weapons;
+using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Upgrades
 {
     public abstract class ProjectilesExplodeAfterHittingEnemyUpgradeBase : UpgradeView
     {
-        private readonly Shooting _shootingSystem;
+        private readonly Weapon _weapon;
 
-        protected ProjectilesExplodeAfterHittingEnemyUpgradeBase(Shooting shootingSystem, Sprite sprite, UpgradeType upgradeType)
-            : base("Projectile explodes", "Projectile explodes after hitting enemy. Works only on pistol, machine gun and shotgun.", sprite, upgradeType)
+        protected ProjectilesExplodeAfterHittingEnemyUpgradeBase(Weapon weapon, Sprite sprite, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(weapon.WeaponType)} projectile explodes",
+                $"{Weapon.GetWeaponName(weapon.WeaponType)} projectile explodes after hitting enemy",
+                sprite, upgradeType)
         {
-            _shootingSystem = shootingSystem;
+            _weapon = weapon;
         }
     }
 }
