@@ -123,6 +123,102 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &139558746
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2695491978722521829, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_Name
+      value: IdleMusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: SwitchType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[0].SoundType
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[1].SoundType
+      value: 3003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[2].SoundType
+      value: 3006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[3].SoundType
+      value: 3006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[1].PlaybackSettings.UseDefault
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+--- !u!114 &139558747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+  m_PrefabInstance: {fileID: 139558746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4912086642a831d4eb583f4b543e7d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &266757169
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -184,6 +280,86 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
+--- !u!1001 &762268524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2695491978722521829, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_Name
+      value: FightMusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791108613062180642, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: SwitchType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+      propertyPath: BackgroundMusicQueue.Array.data[0].SoundType
+      value: 3001
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+--- !u!114 &762268525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
+  m_PrefabInstance: {fileID: 762268524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4912086642a831d4eb583f4b543e7d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &822649173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -406,6 +582,14 @@ PrefabInstance:
       propertyPath: userInterface
       value: 
       objectReference: {fileID: 2113982991}
+    - target: {fileID: 295459154561307031, guid: 6c5102391be88004abfdcbea8d86f5ff, type: 3}
+      propertyPath: IdleMusicManager
+      value: 
+      objectReference: {fileID: 139558747}
+    - target: {fileID: 295459154561307031, guid: 6c5102391be88004abfdcbea8d86f5ff, type: 3}
+      propertyPath: FightMusicManager
+      value: 
+      objectReference: {fileID: 762268525}
     - target: {fileID: 295459154561307031, guid: 6c5102391be88004abfdcbea8d86f5ff, type: 3}
       propertyPath: BackgroundMusicManager
       value: 

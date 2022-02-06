@@ -411,7 +411,7 @@ namespace Assets.Scripts.SoundManager
             }
 
             // Update playing status
-            if (Source.isPlaying != IsPlaying && Application.isFocused)
+            if (Source.isPlaying != IsPlaying && !IsPaused && Application.isFocused)
             {
                 IsPlaying = Source.isPlaying;
             }
