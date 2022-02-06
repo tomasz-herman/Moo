@@ -8,8 +8,6 @@ public class PlayerShooting : MonoBehaviour
     private Shooting shooting;
     public GameWorld gameWorld;
 
-    private bool leftClicked = false;
-
     void Start()
     {
         shooting = GetComponent<Shooting>();
