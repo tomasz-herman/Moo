@@ -8,7 +8,7 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Upgrades
     {
         private readonly Sword _sword;
         public SwordReflectsEnemyProjectilesUpgrade(Sword sword, Sprite sprite)
-            : base("Lightsaber", $"{Weapon.GetWeaponName(sword.WeaponType)} reflects enemy projectiles.", sprite, UpgradeType.SwordReflectsEnemyProjectiles)
+            : base("Lightsaber", $"{Weapon.GetWeaponName(sword.WeaponType)} reflects enemy projectiles", sprite, UpgradeType.SwordReflectsEnemyProjectiles)
         {
             _sword = sword;
         }
