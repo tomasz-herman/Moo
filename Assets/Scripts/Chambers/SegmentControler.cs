@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SegmentControler : MonoBehaviour
@@ -9,15 +10,17 @@ public class SegmentControler : MonoBehaviour
     List<PathSegment> Path = new List<PathSegment>();
     private void Awake()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject ob = transform.GetChild(i).gameObject;
-            PathSegment pathsegment = ob.GetComponent<PathSegment>();
-            if (pathsegment != null)
-                Path.Add(pathsegment);
-            else
-                SegmentObjects.Add(ob.GetComponent<BlocadeTransition>());
-        }
+        Path = gameObject.GetComponentsInChildren<PathSegment>().ToList();
+        SegmentObjects = gameObject.GetComponentsInChildren<BlocadeTransition>().ToList();
+        //for (int i = 0; i < transform.childCount; i++)
+        //{
+        //    GameObject ob = transform.GetChild(i).gameObject;
+        //    PathSegment pathsegment = ob.GetComponent<PathSegment>();
+        //    if (pathsegment != null)
+        //        Path.Add(pathsegment);
+        //    else
+        //        SegmentObjects.Add(ob.GetComponent<BlocadeTransition>());
+        //}
     }
 
     public void SetPathBlocade(bool isActive)

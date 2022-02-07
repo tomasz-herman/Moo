@@ -29,7 +29,6 @@ public class ChamberControl : MonoBehaviour
     private void Start()
     {
         enemySpawner.AllEnemiesKilled.AddListener(AllEnemiesKilledHandler);
-        SetDoors(true);
     }
 
     private void OnDestroy()
