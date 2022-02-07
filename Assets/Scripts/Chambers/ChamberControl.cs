@@ -13,6 +13,7 @@ public class ChamberControl : Entity
     public ChamberNode node;
     private Dictionary<Direction, SegmentControler> segments = new Dictionary<Direction, SegmentControler>();
     private List<Door> doors = null;
+    private UnityEngine.Events.UnityEvent DoorOpenEvent = new UnityEngine.Events.UnityEvent();
 
     private void Awake()
     {
@@ -110,7 +111,9 @@ public class ChamberControl : Entity
         if (opened)
         {
             SetDefaultPathsColors();
+            BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.IdleMusicManager, GameWorld.FightMusicManager);
             State = States.Cleared;
+            DoorOpenEvent.Invoke();
         }
     }
 
@@ -174,14 +177,16 @@ public class ChamberControl : Entity
     {
         State = States.DoorsOpening;
         SetDoors(true);
-        SetDefaultPathsColors();
-        BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.IdleMusicManager, GameWorld.FightMusicManager);
-        State = States.Cleared;
     }
 
     public void AddAllEnemiesKilledListener(UnityEngine.Events.UnityAction action)
     {
         enemySpawner.AllEnemiesKilled.AddListener(action);
+    }
+
+    public void AddDoorsOpenListener(UnityEngine.Events.UnityAction action)
+    {
+        DoorOpenEvent.AddListener(action);
     }
 
     private void SetDoors(bool isOpen)

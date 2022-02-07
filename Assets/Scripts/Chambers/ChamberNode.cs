@@ -151,7 +151,7 @@ public class ChamberNode
 
     public void ActivateClearedHandler()
     {
-        ChamberControl.AddAllEnemiesKilledListener(ChamberClearedHandler);
+        ChamberControl.AddDoorsOpenListener(ChamberClearedHandler);
     }
 
     public void ActivateNode(ChamberControl control)
