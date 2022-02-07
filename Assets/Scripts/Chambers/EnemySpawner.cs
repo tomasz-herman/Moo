@@ -8,7 +8,9 @@ public class EnemySpawner
     public static int MaxNumber = 0;
     private int numberOfAliveEnemies = 0;
     public UnityEngine.Events.UnityEvent AllEnemiesKilled = new UnityEngine.Events.UnityEvent();
-    public void Spawn(List<SpawnLocationScript> spawnLocations, ChamberType chamberType, int chamberNumber)
+
+    /// <returns>Current boss (if spawned) or null (if not)</returns>
+    public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberType chamberType, int chamberNumber)
     {
         EnemiesSpawnData currentSpawnData = EnemiesData.GetData();
         int numberOfEnemys;
@@ -16,19 +18,16 @@ public class EnemySpawner
         {
             case ChamberType.Normal:
                 numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInNormalChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInNormalChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInNormalChamber);
-                SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData);
-                break;
+                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData);
             case ChamberType.Boss:
                 numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInBossChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInBossChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInBossChamber);
-                SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, EnemyTypes.Boss);
-                break;
+                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, EnemyTypes.Boss);
             case ChamberType.Optional:
                 numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInOptionalChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInOptionalChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInOptionalChamber);
-                SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, EnemyTypes.MiniBoss);
-                break;
+                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, EnemyTypes.MiniBoss);
             case ChamberType.Start:
             default:
-                break;
+                return null;
         }
     }
 
@@ -45,13 +44,15 @@ public class EnemySpawner
         return numberOfAliveEnemies <= 0;
     }
 
-    private void SpawnEnemy(EnemyTypes type, Vector3 position)
+    private Enemy SpawnEnemy(EnemyTypes type, Vector3 position)
     {
         EnemyPrefabInfo enemyinfo = Enemys.GetEnemyInfoFromType(type);
         var enemy = GameObject.Instantiate(enemyinfo.enemy, position, Quaternion.identity);
         numberOfAliveEnemies++;
-        enemy.GetComponent<Enemy>().KillEvent.AddListener(KillHandler);
+        Enemy enemyClass = enemy.GetComponent<Enemy>();
+        enemyClass.KillEvent.AddListener(KillHandler);
         TeleporterEffectScript.CreateTeleporterForEntity(enemy, enemyinfo.teleporterScale);
+        return enemyClass;
     }
 
     private EnemyTypes RandomEnemy(int chamberNumber, EnemiesSpawnData currData)
@@ -63,18 +64,19 @@ public class EnemySpawner
         return EnemyTypes.Small;
     }
 
-    private void SpawnNumberOfEnemies(int numberOfEnemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, EnemiesSpawnData currData,  EnemyTypes? BossType = null)
+    private Enemy SpawnNumberOfEnemies(int numberOfEnemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, EnemiesSpawnData currData,  EnemyTypes? BossType = null)
     {
-
+        Enemy boss = null;
         foreach (var item in spawnLocations.OrderBy(x => Utils.RandomNumber()))
         {
             if (numberOfEnemies <= 0)
-                return;
+                return boss;
             if (numberOfEnemies == 1 && BossType != null)
-                SpawnEnemy(BossType.Value, item.transform.position);
+                boss = SpawnEnemy(BossType.Value, item.transform.position);
             else
                 SpawnEnemy(RandomEnemy(chamberNumber, currData), item.transform.position);
             numberOfEnemies--;
         }
+        return boss;
     }
 }

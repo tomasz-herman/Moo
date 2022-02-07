@@ -10,6 +10,7 @@ public class HeadUpDisplay : MonoBehaviour
     public HealthBar healthBar;
     public WeaponBar weaponBar;
     public TimerBar timerBar;
+    public BossBar bossBar;
     public DamagePostProcessing damagePostProcessing;
 
 }

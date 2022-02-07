@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float defaultHealth = 100f;
+    [HideInInspector] public float defaultHealth = 100f;
     private float health, maxHealth;
+    public bool godMode;
     public float Health
     {
-        get { return health; }
+        get => health;
         set
         {
+            if(godMode && value < health) return;
             float previousHealth = health;
             health = value;
             if (health > maxHealth)

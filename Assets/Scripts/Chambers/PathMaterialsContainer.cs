@@ -17,7 +17,7 @@ public class PathMaterialsContainer : ScriptableObject
     }
 }
 
-public enum PathTypes { Main, None, Optional, Fight}
+public enum PathTypes { Main, None, Optional, Fight, Cleared}
 
 [System.Serializable]
 public struct PathMaterialInfo

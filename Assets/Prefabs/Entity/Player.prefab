@@ -115,9 +115,9 @@ MonoBehaviour:
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  projectileSpeed: 10
-  triggerTimeout: 0.5
-  weaponDamage: 1
+  projectileSpeedMultiplier: 1
+  triggerTimeoutMultiplier: 1
+  weaponDamageMultiplier: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &5724624748060603388
@@ -167,6 +167,7 @@ MonoBehaviour:
   upgradeSystem: {fileID: 0}
   ammoSystem: {fileID: 0}
   scoreSystem: {fileID: 0}
+  TeleporterScale: 2
 --- !u!114 &4063650702846584660
 MonoBehaviour:
   m_ObjectHideFlags: 0

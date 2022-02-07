@@ -18,9 +18,11 @@ namespace Assets.Scripts.Weapons
         public Audio Audio { get; protected set; }
 
         protected AudioManager AudioManager;
+        public readonly WeaponType WeaponType;
 
-        protected Weapon(SoundType soundType = SoundType.NoSound)
+        protected Weapon(WeaponType weaponType, SoundType soundType = SoundType.NoSound)
         {
+            WeaponType = weaponType;
             //TODO: update this section when Weapon will derive from MonoBehaviour
             AudioManager = AudioManager.Instance;
             Sound = new SoundTypeWithPlaybackSettings
@@ -43,7 +45,7 @@ namespace Assets.Scripts.Weapons
 
         public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting, AmmoSystem ammoSystem)
         {
-            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeout * triggerTimeout);
+            int dischargeCount = trigger.PullTrigger(shooting.triggerTimeoutMultiplier * triggerTimeout);
             for (int i = 0; i < dischargeCount; i++)
             {
                 if (ammoSystem.Ammo >= ammoConsumption)

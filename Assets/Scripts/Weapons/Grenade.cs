@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grenade : ProjectileBase
 {
+    [SerializeField] private ExplosionParticles explosionParticles;
     public Color color;
     public float Emission = 6;
 
@@ -54,6 +55,9 @@ public class Grenade : ProjectileBase
                 isExplosing = true;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 PlaySound();
+                
+                Instantiate(explosionParticles, transform.position, transform.rotation);
+                gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 
             var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);

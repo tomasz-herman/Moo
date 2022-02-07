@@ -31,7 +31,7 @@ public class ChambersControler : MonoBehaviour
     private bool ChangeChamber()
     {
         Vector2Int playerPosition = new Vector2Int(Mathf.FloorToInt(Player.transform.position.x / (float)Spawn.ChamberSize), Mathf.FloorToInt(Player.transform.position.z / (float)Spawn.ChamberSize));
-        if ((playerPosition-CurrentChamber.Location).magnitude > 1)
+        if ((playerPosition - CurrentChamber.Location).magnitude > 1)
             return false;
         if (playerPosition != CurrentChamber.Location)
         {

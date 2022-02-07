@@ -10,7 +10,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponDamageUpgrade : UpgradeView
     {
-        private float multiplier = 2f;
+        private float multiplier = 1.2f;
 
         private readonly Weapon weapon;
         public WeaponDamageUpgrade(Weapon w, Sprite sprite, string weaponName)

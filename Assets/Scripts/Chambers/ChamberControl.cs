@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.SoundManager;
 using UnityEngine;
 
-public class ChamberControl : MonoBehaviour
+public class ChamberControl : Entity
 {
     [HideInInspector] public List<SpawnLocationScript> SpawnLocations;
     [HideInInspector] public PathSymbolControler symbol;
@@ -28,7 +28,7 @@ public class ChamberControl : MonoBehaviour
 
     private void Start()
     {
-        enemySpawner.AllEnemiesKilled.AddListener(AllEnemiesKilledHandler);
+        AddAllEnemiesKilledListener(AllEnemiesKilledHandler);
     }
 
     private void OnDestroy()
@@ -87,7 +87,11 @@ public class ChamberControl : MonoBehaviour
         {
             State = States.Fight;
             SetFightPathsColors();
-            enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
+            Enemy boss = enemySpawner.Spawn(SpawnLocations, node.Type, node.Number);
+            if (boss != null)
+                GameWorld.userInterface.hud.bossBar.TrackedEnemy = boss;
+
+            BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.FightMusicManager, GameWorld.IdleMusicManager);
         }
     }
 
@@ -137,6 +141,14 @@ public class ChamberControl : MonoBehaviour
         }
     }
 
+    public void SetClearedPathColor(Direction direction)
+    {
+        if (segments.ContainsKey(direction))
+        {
+            symbol.materials[direction] = PathMaterials.GetMaterialFromType(PathTypes.Cleared);
+        }
+    }
+
     protected enum States { PreFight, Fight, Cleared, DoorsClosing, DoorsOpening }
 
     public bool IsCleared()
@@ -162,6 +174,9 @@ public class ChamberControl : MonoBehaviour
     {
         State = States.DoorsOpening;
         SetDoors(true);
+        SetDefaultPathsColors();
+        BackgroundMusicManager.SwapBackgroundMusicPlaying(GameWorld.IdleMusicManager, GameWorld.FightMusicManager);
+        State = States.Cleared;
     }
 
     public void AddAllEnemiesKilledListener(UnityEngine.Events.UnityAction action)

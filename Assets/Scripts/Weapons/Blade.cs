@@ -1,4 +1,5 @@
 using Assets.Scripts.Weapons;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Blade : ProjectileBase
@@ -13,7 +14,9 @@ public class Blade : ProjectileBase
     public Color color;
     public float Emission = 6;
     protected override float baseDamage => 30f;
-    private float extraDamage = 0;
+    private float extraDamage = 1;
+
+    private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
     protected override void Start()
     {
@@ -52,8 +55,12 @@ public class Blade : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, baseDamage + extraDamage);
-            Destroy(gameObject);
+            Entity entity = other.GetComponent<Entity>();
+            if(entity != null && !hitEntities.Contains(entity))
+            {
+                ApplyDamage(other, baseDamage * extraDamage);
+                hitEntities.Add(entity);
+            }
         }
     }
     private void SetRotation()

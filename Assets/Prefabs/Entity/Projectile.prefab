@@ -159,6 +159,8 @@ MonoBehaviour:
       FadeOutSeconds: 0
       UseDefault: 0
   TimeToLive: 10
+  hitTerrainParticles: {fileID: 8109755569039797874, guid: 794dc7c86688b7f4a83bb739d4367588, type: 3}
+  particleCount: 20
   color: {r: 1, g: 1, b: 1, a: 1}
   Emission: 6
 --- !u!54 &1227762693535133598
@@ -176,4 +178,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
