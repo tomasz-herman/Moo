@@ -3,26 +3,19 @@ using UnityEngine;
 
 public class Projectile : ProjectileBase
 {
-    [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
-    [SerializeField] private int particleCount = 30;
-    public Color color;
     public float Emission = 6;
-
-    protected override float baseDamage => 10f;
-    protected float extraDamage = 1;
 
     protected override void Start()
     {
+        base.Start();
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color*Emission);
         material.SetColor("_BaseColor", color);
-        base.Start();
     }
 
-    public virtual void Launch(GameObject owner, Vector3 velocity, float extradamage)
+    public virtual void Launch(GameObject owner, Vector3 velocity, float damage)
     {
-        this.Owner = owner;
-        extraDamage = extradamage;
+        Launch(owner, damage);
         GetComponent<Rigidbody>().velocity = velocity;
         gameObject.transform.LookAt(transform.position + velocity);
     }
@@ -31,14 +24,12 @@ public class Projectile : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, CalculateDamage(other));
+            ApplyDamage(other, damage);
 
             //TODO: Uncomment when chambers' terrain has proper layering
             //if (Layers.TerrainLayers.Contains(other.gameObject.layer))
             {
-                var particles = Instantiate(hitTerrainParticles, transform.position, transform.rotation);
-                particles.SparkColor = color;
-                particles.ParticleCount = particleCount;
+                SpawnParticles(transform.position);
             }
                 
 
@@ -46,8 +37,5 @@ public class Projectile : ProjectileBase
         }
     }
 
-    protected virtual float CalculateDamage(Collider other)
-    {
-        return baseDamage * extraDamage;
-    }
+    protected virtual float CalculateDamage(Collider other) { return damage; }
 }
