@@ -76,14 +76,14 @@ public class Shooting : MonoBehaviour
     public void NextWeapon()
     {
         weapons.Next();
-        weaponBar.SlotUp();
+        weaponBar.SelectSlot(CurrentWeapon.WeaponType);
         WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void PrevWeapon()
     {
         weapons.Prev();
-        weaponBar.SlotDown();
+        weaponBar.SelectSlot(CurrentWeapon.WeaponType);
         WeaponChanged?.Invoke(this, weapons.Current());
     }
 
@@ -97,5 +97,13 @@ public class Shooting : MonoBehaviour
     public bool HasEnoughAmmo()
     {
         return weapons.Current().HasEnoughAmmo(ammoSystem);
+    }
+
+    public Weapon this[WeaponType type]
+    {
+        get
+        {
+            return weaponMap[type];
+        }
     }
 }

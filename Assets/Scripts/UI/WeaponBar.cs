@@ -12,136 +12,101 @@ public class WeaponBar : MonoBehaviour
     public Image overlayMachine;
     public Image overlayLauncher;
     public Image overlaySword;
-    public Image slot1, slot2, slot3, slot4, slot5;
+    [SerializeField] private Image slot1, slot2, slot3, slot4, slot5;
     private Image[] images;
 
-    private int slotCount;
-    private int selectedIndex;
+    private WeaponType selectedWeapon = WeaponType.Pistol;
 
     public Shooting shooting;
-    public float PistolTimeout, ShotgunTimeout, MachineTimeout, LauncherTimeout, SwordTimeout = 0;
-    public float PistolRemainingTime, ShotgunRemainingTime, MachineRemainingTime, LauncherRemaningTime, SwordRemaningTime = 0;
-    public bool PistolCooldown, ShotgunCooldown, MachineCooldown, SwordCooldown, LauncherCooldown = false;
+
+    private Dictionary<WeaponType, WeaponInfo> weaponData = new Dictionary<WeaponType, WeaponInfo>();
+
+    private Color overlayOffColor, overlayOnColor;
     void Start()
     {
-        images = new Image[] { slot1, slot2, slot3, slot4, slot5 };
-        slotCount = images.Length;
-        selectedIndex = images.Length / 2;
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
-        overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
-        overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
-        overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
-        overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
-        shooting.Pistol.WeaponShoot += UpdateSprite;
-        shooting.Shotgun.WeaponShoot += UpdateSprite;
-        shooting.Sword.WeaponShoot += UpdateSprite;
-        shooting.GrenadeLauncher.WeaponShoot += UpdateSprite;
-        shooting.MachineGun.WeaponShoot += UpdateSprite;
+        foreach(WeaponType type in Enum.GetValues(typeof(WeaponType)))
+        {
+            weaponData.Add(type, new WeaponInfo());
+        }
+        weaponData[WeaponType.MachineGun].image = slot1;
+        weaponData[WeaponType.MachineGun].overlay = overlayMachine;
+        weaponData[WeaponType.Shotgun].image = slot2;
+        weaponData[WeaponType.Shotgun].overlay = overlayShotgun;
+        weaponData[WeaponType.Pistol].image = slot3;
+        weaponData[WeaponType.Pistol].overlay = overlay;
+        weaponData[WeaponType.Sword].image = slot4;
+        weaponData[WeaponType.Sword].overlay = overlaySword;
+        weaponData[WeaponType.GrenadeLauncher].image = slot5;
+        weaponData[WeaponType.GrenadeLauncher].overlay = overlayLauncher;
+
+        overlayOffColor = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0f);
+        overlayOnColor = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
+
+        foreach (WeaponType type in Enum.GetValues(typeof(WeaponType)))
+        {
+            weaponData[type].overlay.color = overlayOffColor;
+            shooting[type].WeaponShoot += UpdateSprite;
+        }
         setAllwhite();
         UpdateSelector();
     }
+
     void Update()
     {
-        if (PistolCooldown)
+        foreach(var weaponInfo in weaponData.Values)
         {
-            overlay.rectTransform.localScale = new Vector3(1, 1 - (PistolRemainingTime / PistolTimeout), 1);
-            PistolRemainingTime += Time.deltaTime;
-            if (PistolRemainingTime > PistolTimeout)
-                PistolCooldown = false;
+            if(weaponInfo.cooldown)
+            {
+                weaponInfo.overlay.rectTransform.localScale = new Vector3(1, 1 - (weaponInfo.remainingTime / weaponInfo.timeout), 1);
+                weaponInfo.remainingTime += Time.deltaTime;
+                if (weaponInfo.remainingTime > weaponInfo.timeout)
+                {
+                    weaponInfo.overlay.color = overlayOffColor;
+                    weaponInfo.cooldown = false;
+                }
+                    
+            }
         }
-        if (ShotgunCooldown)
-        {
-            overlayShotgun.rectTransform.localScale = new Vector3(1, 1 - (ShotgunRemainingTime / ShotgunTimeout), 1);
-            ShotgunRemainingTime += Time.deltaTime;
-            if (ShotgunRemainingTime > ShotgunTimeout)
-                ShotgunCooldown = false;
-        }
-        if (MachineCooldown)
-        {
-            overlayMachine.rectTransform.localScale = new Vector3(1, 1 - (MachineRemainingTime / MachineTimeout), 1);
-            MachineRemainingTime += Time.deltaTime;
-            if (MachineRemainingTime > MachineTimeout)
-                MachineCooldown = false;
-        }
-        if (LauncherCooldown)
-        {
-            overlayLauncher.rectTransform.localScale = new Vector3(1, 1 - (LauncherRemaningTime / LauncherTimeout), 1);
-            LauncherRemaningTime += Time.deltaTime;
-            if (LauncherRemaningTime > LauncherTimeout)
-                LauncherCooldown = false;
-        }
-        if (SwordCooldown)
-        {
-            overlaySword.rectTransform.localScale = new Vector3(1, 1 - (SwordRemaningTime / SwordTimeout), 1);
-            SwordRemaningTime += Time.deltaTime;
-            if (SwordRemaningTime > SwordTimeout)
-                SwordCooldown = false;
-        }
-
     }
     void UpdateSprite(object sender, (float Timeout, WeaponType type) args)
     {
-        switch (args.type)
-        {
-            case WeaponType.Pistol:
-                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
-                PistolCooldown = true;
-                PistolRemainingTime = 0;
-                PistolTimeout = args.Timeout;
-                break;
-            case WeaponType.Shotgun:
-                overlayShotgun.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
-                ShotgunCooldown = true;
-                ShotgunRemainingTime = 0;
-                ShotgunTimeout = args.Timeout;
-                break;
-            case WeaponType.MachineGun:
-                overlayMachine.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
-                MachineCooldown = true;
-                MachineRemainingTime = 0;
-                MachineTimeout = args.Timeout;
-                break;
-            case WeaponType.GrenadeLauncher:
-                overlayLauncher.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
-                LauncherCooldown = true;
-                LauncherRemaningTime = 0;
-                LauncherTimeout = args.Timeout;
-                break;
-            case WeaponType.Sword:
-                overlaySword.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.2f);
-                SwordCooldown = true;
-                SwordRemaningTime = 0;
-                SwordTimeout = args.Timeout;
-                break;
-        }
-
-
+        var weaponInfo = weaponData[args.type];
+        weaponInfo.overlay.color = overlayOnColor;
+        weaponInfo.cooldown = true;
+        weaponInfo.remainingTime = 0;
+        weaponInfo.timeout = args.Timeout;
     }
 
-    public void SelectSlot(int slot)
+    public void SelectSlot(WeaponType type)
     {
-        images[selectedIndex].color = Color.white;
-        selectedIndex = slot;
+        weaponData[selectedWeapon].image.color = Color.white;
+        selectedWeapon = type;
         UpdateSelector();
     }
 
-    public void SlotDown() { SelectSlot((selectedIndex + 1) % slotCount); }
-
-    public void SlotUp() { SelectSlot((selectedIndex + slotCount - 1) % slotCount); }
-
     public void UpdateSelector()
     {
-        selector.transform.position = images[selectedIndex].transform.position;
-        selector.color = ApplicationData.WeaponData[shooting.CurrentWeapon.WeaponType].color;
-        images[selectedIndex].color = ApplicationData.WeaponData[shooting.CurrentWeapon.WeaponType].color;
+        var weaponInfo = weaponData[selectedWeapon];
+        selector.transform.position = weaponInfo.image.transform.position;
+        selector.color = ApplicationData.WeaponData[selectedWeapon].color;
+        weaponInfo.image.color = ApplicationData.WeaponData[selectedWeapon].color;
     }
 
     public void setAllwhite()
     {
-        for (int i = 0; i < 5; i++)
+        foreach(var weaponInfo in weaponData.Values)
         {
-            images[i].color = Color.white;
+            weaponInfo.image.color = Color.white;
         }
+    }
+
+    private class WeaponInfo
+    {
+        internal float timeout;
+        internal float remainingTime;
+        internal bool cooldown;
+        internal Image image;
+        internal Image overlay;
     }
 
 }
