@@ -17,7 +17,11 @@ public class HeadUpDisplay : MonoBehaviour
     {
         SetHeight(healthBar, ApplicationData.UiData.HealthBarHeight);
         SetHeight(ammoBar, ApplicationData.UiData.AmmoBarHeight);
-        SetHeight(bossBar, ApplicationData.UiData.BossBarHeight);
+
+        float bossBarHeight = ApplicationData.UiData.BossBarHeight;
+        SetHeight(bossBar, bossBarHeight);
+        bossBar.weapon.GetComponent<RectTransform>().sizeDelta = new Vector2(bossBarHeight, bossBarHeight);
+
         SetHeight(timerBar, ApplicationData.UiData.TimerBarHeight);
         SetHeight(scoreBar, ApplicationData.UiData.ScoreBarHeight);
     }
