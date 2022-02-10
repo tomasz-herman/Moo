@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86526046e1a308944983dbed7874d0e4, type: 3}
   m_Name: UiConfig
   m_EditorClassIdentifier: 
-  HealthBarHeight: 80
-  AmmoBarHeight: 80
-  BossBarHeight: 100
+  HealthBarHeight: 50
+  AmmoBarHeight: 50
+  BossBarHeight: 60
   TimerBarHeight: 50
   ScoreBarHeight: 50
