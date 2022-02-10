@@ -93,4 +93,9 @@ public class Shooting : MonoBehaviour
     }
 
     public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].basetriggerTimeout * triggerTimeoutMultiplier; }
+
+    public bool HasEnoughAmmo()
+    {
+        return weapons.Current().HasEnoughAmmo(ammoSystem);
+    }
 }

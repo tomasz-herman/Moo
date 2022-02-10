@@ -30,7 +30,7 @@ public class Statistics : MonoBehaviour
     }
 
 
-    void UpdateAmmo(object sender, (int ammo, int maxAmmo) args)
+    void UpdateAmmo(object sender, (float ammo, float maxAmmo) args)
     {
         statisticsSystem.SetStatistic(StatisticType.Ammo, args.ammo);
         statisticsSystem.SetStatistic(StatisticType.MaxAmmo, args.maxAmmo);

@@ -443,6 +443,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1d5d5da7398ee4cb94dd011d5efacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    Type: 0
+    BaseHealth: 100
+    BaseDamageMultiplier: 1
+    BaseProjectileSpeedMultiplier: 1
+    BaseMovementSpeed: 1
+    BaseTriggerTimeoutMultiplier: 1
+    BaseScoreForKill: 1
+    UpgradeDropCount: 0
+    UpgradeDropChance: 1
+    HealthDropChance: 0
+    BaseMinHealthDrop: 20
+    BaseMaxHealthDrop: 50
+    AmmoDropChance: 1
+    BaseMinAmmoDrop: 10
+    BaseMaxAmmoDrop: 25
   healthSystem: {fileID: 0}
   dropSystem: {fileID: 0}
   KillEvent:
@@ -494,12 +510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 25
-  movementSpeed: 1
-  damageMultiplier: 0.8
   movementDirection: {x: 0, y: 0, z: 0}
   remainingMovementTime: 0
   ammoSystem: {fileID: 0}
-  weaponAI: 2
+  weapon: 0
 --- !u!114 &7777235469271342937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,9 +530,9 @@ MonoBehaviour:
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  projectileSpeed: 5
-  triggerTimeout: 0.5
-  weaponDamage: 1
+  projectileSpeedMultiplier: 1
+  triggerTimeoutMultiplier: 1
+  weaponDamageMultiplier: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &-1757155267967381844
@@ -533,8 +547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a205519e091115b40865c709a1fdfc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAmmo: 42069
-  defaultCapacity: 69420
+  defaultAmmo: 0
+  defaultCapacity: 50
 --- !u!114 &2753961696640401444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,10 +591,14 @@ MonoBehaviour:
   ammoPrefab: {fileID: 769122989822789483, guid: 5bc2290714847f84fac8cc2a559c597b, type: 3}
   healthPrefab: {fileID: 709617650000426603, guid: 34fc7f2e75e36af4cb55dc1e5420a55d, type: 3}
   dropItem: {fileID: 1207376928025762238, guid: 3929c05bbbdd6c242add540fb2f619fd, type: 3}
-  dropUpgradeChance: 0.1
-  dropAmmoChance: 0.5
-  dropHealthChance: 0.4
-  drops: 1
+  upgradeDropCount: 0
+  upgradeDropChance: 0
+  healthDropChance: 0
+  minHealth: 0
+  maxHealth: 0
+  ammoDropChance: 0
+  minAmmo: 0
+  maxAmmo: 0
 --- !u!1 &1653182828857183468
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,16 +28,18 @@ public class Health : Entity
         {
             var playerCapacity = player.healthSystem.MaxHealth - player.healthSystem.Health;
             if(playerCapacity <= 0) return;
-            if (playerCapacity > remainingHealth)
+            if (playerCapacity >= remainingHealth)
             {
-                ShowText("+" + (int)remainingHealth);
+                int displayedValue = Mathf.CeilToInt(remainingHealth);
+                ShowText("+" + displayedValue);
 
                 player.healthSystem.Health += remainingHealth;
                 Destroy(gameObject);
             }
             else
             {
-                ShowText("+" + (int)playerCapacity);
+                int displayedValue = Mathf.CeilToInt(playerCapacity);
+                ShowText("+" + displayedValue);
 
                 player.healthSystem.Health += playerCapacity;
                 remainingHealth -= playerCapacity;
