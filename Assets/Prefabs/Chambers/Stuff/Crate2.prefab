@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4326289906726144155}
   - component: {fileID: 2041133234242341796}
   - component: {fileID: 6532809060551325988}
-  - component: {fileID: 8047992340642221917}
+  - component: {fileID: 7387035023108582699}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2019,57 +2019,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: 000000000100000004000000030000000200000005000000
-  m_SelectedEdges:
-  - a: 0
-    b: 1
-  - a: 2
-    b: 0
-  - a: 1
-    b: 3
-  - a: 3
-    b: 2
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  - a: 16
-    b: 17
-  - a: 18
-    b: 16
-  - a: 17
-    b: 19
-  - a: 19
-    b: 18
-  - a: 12
-    b: 13
-  - a: 14
-    b: 12
-  - a: 13
-    b: 15
-  - a: 15
-    b: 14
-  - a: 8
-    b: 9
-  - a: 10
-    b: 8
-  - a: 9
-    b: 11
-  - a: 11
-    b: 10
-  - a: 20
-    b: 21
-  - a: 22
-    b: 20
-  - a: 21
-    b: 23
-  - a: 23
-    b: 22
-  m_SelectedVertices: 0000000001000000020000000300000004000000050000000600000007000000100000001100000012000000130000000c0000000d0000000e0000000f00000008000000090000000a0000000b00000014000000150000001600000017000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &2041133234242341796
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2120,8 +2072,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862647097276029141}
   m_Mesh: {fileID: 0}
---- !u!64 &8047992340642221917
-MeshCollider:
+--- !u!65 &7387035023108582699
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2130,10 +2082,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0.75, y: 0.75, z: -0.75}
 --- !u!1 &7875248177839156257
 GameObject:
   m_ObjectHideFlags: 0

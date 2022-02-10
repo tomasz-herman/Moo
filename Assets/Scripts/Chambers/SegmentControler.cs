@@ -12,15 +12,6 @@ public class SegmentControler : MonoBehaviour
     {
         Path = gameObject.GetComponentsInChildren<PathSegment>().ToList();
         SegmentObjects = gameObject.GetComponentsInChildren<BlocadeTransition>().ToList();
-        //for (int i = 0; i < transform.childCount; i++)
-        //{
-        //    GameObject ob = transform.GetChild(i).gameObject;
-        //    PathSegment pathsegment = ob.GetComponent<PathSegment>();
-        //    if (pathsegment != null)
-        //        Path.Add(pathsegment);
-        //    else
-        //        SegmentObjects.Add(ob.GetComponent<BlocadeTransition>());
-        //}
     }
 
     public void SetPathBlocade(bool isActive)
