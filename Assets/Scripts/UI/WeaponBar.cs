@@ -44,40 +44,35 @@ public class WeaponBar : MonoBehaviour
     {
         if (PistolCooldown)
         {
-            overlay.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (PistolRemainingTime / PistolTimeout));
-            //overlay.rectTransform.localPosition = new Vector3(0, -(-50 + (PistolRemainingTime / PistolTimeout) * 40), 0);
+            overlay.rectTransform.localScale = new Vector3(1, 1 - (PistolRemainingTime / PistolTimeout), 1);
             PistolRemainingTime += Time.deltaTime;
             if (PistolRemainingTime > PistolTimeout)
                 PistolCooldown = false;
         }
         if (ShotgunCooldown)
         {
-            overlayShotgun.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (ShotgunRemainingTime / ShotgunTimeout));
-            //overlayShotgun.rectTransform.localPosition = new Vector3(-100, -(-50 + (ShotgunRemainingTime / ShotgunTimeout) * 40), 0);
+            overlayShotgun.rectTransform.localScale = new Vector3(1, 1 - (ShotgunRemainingTime / ShotgunTimeout), 1);
             ShotgunRemainingTime += Time.deltaTime;
             if (ShotgunRemainingTime > ShotgunTimeout)
                 ShotgunCooldown = false;
         }
         if (MachineCooldown)
         {
-            overlayMachine.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (MachineRemainingTime / MachineTimeout));
-            //overlayMachine.rectTransform.localPosition = new Vector3(-200, -(-50 + (MachineRemainingTime / MachineTimeout) * 40), 0);
+            overlayMachine.rectTransform.localScale = new Vector3(1, 1 - (MachineRemainingTime / MachineTimeout), 1);
             MachineRemainingTime += Time.deltaTime;
             if (MachineRemainingTime > MachineTimeout)
                 MachineCooldown = false;
         }
         if (LauncherCooldown)
         {
-            overlayLauncher.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (LauncherRemaningTime / LauncherTimeout));
-            //overlayLauncher.rectTransform.localPosition = new Vector3(200, -(-50 + (LauncherRemaningTime / LauncherTimeout) * 40), 0);
+            overlayLauncher.rectTransform.localScale = new Vector3(1, 1 - (LauncherRemaningTime / LauncherTimeout), 1);
             LauncherRemaningTime += Time.deltaTime;
             if (LauncherRemaningTime > LauncherTimeout)
                 LauncherCooldown = false;
         }
         if (SwordCooldown)
         {
-            overlaySword.rectTransform.sizeDelta = new Vector2(100, 100 - 100 * (SwordRemaningTime / SwordTimeout));
-            //overlaySword.rectTransform.localPosition = new Vector3(100, -(-50 + (SwordRemaningTime / SwordTimeout) * 40), 0);
+            overlaySword.rectTransform.localScale = new Vector3(1, 1 - (SwordRemaningTime / SwordTimeout), 1);
             SwordRemaningTime += Time.deltaTime;
             if (SwordRemaningTime > SwordTimeout)
                 SwordCooldown = false;
