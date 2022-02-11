@@ -47,7 +47,7 @@ public class WeaponBar : MonoBehaviour
             weaponData[type].overlay.color = overlayOffColor;
             shooting[type].WeaponShoot += UpdateSprite;
         }
-        setAllwhite();
+        SetAllwhite();
         UpdateSelector();
     }
 
@@ -92,7 +92,7 @@ public class WeaponBar : MonoBehaviour
         weaponInfo.image.color = ApplicationData.WeaponData[selectedWeapon].color;
     }
 
-    public void setAllwhite()
+    public void SetAllwhite()
     {
         foreach(var weaponInfo in weaponData.Values)
         {
