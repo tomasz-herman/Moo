@@ -12,7 +12,6 @@ public class Blade : ProjectileBase
     private float speed;
 
     public float Emission = 6;
-    private float extraDamage = 1;
     public float length;
     private Vector3 ownerToBlade;
     private HashSet<Entity> hitEntities = new HashSet<Entity>();

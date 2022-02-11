@@ -60,7 +60,7 @@ namespace Assets.Scripts.Weapons
             int dischargeCount = trigger.PullTrigger(triggerTimeout);
             for (int i = 0; i < dischargeCount; i++)
             {
-                if (ammoSystem.Ammo >= baseAmmoConsumption)
+                if (HasEnoughAmmo(ammoSystem))
                 {
                     WeaponShoot?.Invoke(this, (triggerTimeout, WeaponType));
                     Shoot(shooter, position, direction, shooting);
@@ -81,6 +81,11 @@ namespace Assets.Scripts.Weapons
         public void Dispose()
         {
             Audio?.Dispose();
+        }
+
+        public bool HasEnoughAmmo(AmmoSystem ammoSystem)
+        {
+            return ammoSystem.Ammo >= baseAmmoConsumption;
         }
 
         public static string GetWeaponName(WeaponType type)

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be57e4bc7adcc84f90c0e38a4f880f7, type: 3}
+  m_Name: Chambers
+  m_EditorClassIdentifier: 
+  Chambers:
+  - chamber: {fileID: 8140789307259307936, guid: 3f5e603886aea4442b9ed4c6b6cfde80, type: 3}
+    type: 3
+  - chamber: {fileID: 8140789307259307936, guid: 32707b8caabe6ff4d9844250a67945e8, type: 3}
+    type: 0
+  - chamber: {fileID: 8140789307259307936, guid: b29414a6f231bda489166b6d30770314, type: 3}
+    type: 2
+  - chamber: {fileID: 8140789307259307936, guid: b5966de1197b32b4a84b3c1bb0661058, type: 3}
+    type: 1

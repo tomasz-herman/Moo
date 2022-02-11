@@ -14,37 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
   - Type: 2
+    MinimumRange: 5
     PreferredRange: 7.5
     MaximumRange: 40
     TriggerTimeoutMultiplier: 1
     ProjectileSpeedMultiplier: 1
-    DamageMultiplier: 0.65
+    DamageMultiplier: 1
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 1
+    AmmoRechargeAmmount: 6
   - Type: 3
+    MinimumRange: 0
     PreferredRange: 1.5
     MaximumRange: 3
     TriggerTimeoutMultiplier: 1
     ProjectileSpeedMultiplier: 1
-    DamageMultiplier: 0.5
+    DamageMultiplier: 1
     MovementSpeedMultiplier: 2.5
+    AmmoRechargeTime: 1
+    AmmoRechargeAmmount: 0
   - Type: 4
+    MinimumRange: 7.5
     PreferredRange: 15
     MaximumRange: 25
     TriggerTimeoutMultiplier: 0.5
     ProjectileSpeedMultiplier: 2
     DamageMultiplier: 0.75
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 2
+    AmmoRechargeAmmount: 7
   - Type: 0
+    MinimumRange: 7.5
     PreferredRange: 15
     MaximumRange: 40
     TriggerTimeoutMultiplier: 1
-    ProjectileSpeedMultiplier: 0.8
-    DamageMultiplier: 0.35
+    ProjectileSpeedMultiplier: 1
+    DamageMultiplier: 1
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 4
+    AmmoRechargeAmmount: 25
   - Type: 1
+    MinimumRange: 0
     PreferredRange: 2
     MaximumRange: 16
-    TriggerTimeoutMultiplier: 0.75
-    ProjectileSpeedMultiplier: 0.8
-    DamageMultiplier: 2
+    TriggerTimeoutMultiplier: 1
+    ProjectileSpeedMultiplier: 1
+    DamageMultiplier: 1
     MovementSpeedMultiplier: 1
+    AmmoRechargeTime: 2
+    AmmoRechargeAmmount: 6
