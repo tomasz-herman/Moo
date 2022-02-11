@@ -65,7 +65,7 @@ public class BossBar : MonoBehaviour
     private void CalculateVisibility()
     {
         bool show = visible && trackedEnemy != null;
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(show);
         }
@@ -87,6 +87,7 @@ public class BossBar : MonoBehaviour
     private void SetWeaponSprite(WeaponType type)
     {
         weapon.sprite = ApplicationData.WeaponData[type].image;
+        weapon.color = ApplicationData.WeaponData[type].color;
     }
 
     private void OnKill(GameObject obj)

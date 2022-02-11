@@ -503,6 +503,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 2113982994}
+--- !u!114 &822649184 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5699320512004101977, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+  m_PrefabInstance: {fileID: 822649173}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822649175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eae81e582b4fb445b44953f855852ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027701281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1231,6 +1242,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'UI '
       objectReference: {fileID: 0}
+    - target: {fileID: 8248976422226341987, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
+      propertyPath: shooting
+      value: 
+      objectReference: {fileID: 822649184}
     - target: {fileID: 8248976422468481446, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
       propertyPath: statSystem
       value: 

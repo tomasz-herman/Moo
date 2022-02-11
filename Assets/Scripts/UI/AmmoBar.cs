@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,9 +17,12 @@ public class AmmoBar : MonoBehaviour
         UpdateBar(this, (ammoSystem.Ammo, ammoSystem.MaxAmmo));
     }
 
-    public void UpdateBar(object sender, (int ammo, int maxAmmo) args)
+    public void UpdateBar(object sender, (float ammo, float maxAmmo) args)
     {
-        fill.transform.localScale = new Vector3((float)args.ammo / args.maxAmmo, 1, 1);
-        text.text = $"{args.ammo}/{args.maxAmmo}";
+        fill.transform.localScale = new Vector3(args.ammo / args.maxAmmo, 1, 1);
+
+        int displayAmmo = Mathf.CeilToInt(args.ammo);
+        int displayMaxAmmo = Mathf.CeilToInt(args.maxAmmo);
+        text.text = $"{displayAmmo}/{displayMaxAmmo}";
     }
 }

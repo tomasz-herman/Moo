@@ -18,6 +18,8 @@ public class OptionsView : MenuView
 
     private const float MixerVolumeMultiplier = 20f;
 
+    private bool awaken = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,21 +31,26 @@ public class OptionsView : MenuView
         resolutions.Reverse();
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(resolutions.Select(res => res.ToString()).ToList());
+
+        awaken = true;
     }
 
     public void SetEffectsVolume(float volume)
     {
-        AudioManager.Instance.SoundVolume = CalculateMixerVolume(volume);
+        if(awaken)
+            AudioManager.Instance.SoundVolume = CalculateMixerVolume(volume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        AudioManager.Instance.MusicVolume = CalculateMixerVolume(volume);
+        if (awaken)
+            AudioManager.Instance.MusicVolume = CalculateMixerVolume(volume);
     }
 
     public void SetUiVolume(float volume)
     {
-        AudioManager.Instance.UiVolume = CalculateMixerVolume(volume);
+        if (awaken)
+            AudioManager.Instance.UiVolume = CalculateMixerVolume(volume);
     }
 
     private void OnEnable()
