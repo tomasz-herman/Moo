@@ -13,6 +13,7 @@ public class ChamberNode
     public Direction ParentDirection;
     public ChamberControl ChamberControl;
     public int Number = -1;
+    public int Level = 1;
     public bool IsLast = false;
     private Dictionary<Direction, ChamberNode> children;
     private bool isCleared = false;
