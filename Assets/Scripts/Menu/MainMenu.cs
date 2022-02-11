@@ -66,7 +66,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         activeView.SetActive(false);
-        SceneManager.LoadScene(Scenes.TestGeneration);
+        SceneManager.LoadScene(Scenes.LoadingScreen);
     }
 
     public void Quit()
