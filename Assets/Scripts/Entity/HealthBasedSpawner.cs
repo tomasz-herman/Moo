@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class HealthBasedSpawner : MonoBehaviour
 {
-    [SerializeField] private LinkedList<SpawnRule> spawnRules;
+    [SerializeField] private LinkedList<SpawnRule> spawnRules = new LinkedList<SpawnRule>();
 
     private List<Enemy> spawnedChildren = new List<Enemy>();
     private Enemy parent;
     public void Start()
     {
+        for (int i = 80; i >= 20; i -= 20)
+            spawnRules.AddLast(new SpawnRule() { HealthPercent = i, Enemies = new List<EnemyTypes>() { EnemyTypes.Small, EnemyTypes.Small, EnemyTypes.Medium, EnemyTypes.Big } });
+
         var ordered = spawnRules.OrderByDescending(rule => rule.HealthPercent).ToList();
         spawnRules.Clear();
         foreach (var rule in ordered)
