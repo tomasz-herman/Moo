@@ -21,10 +21,10 @@ public class ChamberControl : Entity
         symbol = gameObject.GetComponentInChildren<PathSymbolControler>();
         fightTrigger = gameObject.GetComponentInChildren<FightTrigger>();
         doors = gameObject.GetComponentsInChildren<Door>().ToList();
+        foreach (var item in doors)
+            item.MoveStopEvent.AddListener(MoveOffHandler);
         foreach (var item in gameObject.GetComponentsInChildren<SegmentControler>())
-        {
             segments.Add(item.direction, item);
-        }
     }
 
     private void Start()
@@ -44,15 +44,9 @@ public class ChamberControl : Entity
             case States.PreFight:
                 PreFight();
                 return;
-            case States.DoorsClosing:
-                DoorsClosing();
-                return;
             case States.Fight:
-                Fight();
-                return;
+            case States.DoorsClosing:
             case States.DoorsOpening:
-                DoorsOpening();
-                return;
             case States.Cleared:
             default:
                 return;
@@ -199,5 +193,19 @@ public class ChamberControl : Entity
                 else
                     item.CloseDoor();
             }
+    }
+
+    private void MoveOffHandler(bool isClosed)
+    {
+        if (isClosed)
+        {
+            if (State == States.DoorsClosing)
+                DoorsClosing();
+        }
+        else
+        {
+            if (State == States.DoorsOpening)
+                DoorsOpening();
+        }
     }
 }

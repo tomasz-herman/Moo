@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Animator animator;
+    [HideInInspector] public UnityEngine.Events.UnityEvent<bool> MoveStopEvent = new UnityEngine.Events.UnityEvent<bool>();
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -25,6 +26,7 @@ public class Door : MonoBehaviour
     public void MoveOff()
     {
         animator.SetBool("DoorMove", false);
+        MoveStopEvent.Invoke(animator.GetBool("DoorClose"));
     }
 
     public bool IsOpen()
