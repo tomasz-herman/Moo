@@ -6,9 +6,9 @@ using UnityEngine;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] public float ChamberSize = 60;
-    [SerializeField] int NumberOfOptionalChambersBeforeBoss = 5;
-    [SerializeField] int NumberOfBossChambers = 3;
-    [SerializeField] int NumbersOfChambersBeforeBoss = 2;
+    int NumberOfOptionalChambersBeforeBoss = 1;
+    int NumberOfBossChambers = 1;
+    int NumbersOfChambersBeforeBoss = 1;
     [SerializeField] int NumberOfTryBeforeOnlyForwardMode = 3;
     [SerializeField] float OptionalChamberSpawnPossibilityPercent = 50;
 
@@ -28,6 +28,12 @@ public class SpawnScript : MonoBehaviour
     private void Awake()
     {
         optionalSpawnFloat = 1 - (float)OptionalChamberSpawnPossibilityPercent / 100;
+
+        var gameplay = ApplicationData.GameplayData;
+        NumberOfOptionalChambersBeforeBoss = gameplay.NumberOfOptionalChambersBeforeBoss;
+        NumberOfBossChambers = gameplay.NumberOfBossChambers;
+        NumbersOfChambersBeforeBoss = gameplay.NumberOfChambersBeforeBoss;
+
         LoadChamberPrefabs();
     }
 

@@ -31,12 +31,7 @@ public class GameWorld : MonoBehaviour
         double timeMs = timer.GetElapsedTime().TotalMilliseconds;
         if(win)
         {
-            //TODO: we need a nicer API for getting these values - preferably put it in GameplayConfig scriptable object - best place for it
-            var spawnScript = chambersControler.GetComponent<SpawnScript>();
             var gameplay = ApplicationData.GameplayData;
-            int normalChambersBeforeBoss = (int)typeof(SpawnScript).GetField("NumbersOfChambersBeforeBoss").GetValue(spawnScript);
-            int optionalChambersBeforeBoss = (int)typeof(SpawnScript).GetField("NumberOfOptionalChambersBeforeBoss").GetValue(spawnScript);
-            int bossChambers = (int)typeof(SpawnScript).GetField("NumberOfBossChambers").GetValue(spawnScript);
 
             float expectedTimeToClearAllChambers = 0f;
             float expectedTimeToClearObligatoryChambers = 0f;

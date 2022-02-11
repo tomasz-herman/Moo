@@ -27,6 +27,10 @@ public class GameplayConfig : ScriptableObject
     public float ChamberClearTimeScalingMultiplier = 0.5f;
     public float QuickWinScoreBonus = 10000;
 
+    public int NumberOfChambersBeforeBoss = 2;
+    public int NumberOfOptionalChambersBeforeBoss = 5;
+    public int NumberOfBossChambers = 3;
+
     //https://github.com/tomasz-herman/Moo/projects/6 see third column
     private float GetScalingFactor(int level, float multiplier) { return (float) Math.Pow(1 + ((ScalingFactor - 1) * multiplier), level - 1); }
     public float GetHealthScalingMultiplier(int level) { return GetScalingFactor(level, HealthScalingMultiplier); }
