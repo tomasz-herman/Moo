@@ -26,6 +26,7 @@ public class LoadingManager : MonoBehaviour
 
     private IEnumerator LoadScenes()
     {
+        Time.timeScale = 0;
         foreach (var scene in scenesLoading)
         {
             while (!scene.isDone)
@@ -46,11 +47,12 @@ public class LoadingManager : MonoBehaviour
 
         for (int i = 0; i <= 50; i++)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSecondsRealtime(0.1f);
             progressBar.value = 0.5f + i / 50f;
         }
 
         loadingScreen.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
 }
