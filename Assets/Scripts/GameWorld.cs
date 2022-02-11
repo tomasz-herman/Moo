@@ -13,7 +13,7 @@ public class GameWorld : MonoBehaviour
     public Player player;
     public ChambersControler chambersControler;
 
-    void Start()
+    private void Start()
     {
         timer.SetTicking(true);
         IdleMusicManager?.Play();
@@ -24,16 +24,13 @@ public class GameWorld : MonoBehaviour
 
     private void Update()
     {
-        if (!Debug.isDebugBuild)
-        {
-            if (!Application.isFocused && !IsPaused())
-            {
-                if (userInterface.selectedWindow != null)
-                    userInterface.ClearWindow();
-                else
-                    userInterface.TryToggleWindow(userInterface.pauseMenu);
-            }
-        }
+        if (Debug.isDebugBuild) return;
+        if (Application.isFocused || IsPaused()) return;
+
+        if (userInterface.selectedWindow != null)
+            userInterface.ClearWindow();
+        else
+            userInterface.TryToggleWindow(userInterface.pauseMenu);
     }
 
     public bool IsPaused() { return Time.timeScale == 0; }
