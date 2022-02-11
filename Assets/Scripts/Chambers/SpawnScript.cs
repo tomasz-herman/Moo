@@ -173,7 +173,7 @@ public class SpawnScript : MonoBehaviour
         ChamberNode currentNode = chambersTreeRoot;
         ChamberNode tempNode;
 
-        currentNode.Level = 1;
+        currentNode.Level = 10;
 
         List<ChamberNode> orderedChambers = new List<ChamberNode>();
 

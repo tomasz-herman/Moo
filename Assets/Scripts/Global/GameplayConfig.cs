@@ -13,7 +13,7 @@ public class GameplayConfig : ScriptableObject
     public float ScalingFactor = 1.5f;
     public float HealthScalingMultiplier = 1f;
     public float DamageScalingMultiplier = 1f;
-    public float MovementSpeedScalingMultiplier = 0.5f;
+    public float MovementSpeedScalingMultiplier = 0.2f;
     public float ProjectileSpeedScalingMultiplier = 0.8f;
     public float ScoreScalingMultiplier = 1f;
     public float TriggerTimeoutScalingMultiplier = 0.7f;
@@ -27,7 +27,7 @@ public class GameplayConfig : ScriptableObject
     public float ChamberClearTimeScalingMultiplier = 0.5f;
 
     //https://github.com/tomasz-herman/Moo/projects/6 see third column
-    private float GetScalingFactor(int level, float multiplier) { return (float) Math.Pow(1 + (1 - ScalingFactor * multiplier), level - 1); }
+    private float GetScalingFactor(int level, float multiplier) { return (float) Math.Pow(1 + ((ScalingFactor - 1) * multiplier), level - 1); }
     public float GetHealthScalingMultiplier(int level) { return GetScalingFactor(level, HealthScalingMultiplier); }
     public float GetDamageScalingMultiplier(int level) { return GetScalingFactor(level, DamageScalingMultiplier); }
     public float GetMovementSpeedScalingMultiplier(int level) { return GetScalingFactor(level, MovementSpeedScalingMultiplier); }

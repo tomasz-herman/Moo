@@ -14,6 +14,7 @@ public class ChambersControler : MonoBehaviour
     ChamberNode ChamberTreeRoot;
 
     private ChamberNode[] Chambers;
+    public int ChamberCount { get { return Chambers.Length; } }
 
     void Start()
     {
