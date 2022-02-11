@@ -42,7 +42,7 @@ public abstract class Enemy : Entity
         Spawn();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
@@ -108,6 +108,15 @@ public abstract class Enemy : Entity
         Audio.PlayOneShot();
         if (healthSystem.Health <= 0)
             Die(system);
+    }
+
+    public void Kill(ScoreSystem system = null)
+    {
+        if (isDead)
+            return;
+        healthSystem.Health = 0;
+        Audio.PlayOneShot();
+        Die(system);
     }
 
     private void Die(ScoreSystem system = null)
