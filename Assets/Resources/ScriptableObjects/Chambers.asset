@@ -19,5 +19,5 @@ MonoBehaviour:
     type: 0
   - chamber: {fileID: 8140789307259307936, guid: b29414a6f231bda489166b6d30770314, type: 3}
     type: 2
-  - chamber: {fileID: 8140789307259307936, guid: b39c3b24501092c4ba28b5ebbd42ac50, type: 3}
+  - chamber: {fileID: 8140789307259307936, guid: b5966de1197b32b4a84b3c1bb0661058, type: 3}
     type: 1
