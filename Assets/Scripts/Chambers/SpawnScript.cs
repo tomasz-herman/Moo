@@ -31,7 +31,7 @@ public class SpawnScript : MonoBehaviour
         LoadChamberPrefabs();
     }
 
-    public ChamberNode GenerateTree()
+    public ChamberNode[] GenerateTree()
     {
         int i = 0;
         while (!GenerateChamberTree())
@@ -40,8 +40,7 @@ public class SpawnScript : MonoBehaviour
             if (i > NumberOfTryBeforeOnlyForwardMode)
                 OnlyForward = true;
         }
-        NumberTheChambers();
-        return chambersTreeRoot;
+        return NumberTheChambers();
     }
 
     private bool GenerateChamberTree()
@@ -168,11 +167,16 @@ public class SpawnScript : MonoBehaviour
             BuildChambersRec(item);
     }
 
-    private void NumberTheChambers()
+    private ChamberNode[] NumberTheChambers()
     {
         int currNumber = 0;
         ChamberNode currentNode = chambersTreeRoot;
         ChamberNode tempNode;
+
+        currentNode.Level = 1;
+
+        List<ChamberNode> orderedChambers = new List<ChamberNode>();
+
         while (currentNode != null)
         {
             if (currentNode.Type == ChamberType.Normal)
@@ -180,8 +184,11 @@ public class SpawnScript : MonoBehaviour
             else
             {
                 currentNode.Number = currNumber;
+                orderedChambers.Add(currentNode);
                 currNumber++;
             }
+
+            int nextChamberLevel = currentNode.Level + (currentNode.Type == ChamberType.Boss ? 1 : 0);
 
             tempNode = null;
             foreach (var item in currentNode.Children())
@@ -190,6 +197,8 @@ public class SpawnScript : MonoBehaviour
                     tempNode = item;
             }
             currentNode = tempNode;
+            if(currentNode != null)
+                currentNode.Level = nextChamberLevel;
         }
         EnemySpawner.MaxNumber = currNumber - 1;
 
@@ -199,13 +208,20 @@ public class SpawnScript : MonoBehaviour
                 return;
 
             root.Number = currNumber;
+            orderedChambers.Add(root);
             currNumber++;
+
             foreach (var item in root.Children())
             {
                 if (item.Type == ChamberType.Optional)
+                {
+                    item.Level = root.Level;
                     NumberTheOptionalChambersRec(item);
+                }
             }
         }
+
+        return orderedChambers.ToArray();
     }
 
     private Direction randomNext(ChamberNode current)

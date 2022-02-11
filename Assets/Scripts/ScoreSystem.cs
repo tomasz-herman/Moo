@@ -24,4 +24,5 @@ public class ScoreSystem : MonoBehaviour
     }
 
     public int IntScore { get { return Mathf.CeilToInt(score); } }
+    public float Score { get { return score; } }
 }

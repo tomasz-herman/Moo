@@ -93,7 +93,7 @@ public class Console : MonoBehaviour
                     _ => throw new ArgumentOutOfRangeException(nameof(result), result, 
                         "Should be one of: win, lose")
                 };
-                gameWorld.EndGame(win, scoreSystem.IntScore);
+                gameWorld.EndGame(win);
             });
         Commands = new Dictionary<string, Command>
         {

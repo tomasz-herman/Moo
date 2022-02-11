@@ -43,7 +43,7 @@ public class Player : Entity
     {
         if(args.health <= 0)
         {
-            GameWorld.EndGame(false, scoreSystem.IntScore);
+            GameWorld.EndGame(false);
         }
     }
 

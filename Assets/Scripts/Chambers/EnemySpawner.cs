@@ -10,11 +10,13 @@ public class EnemySpawner
     public UnityEngine.Events.UnityEvent AllEnemiesKilled = new UnityEngine.Events.UnityEvent();
 
     /// <returns>Current boss (if spawned) or null (if not)</returns>
-    public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberType chamberType, int chamberNumber)
+    public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberNode chamberNode)
     {
         EnemiesSpawnData currentSpawnData = EnemiesData.GetData();
         int numberOfEnemys;
-        int chamberLevel = GetChamberLevel(chamberNumber);
+        ChamberType chamberType = chamberNode.Type;
+        int chamberLevel = chamberNode.Level;
+        int chamberNumber = chamberNode.Number;
         switch (chamberType)
         {
             case ChamberType.Normal:
@@ -30,12 +32,6 @@ public class EnemySpawner
             default:
                 return null;
         }
-    }
-
-    //TODO: Dummy method, we need API to get the actual chamber level
-    private int GetChamberLevel(int chamberNumber)
-    {
-        return 1;
     }
 
     private void KillHandler(GameObject sender)
