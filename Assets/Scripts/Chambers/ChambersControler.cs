@@ -7,7 +7,7 @@ public class ChambersControler : MonoBehaviour
 {
     [SerializeField] GameObject Player;
     [SerializeField] GameWorld gameWorld;
-    [SerializeField] int Depth = 5;
+    //[SerializeField] int Depth = 5;
 
     [HideInInspector] public ChamberNode CurrentChamber = null;
 
