@@ -8,7 +8,7 @@ public class HealthBasedSpawner : MonoBehaviour
     [SerializeField] private LinkedList<SpawnRule> spawnRules;
 
     private List<Enemy> spawnedChildren = new List<Enemy>();
-    
+    private Enemy parent;
     public void Start()
     {
         var ordered = spawnRules.OrderByDescending(rule => rule.HealthPercent).ToList();
@@ -16,15 +16,18 @@ public class HealthBasedSpawner : MonoBehaviour
         foreach (var rule in ordered)
             spawnRules.AddLast(rule);
 
-        var enemy = GetComponent<Enemy>();
+        parent = GetComponent<Enemy>();
 
-        enemy.healthSystem.HealthChanged += OnHealthChanged;
-        enemy.KillEvent.AddListener(OnParentDeath);
-        
+        parent.healthSystem.HealthChanged += OnHealthChanged;
+        parent.KillEvent.AddListener(OnParentDeath);
     }
 
     private void OnHealthChanged(object sender, (float health, float maxHealth) args)
     {
+        var world = parent.GameWorld;
+        var position = parent.transform.position;
+        var level = parent.Level;
+
         float healthPercent = 100 * args.health / args.maxHealth;
         while(spawnRules.Count > 0 && spawnRules.First.Value.HealthPercent >= healthPercent)
         {
@@ -33,7 +36,8 @@ public class HealthBasedSpawner : MonoBehaviour
 
             foreach(var type in toSpawn)
             {
-                //TODO: spawn enemies, set level, kill on parent death, add to spawnedChildren list
+                Enemy child = world.SpawnEnemy(type, position, level);
+                spawnedChildren.Add(child);
             }
         }
     }

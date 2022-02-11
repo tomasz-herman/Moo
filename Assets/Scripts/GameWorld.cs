@@ -72,4 +72,15 @@ public class GameWorld : MonoBehaviour
         MainMenu.ScheduleShowEndgameScreen();
         SceneManager.LoadScene(Scenes.MainMenu);
     }
+
+    public Enemy SpawnEnemy(EnemyTypes type, Vector3 position, int level)
+    {
+        EnemyPrefabInfo enemyinfo = Enemys.GetEnemyInfoFromType(type);
+        var enemy = GameObject.Instantiate(enemyinfo.enemy, position, Quaternion.identity);
+        Enemy enemyClass = enemy.GetComponent<Enemy>();
+        enemyClass.Level = level;
+        enemyClass.Spawn();
+        TeleporterEffectScript.CreateTeleporterForEntity(enemy, enemyinfo.teleporterScale);
+        return enemyClass;
+    }
 }

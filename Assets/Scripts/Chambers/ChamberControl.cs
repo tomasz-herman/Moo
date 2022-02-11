@@ -9,7 +9,7 @@ public class ChamberControl : Entity
     [HideInInspector] public PathSymbolControler symbol;
     protected States State = States.PreFight;
     private FightTrigger fightTrigger;
-    private EnemySpawner enemySpawner = new EnemySpawner();
+    private EnemySpawner enemySpawner;
     public ChamberNode node;
     private Dictionary<Direction, SegmentControler> segments = new Dictionary<Direction, SegmentControler>();
 
@@ -22,6 +22,7 @@ public class ChamberControl : Entity
         {
             segments.Add(item.direction, item);
         }
+        enemySpawner = new EnemySpawner(GameWorld);
     }
 
     private void Start()
