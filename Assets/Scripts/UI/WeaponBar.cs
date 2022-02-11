@@ -13,7 +13,6 @@ public class WeaponBar : MonoBehaviour
     public Image overlayLauncher;
     public Image overlaySword;
     [SerializeField] private Image slot1, slot2, slot3, slot4, slot5;
-    private Image[] images;
 
     private WeaponType selectedWeapon = WeaponType.Pistol;
 
@@ -47,7 +46,7 @@ public class WeaponBar : MonoBehaviour
             weaponData[type].overlay.color = overlayOffColor;
             shooting[type].WeaponShoot += UpdateSprite;
         }
-        setAllwhite();
+        SetAllWhite();
         UpdateSelector();
     }
 
@@ -92,7 +91,7 @@ public class WeaponBar : MonoBehaviour
         weaponInfo.image.color = ApplicationData.WeaponData[selectedWeapon].color;
     }
 
-    public void setAllwhite()
+    public void SetAllWhite()
     {
         foreach(var weaponInfo in weaponData.Values)
         {

@@ -12,10 +12,15 @@ public class ChambersControler : MonoBehaviour
 
     SpawnScript Spawn;
     ChamberNode ChamberTreeRoot;
+
+    private ChamberNode[] Chambers;
+    public int ChamberCount { get { return Chambers.Length; } }
+
     void Start()
     {
         Spawn = GetComponent<SpawnScript>();
-        ChamberTreeRoot = Spawn.GenerateTree();
+        Chambers = Spawn.GenerateTree();
+        ChamberTreeRoot = Chambers[0];
         Spawn.BuildChambersRec(ChamberTreeRoot);
         CurrentChamber = ChamberTreeRoot;
         Player.transform.position = ChamberTreeRoot.ChamberControl.SpawnLocations[0].transform.position;
@@ -26,6 +31,11 @@ public class ChambersControler : MonoBehaviour
     {
         ChangeChamber();
         CurrentChamber.ChamberControl.ChamberUpdate();
+    }
+
+    public ChamberNode GetChamberNode(int id)
+    {
+        return Chambers[id];
     }
 
     private bool ChangeChamber()
@@ -45,6 +55,6 @@ public class ChambersControler : MonoBehaviour
 
     private void GameFinishedHandler()
     {
-        gameWorld.EndGame(true, Player.GetComponent<ScoreSystem>().GetScore());
+        gameWorld.EndGame(true);
     }
 }

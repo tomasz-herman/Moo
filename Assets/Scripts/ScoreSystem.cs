@@ -6,21 +6,23 @@ using UnityEngine.UI;
 public class ScoreSystem : MonoBehaviour
 {
     public HeadUpDisplay hud;
-    private int score = 0;
+    private float score = 0;
+
     void Start()
     {
         UpdateHud();
     }
 
-    public void AddScore(int points = 1)
+    public void AddScore(float points)
     {
         score += points;
         UpdateHud();
     }
     private void UpdateHud()
     {
-        hud.scoreBar.SetScore(score);
+        hud.scoreBar.SetScore(IntScore);
     }
 
-    public int GetScore() { return score; }
+    public int IntScore { get { return Mathf.CeilToInt(score); } }
+    public float Score { get { return score; } }
 }

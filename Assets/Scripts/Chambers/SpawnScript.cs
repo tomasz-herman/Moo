@@ -6,9 +6,9 @@ using UnityEngine;
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] public float ChamberSize = 60;
-    [SerializeField] int NumberOfOptionalChambersBeforeBoss = 5;
-    [SerializeField] int NumberOfBossChambers = 3;
-    [SerializeField] int NumbersOfChambersBeforeBoss = 2;
+    int NumberOfOptionalChambersBeforeBoss = 1;
+    int NumberOfBossChambers = 1;
+    int NumbersOfChambersBeforeBoss = 1;
     [SerializeField] int NumberOfTryBeforeOnlyForwardMode = 3;
     [SerializeField] float OptionalChamberSpawnPossibilityPercent = 50;
 
@@ -28,10 +28,16 @@ public class SpawnScript : MonoBehaviour
     private void Awake()
     {
         optionalSpawnFloat = 1 - (float)OptionalChamberSpawnPossibilityPercent / 100;
+
+        var gameplay = ApplicationData.GameplayData;
+        NumberOfOptionalChambersBeforeBoss = gameplay.NumberOfOptionalChambersBeforeBoss;
+        NumberOfBossChambers = gameplay.NumberOfBossChambers;
+        NumbersOfChambersBeforeBoss = gameplay.NumberOfChambersBeforeBoss;
+
         LoadChamberPrefabs();
     }
 
-    public ChamberNode GenerateTree()
+    public ChamberNode[] GenerateTree()
     {
         int i = 0;
         while (!GenerateChamberTree())
@@ -40,8 +46,7 @@ public class SpawnScript : MonoBehaviour
             if (i > NumberOfTryBeforeOnlyForwardMode)
                 OnlyForward = true;
         }
-        NumberTheChambers();
-        return chambersTreeRoot;
+        return NumberTheChambers();
     }
 
     private bool GenerateChamberTree()
@@ -168,11 +173,16 @@ public class SpawnScript : MonoBehaviour
             BuildChambersRec(item);
     }
 
-    private void NumberTheChambers()
+    private ChamberNode[] NumberTheChambers()
     {
         int currNumber = 0;
         ChamberNode currentNode = chambersTreeRoot;
         ChamberNode tempNode;
+
+        currentNode.Level = 1;
+
+        List<ChamberNode> orderedChambers = new List<ChamberNode>();
+
         while (currentNode != null)
         {
             if (currentNode.Type == ChamberType.Normal)
@@ -180,8 +190,11 @@ public class SpawnScript : MonoBehaviour
             else
             {
                 currentNode.Number = currNumber;
+                orderedChambers.Add(currentNode);
                 currNumber++;
             }
+
+            int nextChamberLevel = currentNode.Level + (currentNode.Type == ChamberType.Boss ? 1 : 0);
 
             tempNode = null;
             foreach (var item in currentNode.Children())
@@ -190,6 +203,8 @@ public class SpawnScript : MonoBehaviour
                     tempNode = item;
             }
             currentNode = tempNode;
+            if(currentNode != null)
+                currentNode.Level = nextChamberLevel;
         }
         EnemySpawner.MaxNumber = currNumber - 1;
 
@@ -199,13 +214,20 @@ public class SpawnScript : MonoBehaviour
                 return;
 
             root.Number = currNumber;
+            orderedChambers.Add(root);
             currNumber++;
+
             foreach (var item in root.Children())
             {
                 if (item.Type == ChamberType.Optional)
+                {
+                    item.Level = root.Level;
                     NumberTheOptionalChambersRec(item);
+                }
             }
         }
+
+        return orderedChambers.ToArray();
     }
 
     private Direction randomNext(ChamberNode current)
