@@ -20,6 +20,7 @@ public abstract class Enemy : Entity
     [HideInInspector] public float movementSpeed;
     [HideInInspector] public int pointsForKill;
 
+    private float scalingFactor = 1f;
     private bool isDead = false;
 
     void Awake()
@@ -38,6 +39,22 @@ public abstract class Enemy : Entity
         };
 
         data = ApplicationData.EnemyData[EnemyType];
+        Spawn();
+    }
+
+    void Start()
+    {
+        _audioManager = AudioManager.Instance;
+        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
+    }
+
+    void OnDestroy()
+    {
+        Audio?.Dispose();
+    }
+
+    public void Spawn()
+    {
         healthSystem.MaxHealth = data.BaseHealth;
         healthSystem.Health = healthSystem.MaxHealth;
 
@@ -56,17 +73,15 @@ public abstract class Enemy : Entity
         dropSystem.maxAmmo = data.BaseMaxAmmoDrop;
         dropSystem.upgradeDropChance = data.UpgradeDropChance;
         dropSystem.upgradeDropCount = data.UpgradeDropCount;
-}
-
-    void Start()
-    {
-        _audioManager = AudioManager.Instance;
-        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
     }
 
-    void OnDestroy()
+    public float ScalingFactor
     {
-        Audio?.Dispose();
+        get { return scalingFactor; }
+        set
+        {
+            scalingFactor = value;
+        }
     }
 
     public void TakeDamage(float damage, ScoreSystem system = null)
