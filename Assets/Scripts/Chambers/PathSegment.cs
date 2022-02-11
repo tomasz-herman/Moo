@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathSegment : MonoBehaviour
 {
-    private Renderer renderer;
+    private new Renderer renderer;
 
     private void Awake()
     {
