@@ -12,4 +12,5 @@ public static class ApplicationData
     public static WeaponAIConfig WeaponAIData = Resources.Load<WeaponAIConfig>("ScriptableObjects/WeaponAIData");
     public static GameplayConfig GameplayData = Resources.Load<GameplayConfig>("ScriptableObjects/GameplayData");
     public static EnemyConfig EnemyData = Resources.Load<EnemyConfig>("ScriptableObjects/EnemyData");
+    public static UiConfig UiData = Resources.Load<UiConfig>("ScriptableObjects/UiConfig");
 }
