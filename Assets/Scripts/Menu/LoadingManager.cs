@@ -8,6 +8,8 @@ public class LoadingManager : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider progressBar;
+    public Sprite[] backgrounds;
+    public Image backgroundImage;
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     private float progress;
     private void Awake()
@@ -17,6 +19,7 @@ public class LoadingManager : MonoBehaviour
 
     private void LoadGame()
     {
+        backgroundImage.sprite = backgrounds[Random.Range(0, backgrounds.Length)];
         loadingScreen.gameObject.SetActive(true);
         
         scenesLoading.Add(SceneManager.LoadSceneAsync(Scenes.TestGeneration, LoadSceneMode.Additive));
