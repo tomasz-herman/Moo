@@ -45,6 +45,6 @@ public class ChambersControler : MonoBehaviour
 
     private void GameFinishedHandler()
     {
-        gameWorld.EndGame(true, Player.GetComponent<ScoreSystem>().GetScore());
+        gameWorld.EndGame(true, Player.GetComponent<ScoreSystem>().IntScore);
     }
 }
