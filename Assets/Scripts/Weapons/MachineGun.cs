@@ -5,20 +5,21 @@ namespace Assets.Scripts.Weapons
 {
     public class MachineGun : Weapon
     {
-        private readonly Projectile projectilePrefab;
+        public Projectile projectilePrefab { get; protected set; }
 
-        private float scatterFactor = 3f;
+        private readonly float _scatterFactor = 3f;
 
-        public MachineGun(Projectile projectileprefab) : base(WeaponType.MachineGun, SoundType.PistolShot)
+        public MachineGun(Projectile projectilePrefab) : base(WeaponType.MachineGun, SoundType.PistolShot)
         {
-            projectilePrefab = projectileprefab;
+            this.projectilePrefab = projectilePrefab;
         }
 
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            Projectile projectile = Shooting.Instantiate(projectilePrefab, position, Quaternion.identity);
+            Projectile projectile = Object.Instantiate(projectilePrefab, position, Quaternion.identity);
             projectile.color = color;
-            var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
+            projectile.SetUpgrades(projectileUpgrades);
+            var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, _scatterFactor), 0) * direction.normalized;
             projectile.Launch(shooter, dir * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
         }
     }

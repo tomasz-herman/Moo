@@ -5,16 +5,17 @@ namespace Assets.Scripts.Weapons
 {
     public class GrenadeLauncher : Weapon
     {
-        private readonly Grenade grenadePrefab;
+        public Grenade grenadePrefab { get; protected set; }
 
-        public GrenadeLauncher(Grenade grenadeprefab) : base(WeaponType.GrenadeLauncher, SoundType.GrenadeLauncherShot)
+        public GrenadeLauncher(Grenade grenadePrefab) : base(WeaponType.GrenadeLauncher, SoundType.GrenadeLauncherShot)
         {
-            grenadePrefab = grenadeprefab;
+            this.grenadePrefab = grenadePrefab;
         }
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            Grenade grenade = Shooting.Instantiate(grenadePrefab, position, Quaternion.identity);
+            Grenade grenade = Object.Instantiate(grenadePrefab, position, Quaternion.identity);
             grenade.color = color;
+            grenade.SetUpgrades(projectileUpgrades);
             grenade.Launch(shooter, direction.normalized * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.SoundManager;
-using Assets.Scripts.Upgrades.OneTime.Handlers;
+﻿using Assets.Scripts.SoundManager;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -8,7 +6,6 @@ namespace Assets.Scripts.Weapons
     public class Sword : Weapon
     {
         private readonly Blade bladePrefab;
-        public List<IOneTimeProjectileUpgradeHandler> BladeUpgrades { get; set; } = new List<IOneTimeProjectileUpgradeHandler>();
 
         public Sword(Blade bladePrefab) : base(WeaponType.Sword, SoundType.SwordSwing)
         {
@@ -17,11 +14,10 @@ namespace Assets.Scripts.Weapons
 
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
-            Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
+            Blade blade = Object.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.ProjectileUpgrades = BladeUpgrades;
+            blade.SetUpgrades(projectileUpgrades);
             blade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, baseProjectileSpeed * shooting.projectileSpeedMultiplier);
         }
-
     }
 }
