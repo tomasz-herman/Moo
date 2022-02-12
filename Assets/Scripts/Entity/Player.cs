@@ -1,3 +1,4 @@
+using Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers;
 using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers;
 using Assets.Scripts.Weapons;
 
@@ -37,8 +38,15 @@ public class Player : Entity
         shooting.SelectWeapon(WeaponType.Sword);
         var sword = shooting.CurrentWeapon as Sword;
         var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(sword);
+        sword?.AddUpgrade(projectileUpgrade);
+        shooting.SelectWeapon(currweap.WeaponType);
 
-        sword?.BladeUpgrades.Add(projectileUpgrade);
+        //TODO: delete (if you see this in PR let MichalR know)
+        currweap = shooting.CurrentWeapon;
+        shooting.SelectWeapon(WeaponType.Pistol);
+        var pistol = shooting.CurrentWeapon as Pistol;
+        var projectileUpgrade2 = new PistolProjectilesChainToNearestEnemyUpgradeHandler(pistol);
+        pistol?.AddUpgrade(projectileUpgrade2);
         shooting.SelectWeapon(currweap.WeaponType);
     }
 
