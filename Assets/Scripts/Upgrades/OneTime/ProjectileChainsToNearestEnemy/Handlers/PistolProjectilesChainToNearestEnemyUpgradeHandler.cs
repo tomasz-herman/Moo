@@ -19,6 +19,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
             Weapon.AddUpgrade(this);
         }
 
+        //TODO: move to base class, add some virtual method to Instantiate projectile
         public override void OnEnemyHit(ProjectileBase projectile, Enemy enemy, IOneTimeProjectileUpgradeHandlerData data)
         {
             var closestEnemy = FindClosestEnemy(enemy);

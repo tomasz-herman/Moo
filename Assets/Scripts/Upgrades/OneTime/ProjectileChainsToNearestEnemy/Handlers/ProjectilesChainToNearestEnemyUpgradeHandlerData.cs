@@ -3,6 +3,7 @@ using Assets.Scripts.Weapons;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers
 {
+    //TODO: delete
     public class ProjectilesChainToNearestEnemyUpgradeHandlerData : IOneTimeProjectileUpgradeHandlerData
     {
         private readonly ProjectileBase _projectile;
