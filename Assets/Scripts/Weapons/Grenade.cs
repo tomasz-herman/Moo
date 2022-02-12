@@ -49,11 +49,13 @@ public class Grenade : ProjectileBase
             if (!isExplosing)
             {
                 isExplosing = true;
-                var velocity = GetComponent<Rigidbody>().velocity;
+                var rigidbody = GetComponent<Rigidbody>();
+                var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 PlaySound();
-                
-                Instantiate(explosionParticles, transform.position - velocity * 2f * Time.fixedDeltaTime, transform.rotation);
+
+                transform.position = backtrackedPosition;
+                Instantiate(explosionParticles, transform.position, transform.rotation);
                 gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 

@@ -26,7 +26,6 @@ public class ExplosionParticles : MonoBehaviour
     private void Update()
     {
         //TODO
-        //logarithmic intensity
         //explosion position
         //light color
         elapsedTime += Time.deltaTime;
