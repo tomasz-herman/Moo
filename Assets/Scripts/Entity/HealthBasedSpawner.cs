@@ -43,10 +43,13 @@ public class HealthBasedSpawner : MonoBehaviour
             Vector3 tempSpawnLocation = parent.transform.position + direction * Utils.FloatBetween(MinSpawnRadius, MaxSpawnRadius);
             Vector3 capsuleCenter = tempSpawnLocation + bottomToCenter;
 
-            if(!Physics.CheckCapsule(capsuleCenter - centerToUpperSphere * 0.99f, capsuleCenter + centerToUpperSphere, capsuleRadius, Layers.TerrainLayers))
+            if(Physics.RaycastAll(tempSpawnLocation, new Vector3(0, -1, 0), 0.1f, LayerMask.GetMask(Layers.Floor)).Length > 0)
             {
-                spawnLocation = tempSpawnLocation;
-                break;
+                if (!Physics.CheckCapsule(capsuleCenter - centerToUpperSphere * 0.99f, capsuleCenter + centerToUpperSphere, capsuleRadius, Layers.TerrainLayers))
+                {
+                    spawnLocation = tempSpawnLocation;
+                    break;
+                }
             }
         }
 
