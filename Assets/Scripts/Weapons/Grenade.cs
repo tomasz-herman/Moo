@@ -55,7 +55,8 @@ public class Grenade : ProjectileBase
                 PlaySound();
 
                 transform.position = backtrackedPosition;
-                Instantiate(explosionParticles, transform.position, transform.rotation);
+                var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
+                particles.Color = color;
                 gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 

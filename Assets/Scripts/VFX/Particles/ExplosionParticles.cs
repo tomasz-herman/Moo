@@ -10,6 +10,9 @@ public class ExplosionParticles : MonoBehaviour
     [SerializeField] private float lightTimeToLive = 1;
     [SerializeField] private float fullBrightnessTimeFactor = 0.1f;
     [SerializeField] private float intensityGamma = 10;
+    [SerializeField] private GameObject singleColorParticleParent;
+    [SerializeField] private ProjectileHitTerrainParticles terrainParticles;
+
     private new Light light;
     private float elapsedTime = 0;
     private float fullBrightnessTimeOffset;
@@ -25,9 +28,6 @@ public class ExplosionParticles : MonoBehaviour
 
     private void Update()
     {
-        //TODO
-        //explosion position
-        //light color
         elapsedTime += Time.deltaTime;
         float intensityFactor;
         if (elapsedTime < fullBrightnessTimeOffset)
@@ -39,6 +39,22 @@ public class ExplosionParticles : MonoBehaviour
         float logIntensity = (Mathf.Pow(intensityGamma, intensityFactor) - 1)/(intensityGamma - 1);
 
         SetLightIntensity(baseIntensity * logIntensity);
+    }
+
+    public Color Color
+    {
+        set
+        {
+            terrainParticles.SparkColor = value;
+            var particles = singleColorParticleParent.GetComponentsInChildren<ParticleSystem>()
+                .Concat(new ParticleSystem[] { singleColorParticleParent.GetComponent<ParticleSystem>() });
+            foreach (var particleSystem in particles)
+            {
+                var gradient = new ParticleSystem.MinMaxGradient(value);
+                var main = particleSystem.main;
+                main.startColor = gradient;
+            }
+        }
     }
 
     private void SetLightIntensity(float intensity)
