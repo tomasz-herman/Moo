@@ -16,7 +16,6 @@ public class Blade : ProjectileBase
     private Vector3 ownerToBlade;
     private HashSet<Entity> hitEntities = new HashSet<Entity>();
 
-
     public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
     {
         base.Launch(owner, damage);
@@ -28,9 +27,9 @@ public class Blade : ProjectileBase
         ownerToBlade = new Vector3(0, transform.localPosition.y, length / 2);
         UpdateTransform();
 
-        foreach (var upgrade in ProjectileUpgrades)
+        for (int i = 0; i < projectileUpgrades.Count; i++)
         {
-            upgrade.OnLaunch(this);
+            projectileUpgrades[i].OnLaunch(this, projectileUpgradesData[i]);
         }
     }
 
@@ -41,10 +40,10 @@ public class Blade : ProjectileBase
 
     protected override void Start()
     {
+        base.Start();
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
-        base.Start();
 
         UpdateTransform();
     }
@@ -58,9 +57,9 @@ public class Blade : ProjectileBase
 
         UpdateTransform();
 
-        foreach (var upgrade in ProjectileUpgrades)
+        for (int i = 0; i < projectileUpgrades.Count; i++)
         {
-            upgrade.OnUpdate(this);
+            projectileUpgrades[i].OnUpdate(this, projectileUpgradesData[i]);
         }
 
         if (angle > stopAngle)
@@ -69,9 +68,9 @@ public class Blade : ProjectileBase
 
     private void OnDrawGizmos()
     {
-        foreach (var upgrade in ProjectileUpgrades)
+        for (int i = 0; i < projectileUpgrades.Count; i++)
         {
-            upgrade.OnDrawGizmos(this);
+            projectileUpgrades[i].OnDrawGizmos(this, projectileUpgradesData[i]);
         }
     }
 

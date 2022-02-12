@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.SoundManager;
 using Assets.Scripts.Upgrades.OneTime.Handlers;
 using Assets.Scripts.Upgrades.OneTime.Upgradables;
@@ -8,7 +9,16 @@ namespace Assets.Scripts.Weapons
 {
     public abstract class ProjectileBase : Entity, IOneTimeProjectileUpgradable
     {
-        public List<IOneTimeProjectileUpgradeHandler> ProjectileUpgrades { get; set; } = new List<IOneTimeProjectileUpgradeHandler>();
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; protected set; } = new List<IOneTimeProjectileUpgradeHandler>();
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandlerData> projectileUpgradesData { get; protected set; } = new List<IOneTimeProjectileUpgradeHandlerData>();
+
+        public List<GameObject> nonCollidableObjects = new List<GameObject>();
 
         public SoundTypeWithPlaybackSettings Sound;
 
@@ -50,9 +60,9 @@ namespace Assets.Scripts.Weapons
 
         protected virtual void OnDestroy()
         {
-            foreach (var upgrade in ProjectileUpgrades)
+            for (int i = 0; i < projectileUpgrades.Count; i++)
             {
-                upgrade.OnDestroy(this);
+                projectileUpgrades[i].OnDestroy(this, projectileUpgradesData[i]);
             }
         }
 
@@ -83,9 +93,25 @@ namespace Assets.Scripts.Weapons
 
         public void SpawnParticles(Vector3 position)
         {
+            SpawnParticles(position, color);
+        }
+
+        public void SpawnParticles(Vector3 position, Color sparkColor)
+        {
+            SpawnParticles(position, sparkColor, particleCount);
+        }
+
+        public void SpawnParticles(Vector3 position, Color sparkColor, int particleCount)
+        {
             var particles = Instantiate(hitTerrainParticles, position, Quaternion.identity);
-            particles.SparkColor = color;
+            particles.SparkColor = sparkColor;
             particles.ParticleCount = particleCount;
+        }
+
+        public void SetUpgrades(List<IOneTimeProjectileUpgradeHandler> projectileUpgrades)
+        {
+            this.projectileUpgrades = projectileUpgrades;
+            this.projectileUpgradesData = projectileUpgrades.Select(x => x.CreateEmptyData(this)).ToList();
         }
     }
 }
