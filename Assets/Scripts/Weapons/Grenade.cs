@@ -1,11 +1,9 @@
 using Assets.Scripts.SoundManager;
-using Assets.Scripts.Weapons;
 using UnityEngine;
 
-public class Grenade : ProjectileBase
+public class Grenade : Projectile
 {
     [SerializeField] private ExplosionParticles explosionParticles;
-    public float Emission = 6;
 
     private float explosionSpeed = 40f;
     private float explosionRange = 10f;
@@ -25,9 +23,6 @@ public class Grenade : ProjectileBase
             }
         };
 
-        var material = gameObject.GetComponentInChildren<Renderer>().material;
-        material.SetColor("_EmissiveColor", color * Emission);
-        material.SetColor("_BaseColor", color);
         base.Start();
     }
 
@@ -60,19 +55,5 @@ public class Grenade : ProjectileBase
             var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
             ApplyDamage(other, dmg);
         }
-    }
-
-    protected override void OnDestroy()
-    {
-        //Audio?.Dispose();
-
-        base.OnDestroy();
-    }
-
-    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
-    {
-        Launch(owner, extradamage);
-        GetComponent<Rigidbody>().velocity = velocity;
-        gameObject.transform.LookAt(transform.position + velocity);
     }
 }
