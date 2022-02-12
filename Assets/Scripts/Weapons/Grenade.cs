@@ -49,10 +49,11 @@ public class Grenade : ProjectileBase
             if (!isExplosing)
             {
                 isExplosing = true;
+                var velocity = GetComponent<Rigidbody>().velocity;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 PlaySound();
                 
-                Instantiate(explosionParticles, transform.position, transform.rotation);
+                Instantiate(explosionParticles, transform.position - velocity * 2f * Time.fixedDeltaTime, transform.rotation);
                 gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 
