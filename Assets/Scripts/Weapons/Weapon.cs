@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.SoundManager;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -7,6 +10,11 @@ namespace Assets.Scripts.Weapons
     public abstract class Weapon : IDisposable
     {
         protected ContinuousTrigger trigger = new ContinuousTrigger();
+
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; } = new List<IOneTimeProjectileUpgradeHandler>();
 
         public float baseProjectileSpeed { get; set; }
         public float basetriggerTimeout { get; set; }
@@ -86,6 +94,18 @@ namespace Assets.Scripts.Weapons
         public bool HasEnoughAmmo(AmmoSystem ammoSystem)
         {
             return ammoSystem.Ammo >= baseAmmoConsumption;
+        }
+
+        public void AddUpgrade<T>(T handler) where T : IOneTimeProjectileUpgradeHandler
+        {
+            if (ContainsUpgrade<T>()) return;
+
+            projectileUpgrades.Add(handler);
+        }
+
+        public bool ContainsUpgrade<T>() where T : IOneTimeProjectileUpgradeHandler
+        {
+            return projectileUpgrades.OfType<T>().Any();
         }
 
         public static string GetWeaponName(WeaponType type)
