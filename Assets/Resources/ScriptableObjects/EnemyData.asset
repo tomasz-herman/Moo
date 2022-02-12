@@ -93,9 +93,9 @@ MonoBehaviour:
     BaseMinAmmoDrop: 50
     BaseMaxAmmoDrop: 80
     ChildSpawnRules:
-    - HealthPercent: 50
+    - HealthPercent: 60
       Enemies: 00000000
-    - HealthPercent: 40
+    - HealthPercent: 45
       Enemies: 000000000000000000000000
     - HealthPercent: 30
       Enemies: 0000000000000000000000000000000001000000
