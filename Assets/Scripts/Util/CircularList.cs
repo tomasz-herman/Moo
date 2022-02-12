@@ -1,69 +1,64 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scripts.Util
 {
     public class CircularList<T>: IEnumerable<T>
         where T : class
     {
-        private class Node
-        {
-            public T Val;
-            public Node Prev;
-            public Node Next;
-        }
-
-        private Node Curr;
+        private readonly List<T> list = new List<T> {null};
+        private int current;
 
         public void Add(T val)
         {
+            if(val == null) return;
 
-            var node = new Node() { Val = val };
-            if (Curr == null)
+            if (Current() == null)
             {
-                Curr = node;
-                Curr.Prev = Curr;
-                Curr.Next = Curr;
+                list[0] = val;
                 return;
             }
 
-            node.Prev = Curr.Prev;
-            node.Next = Curr;
-            Curr.Prev.Next = node;
-            Curr.Prev = node;
+            list.Add(val);
         }
-        public T Current() => Curr.Val;
+
+        public void Sort(Comparison<T> comparer)
+        {
+            list.Sort(comparer);
+        }
+
+        public void SetIndex(int i)
+        {
+            current = i;
+        }
+        public T Current() => list[current];
         public T Next()
         {
-            Curr = Curr.Next;
-            return Curr.Val;
+            current++;
+            if (current >= list.Count) current = 0;
+            return Current();
         }
         public T Prev()
         {
-            Curr = Curr.Prev;
-            return Curr.Val;
+            current--;
+            if (current < 0) current = list.Count - 1;
+            return Current();
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            var cur = Curr;
-            var ret = new List<T>();
-            do
+            var first = Current();
+            yield return first;
+            while (Next() != first)
             {
-                ret.Add(cur.Val);
-                cur = cur.Next;
+                yield return Current();
             }
-            while (cur != Curr);
-            return ret.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

@@ -28,5 +28,11 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.mouseScrollDelta.y > 0) shooting.NextWeapon();
         else if (Input.mouseScrollDelta.y < 0) shooting.PrevWeapon();
+
+        if(Input.GetKeyDown(KeyCode.Alpha1)) shooting.SelectWeapon(WeaponType.MachineGun);
+        if(Input.GetKeyDown(KeyCode.Alpha2)) shooting.SelectWeapon(WeaponType.Shotgun);
+        if(Input.GetKeyDown(KeyCode.Alpha3)) shooting.SelectWeapon(WeaponType.Pistol);
+        if(Input.GetKeyDown(KeyCode.Alpha4)) shooting.SelectWeapon(WeaponType.Sword);
+        if(Input.GetKeyDown(KeyCode.Alpha5)) shooting.SelectWeapon(WeaponType.GrenadeLauncher);
     }
 }
