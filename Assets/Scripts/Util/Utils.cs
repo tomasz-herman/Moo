@@ -1,21 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class Utils
 {
-    private static readonly System.Random random = new System.Random();
+    private static readonly System.Random Random = new System.Random();
 
-    public static int NumberBetween(int i, int j) { return random.Next(i, j + 1); }
-    public static float FloatBetween(float i, float j) { return (float)random.NextDouble() * (j - i) + i; }
-    public static int RandomNumber() { return random.Next(); }
-    public static bool RandomBool() { return (random.Next() & 1) == 0; }
+    public static int NumberBetween(int i, int j) { return Random.Next(i, j + 1); }
+    public static float FloatBetween(float i, float j) { return (float)Random.NextDouble() * (j - i) + i; }
+    public static int RandomNumber() { return Random.Next(); }
+    public static bool RandomBool() { return (Random.Next() & 1) == 0; }
 
     public static float RandomGaussNumber(float mean, float stdev)
     {
-        var U1 = (float)random.NextDouble();
-        var U2 = (float)random.NextDouble();
+        var U1 = (float)Random.NextDouble();
+        var U2 = (float)Random.NextDouble();
 
         return stdev * Mathf.Sqrt(-2 * Mathf.Log(U1, Mathf.Exp(1))) * Mathf.Cos(2 * Mathf.PI * U2) + mean;
+    }
+
+    public static Color CombineColors(params Color[] colors)
+    {
+        var result = new Color(0, 0, 0, 0);
+        foreach (var color in colors)
+        {
+            result += color;
+        }
+        result /= colors.Length;
+        return result;
     }
 }
