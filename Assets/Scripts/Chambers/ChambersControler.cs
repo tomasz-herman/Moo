@@ -7,6 +7,7 @@ public class ChambersControler : MonoBehaviour
 {
     [SerializeField] GameObject Player;
     [SerializeField] GameWorld gameWorld;
+    //[SerializeField] int Depth = 5;
 
     [HideInInspector] public ChamberNode CurrentChamber = null;
 
@@ -25,6 +26,7 @@ public class ChambersControler : MonoBehaviour
         CurrentChamber = ChamberTreeRoot;
         Player.transform.position = ChamberTreeRoot.ChamberControl.SpawnLocations[0].transform.position;
         TeleporterEffectScript.CreateTeleporterForEntity(Player, Player.GetComponent<Player>().TeleporterScale);
+        //ChamberNode.ShowChambers(CurrentChamber, Depth);
     }
 
     void Update()
@@ -46,6 +48,7 @@ public class ChambersControler : MonoBehaviour
         if (playerPosition != CurrentChamber.Location)
         {
             CurrentChamber = CurrentChamber.GetNextNodeFromDirecion(playerPosition - CurrentChamber.Location);
+            //ChamberNode.ShowChambers(CurrentChamber, Depth);
             if (CurrentChamber.IsLast)
                 CurrentChamber.ChamberControl.AddAllEnemiesKilledListener(GameFinishedHandler);
             return true;

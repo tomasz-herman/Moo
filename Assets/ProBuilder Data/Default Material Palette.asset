@@ -15,10 +15,10 @@ MonoBehaviour:
   array:
   - {fileID: 2100000, guid: d858beeca46822349acfa077fabc8255, type: 2}
   - {fileID: 2100000, guid: 535d2ed88290912439abe9f474ef2541, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: b40523d7b3e232142b9fdaedd47b4712, type: 2}
+  - {fileID: 2100000, guid: 5c207172f42123a45bf442d71084b9d1, type: 2}
+  - {fileID: 2100000, guid: aff486c27bbca7344bc442ac8db4ef3e, type: 2}
+  - {fileID: 2100000, guid: af3fcf677d263174bb057c9857549ee8, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

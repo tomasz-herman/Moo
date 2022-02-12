@@ -288,7 +288,7 @@ public class SpawnScript : MonoBehaviour
 
     private void LoadChamberPrefabs()
     {
-        ChambersContainer ChambersContainer = Resources.Load<ChambersContainer>("ScriptableObjects/TestChambers"); // TODO: change to finished chambers
+        ChambersContainer ChambersContainer = Resources.Load<ChambersContainer>("ScriptableObjects/Chambers");
         foreach (var item in ChambersContainer.Chambers)
         {
             switch (item.type)

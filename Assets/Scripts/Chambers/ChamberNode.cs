@@ -152,7 +152,7 @@ public class ChamberNode
 
     public void ActivateClearedHandler()
     {
-        ChamberControl.AddAllEnemiesKilledListener(ChamberClearedHandler);
+        ChamberControl.AddDoorsOpenListener(ChamberClearedHandler);
     }
 
     public void ActivateNode(ChamberControl control)
@@ -248,4 +248,27 @@ public class ChamberNode
             return false;
         return true;
     }
+
+    //public static void ShowChambers(ChamberNode root, int depth, ChamberNode from = null)
+    //{
+    //    if (depth >= 0 && !root.ChamberControl.gameObject.activeInHierarchy)
+    //        root.SetActive(true);
+    //    else if (depth < 0 && root.ChamberControl.gameObject.activeInHierarchy)
+    //        root.SetActive(false);
+    //    else if (depth < 0 && !root.ChamberControl.gameObject.activeInHierarchy)
+    //        return;
+
+    //    foreach (var item in root.Children())
+    //        if (item != from)
+    //            ShowChambers(item, depth - 1, root);
+
+    //    if (root.Parent != null)
+    //        if (root.Parent != from)
+    //            ShowChambers(root.Parent, depth - 1, root);
+    //}
+
+    //private void SetActive(bool isActive)
+    //{
+    //    ChamberControl.gameObject.SetActive(isActive);
+    //}
 }
