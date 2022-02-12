@@ -66,17 +66,17 @@ public class SimpleEnemyAI : MonoBehaviour
         playerTooClose = distToPlayer < weaponAIProperties.MinimumRange;
         outOfAmmo = !shooting.HasEnoughAmmo();
 
-        if (outOfAmmo)
-        {
-            remainingAmmoRechargeTime -= Time.deltaTime;
-            if (remainingAmmoRechargeTime <= 0) Recharge();
-            else Dodge();
-        }
+        //if (outOfAmmo)
+        //{
+        //    remainingAmmoRechargeTime -= Time.deltaTime;
+        //    if (remainingAmmoRechargeTime <= 0) Recharge();
+        //    else Dodge();
+        //}
 
-        if(!playerInSight && !playerInAttackRange) Patrol();
-        if(playerInSight && !playerInPrefferedRange) Chase();
-        if(playerInSight && playerInAttackRange) Attack();
-        if(playerTooClose) Escape(); 
+        //if(!playerInSight && !playerInAttackRange) Patrol();
+        //if(playerInSight && !playerInPrefferedRange) Chase();
+        //if(playerInSight && playerInAttackRange) Attack();
+        //if(playerTooClose) Escape(); 
         lastPlayerPosition = playerPosition;
     }
 
