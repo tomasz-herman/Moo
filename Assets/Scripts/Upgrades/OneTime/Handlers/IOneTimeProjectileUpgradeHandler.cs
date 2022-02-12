@@ -5,11 +5,13 @@ namespace Assets.Scripts.Upgrades.OneTime.Handlers
 {
     public interface IOneTimeProjectileUpgradeHandler : IOneTimeUpgradeHandler
     {
-        void OnEnemyHit(ProjectileBase projectile, Enemy enemy);
-        void OnTerrainHit(GameObject projectile, Collider terrain);
-        void OnUpdate(ProjectileBase projectile);
-        void OnLaunch(ProjectileBase projectile);
-        void OnDestroy(ProjectileBase projectile);
-        void OnDrawGizmos(ProjectileBase projectile);
+        void ApplyUpgrade();
+        void OnEnemyHit(ProjectileBase projectile, Enemy enemy, IOneTimeProjectileUpgradeHandlerData data = null);
+        void OnTerrainHit(GameObject projectile, Collider terrain, IOneTimeProjectileUpgradeHandlerData data = null);
+        void OnUpdate(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data = null);
+        void OnLaunch(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data = null);
+        void OnDestroy(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data = null);
+        void OnDrawGizmos(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data = null);
+        IOneTimeProjectileUpgradeHandlerData CreateEmptyData(ProjectileBase projectile);
     }
 }
