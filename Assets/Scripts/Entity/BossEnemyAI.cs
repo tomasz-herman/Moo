@@ -24,10 +24,6 @@ public class BossEnemyAI : SimpleEnemyAI
             var k = Utils.NumberBetween(0, availableWeapons.Length - 1);
             (availableWeapons[n], availableWeapons[k]) = (availableWeapons[k], availableWeapons[n]);
         }
-        foreach (var availableWeapon in availableWeapons)
-        {
-            Debug.Log(availableWeapon);
-        }
 
         weapons = availableWeapons.Take(phases).ToList();
     }

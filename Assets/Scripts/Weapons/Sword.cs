@@ -15,7 +15,7 @@ namespace Assets.Scripts.Weapons
         {
             Blade blade = Shooting.Instantiate(bladePrefab, position, Quaternion.identity);
             blade.color = color;
-            blade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, baseProjectileSpeed * shooting.projectileSpeedMultiplier);
+            blade.Launch(shooter, shooting.weaponDamageMultiplier * baseDamage, baseProjectileSpeed * shooting.projectileSpeedMultiplier);
         }
     }
 }
