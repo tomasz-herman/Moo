@@ -28,6 +28,7 @@ MonoBehaviour:
     AmmoDropChance: 0.2
     BaseMinAmmoDrop: 5
     BaseMaxAmmoDrop: 10
+    ChildSpawnRules: []
   - Type: 1
     BaseHealth: 50
     BaseDamageMultiplier: 0.5
@@ -43,6 +44,7 @@ MonoBehaviour:
     AmmoDropChance: 0.5
     BaseMinAmmoDrop: 10
     BaseMaxAmmoDrop: 20
+    ChildSpawnRules: []
   - Type: 2
     BaseHealth: 150
     BaseDamageMultiplier: 1
@@ -58,6 +60,7 @@ MonoBehaviour:
     AmmoDropChance: 0.75
     BaseMinAmmoDrop: 20
     BaseMaxAmmoDrop: 40
+    ChildSpawnRules: []
   - Type: 3
     BaseHealth: 300
     BaseDamageMultiplier: 1.5
@@ -73,6 +76,7 @@ MonoBehaviour:
     AmmoDropChance: 1
     BaseMinAmmoDrop: 30
     BaseMaxAmmoDrop: 50
+    ChildSpawnRules: []
   - Type: 4
     BaseHealth: 1000
     BaseDamageMultiplier: 2.5
@@ -88,3 +92,12 @@ MonoBehaviour:
     AmmoDropChance: 1
     BaseMinAmmoDrop: 50
     BaseMaxAmmoDrop: 80
+    ChildSpawnRules:
+    - HealthPercent: 50
+      Enemies: 00000000
+    - HealthPercent: 40
+      Enemies: 000000000000000000000000
+    - HealthPercent: 30
+      Enemies: 0000000000000000000000000000000001000000
+    - HealthPercent: 20
+      Enemies: 00000000000000000000000000000000000000000100000002000000

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class HealthBasedSpawner : MonoBehaviour
 {
-    [SerializeField] private LinkedList<SpawnRule> spawnRules = new LinkedList<SpawnRule>();
+    private LinkedList<SpawnRule> spawnRules = new LinkedList<SpawnRule>();
 
     public float MinSpawnRadius = 1;
     public float MaxSpawnRadius = 5;
@@ -15,15 +16,13 @@ public class HealthBasedSpawner : MonoBehaviour
     private Enemy parent;
     public void Start()
     {
-        for (int i = 95; i >= 5; i -= 5)
-            spawnRules.AddLast(new SpawnRule() { HealthPercent = i, Enemies = new List<EnemyTypes>() { EnemyTypes.Small } });
+        parent = GetComponent<Enemy>();
 
-        var ordered = spawnRules.OrderByDescending(rule => rule.HealthPercent).ToList();
+        var rules = ApplicationData.EnemyData[parent.EnemyType].ChildSpawnRules;
+        var ordered = rules.OrderByDescending(rule => rule.HealthPercent).ToList();
         spawnRules.Clear();
         foreach (var rule in ordered)
             spawnRules.AddLast(rule);
-
-        parent = GetComponent<Enemy>();
 
         parent.healthSystem.HealthChanged += OnHealthChanged;
         parent.KillEvent.AddListener(OnParentDeath);
@@ -83,6 +82,7 @@ public class HealthBasedSpawner : MonoBehaviour
     }
 }
 
+[Serializable]
 public class SpawnRule
 {
     public float HealthPercent;
