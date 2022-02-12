@@ -11,6 +11,7 @@ public class UpgradesProvider : MonoBehaviour
     [SerializeField] Sprite weaponDamageIcon;
     [SerializeField] Sprite weaponProjectileSpeedIcon;
     [SerializeField] Sprite weaponCooldownIcon;
+    [SerializeField] Sprite weaponAmmoCostIcon;
     [SerializeField] Sprite shotgunProjectileCountIcon;
     [SerializeField] Sprite shotgunProjectileDispersionIcon;
 
@@ -49,6 +50,11 @@ public class UpgradesProvider : MonoBehaviour
         dict.Add(UpgradeType.MachineGunCooldown, new MachineGunCooldownUpgrade(shootingSystem.MachineGun, weaponCooldownIcon));
         dict.Add(UpgradeType.GrenadeLauncherCooldown, new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon));
         dict.Add(UpgradeType.SwordCooldown, new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon));
+
+        dict.Add(UpgradeType.PistolAmmoCost, new PistolAmmoCostUpgrade(shootingSystem.Pistol, weaponAmmoCostIcon));
+        dict.Add(UpgradeType.ShotgunAmmoCost, new ShotgunAmmoCostUpgrade(shootingSystem.Shotgun, weaponAmmoCostIcon));
+        dict.Add(UpgradeType.MachineGunAmmoCost, new MachineGunAmmoCostUpgrade(shootingSystem.MachineGun, weaponAmmoCostIcon));
+        dict.Add(UpgradeType.GrenadeLauncherAmmoCost, new GrenadeLauncherAmmoCostUpgrade(shootingSystem.GrenadeLauncher, weaponAmmoCostIcon));
 
         dict.Add(UpgradeType.ShotgunProjectileCount, new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon));
 
