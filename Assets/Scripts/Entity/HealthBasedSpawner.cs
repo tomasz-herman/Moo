@@ -6,6 +6,11 @@ using UnityEngine;
 public class HealthBasedSpawner : MonoBehaviour
 {
     [SerializeField] private LinkedList<SpawnRule> spawnRules = new LinkedList<SpawnRule>();
+    [SerializeField] private GameObject debugObject;
+
+    public float MinSpawnRadius = 1;
+    public float MaxSpawnRadius = 5;
+    public int NumberOfSpawnTriesBeforeFail = 20;
 
     private List<Enemy> spawnedChildren = new List<Enemy>();
     private Enemy parent;
@@ -25,12 +30,37 @@ public class HealthBasedSpawner : MonoBehaviour
         parent.KillEvent.AddListener(OnParentDeath);
     }
 
+    private void Spawn(EnemyTypes type)
+    {
+        var controller = Enemys.GetEnemyInfoFromType(type).enemy.GetComponent<CharacterController>();
+        float capsuleRadius = controller.radius;
+        float capsuleCenterY = controller.center.y;
+        Vector3 bottomToCenter = new Vector3(0, capsuleCenterY, 0);
+        Vector3 centerToUpperSphere = new Vector3(0, controller.height / 2, 0);
+
+        Vector3 spawnLocation = parent.transform.position;
+        for (int i = 0; i < NumberOfSpawnTriesBeforeFail; i++)
+        {
+            Vector3 direction = new Vector3(Utils.FloatBetween(-1, 1), 0, Utils.FloatBetween(1, 1)).normalized;
+            Vector3 tempSpawnLocation = parent.transform.position + direction * Utils.FloatBetween(MinSpawnRadius, MaxSpawnRadius);
+            Vector3 capsuleCenter = spawnLocation + bottomToCenter;
+
+            Instantiate(debugObject, capsuleCenter - centerToUpperSphere, Quaternion.identity);
+            Instantiate(debugObject, capsuleCenter + centerToUpperSphere, Quaternion.identity);
+
+            if(!Physics.CheckCapsule(capsuleCenter - centerToUpperSphere, capsuleCenter + centerToUpperSphere, capsuleRadius, Layers.TerrainLayers))
+            {
+                spawnLocation = tempSpawnLocation;
+                break;
+            }
+        }
+
+        Enemy child = parent.GameWorld.SpawnEnemy(type, spawnLocation, parent.Level);
+        spawnedChildren.Add(child);
+    }
+
     private void OnHealthChanged(object sender, (float health, float maxHealth) args)
     {
-        var world = parent.GameWorld;
-        var position = parent.transform.position;
-        var level = parent.Level;
-
         float healthPercent = 100 * args.health / args.maxHealth;
         while(spawnRules.Count > 0 && spawnRules.First.Value.HealthPercent >= healthPercent)
         {
@@ -39,8 +69,7 @@ public class HealthBasedSpawner : MonoBehaviour
 
             foreach(var type in toSpawn)
             {
-                Enemy child = world.SpawnEnemy(type, position, level);
-                spawnedChildren.Add(child);
+                Spawn(type);
             }
         }
     }

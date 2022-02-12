@@ -617,6 +617,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7e184f906cfe43ac3d223e6627b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugObject: {fileID: 5544767022948883220, guid: ce22dd69e51c0634b8fbd3eec2bb764f, type: 3}
+  MinSpawnRadius: 1
+  MaxSpawnRadius: 5
+  NumberOfSpawnTriesBeforeFail: 20
 --- !u!1 &1653182828857183468
 GameObject:
   m_ObjectHideFlags: 0
