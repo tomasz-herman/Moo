@@ -26,8 +26,8 @@ public class PlayerShooting : MonoBehaviour
             shooting.TryShoot(gameObject, gun.transform.position, gameObject.transform.forward);
         }
 
-        if (Input.mouseScrollDelta.y > 0) shooting.NextWeapon();
-        else if (Input.mouseScrollDelta.y < 0) shooting.PrevWeapon();
+        if (Input.mouseScrollDelta.y > 0) shooting.PrevWeapon();
+        else if (Input.mouseScrollDelta.y < 0) shooting.NextWeapon();
 
         if(Input.GetKeyDown(KeyCode.Alpha1)) shooting.SelectWeapon(WeaponType.MachineGun);
         if(Input.GetKeyDown(KeyCode.Alpha2)) shooting.SelectWeapon(WeaponType.Shotgun);
