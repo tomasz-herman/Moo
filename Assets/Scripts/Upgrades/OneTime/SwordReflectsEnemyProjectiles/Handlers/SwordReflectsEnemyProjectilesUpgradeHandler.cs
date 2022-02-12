@@ -11,6 +11,9 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
     {
         //it looks fun when reflected projectile is faster
         private float _projectileSpeedModifier = 1.5f;
+        private int _particleCount = 15;
+        private float _deviationOfReflectionSpreadAngleDeg = 3f;
+        private float _maxReflectionSpreadAngleDeg = 7f;
 
         private float _swordLength;
         private float _swordLengthOver2;
@@ -38,13 +41,10 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
         public void ApplyUpgrade()
         {
-            if (!_sword.ProjectileUpgrades.OfType<SwordReflectsEnemyProjectilesUpgradeHandler>().Any())
-            {
-                _sword.ProjectileUpgrades.Add(this);
-            }
+            _sword.AddUpgrade(this);
         }
 
-        public void OnUpdate(ProjectileBase projectile)
+        public void OnUpdate(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data)
         {
             if (!_launched) return;
 
@@ -63,48 +63,75 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
             foreach (var collider in colliders)
             {
-                if (collider.gameObject != projectile.gameObject)
+                //check if we didn't hit our blade
+                if (collider.gameObject == projectile.gameObject) continue;
+
+                var offset = collider.transform.position - position;
+                var distSquared = Vector3.SqrMagnitude(offset);
+
+                //check if projectile is close enough
+                if (distSquared >= _swordLengthSquared) continue;
+
+                var otherProjectile = collider.attachedRigidbody.GetComponent<ProjectileBase>();
+
+                //check if projectile base is not null
+                if (otherProjectile == null || otherProjectile.gameObject == null) continue;
+
+                //check if we did not reflected this projectile already
+                if (_reflectedProjectiles.Contains(otherProjectile)) continue;
+
+                _reflectedProjectiles.Add(otherProjectile);
+
+                var otherProjectileRigidBody = otherProjectile.gameObject.GetComponent<Rigidbody>();
+
+                //Redirect projectile
+                //calculate direction
+                Vector3 direction;
+                if (otherProjectile.Owner == null)
                 {
-                    var offset = collider.transform.position - position;
-                    var distSquared = Vector3.SqrMagnitude(offset);
-
-                    if (distSquared < _swordLengthSquared)
-                    {
-                        var otherProjectile = collider.attachedRigidbody.GetComponent<ProjectileBase>();
-
-                        if (otherProjectile != null)
-                        {
-                            if (!_reflectedProjectiles.Contains(otherProjectile))
-                            {
-                                _reflectedProjectiles.Add(otherProjectile);
-
-                                var direction = otherProjectile.Owner.transform.position - otherProjectile.transform.position;
-
-                                //TODO: do sth with that
-                                direction += Vector3.up;
-
-                                direction.Normalize();
-
-                                otherProjectile.Owner = projectile.Owner;
-
-                                var otherProjectileRigidBody = otherProjectile.gameObject.GetComponent<Rigidbody>();
-                                var otherProjectileSpeed = otherProjectileRigidBody.velocity.magnitude * _projectileSpeedModifier;
-                                var velocity = otherProjectileSpeed * direction;
-                                otherProjectileRigidBody.velocity = velocity;
-                                otherProjectile.gameObject.transform.LookAt(otherProjectile.transform.position + velocity);
-                            }
-                        }
-                    }
+                    direction = -otherProjectileRigidBody.velocity;
                 }
+                else
+                {
+                    direction = otherProjectile.Owner.transform.position - otherProjectile.transform.position;
+                    //TODO: do sth with that
+                    direction += Vector3.up;
+                }
+
+                direction.Normalize();
+
+                //deviate direction a bit
+                var angle = Utils.RandomGaussNumber(0, _deviationOfReflectionSpreadAngleDeg);
+                angle = Mathf.Clamp(angle, -_maxReflectionSpreadAngleDeg, _maxReflectionSpreadAngleDeg);
+                var deviation = Quaternion.Euler(0, angle, 0);
+                direction = deviation * direction;
+
+                //update owner
+                otherProjectile.Owner = projectile.Owner;
+
+                //update velocity of projectile
+                var otherProjectileSpeed = otherProjectileRigidBody.velocity.magnitude * _projectileSpeedModifier;
+                var velocity = otherProjectileSpeed * direction;
+                otherProjectileRigidBody.velocity = velocity;
+                otherProjectile.gameObject.transform.LookAt(otherProjectile.transform.position + velocity);
+
+                //spawn particles
+                var sparkColor = Utils.CombineColors(projectile.color, otherProjectile.color);
+                projectile.SpawnParticles(otherProjectile.transform.position, sparkColor, _particleCount);
             }
         }
 
-        public void OnDrawGizmos(ProjectileBase projectile)
+        public void OnDrawGizmos(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data)
         {
             Gizmos.DrawWireSphere(_rayCastSphereCenter, _rayCastSphereRadius);
         }
 
-        public void OnLaunch(ProjectileBase projectile)
+        public IOneTimeProjectileUpgradeHandlerData CreateEmptyData(ProjectileBase projectile)
+        {
+            return null;
+        }
+
+        public void OnLaunch(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data)
         {
             if (projectile is Blade blade)
             {
@@ -121,24 +148,15 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
                 _reflectedProjectiles.Clear();
 
-                OnUpdate(projectile);
+                OnUpdate(projectile, data);
             }
         }
 
-        public void OnEnemyHit(ProjectileBase projectile, Enemy enemy)
-        {
+        public void OnEnemyHit(ProjectileBase projectile, Enemy enemy, IOneTimeProjectileUpgradeHandlerData data) { }
 
-        }
+        public void OnTerrainHit(GameObject projectile, Collider terrain, IOneTimeProjectileUpgradeHandlerData data) { }
 
-        public void OnTerrainHit(GameObject projectile, Collider terrain)
-        {
-
-        }
-
-        public void OnDestroy(ProjectileBase projectile)
-        {
-
-        }
+        public void OnDestroy(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data) { }
 
         public static void DrawWireCapsule(Vector3 _pos, Vector3 _pos2, float _radius, Color _color = default)
         {
