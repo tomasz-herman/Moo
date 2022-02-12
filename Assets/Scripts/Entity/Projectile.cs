@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Assets.Scripts.Weapons;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ public class Projectile : ProjectileBase
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
-        nonCollidableObjects = new List<GameObject>();
     }
 
     public virtual void Launch(GameObject owner, Vector3 velocity, float damage)

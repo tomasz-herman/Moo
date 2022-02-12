@@ -12,13 +12,13 @@ namespace Assets.Scripts.Weapons
         /// <summary>
         /// Do not modify this collection
         /// </summary>
-        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; protected set; } = new List<IOneTimeProjectileUpgradeHandler>();
+        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; protected set; }
         /// <summary>
         /// Do not modify this collection
         /// </summary>
-        public List<IOneTimeProjectileUpgradeHandlerData> projectileUpgradesData { get; protected set; } = new List<IOneTimeProjectileUpgradeHandlerData>();
+        public List<IOneTimeProjectileUpgradeHandlerData> projectileUpgradesData { get; protected set; }
 
-        public List<GameObject> nonCollidableObjects = new List<GameObject>();
+        public List<GameObject> nonCollidableObjects;
 
         public SoundTypeWithPlaybackSettings Sound;
 
@@ -37,6 +37,13 @@ namespace Assets.Scripts.Weapons
         private float _elapsedTime = 0f;
 
         public float damage = 1;
+
+        protected virtual void Awake()
+        {
+            projectileUpgrades ??= new List<IOneTimeProjectileUpgradeHandler>();
+            projectileUpgradesData ??= new List<IOneTimeProjectileUpgradeHandlerData>();
+            nonCollidableObjects ??= new List<GameObject>();
+        }
 
         protected virtual void Start()
         {
