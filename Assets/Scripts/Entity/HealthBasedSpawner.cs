@@ -6,7 +6,6 @@ using UnityEngine;
 public class HealthBasedSpawner : MonoBehaviour
 {
     [SerializeField] private LinkedList<SpawnRule> spawnRules = new LinkedList<SpawnRule>();
-    [SerializeField] private GameObject debugObject;
 
     public float MinSpawnRadius = 1;
     public float MaxSpawnRadius = 5;
@@ -16,8 +15,8 @@ public class HealthBasedSpawner : MonoBehaviour
     private Enemy parent;
     public void Start()
     {
-        for (int i = 80; i >= 20; i -= 20)
-            spawnRules.AddLast(new SpawnRule() { HealthPercent = i, Enemies = new List<EnemyTypes>() { EnemyTypes.Small, EnemyTypes.Small, EnemyTypes.Medium, EnemyTypes.Big } });
+        for (int i = 95; i >= 5; i -= 5)
+            spawnRules.AddLast(new SpawnRule() { HealthPercent = i, Enemies = new List<EnemyTypes>() { EnemyTypes.Small } });
 
         var ordered = spawnRules.OrderByDescending(rule => rule.HealthPercent).ToList();
         spawnRules.Clear();
@@ -36,19 +35,16 @@ public class HealthBasedSpawner : MonoBehaviour
         float capsuleRadius = controller.radius;
         float capsuleCenterY = controller.center.y;
         Vector3 bottomToCenter = new Vector3(0, capsuleCenterY, 0);
-        Vector3 centerToUpperSphere = new Vector3(0, controller.height / 2, 0);
+        Vector3 centerToUpperSphere = new Vector3(0, controller.height/2 - capsuleRadius, 0);
 
         Vector3 spawnLocation = parent.transform.position;
         for (int i = 0; i < NumberOfSpawnTriesBeforeFail; i++)
         {
             Vector3 direction = new Vector3(Utils.FloatBetween(-1, 1), 0, Utils.FloatBetween(1, 1)).normalized;
             Vector3 tempSpawnLocation = parent.transform.position + direction * Utils.FloatBetween(MinSpawnRadius, MaxSpawnRadius);
-            Vector3 capsuleCenter = spawnLocation + bottomToCenter;
+            Vector3 capsuleCenter = tempSpawnLocation + bottomToCenter;
 
-            Instantiate(debugObject, capsuleCenter - centerToUpperSphere, Quaternion.identity);
-            Instantiate(debugObject, capsuleCenter + centerToUpperSphere, Quaternion.identity);
-
-            if(!Physics.CheckCapsule(capsuleCenter - centerToUpperSphere, capsuleCenter + centerToUpperSphere, capsuleRadius, Layers.TerrainLayers))
+            if(!Physics.CheckCapsule(capsuleCenter - centerToUpperSphere * 0.99f, capsuleCenter + centerToUpperSphere, capsuleRadius, Layers.TerrainLayers))
             {
                 spawnLocation = tempSpawnLocation;
                 break;
