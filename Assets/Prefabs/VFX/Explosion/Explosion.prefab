@@ -5037,9 +5037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseIntensity: 25000
-  lightTimeToLive: 0.4
-  fullBrightnessTimeFactor: 0.25
-  intensityGamma: 50
+  lightTimeToLive: 1
+  fullBrightnessTimeFactor: 0.1
+  intensityGamma: 2.2
   singleColorParticleParent: {fileID: 7435383568496884098}
   terrainParticles: {fileID: 4090892527497021083}
 --- !u!1001 &5210214713339570409
