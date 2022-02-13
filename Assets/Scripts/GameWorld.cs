@@ -55,17 +55,18 @@ public class GameWorld : MonoBehaviour
                     expectedTimeToClearObligatoryChambers += expectedClearTime;
             }
 
-            //for time to clear all we receive 0 bonus, for time to clear obligatory we receive bonus, we interpolate linearly everything else, clamped to min 0
-            //f(x) = ax + b
-            //f(all) = 0            => a * all + b = 0
-            //f(obligatory) = 1     => a * obl + b = 1
-            float a = 1 / (expectedTimeToClearObligatoryChambers - expectedTimeToClearAllChambers);
-            float b = - a * expectedTimeToClearAllChambers;
-            float bonusMultiplier = Mathf.Max(0, a * (float)timeMs / 1000 + b);
+            float timeFactor = ((float)timeMs / 1000 - expectedTimeToClearObligatoryChambers)/(expectedTimeToClearAllChambers - expectedTimeToClearObligatoryChambers);
+            float bonusMultiplier = Mathf.Max(0, Mathf.Lerp(1, 0, timeFactor));
 
             float expectedScoreInOptionalChambers = 0;
+            for (int i = 0; i < chamberCount; i++)
+            {
+                var node = chambersControler.GetChamberNode(i);
+                if (node.Type == ChamberType.Optional)
+                    expectedScoreInOptionalChambers += ApplicationData.SpawnData.enemiesSpawnData.GetExpectedEnemyScoreForChamber(node);
+            }
 
-            score += bonusMultiplier;
+            score += bonusMultiplier * expectedScoreInOptionalChambers * gameplay.QuickWinScoreFactor;
         }
 
 
