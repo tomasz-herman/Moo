@@ -14,13 +14,6 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
 
         protected readonly Weapon Weapon;
 
-        //protected bool Launched;
-        //protected bool HasChained;
-
-        //protected GameObject HitEnemy;
-
-        //protected Dictionary<ProjectileBase, ProjectileData> ProjectileDataDictionary = new Dictionary<ProjectileBase, ProjectileData>();
-
         protected ProjectilesChainToNearestEnemyUpgradeHandlerBase(Weapon weapon)
         {
             Weapon = weapon;
@@ -28,31 +21,42 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
 
         public abstract void ApplyUpgrade();
 
-        public abstract void OnEnemyHit(ProjectileBase projectile, Enemy enemy, IOneTimeProjectileUpgradeHandlerData data);
+        public void OnEnemyHit(ProjectileBase projectile, Enemy enemy, IOneTimeProjectileUpgradeHandlerData data)
+        {
+            var closestEnemy = FindClosestEnemy(enemy);
+            if (closestEnemy == null) return;
+
+            var direction = closestEnemy.transform.position - projectile.transform.position;
+            //TODO: do sth with that
+            direction.y = 0f;
+            direction.Normalize();
+
+            var projectileRigidBody = projectile.gameObject.GetComponent<Rigidbody>();
+            var projectileSpeed = projectileRigidBody.velocity.magnitude;
+            var velocity = projectileSpeed * direction;
+
+            var projectileObject = InstantiateProjectile(projectile.transform.position);
+            projectileObject.color = projectile.color;
+            projectileObject.nonCollidableObjects.Add(enemy.gameObject);
+            projectileObject.Launch(projectile.Owner, velocity, ChainedProjectileDamageMultiplier * projectile.damage);
+        }
 
         public void OnTerrainHit(GameObject projectile, Collider terrain, IOneTimeProjectileUpgradeHandlerData data) { }
 
         public void OnUpdate(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data) { }
 
-        public void OnLaunch(ProjectileBase projectileBase, IOneTimeProjectileUpgradeHandlerData data)
-        {
-            if (projectileBase is Projectile)
-            {
-                //ProjectileDataDictionary.Add(projectileBase, new ProjectileData(false));
-            }
-        }
+        public void OnLaunch(ProjectileBase projectileBase, IOneTimeProjectileUpgradeHandlerData data) { }
 
-        public void OnDestroy(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data)
-        {
-            //ProjectileDataDictionary.Remove(projectile);
-        }
+        public void OnDestroy(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data) { }
 
         public void OnDrawGizmos(ProjectileBase projectile, IOneTimeProjectileUpgradeHandlerData data) { }
 
         public IOneTimeProjectileUpgradeHandlerData CreateEmptyData(ProjectileBase projectile)
         {
-            return new ProjectilesChainToNearestEnemyUpgradeHandlerData(projectile);
+            return null;
         }
+
+        protected abstract Projectile InstantiateProjectile(Vector3 position);
 
         protected Enemy FindClosestEnemy(Enemy startingEnemy)
         {
@@ -60,8 +64,6 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
             var projectileLayer = Layers.GetLayer(Layers.Enemy);
             int layerMask = 1 << projectileLayer;
             var colliders = Physics.OverlapSphere(position, RayCastSphereRadius, layerMask);
-
-            Debug.Log($"Found {colliders.Length} enemies nearby");
 
             Enemy foundEnemy = null;
             var minDistanceSquared = float.MaxValue;
@@ -77,12 +79,8 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
 
                 minDistanceSquared = dist;
 
-                var en1 = collider.GetComponent<Enemy>();
-                //var en2 = collider.attachedRigidbody.GetComponent<Enemy>();
-                foundEnemy = en1;
+                foundEnemy = collider.GetComponent<Enemy>(); ;
             }
-
-            Debug.Log($"Found enemy is {foundEnemy}");
 
             return foundEnemy;
         }

@@ -5,13 +5,13 @@ using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers
 {
-    public class PistolProjectilesChainToNearestEnemyUpgradeHandler : ProjectilesChainToNearestEnemyUpgradeHandlerBase
+    public class MachineGunProjectilesChainToNearestEnemyUpgradeHandler : ProjectilesChainToNearestEnemyUpgradeHandlerBase
     {
-        protected readonly Pistol Pistol;
+        protected readonly MachineGun MachineGun;
 
-        public PistolProjectilesChainToNearestEnemyUpgradeHandler(Pistol pistol) : base(pistol)
+        public MachineGunProjectilesChainToNearestEnemyUpgradeHandler(MachineGun machineGun) : base(machineGun)
         {
-            Pistol = pistol;
+            MachineGun = machineGun;
         }
 
         public override void ApplyUpgrade()
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
 
         protected override Projectile InstantiateProjectile(Vector3 position)
         {
-            return Object.Instantiate(Pistol.projectilePrefab, position, Quaternion.identity);
+            return Object.Instantiate(MachineGun.projectilePrefab, position, Quaternion.identity);
         }
     }
 }
