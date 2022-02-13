@@ -32,6 +32,8 @@ public class Shooting : MonoBehaviour
 
     private Dictionary<WeaponType, Weapon> weaponMap;
 
+    private GameObject _owner;
+
     private void Awake()
     {
         Pistol = new Pistol(projectilePrefab);
@@ -54,7 +56,12 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
-
+        //TODO: do not use entity but some object that shows weapon sound position
+        this._owner = GetComponent<Entity>().gameObject;
+        foreach (var weapon in this.weapons)
+        {
+            weapon.Owner = this._owner;
+        }
     }
 
     private void Update()
