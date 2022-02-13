@@ -16,6 +16,7 @@ public class UpgradesProvider : MonoBehaviour
     [SerializeField] Sprite weaponDamageIcon;
     [SerializeField] Sprite weaponProjectileSpeedIcon;
     [SerializeField] Sprite weaponCooldownIcon;
+    [SerializeField] Sprite weaponAmmoCostIcon;
     [SerializeField] Sprite shotgunProjectileCountIcon;
     [SerializeField] Sprite shotgunProjectileDispersionIcon;
     [SerializeField] Sprite swordReflectsEnemyProjectilesIcon;
@@ -68,7 +69,7 @@ public class UpgradesProvider : MonoBehaviour
 
             //Shotgun projectile dispersion upgrade
             new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon),
-
+            //TODO: add here ammo cost upgrades
             //One time upgrades
 
             //Sword reflect enemy projectiles upgrade

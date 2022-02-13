@@ -28,7 +28,7 @@ public class Shooting : MonoBehaviour
     public Sword Sword { get; private set; }
 
     public event EventHandler<Weapon> WeaponChanged;
-    public Weapon CurrentWeapon { get { return weapons.Current(); } }
+    public Weapon CurrentWeapon => weapons.Current();
 
     private Dictionary<WeaponType, Weapon> weaponMap;
 
@@ -44,8 +44,12 @@ public class Shooting : MonoBehaviour
         weapons.Add(MachineGun);
         weapons.Add(GrenadeLauncher);
         weapons.Add(Sword);
+        weapons.Sort((x, y) => x.WeaponType.CompareTo(y.WeaponType));
+        
+        SelectWeapon(WeaponType.Pistol);
 
         weaponMap = weapons.ToDictionary(w => w.WeaponType);
+        if(weaponBar != null) WeaponChanged += (sender, weapon) => weaponBar.SelectSlot(weapon.WeaponType); 
     }
 
     void Update()
@@ -55,34 +59,19 @@ public class Shooting : MonoBehaviour
 
     public void SelectWeapon(WeaponType type)
     {
-        Weapon searched = type switch
-        {
-            WeaponType.Pistol => Pistol,
-            WeaponType.Shotgun => Shotgun,
-            WeaponType.MachineGun => MachineGun,
-            WeaponType.GrenadeLauncher => GrenadeLauncher,
-            WeaponType.Sword => Sword,
-            _ => null
-        };
-        Weapon first = weapons.Current();
-        while(weapons.Current() != searched)
-        {
-            if (first == weapons.Next()) break;
-        }
+        weapons.SetIndex((int)type);
         WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void NextWeapon()
     {
         weapons.Next();
-        weaponBar.SelectSlot(CurrentWeapon.WeaponType);
         WeaponChanged?.Invoke(this, weapons.Current());
     }
 
     public void PrevWeapon()
     {
         weapons.Prev();
-        weaponBar.SelectSlot(CurrentWeapon.WeaponType);
         WeaponChanged?.Invoke(this, weapons.Current());
     }
 
@@ -98,11 +87,5 @@ public class Shooting : MonoBehaviour
         return weapons.Current().HasEnoughAmmo(ammoSystem);
     }
 
-    public Weapon this[WeaponType type]
-    {
-        get
-        {
-            return weaponMap[type];
-        }
-    }
+    public Weapon this[WeaponType type] => weaponMap[type];
 }

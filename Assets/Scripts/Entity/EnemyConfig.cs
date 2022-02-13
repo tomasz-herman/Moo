@@ -39,4 +39,5 @@ public class EnemyData
     public float AmmoDropChance = 1;
     public int BaseMinAmmoDrop = 10;
     public int BaseMaxAmmoDrop = 25;
+    public List<SpawnRule> ChildSpawnRules = new List<SpawnRule>();
 }

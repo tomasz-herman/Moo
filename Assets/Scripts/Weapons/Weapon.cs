@@ -20,7 +20,7 @@ namespace Assets.Scripts.Weapons
         public float basetriggerTimeout { get; set; }
         public float baseDamage { get; set; }
         public string Name { get; set; }
-        public int baseAmmoConsumption { get; set; }
+        public float baseAmmoConsumption { get; set; }
         public Color color { get; set; }
 
         public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
