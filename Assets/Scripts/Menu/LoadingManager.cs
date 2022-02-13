@@ -12,6 +12,7 @@ public class LoadingManager : MonoBehaviour
     public Image backgroundImage;
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     private float progress;
+    public float secondsToWait;
     private void Awake()
     {
         LoadGame();
@@ -29,6 +30,7 @@ public class LoadingManager : MonoBehaviour
 
     private IEnumerator LoadScenes()
     {
+        int scenes = scenesLoading.Count;
         Time.timeScale = 0;
         foreach (var scene in scenesLoading)
         {
@@ -41,17 +43,20 @@ public class LoadingManager : MonoBehaviour
                     progress += operation.progress;
                 }
 
-                progress /= scenesLoading.Count;
-                progressBar.value = progress / 2;
+                progress /= scenes + 1;
+                progressBar.value = progress;
                 
                 yield return null;
             }
         }
 
-        for (int i = 0; i <= 50; i++)
+        const float waitTimeTick = 0.1f;
+        int waitingTicks = Mathf.CeilToInt(secondsToWait / waitTimeTick);
+        for (int i = 0; i < waitingTicks; i++)
         {
-            yield return new WaitForSecondsRealtime(0.1f);
-            progressBar.value = 0.5f + i / 50f;
+            progress = (scenes + (i + 1.0f) / waitingTicks) / (scenes + 1.0f);
+            progressBar.value = progress;
+            yield return new WaitForSecondsRealtime(waitTimeTick);
         }
 
         loadingScreen.gameObject.SetActive(false);
