@@ -1,13 +1,13 @@
-using Assets.Scripts.Upgrades;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Upgrades;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UpgradeSystem : MonoBehaviour
 {
+    private readonly int CommonUpgradeCountOnPage = 3;
+
     public UpgradeWindow upgradeWindow;
     private int pendingUpgrades = 0;
     public Player player;
@@ -17,9 +17,12 @@ public class UpgradeSystem : MonoBehaviour
 
     private UpgradesProvider upgradesProvider;
 
+    private Dictionary<UpgradeType, bool> _oneTimeUpgradesUsed;
+
     void Awake()
     {
         upgradesProvider = GetComponent<UpgradesProvider>();
+        _oneTimeUpgradesUsed = UpgradeTypeExtensions.OneTimeUpgrades.ToDictionary(x => x, x => false);
     }
 
     public void AddUpgrade(int upgradeCount = 1)
@@ -41,26 +44,30 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Upgrade(UpgradeView upgrade)
     {
-        var upgradetype = upgrade.CommitUpdate();
+        var upgradeType = upgrade.CommitUpdate();
+        if (upgradeType.IsOneTimeUpgrade())
+        {
+            _oneTimeUpgradesUsed[upgradeType] = true;
+        }
 
-        if (upgrades.ContainsKey(upgradetype))
-            upgrades[upgradetype]++;
+        if (upgrades.ContainsKey(upgradeType))
+            upgrades[upgradeType]++;
         else
-            upgrades[upgradetype] = 1;
-        Upgraded?.Invoke(this, (upgradetype, upgrades[upgradetype]));
+            upgrades[upgradeType] = 1;
+        Upgraded?.Invoke(this, (upgradeType, upgrades[upgradeType]));
     }
 
     public UpgradeView[] GenerateRandomUpgrades()
     {
-        var views = new UpgradeView[3];
+        var views = new UpgradeView[CommonUpgradeCountOnPage];
 
         var upgradeTypes = Enum.GetValues(typeof(UpgradeType));
         var isAdded = new bool[upgradeTypes.Length];
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < CommonUpgradeCountOnPage; i++)
         {
             var index = Utils.NumberBetween(0, upgradeTypes.Length - 1);
-            var type = (UpgradeType)upgradeTypes.GetValue(index);
+
             if (isAdded[index])
             {
                 i--;
@@ -68,6 +75,14 @@ public class UpgradeSystem : MonoBehaviour
             }
 
             isAdded[index] = true;
+            var type = (UpgradeType)upgradeTypes.GetValue(index);
+
+            if (type.IsOneTimeUpgrade() && _oneTimeUpgradesUsed[type])
+            {
+                i--;
+                continue;
+            }
+
             views[i] = upgradesProvider.GetUpgrade(type);
         }
 

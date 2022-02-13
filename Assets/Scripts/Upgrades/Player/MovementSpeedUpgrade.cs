@@ -4,19 +4,20 @@ namespace Assets.Scripts.Upgrades
 {
     public class MovementSpeedUpgrade : UpgradeView
     {
-        private float bonus = 0.2f;
+        private const float Bonus = 0.2f;
 
-        private readonly PlayerMovement movementSystem;
-        public MovementSpeedUpgrade(PlayerMovement movementsystem, Sprite sprite)
-            : base("Movement speed", "Increase movement speed", sprite)
+        private readonly PlayerMovement _movementSystem;
+
+        public MovementSpeedUpgrade(PlayerMovement movementSystem, Sprite sprite)
+            : base("Movement speed", "Increase movement speed", sprite, UpgradeType.MovementSpeed)
         {
-            movementSystem = movementsystem;
+            _movementSystem = movementSystem;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            movementSystem.Speed += bonus;
-            return UpgradeType.MovementSpeed;
+            _movementSystem.Speed += Bonus;
+            return this.upgradeType;
         }
     }
 }

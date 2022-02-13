@@ -13,14 +13,24 @@ public class GameWorld : MonoBehaviour
     public Player player;
     public ChambersControler chambersControler;
 
-    void Start()
+    private void Start()
     {
         timer.SetTicking(true);
         IdleMusicManager?.Play();
-
         audioManager = AudioManager.Instance;
         player = FindObjectOfType<Player>();
         chambersControler = FindObjectOfType<ChambersControler>();
+    }
+
+    private void Update()
+    {
+        if (Debug.isDebugBuild) return;
+        if (Application.isFocused || IsPaused()) return;
+
+        if (userInterface.selectedWindow != null)
+            userInterface.ClearWindow();
+        else
+            userInterface.TryToggleWindow(userInterface.pauseMenu);
     }
 
     public bool IsPaused() { return Time.timeScale == 0; }

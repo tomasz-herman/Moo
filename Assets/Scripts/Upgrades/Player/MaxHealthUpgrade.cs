@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Upgrades
 {
     public class MaxHealthUpgrade : UpgradeView
     {
-        private int bonus = 50;
-        private readonly HealthSystem healthSystem;
-        public MaxHealthUpgrade(HealthSystem system, Sprite sprite) 
-            : base("Max health", "Increase max health", sprite) 
+        private const int Bonus = 50;
+
+        private readonly HealthSystem _healthSystem;
+
+        public MaxHealthUpgrade(HealthSystem system, Sprite sprite)
+            : base("Max health", "Increase max health", sprite, UpgradeType.MaxHealth)
         {
-            healthSystem = system;
+            _healthSystem = system;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            healthSystem.MaxHealth += bonus;
-            healthSystem.Health += bonus;
-            return UpgradeType.MaxHealth;
+            _healthSystem.MaxHealth += Bonus;
+            _healthSystem.Health += Bonus;
+            return this.upgradeType;
         }
     }
 }

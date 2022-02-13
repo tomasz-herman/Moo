@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Assets.Scripts.Util;
 using Assets.Scripts.Weapons;
@@ -33,7 +32,9 @@ public class Shooting : MonoBehaviour
 
     private Dictionary<WeaponType, Weapon> weaponMap;
 
-    void Awake()
+    private GameObject _owner;
+
+    private void Awake()
     {
         Pistol = new Pistol(projectilePrefab);
         Shotgun = new Shotgun(bulletPrefab);
@@ -53,7 +54,17 @@ public class Shooting : MonoBehaviour
         if(weaponBar != null) WeaponChanged += (sender, weapon) => weaponBar.SelectSlot(weapon.WeaponType); 
     }
 
-    void Update()
+    private void Start()
+    {
+        //TODO: do not use entity but some object that shows weapon sound position
+        this._owner = GetComponent<Entity>().gameObject;
+        foreach (var weapon in this.weapons)
+        {
+            weapon.Owner = this._owner;
+        }
+    }
+
+    private void Update()
     {
         weapons.Current().DecreaseTime();
     }

@@ -365,6 +365,14 @@ namespace Assets.Scripts.SoundManager
         }
 
         /// <summary>
+        /// Applies playback settings to audio source
+        /// </summary>
+        public void ApplyPlaybackSettings()
+        {
+            PlaybackSettings.ApplyToAudioSource(Source);
+        }
+
+        /// <summary>
         /// Update loop of the Audio. This is automatically called from the sound manager itself. Do not use this function anywhere else, as it may lead to unwanted behaviour.
         /// </summary>
         public void Update()
@@ -399,7 +407,7 @@ namespace Assets.Scripts.SoundManager
             }
 
             //Update Source with playback settings
-            PlaybackSettings.ApplyToAudioSource(Source);
+            ApplyPlaybackSettings();
 
             // Completely stop audio if it finished the process of stopping
             if (PlaybackSettings.Volume < Eps && Stopping)
@@ -441,7 +449,7 @@ namespace Assets.Scripts.SoundManager
                 _ => null
             };
 
-            PlaybackSettings.ApplyToAudioSource(Source);
+            ApplyPlaybackSettings();
         }
 
         private SoundType _soundType;

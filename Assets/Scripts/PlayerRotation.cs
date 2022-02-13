@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
@@ -21,7 +19,9 @@ public class PlayerRotation : MonoBehaviour
 
     void Update()
     {
-        if(!gameWorld.IsPaused())
+        if (!Application.isFocused) return;
+
+        if (!gameWorld.IsPaused())
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             var plane = new Plane(Vector3.up, gun.transform.position);

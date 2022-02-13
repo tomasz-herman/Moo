@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.SoundManager;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -8,12 +11,28 @@ namespace Assets.Scripts.Weapons
     {
         protected ContinuousTrigger trigger = new ContinuousTrigger();
 
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; } = new List<IOneTimeProjectileUpgradeHandler>();
+
         public float baseProjectileSpeed { get; set; }
         public float basetriggerTimeout { get; set; }
         public float baseDamage { get; set; }
         public string Name { get; set; }
         public float baseAmmoConsumption { get; set; }
         public Color color { get; set; }
+
+        private GameObject _owner;
+        public GameObject Owner
+        {
+            get => this._owner;
+            set
+            {
+                _owner = value;
+                Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, _owner.transform);
+            }
+        }
 
         public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
@@ -26,19 +45,6 @@ namespace Assets.Scripts.Weapons
         protected Weapon(WeaponType weaponType, SoundType soundType = SoundType.NoSound)
         {
             WeaponType = weaponType;
-            //TODO: update this section when Weapon will derive from MonoBehaviour
-            AudioManager = AudioManager.Instance;
-            Sound = new SoundTypeWithPlaybackSettings
-            {
-                SoundType = soundType,
-                PlaybackSettings = new PlaybackSettings
-                {
-                    SpatialBlend = 1f,
-                    Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
-                }
-            };
-
-            Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, null);
 
             WeaponData data = ApplicationData.WeaponData[WeaponType];
             baseAmmoConsumption = data.ammoConsumption;
@@ -47,6 +53,23 @@ namespace Assets.Scripts.Weapons
             basetriggerTimeout = data.triggerTimeout;
             Name = data.name;
             color = data.color;
+
+            AudioManager = AudioManager.Instance;
+            Sound = new SoundTypeWithPlaybackSettings
+            {
+                SoundType = soundType,
+                PlaybackSettings = new PlaybackSettings
+                {
+                    //TODO: maybe set spatial blend to 0f if player is owner
+                    SpatialBlend = 1f,
+                    Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
+                }
+            };
+        }
+
+        protected Weapon(WeaponType weaponType, GameObject owner, SoundType soundType = SoundType.NoSound) : this(weaponType, soundType)
+        {
+            Owner = owner;
         }
 
         public void DecreaseTime()
@@ -64,7 +87,7 @@ namespace Assets.Scripts.Weapons
                 {
                     WeaponShoot?.Invoke(this, (triggerTimeout, WeaponType));
                     Shoot(shooter, position, direction, shooting);
-                    PlayGunfireSound(position);
+                    PlayGunfireSound();
                     ammoSystem.Ammo -= baseAmmoConsumption;
                 }
             }
@@ -72,10 +95,12 @@ namespace Assets.Scripts.Weapons
 
         public abstract void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting);
 
-        protected virtual void PlayGunfireSound(Vector3 position)
+        protected virtual void PlayGunfireSound()
         {
-            //TODO: I don't like it, if it is possible weapon class should have player field or derive from MonoBehaviour this also is not affected by volume sliders
-            Audio?.PlayClipAtPoint(position, SoundTypeSettings.GetVolumeForSoundType(Sound.SoundType));
+            //TODO: this is terrible hack, find what causes bug with sound crack at start
+            Sound.PlaybackSettings.Volume = 1f;
+            Audio?.ApplyPlaybackSettings();
+            Audio?.PlayOneShot();
         }
 
         public void Dispose()
@@ -86,6 +111,37 @@ namespace Assets.Scripts.Weapons
         public bool HasEnoughAmmo(AmmoSystem ammoSystem)
         {
             return ammoSystem.Ammo >= baseAmmoConsumption;
+        }
+
+        public void AddUpgrade<T>(T handler) where T : IOneTimeProjectileUpgradeHandler
+        {
+            if (ContainsUpgrade<T>()) return;
+
+            projectileUpgrades.Add(handler);
+        }
+
+        public bool ContainsUpgrade<T>() where T : IOneTimeProjectileUpgradeHandler
+        {
+            return projectileUpgrades.OfType<T>().Any();
+        }
+
+        public static string GetWeaponName(WeaponType type)
+        {
+            switch (type)
+            {
+                case WeaponType.MachineGun:
+                    return "MACHINEGUN";
+                case WeaponType.Shotgun:
+                    return "SHOTGUN";
+                case WeaponType.Pistol:
+                    return "PISTOL";
+                case WeaponType.Sword:
+                    return "SWORD";
+                case WeaponType.GrenadeLauncher:
+                    return "GRENADE LAUNCHER";
+                default:
+                    return "";
+            }
         }
     }
 }

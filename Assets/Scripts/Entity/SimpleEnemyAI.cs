@@ -73,10 +73,10 @@ public class SimpleEnemyAI : MonoBehaviour
             else Dodge();
         }
 
-        if(!playerInSight && !playerInAttackRange) Patrol();
-        if(playerInSight && !playerInPrefferedRange) Chase();
-        if(playerInSight && playerInAttackRange) Attack();
-        if(playerTooClose) Escape(); 
+        if (!playerInSight && !playerInAttackRange) Patrol();
+        if (playerInSight && !playerInPrefferedRange) Chase();
+        if (playerInSight && playerInAttackRange) Attack();
+        if (playerTooClose) Escape();
         lastPlayerPosition = playerPosition;
     }
 

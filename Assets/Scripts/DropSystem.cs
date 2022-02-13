@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DropSystem : MonoBehaviour
@@ -47,7 +42,7 @@ public class DropSystem : MonoBehaviour
         if(totalUpgradeCount > 0)
         {
             Upgrade upgrade = Instantiate(dropItem, transform.position, transform.rotation);
-            upgrade.upgradeCount = totalUpgradeCount;
+            upgrade.UpgradeCount = totalUpgradeCount;
         }
     }
 

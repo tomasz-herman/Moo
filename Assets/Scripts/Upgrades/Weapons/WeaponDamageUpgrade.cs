@@ -1,65 +1,53 @@
 ﻿using Assets.Scripts.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponDamageUpgrade : UpgradeView
     {
-        private float multiplier = 1.2f;
+        private const float Multiplier = 1.2f;
 
-        private readonly Weapon weapon;
-        public WeaponDamageUpgrade(Weapon w, Sprite sprite, string weaponName)
-            : base($"{weaponName} damage", $"Increase damage dealt by {weaponName} by 20%", sprite)
+        private readonly Weapon _weapon;
+        protected WeaponDamageUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(w.WeaponType)} damage", $"Increase damage dealt by {Weapon.GetWeaponName(w.WeaponType)} by 20%", sprite, upgradeType)
         {
-            weapon = w;
+            _weapon = w;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            weapon.baseDamage *= multiplier;
-            return GetUpgradeType();
+            _weapon.baseDamage *= Multiplier;
+            return this.upgradeType;
         }
-        protected abstract UpgradeType GetUpgradeType();
     }
 
     public class PistolDamageUpgrade : WeaponDamageUpgrade
     {
         public PistolDamageUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, "PISTOL") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.PistolDamage;
+            : base(weapon, sprite, UpgradeType.PistolDamage) { }
     }
+
     public class ShotgunDamageUpgrade : WeaponDamageUpgrade
     {
         public ShotgunDamageUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, "SHOTGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.ShotgunDamage;
+            : base(weapon, sprite, UpgradeType.ShotgunDamage) { }
     }
+
     public class MachineGunDamageUpgrade : WeaponDamageUpgrade
     {
         public MachineGunDamageUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, "MACHINEGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.MachineGunDamage;
+            : base(weapon, sprite, UpgradeType.MachineGunDamage) { }
     }
+
     public class GrenadeLauncherDamageUpgrade : WeaponDamageUpgrade
     {
         public GrenadeLauncherDamageUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, "GRENADE LAUNCHER") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.GrenadeLauncherDamage;
+            : base(weapon, sprite, UpgradeType.GrenadeLauncherDamage) { }
     }
+
     public class SwordDamageUpgrade : WeaponDamageUpgrade
     {
         public SwordDamageUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, "SWORD") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.SwordDamage;
+            : base(weapon, sprite, UpgradeType.SwordDamage) { }
     }
 }

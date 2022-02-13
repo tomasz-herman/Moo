@@ -1,10 +1,25 @@
-﻿using Assets.Scripts.SoundManager;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.SoundManager;
+using Assets.Scripts.Upgrades.OneTime.Handlers;
+using Assets.Scripts.Upgrades.OneTime.Upgradables;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
 {
-    public abstract class ProjectileBase : Entity
+    public abstract class ProjectileBase : Entity, IOneTimeProjectileUpgradable
     {
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; protected set; }
+        /// <summary>
+        /// Do not modify this collection
+        /// </summary>
+        public List<IOneTimeProjectileUpgradeHandlerData> projectileUpgradesData { get; protected set; }
+
+        public List<GameObject> nonCollidableObjects;
+
         public SoundTypeWithPlaybackSettings Sound;
 
         [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
@@ -16,12 +31,19 @@ namespace Assets.Scripts.Weapons
 
         public float TimeToLive = 10f;
 
-        protected GameObject Owner;
+        public GameObject Owner;
         protected AudioManager AudioManager;
 
         private float _elapsedTime = 0f;
 
         public float damage = 1;
+
+        protected virtual void Awake()
+        {
+            projectileUpgrades ??= new List<IOneTimeProjectileUpgradeHandler>();
+            projectileUpgradesData ??= new List<IOneTimeProjectileUpgradeHandlerData>();
+            nonCollidableObjects ??= new List<GameObject>();
+        }
 
         protected virtual void Start()
         {
@@ -29,9 +51,10 @@ namespace Assets.Scripts.Weapons
             Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
         }
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             _elapsedTime += Time.deltaTime;
+
             if (_elapsedTime > TimeToLive)
                 Destroy(gameObject);
         }
@@ -40,6 +63,14 @@ namespace Assets.Scripts.Weapons
         {
             Owner = owner;
             this.damage = damage;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            for (int i = 0; i < projectileUpgrades.Count; i++)
+            {
+                projectileUpgrades[i].OnDestroy(this, projectileUpgradesData[i]);
+            }
         }
 
         public void ApplyDamage(Collider other, float damage)
@@ -69,10 +100,25 @@ namespace Assets.Scripts.Weapons
 
         public void SpawnParticles(Vector3 position)
         {
+            SpawnParticles(position, color);
+        }
+
+        public void SpawnParticles(Vector3 position, Color sparkColor)
+        {
+            SpawnParticles(position, sparkColor, particleCount);
+        }
+
+        public void SpawnParticles(Vector3 position, Color sparkColor, int particleCount)
+        {
             var particles = Instantiate(hitTerrainParticles, position, Quaternion.identity);
-            particles.SparkColor = color;
+            particles.SparkColor = sparkColor;
             particles.ParticleCount = particleCount;
         }
 
+        public void SetUpgrades(List<IOneTimeProjectileUpgradeHandler> projectileUpgrades)
+        {
+            this.projectileUpgrades = projectileUpgrades;
+            this.projectileUpgradesData = projectileUpgrades.Select(x => x.CreateEmptyData(this)).ToList();
+        }
     }
 }

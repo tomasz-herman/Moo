@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -9,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private new Camera camera;
     public float movementSpeed = 2f;
     private bool iswalking = false;
-    public bool IsWalking { get { return iswalking; } }
+    public bool IsWalking => iswalking;
     public EventHandler<float> SpeedChanged;
     private Vector3 direction;
 
@@ -31,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!Application.isFocused) return;
+
         Vector3 toCharacter = characterController.transform.position - camera.transform.position;
         toCharacter.y = 0;
         toCharacter.Normalize();

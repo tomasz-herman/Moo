@@ -56,7 +56,7 @@ namespace Assets.Scripts.SoundManager
         /// <summary>
         /// How the audio attenuates over distance. Default = Logarithmic.
         /// </summary>
-        public AudioRolloffMode RolloffMode = AudioRolloffMode.Linear;
+        public AudioRolloffMode RolloffMode = AudioRolloffMode.Logarithmic;
 
         /// <summary>
         /// Within the Min distance the audio will cease to grow louder in volume. Default = 1f;
@@ -68,7 +68,7 @@ namespace Assets.Scripts.SoundManager
         /// (Logarithmic rolloff) MaxDistance is the distance a sound stops attenuating at. Default = 500f.
         /// </summary>
         [Range(0.01f, 1000f)]
-        public float Max3DDistance = 1000f;
+        public float Max3DDistance = 500f;
 
         /// <summary>
         /// How many seconds it needs for the audio to fade in/ reach target volume (if higher than current). Default = 0.
@@ -126,8 +126,8 @@ namespace Assets.Scripts.SoundManager
             DopplerLevel = 0f;
             Spread = 0f;
             RolloffMode = AudioRolloffMode.Linear;
-            Min3DDistance = 1f;
-            Max3DDistance = 500f;
+            Min3DDistance = 0.01f;
+            Max3DDistance = 1000f;
             FadeInSeconds = 0f;
             FadeOutSeconds = 0f;
         }

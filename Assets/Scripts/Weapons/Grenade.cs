@@ -1,11 +1,9 @@
 using Assets.Scripts.SoundManager;
-using Assets.Scripts.Weapons;
 using UnityEngine;
 
-public class Grenade : ProjectileBase
+public class Grenade : Projectile
 {
     [SerializeField] private ExplosionParticles explosionParticles;
-    public float Emission = 6;
 
     private float explosionSpeed = 40f;
     private float explosionRange = 10f;
@@ -25,15 +23,12 @@ public class Grenade : ProjectileBase
             }
         };
 
-        var material = gameObject.GetComponentInChildren<Renderer>().material;
-        material.SetColor("_EmissiveColor", color * Emission);
-        material.SetColor("_BaseColor", color);
         base.Start();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         if (gameObject.transform.localScale.x > explosionRange)
             Destroy(gameObject);
@@ -44,10 +39,19 @@ public class Grenade : ProjectileBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Owner)
+        if (other.gameObject == Owner) return;
+        if (nonCollidableObjects.Contains(other.gameObject)) return;
+
+        if (!isExplosing)
         {
-            if (!isExplosing)
+            var enemy = other.gameObject.GetComponent<Enemy>();
+            if (Owner != null && Owner.GetComponent<Player>() != null && enemy != null) // Player was shooting and enemy was hit
             {
+                for (int i = 0; i < projectileUpgrades.Count; i++)
+                {
+                    projectileUpgrades[i].OnEnemyHit(this, enemy, projectileUpgradesData[i]);
+                }
+
                 isExplosing = true;
                 var rigidbody = GetComponent<Rigidbody>();
                 var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
@@ -60,21 +64,16 @@ public class Grenade : ProjectileBase
                 gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 
-            var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
-            var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
-            ApplyDamage(other, dmg);
+            isExplosing = true;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            PlaySound();
+                
+            Instantiate(explosionParticles, transform.position, transform.rotation);
+            gameObject.GetComponentInChildren<Renderer>().enabled = false;
         }
-    }
 
-    private void OnDestroy()
-    {
-        Audio?.Dispose();
-    }
-
-    public void Launch(GameObject owner, Vector3 velocity, float extradamage)
-    {
-        Launch(owner, extradamage);
-        GetComponent<Rigidbody>().velocity = velocity;
-        gameObject.transform.LookAt(transform.position + velocity);
+        var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
+        var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
+        ApplyDamage(other, dmg);
     }
 }

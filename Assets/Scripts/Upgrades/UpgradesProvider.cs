@@ -1,6 +1,11 @@
+using System;
 using Assets.Scripts.Upgrades;
 using Assets.Scripts.Upgrades.Weapons;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrades;
+using Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Upgrades;
+using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Upgrades;
 using UnityEngine;
 
 public class UpgradesProvider : MonoBehaviour
@@ -14,6 +19,9 @@ public class UpgradesProvider : MonoBehaviour
     [SerializeField] Sprite weaponAmmoCostIcon;
     [SerializeField] Sprite shotgunProjectileCountIcon;
     [SerializeField] Sprite shotgunProjectileDispersionIcon;
+    [SerializeField] Sprite swordReflectsEnemyProjectilesIcon;
+    [SerializeField] Sprite projectilesExplodeAfterHittingEnemyIcon;
+    [SerializeField] Sprite projectilesChainToNearestEnemy;
 
     private HealthSystem healthSystem;
     private AmmoSystem ammoSystem;
@@ -28,43 +36,84 @@ public class UpgradesProvider : MonoBehaviour
         movementSystem = GetComponent<PlayerMovement>();
         shootingSystem = GetComponent<Shooting>();
 
-        var dict = new Dictionary<UpgradeType, UpgradeView>();
-        dict.Add(UpgradeType.MaxHealth, new MaxHealthUpgrade(healthSystem, maxHealthIcon));
-        dict.Add(UpgradeType.MaxAmmo, new MaxAmmoUpgrade(ammoSystem, maxAmmoIcon));
-        dict.Add(UpgradeType.MovementSpeed, new MovementSpeedUpgrade(movementSystem, movementSpeedIcon));
+        var upgradesList = new List<UpgradeView>
+        {
+            //Player upgrades
+            new MaxHealthUpgrade(healthSystem, maxHealthIcon),
+            new MaxAmmoUpgrade(ammoSystem, maxAmmoIcon),
+            new MovementSpeedUpgrade(movementSystem, movementSpeedIcon),
 
-        dict.Add(UpgradeType.PistolDamage, new PistolDamageUpgrade(shootingSystem.Pistol, weaponDamageIcon));
-        dict.Add(UpgradeType.ShotgunDamage, new ShotgunDamageUpgrade(shootingSystem.Shotgun, weaponDamageIcon));
-        dict.Add(UpgradeType.MachineGunDamage, new MachineGunDamageUpgrade(shootingSystem.MachineGun, weaponDamageIcon));
-        dict.Add(UpgradeType.GrenadeLauncherDamage, new GrenadeLauncherDamageUpgrade(shootingSystem.GrenadeLauncher, weaponDamageIcon));
-        dict.Add(UpgradeType.SwordDamage, new SwordDamageUpgrade(shootingSystem.Sword, weaponDamageIcon));
+            //Weapon damage upgrades
+            new PistolDamageUpgrade(shootingSystem.Pistol, weaponDamageIcon),
+            new ShotgunDamageUpgrade(shootingSystem.Shotgun, weaponDamageIcon),
+            new MachineGunDamageUpgrade(shootingSystem.MachineGun, weaponDamageIcon),
+            new GrenadeLauncherDamageUpgrade(shootingSystem.GrenadeLauncher, weaponDamageIcon),
+            new SwordDamageUpgrade(shootingSystem.Sword, weaponDamageIcon),
 
-        dict.Add(UpgradeType.PistolProjectileSpeed, new PistolProjectileSpeedUpgrade(shootingSystem.Pistol, weaponProjectileSpeedIcon));
-        dict.Add(UpgradeType.ShotgunProjectileSpeed, new ShotgunProjectileSpeedUpgrade(shootingSystem.Shotgun, weaponProjectileSpeedIcon));
-        dict.Add(UpgradeType.MachineGunProjectileSpeed, new MachineGunProjectileSpeedUpgrade(shootingSystem.MachineGun, weaponProjectileSpeedIcon));
-        dict.Add(UpgradeType.GrenadeLauncherProjectileSpeed, new GrenadeLauncherProjectileSpeedUpgrade(shootingSystem.GrenadeLauncher, weaponProjectileSpeedIcon));
-        dict.Add(UpgradeType.SwordProjectileSpeed, new SwordProjectileSpeedUpgrade(shootingSystem.Sword, weaponProjectileSpeedIcon));
+            //Weapon projectile speed upgrades
+            new PistolProjectileSpeedUpgrade(shootingSystem.Pistol, weaponProjectileSpeedIcon),
+            new ShotgunProjectileSpeedUpgrade(shootingSystem.Shotgun, weaponProjectileSpeedIcon),
+            new MachineGunProjectileSpeedUpgrade(shootingSystem.MachineGun, weaponProjectileSpeedIcon),
+            new GrenadeLauncherProjectileSpeedUpgrade(shootingSystem.GrenadeLauncher, weaponProjectileSpeedIcon),
+            new SwordProjectileSpeedUpgrade(shootingSystem.Sword, weaponProjectileSpeedIcon),
 
-        dict.Add(UpgradeType.PistolCooldown, new PistolCooldownUpgrade(shootingSystem.Pistol, weaponCooldownIcon));
-        dict.Add(UpgradeType.ShotgunCooldown, new ShotgunCooldownUpgrade(shootingSystem.Shotgun, weaponCooldownIcon));
-        dict.Add(UpgradeType.MachineGunCooldown, new MachineGunCooldownUpgrade(shootingSystem.MachineGun, weaponCooldownIcon));
-        dict.Add(UpgradeType.GrenadeLauncherCooldown, new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon));
-        dict.Add(UpgradeType.SwordCooldown, new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon));
+            //Weapon cooldown upgrades
+            new PistolCooldownUpgrade(shootingSystem.Pistol, weaponCooldownIcon),
+            new ShotgunCooldownUpgrade(shootingSystem.Shotgun, weaponCooldownIcon),
+            new MachineGunCooldownUpgrade(shootingSystem.MachineGun, weaponCooldownIcon),
+            new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon),
+            new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon),
 
-        dict.Add(UpgradeType.PistolAmmoCost, new PistolAmmoCostUpgrade(shootingSystem.Pistol, weaponAmmoCostIcon));
-        dict.Add(UpgradeType.ShotgunAmmoCost, new ShotgunAmmoCostUpgrade(shootingSystem.Shotgun, weaponAmmoCostIcon));
-        dict.Add(UpgradeType.MachineGunAmmoCost, new MachineGunAmmoCostUpgrade(shootingSystem.MachineGun, weaponAmmoCostIcon));
-        dict.Add(UpgradeType.GrenadeLauncherAmmoCost, new GrenadeLauncherAmmoCostUpgrade(shootingSystem.GrenadeLauncher, weaponAmmoCostIcon));
+            //Weapon ammo cost upgrades
+            new PistolAmmoCostUpgrade(shootingSystem.Pistol, weaponAmmoCostIcon),
+            new ShotgunAmmoCostUpgrade(shootingSystem.Shotgun, weaponAmmoCostIcon),
+            new MachineGunAmmoCostUpgrade(shootingSystem.MachineGun, weaponAmmoCostIcon),
+            new GrenadeLauncherAmmoCostUpgrade(shootingSystem.GrenadeLauncher, weaponAmmoCostIcon),
 
-        dict.Add(UpgradeType.ShotgunProjectileCount, new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon));
+            //Shotgun projectile count upgrade
+            new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon),
 
-        dict.Add(UpgradeType.ShotgunProjectileDispersion, new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon));
+            //Shotgun projectile dispersion upgrade
+            new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon),
+            
+            //One time upgrades
+
+            //Sword reflect enemy projectiles upgrade
+            new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon),
+
+            //Projectiles explode after hitting enemy upgrades
+            //new PistolProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Pistol, projectilesExplodeAfterHittingEnemyIcon),
+            //new ShotgunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Shotgun, projectilesExplodeAfterHittingEnemyIcon),
+            //new MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.MachineGun, projectilesExplodeAfterHittingEnemyIcon),
+
+            //Projectiles are chained to nearest enemy upgrades
+            new PistolProjectilesChainToNearestEnemyUpgrade(shootingSystem.Pistol, projectilesChainToNearestEnemy),
+            new ShotgunProjectilesChainToNearestEnemyUpgrade(shootingSystem.Shotgun, projectilesChainToNearestEnemy),
+            new MachineGunProjectilesChainToNearestEnemyUpgrade(shootingSystem.MachineGun, projectilesChainToNearestEnemy),
+            new GrenadeLauncherProjectilesChainToNearestEnemyUpgrade(shootingSystem.GrenadeLauncher, projectilesChainToNearestEnemy)
+        };
+
+        try
+        {
+            _ = upgradesList.ToDictionary(x => x.upgradeType);
+        }
+        catch (ArgumentException)
+        {
+            Debug.LogError("Upgrades do not have unique types.");
+        }
+
+        if (upgradesList.Count != UpgradeTypeExtensions.AllUpgrades.Length)
+        {
+            Debug.LogError("Some upgrades are not (or there are too many upgrades) in the upgrades list.");
+        }
 
         //rewrite values into array to improve performance
-        upgrades = new UpgradeView[dict.Count];
-        foreach(var pair in dict)
-            upgrades[(int)pair.Key] = pair.Value;
+        upgrades = new UpgradeView[upgradesList.Count];
+        foreach (var upgrade in upgradesList)
+        {
+            upgrades[(int)upgrade.upgradeType] = upgrade;
+        }
     }
-    public UpgradeView GetUpgrade(UpgradeType type) => upgrades[(int)type];
 
+    public UpgradeView GetUpgrade(UpgradeType type) => upgrades[(int)type];
 }

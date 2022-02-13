@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class UpgradeView
 {
-    private string name, description;
-    private Sprite sprite;
-    public UpgradeView(string name, string description, Sprite sprite)
+    private readonly string _name;
+    private readonly string _description;
+    private readonly Sprite _sprite;
+    public UpgradeType upgradeType { get; protected set; }
+
+    protected UpgradeView(string name, string description, Sprite sprite, UpgradeType upgradeType)
     {
-        this.name = name;
-        this.description = description;
-        this.sprite = sprite;
+        this._name = name;
+        this._description = description;
+        this._sprite = sprite;
+        this.upgradeType = upgradeType;
     }
 
-    public string GetName() { return name; }
-    public string GetDescription() { return description; }
-    public Sprite GetSprite() { return sprite; }
+    public string GetName() { return _name; }
+    public string GetDescription() { return _description; }
+    public Sprite GetSprite() { return _sprite; }
 
     public abstract UpgradeType CommitUpdate();
 }

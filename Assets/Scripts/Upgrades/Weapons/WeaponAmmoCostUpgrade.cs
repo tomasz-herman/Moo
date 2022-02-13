@@ -1,58 +1,50 @@
 ﻿using Assets.Scripts.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponAmmoCostUpgrade : UpgradeView
     {
-        private float multiplier = 0.75f;
+        private const float Multiplier = 0.75f;
 
-        private readonly Weapon weapon;
-        public WeaponAmmoCostUpgrade(Weapon w, Sprite sprite, string weaponName)
-            : base($"{weaponName} ammo cost", $"Decrease ammo cost of {weaponName} by 25%", sprite)
+        private readonly Weapon _weapon;
+
+        protected WeaponAmmoCostUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(w.WeaponType)} ammo cost",
+         $"Decrease ammo cost of {Weapon.GetWeaponName(w.WeaponType)} by 25%",
+                   sprite, upgradeType)
         {
-            weapon = w;
+            _weapon = w;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            weapon.baseAmmoConsumption *= multiplier;
-            return GetUpgradeType();
+            _weapon.baseAmmoConsumption *= Multiplier;
+            return this.upgradeType;
         }
-        protected abstract UpgradeType GetUpgradeType();
     }
 
     public class PistolAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
         public PistolAmmoCostUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, "PISTOL") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.PistolCooldown;
+            : base(weapon, sprite, UpgradeType.PistolAmmoCost) { }
     }
+
     public class ShotgunAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
         public ShotgunAmmoCostUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, "SHOTGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.ShotgunCooldown;
+            : base(weapon, sprite, UpgradeType.ShotgunAmmoCost) { }
     }
+
     public class MachineGunAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
         public MachineGunAmmoCostUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, "MACHINEGUN") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.MachineGunCooldown;
+            : base(weapon, sprite, UpgradeType.MachineGunAmmoCost) { }
     }
+
     public class GrenadeLauncherAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
         public GrenadeLauncherAmmoCostUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, "GRENADE LAUNCHER") { }
-
-        protected override UpgradeType GetUpgradeType() => UpgradeType.GrenadeLauncherCooldown;
+            : base(weapon, sprite, UpgradeType.GrenadeLauncherAmmoCost) { }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +17,7 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
+        if (!Application.isFocused) return;
         if (gameWorld.IsPaused()) return;
 
         if (Input.GetMouseButton((int)MouseButton.LeftMouse))

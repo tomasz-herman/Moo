@@ -4,83 +4,106 @@ using UnityEngine;
 
 public class Blade : ProjectileBase
 {
-    private float startAngle = -45;
-    private float stopAngle = 45;
+    public float startAngle = -45;
+    public float stopAngle = 45;
     private float angle;
 
     private float basicSpeed = 15;
     private float speed;
 
     public float Emission = 6;
-    private float length;
+    public float length;
     private Vector3 ownerToBlade;
-    private HashSet<Entity> hitEntities = new HashSet<Entity>();
+    private HashSet<Entity> hitEntities;
 
-    protected override void Start()
+    public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
     {
-        var material = gameObject.GetComponentInChildren<Renderer>().material;
-        material.SetColor("_EmissiveColor", color * Emission);
-        material.SetColor("_BaseColor", color);
-        base.Start();
+        base.Launch(owner, damage);
 
-        UpdateTransform();
-    }
-
-    protected void Awake()
-    {
-        length = GetComponent<BoxCollider>().transform.localScale.z;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        var dangle = speed * basicSpeed * Time.deltaTime;
-        angle += dangle;
-
-        UpdateTransform();
-
-        if (angle > stopAngle)
-            Destroy(gameObject);
-    }
-
-    public void Launch(GameObject owner, float damage, float speed)
-    {
-        Launch(owner, damage);
         this.speed = speed;
         this.angle = startAngle;
 
         transform.SetParent(owner.transform);
         ownerToBlade = new Vector3(0, transform.localPosition.y, length / 2);
         UpdateTransform();
+
+        for (int i = 0; i < projectileUpgrades.Count; i++)
+        {
+            projectileUpgrades[i].OnLaunch(this, projectileUpgradesData[i]);
+        }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        hitEntities ??= new HashSet<Entity>();
+        length = GetComponent<BoxCollider>().transform.localScale.z;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissiveColor", color * Emission);
+        material.SetColor("_BaseColor", color);
+
+        UpdateTransform();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        var dangle = speed * basicSpeed * Time.deltaTime;
+        angle += dangle;
+
+        UpdateTransform();
+
+        for (int i = 0; i < projectileUpgrades.Count; i++)
+        {
+            projectileUpgrades[i].OnUpdate(this, projectileUpgradesData[i]);
+        }
+
+        if (angle > stopAngle)
+            Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < projectileUpgrades.Count; i++)
+        {
+            projectileUpgrades[i].OnDrawGizmos(this, projectileUpgradesData[i]);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Owner)
-        {
-            Entity entity = other.GetComponent<Entity>();
-            if(entity != null && !hitEntities.Contains(entity))
-            {
-                ApplyDamage(other, damage);
+        if (other.gameObject == Owner) return;
 
-                bool raycastSuccess = false;
-                foreach(var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2*length))
+        Entity entity = other.GetComponent<Entity>();
+        if (entity != null && !hitEntities.Contains(entity))
+        {
+            ApplyDamage(other, damage);
+
+            //why is this needed?
+            bool raycastSuccess = false;
+            foreach (var hit in Physics.RaycastAll(transform.position - transform.localPosition, transform.localPosition, 2 * length))
+            {
+                if (hit.transform.GetComponent<Entity>() == entity)
                 {
-                    if(hit.transform.GetComponent<Entity>() == entity)
-                    {
-                        SpawnParticles(hit.transform.position);
-                        raycastSuccess = true;
-                        break;
-                    }
+                    SpawnParticles(hit.transform.position);
+                    raycastSuccess = true;
+                    break;
                 }
-                if (!raycastSuccess)
-                    SpawnParticles((entity.transform.position + transform.position)/2);
-                
-                hitEntities.Add(entity);
             }
+
+            if (!raycastSuccess)
+                SpawnParticles((entity.transform.position + transform.position) / 2);
+
+            hitEntities.Add(entity);
         }
     }
+
     private void UpdateTransform()
     {
         Quaternion rotation = Quaternion.Euler(0, -angle, 0);

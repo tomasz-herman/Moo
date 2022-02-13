@@ -1,29 +1,25 @@
 ﻿using Assets.Scripts.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.Weapons
 {
     public class ShotgunProjectileDispersionUpgrade : UpgradeView
     {
-        private float multiplier = 0.9f;
+        private const float Multiplier = 0.9f;
 
-        private readonly Shotgun shotgun;
+        private readonly Shotgun _shotgun;
         public ShotgunProjectileDispersionUpgrade(Shotgun w, Sprite sprite)
-            : base($"SHOTGUN projectile dispersion", "Decreases shotgun projectiles dispersion by 10%", sprite)
+            : base($"{Weapon.GetWeaponName(w.WeaponType)} projectile dispersion",
+                $"Decreases {Weapon.GetWeaponName(w.WeaponType)} projectiles dispersion by 10%",
+                sprite, UpgradeType.ShotgunProjectileDispersion)
         {
-            shotgun = w;
+            _shotgun = w;
         }
 
         public override UpgradeType CommitUpdate()
         {
-            shotgun.scatterFactor *= multiplier;
-            return UpgradeType.ShotgunProjectileDispersion;
+            _shotgun.scatterFactor *= Multiplier;
+            return this.upgradeType;
         }
     }
-
 }
