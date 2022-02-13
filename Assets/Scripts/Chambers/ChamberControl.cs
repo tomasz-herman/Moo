@@ -83,7 +83,7 @@ public class ChamberControl : Entity
         {
             State = States.Fight;
             SetFightPathsColors();
-            Enemy boss = enemySpawner.Spawn(SpawnLocations, node);
+            Enemy boss = enemySpawner.Spawn(SpawnLocations, node).Where(enemy => enemy.EnemyType.HasBossBar()).FirstOrDefault();
             if (boss != null)
                 GameWorld.userInterface.hud.bossBar.TrackedEnemy = boss;
 
