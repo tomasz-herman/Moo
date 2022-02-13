@@ -21,8 +21,8 @@ public class DropSystem : MonoBehaviour
     [HideInInspector] public float minHealth;
     [HideInInspector] public float maxHealth;
     [HideInInspector] public float ammoDropChance;
-    [HideInInspector] public int minAmmo;
-    [HideInInspector] public int maxAmmo;
+    [HideInInspector] public float minAmmo;
+    [HideInInspector] public float maxAmmo;
 
     public void Drop()
     {
@@ -35,7 +35,7 @@ public class DropSystem : MonoBehaviour
         if (Random.value < ammoDropChance)
         {
             Ammo ammo = Instantiate(ammoPrefab, transform.position, transform.rotation);
-            ammo.remainingAmmo = Utils.NumberBetween(minAmmo, maxAmmo);
+            ammo.remainingAmmo = Utils.FloatBetween(minAmmo, maxAmmo);
             Throw(ammo);
         }
         int totalUpgradeCount = 0;

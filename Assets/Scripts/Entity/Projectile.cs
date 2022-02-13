@@ -24,7 +24,7 @@ public class Projectile : ProjectileBase
     {
         if (other.gameObject != Owner)
         {
-            ApplyDamage(other, damage);
+            ApplyDamage(other, CalculateDamage(other));
 
             //TODO: Uncomment when chambers' terrain has proper layering
             //if (Layers.TerrainLayers.Contains(other.gameObject.layer))

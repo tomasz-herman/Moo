@@ -18,8 +18,9 @@ public abstract class Enemy : Entity
     private AudioManager _audioManager;
     [HideInInspector] public Shooting shooting;
     [HideInInspector] public float movementSpeed;
-    [HideInInspector] public int pointsForKill;
+    [HideInInspector] public float pointsForKill;
 
+    private int level = 1;
     private bool isDead = false;
 
     void Awake()
@@ -38,27 +39,10 @@ public abstract class Enemy : Entity
         };
 
         data = ApplicationData.EnemyData[EnemyType];
-        healthSystem.MaxHealth = data.BaseHealth;
-        healthSystem.Health = healthSystem.MaxHealth;
+        Spawn();
+    }
 
-        shooting.weaponDamageMultiplier = data.BaseDamageMultiplier;
-        shooting.projectileSpeedMultiplier = data.BaseProjectileSpeedMultiplier;
-        shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier;
-
-        movementSpeed = data.BaseMovementSpeed;
-        pointsForKill = data.BaseScoreForKill;
-
-        dropSystem.healthDropChance = data.HealthDropChance;
-        dropSystem.minHealth = data.BaseMinHealthDrop;
-        dropSystem.maxHealth = data.BaseMaxHealthDrop;
-        dropSystem.ammoDropChance = data.AmmoDropChance;
-        dropSystem.minAmmo = data.BaseMinAmmoDrop;
-        dropSystem.maxAmmo = data.BaseMaxAmmoDrop;
-        dropSystem.upgradeDropChance = data.UpgradeDropChance;
-        dropSystem.upgradeDropCount = data.UpgradeDropCount;
-}
-
-    void Start()
+    protected virtual void Start()
     {
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
@@ -69,6 +53,53 @@ public abstract class Enemy : Entity
         Audio?.Dispose();
     }
 
+    private void RecalculateStatistics()
+    {
+        var gameplay = ApplicationData.GameplayData;
+
+        float healthFactor = gameplay.GetHealthScalingMultiplier(level);
+        healthSystem.MaxHealth = data.BaseHealth * healthFactor;
+
+        shooting.weaponDamageMultiplier = data.BaseDamageMultiplier * gameplay.GetDamageScalingMultiplier(level);
+        shooting.projectileSpeedMultiplier = data.BaseProjectileSpeedMultiplier * gameplay.GetProjectileSpeedScalingMultiplier(level);
+        shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier * gameplay.GetTriggerTimeoutScalingMultiplier(level);
+
+        movementSpeed = data.BaseMovementSpeed * gameplay.GetMovementSpeedScalingMultiplier(level);
+        pointsForKill = data.BaseScoreForKill * gameplay.GetScoreScalingMultiplier(level);
+
+        dropSystem.healthDropChance = data.HealthDropChance;
+        dropSystem.minHealth = data.BaseMinHealthDrop * healthFactor;
+        dropSystem.maxHealth = data.BaseMaxHealthDrop * healthFactor;
+
+        float ammoFactor = gameplay.GetAmmoScalingMultiplier(level);
+        dropSystem.ammoDropChance = data.AmmoDropChance;
+        dropSystem.minAmmo = data.BaseMinAmmoDrop * ammoFactor;
+        dropSystem.maxAmmo = data.BaseMaxAmmoDrop * ammoFactor;
+
+        dropSystem.upgradeDropChance = data.UpgradeDropChance;
+        dropSystem.upgradeDropCount = data.UpgradeDropCount;
+    }
+
+    public void Spawn()
+    {
+        if (isDead)
+            return;
+        RecalculateStatistics();
+        healthSystem.Health = healthSystem.MaxHealth;
+    }
+
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            if (value < 1)
+                return;
+            level = value;
+            RecalculateStatistics();
+        }
+    }
+
     public void TakeDamage(float damage, ScoreSystem system = null)
     {
         if (isDead)
@@ -77,6 +108,15 @@ public abstract class Enemy : Entity
         Audio.PlayOneShot();
         if (healthSystem.Health <= 0)
             Die(system);
+    }
+
+    public void Kill(ScoreSystem system = null)
+    {
+        if (isDead)
+            return;
+        healthSystem.Health = 0;
+        Audio.PlayOneShot();
+        Die(system);
     }
 
     private void Die(ScoreSystem system = null)
