@@ -31,15 +31,22 @@ public class GameplayConfig : ScriptableObject
     public int NumberOfOptionalChambersBeforeBoss = 5;
     public int NumberOfBossChambers = 3;
 
-    //https://github.com/tomasz-herman/Moo/projects/6 see third column
-    private float GetScalingFactor(int level, float multiplier) { return (float) Math.Pow(1 + ((ScalingFactor - 1) * multiplier), level - 1); }
-    public float GetHealthScalingMultiplier(int level) { return GetScalingFactor(level, HealthScalingMultiplier); }
-    public float GetDamageScalingMultiplier(int level) { return GetScalingFactor(level, DamageScalingMultiplier); }
-    public float GetMovementSpeedScalingMultiplier(int level) { return GetScalingFactor(level, MovementSpeedScalingMultiplier); }
-    public float GetProjectileSpeedScalingMultiplier(int level) { return GetScalingFactor(level, ProjectileSpeedScalingMultiplier); }
-    public float GetScoreScalingMultiplier(int level) { return GetScalingFactor(level, ScoreScalingMultiplier); }
-    public float GetTriggerTimeoutScalingMultiplier(int level) { return GetScalingFactor(level, TriggerTimeoutScalingMultiplier); }
-    public float GetUpgradeScalingMultiplier (int level) { return GetScalingFactor(level, UpgradeScalingMultiplier); }
-    public float GetAmmoScalingMultiplier (int level) { return GetScalingFactor(level, AmmoScalingMultiplier); }
-    public float GetChamberClearTimeScalingMultiplier (int level) { return GetScalingFactor(level, ChamberClearTimeScalingMultiplier); }
+    private float GetAscendingScalingFactor(int level, float multiplier)
+    {
+        float a, b, c, x;
+        a = b = (ScalingFactor * multiplier - 1) / 2;
+        c = 1;
+        x = level - 1;
+        return (a * x + b) * x + c;
+    }
+    private float GetDescendingScalingFactor(int level, float multiplier) { return 1 / GetAscendingScalingFactor(level, multiplier); }
+    public float GetHealthScalingMultiplier(int level) { return GetAscendingScalingFactor(level, HealthScalingMultiplier); }
+    public float GetDamageScalingMultiplier(int level) { return GetAscendingScalingFactor(level, DamageScalingMultiplier); }
+    public float GetMovementSpeedScalingMultiplier(int level) { return GetAscendingScalingFactor(level, MovementSpeedScalingMultiplier); }
+    public float GetProjectileSpeedScalingMultiplier(int level) { return GetAscendingScalingFactor(level, ProjectileSpeedScalingMultiplier); }
+    public float GetScoreScalingMultiplier(int level) { return GetAscendingScalingFactor(level, ScoreScalingMultiplier); }
+    public float GetTriggerTimeoutScalingMultiplier(int level) { return GetDescendingScalingFactor(level, TriggerTimeoutScalingMultiplier); }
+    public float GetUpgradeScalingMultiplier (int level) { return GetDescendingScalingFactor(level, UpgradeScalingMultiplier); }
+    public float GetAmmoScalingMultiplier (int level) { return GetAscendingScalingFactor(level, AmmoScalingMultiplier); }
+    public float GetChamberClearTimeScalingMultiplier (int level) { return GetAscendingScalingFactor(level, ChamberClearTimeScalingMultiplier); }
 }
