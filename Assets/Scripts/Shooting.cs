@@ -34,6 +34,8 @@ public class Shooting : MonoBehaviour
 
     private GameObject _owner;
 
+    private bool _initializedWeaponOwner;
+
     private void Awake()
     {
         Pistol = new Pistol(projectilePrefab);
@@ -58,10 +60,17 @@ public class Shooting : MonoBehaviour
     {
         //TODO: do not use entity but some object that shows weapon sound position
         this._owner = GetComponent<Entity>().gameObject;
+        var player = GetComponent<Player>();
+        if (player != null)
+        {
+            return;
+        }
         foreach (var weapon in this.weapons)
         {
             weapon.Owner = this._owner;
         }
+
+        _initializedWeaponOwner = true;
     }
 
     private void Update()
@@ -89,6 +98,14 @@ public class Shooting : MonoBehaviour
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
+        if (!_initializedWeaponOwner)
+        {
+            _initializedWeaponOwner = true;
+            foreach (var weapon in this.weapons)
+            {
+                weapon.Owner = this._owner;
+            }
+        }
         weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
     }
 
