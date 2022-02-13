@@ -35,8 +35,7 @@ public class ExplosionParticles : MonoBehaviour
         else
             intensityFactor = Mathf.Max(0, 1 - (elapsedTime - fullBrightnessTimeOffset) / (lightTimeToLive - fullBrightnessTimeOffset));
 
-        //scale 0 -> (x^0 - 1)/(x-1) = 0; 1 -> (x ^ 1 - 1)/(x-1) = 1
-        float logIntensity = (Mathf.Pow(intensityGamma, intensityFactor) - 1)/(intensityGamma - 1);
+        float logIntensity = Mathf.Pow(intensityFactor, intensityGamma);
 
         SetLightIntensity(baseIntensity * logIntensity);
     }
