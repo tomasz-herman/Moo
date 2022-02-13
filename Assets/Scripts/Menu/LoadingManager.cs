@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class LoadingManager : MonoBehaviour
 {
@@ -13,17 +14,23 @@ public class LoadingManager : MonoBehaviour
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     private float progress;
     public float secondsToWait;
+
     private void Awake()
+    {
+        backgroundImage.sprite = backgrounds[Random.Range(0, backgrounds.Length)];
+        loadingScreen.gameObject.SetActive(true);
+        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(loadingScreen);
+    }
+
+    private void Start()
     {
         LoadGame();
     }
 
     private void LoadGame()
     {
-        backgroundImage.sprite = backgrounds[Random.Range(0, backgrounds.Length)];
-        loadingScreen.gameObject.SetActive(true);
-        
-        scenesLoading.Add(SceneManager.LoadSceneAsync(Scenes.TestGeneration, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(Scenes.TestGeneration, LoadSceneMode.Single));
 
         StartCoroutine(LoadScenes());
     }
@@ -61,6 +68,8 @@ public class LoadingManager : MonoBehaviour
 
         loadingScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
+        Destroy(loadingScreen);
+        Destroy(gameObject);
     }
 
 }
