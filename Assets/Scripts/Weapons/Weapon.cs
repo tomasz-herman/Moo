@@ -22,7 +22,17 @@ namespace Assets.Scripts.Weapons
         public string Name { get; set; }
         public float baseAmmoConsumption { get; set; }
         public Color color { get; set; }
-        public GameObject owner { get; set; }
+
+        private GameObject _owner;
+        public GameObject Owner
+        {
+            get => this._owner;
+            set
+            {
+                _owner = value;
+                Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, _owner.transform);
+            }
+        }
 
         public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
@@ -32,23 +42,9 @@ namespace Assets.Scripts.Weapons
         protected AudioManager AudioManager;
         public readonly WeaponType WeaponType;
 
-        protected Weapon(WeaponType weaponType, GameObject owner, SoundType soundType = SoundType.NoSound)
+        protected Weapon(WeaponType weaponType, SoundType soundType = SoundType.NoSound)
         {
             WeaponType = weaponType;
-            this.owner = owner;
-            //TODO: update this section when Weapon will derive from MonoBehaviour
-            AudioManager = AudioManager.Instance;
-            Sound = new SoundTypeWithPlaybackSettings
-            {
-                SoundType = soundType,
-                PlaybackSettings = new PlaybackSettings
-                {
-                    SpatialBlend = 1f,
-                    Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
-                }
-            };
-
-            Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, null);
 
             WeaponData data = ApplicationData.WeaponData[WeaponType];
             baseAmmoConsumption = data.ammoConsumption;
@@ -57,6 +53,23 @@ namespace Assets.Scripts.Weapons
             basetriggerTimeout = data.triggerTimeout;
             Name = data.name;
             color = data.color;
+
+            AudioManager = AudioManager.Instance;
+            Sound = new SoundTypeWithPlaybackSettings
+            {
+                SoundType = soundType,
+                PlaybackSettings = new PlaybackSettings
+                {
+                    //TODO: maybe set spatial blend to 0f if player is owner
+                    SpatialBlend = 1f,
+                    Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
+                }
+            };
+        }
+
+        protected Weapon(WeaponType weaponType, GameObject owner, SoundType soundType = SoundType.NoSound) : this(weaponType, soundType)
+        {
+            Owner = owner;
         }
 
         public void DecreaseTime()
@@ -74,7 +87,7 @@ namespace Assets.Scripts.Weapons
                 {
                     WeaponShoot?.Invoke(this, (triggerTimeout, WeaponType));
                     Shoot(shooter, position, direction, shooting);
-                    PlayGunfireSound(position);
+                    PlayGunfireSound();
                     ammoSystem.Ammo -= baseAmmoConsumption;
                 }
             }
@@ -82,10 +95,9 @@ namespace Assets.Scripts.Weapons
 
         public abstract void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting);
 
-        protected virtual void PlayGunfireSound(Vector3 position)
+        protected virtual void PlayGunfireSound()
         {
-            //TODO: I don't like it, if it is possible weapon class should have player field or derive from MonoBehaviour this also is not affected by volume sliders
-            Audio?.PlayClipAtPoint(position, SoundTypeSettings.GetVolumeForSoundType(Sound.SoundType));
+            Audio?.PlayOneShot();
         }
 
         public void Dispose()

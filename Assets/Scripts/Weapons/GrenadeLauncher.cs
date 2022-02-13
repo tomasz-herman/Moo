@@ -11,6 +11,12 @@ namespace Assets.Scripts.Weapons
         {
             this.grenadePrefab = grenadePrefab;
         }
+
+        public GrenadeLauncher(GameObject owner, Grenade grenadePrefab) : base(WeaponType.GrenadeLauncher, owner, SoundType.GrenadeLauncherShot)
+        {
+            this.grenadePrefab = grenadePrefab;
+        }
+
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             Grenade grenade = Object.Instantiate(grenadePrefab, position, Quaternion.identity);

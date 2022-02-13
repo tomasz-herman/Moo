@@ -9,6 +9,11 @@ namespace Assets.Scripts.Weapons
 
         private readonly float _scatterFactor = 3f;
 
+        public MachineGun(Projectile projectilePrefab) : base(WeaponType.MachineGun, SoundType.PistolShot)
+        {
+            this.projectilePrefab = projectilePrefab;
+        }
+
         public MachineGun(GameObject owner, Projectile projectilePrefab) : base(WeaponType.MachineGun, owner, SoundType.PistolShot)
         {
             this.projectilePrefab = projectilePrefab;

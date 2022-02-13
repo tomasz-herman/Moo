@@ -14,6 +14,12 @@ namespace Assets.Scripts.Weapons
             currentBlade = null;
         }
 
+        public Sword(GameObject owner, Blade bladePrefab) : base(WeaponType.Sword, owner, SoundType.SwordSwing)
+        {
+            this.bladePrefab = bladePrefab;
+            currentBlade = null;
+        }
+
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
         {
             if (currentBlade != null) return;

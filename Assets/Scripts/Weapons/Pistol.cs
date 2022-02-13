@@ -7,6 +7,11 @@ namespace Assets.Scripts.Weapons
     {
         public Projectile projectilePrefab { get; protected set; }
 
+        public Pistol(Projectile projectilePrefab) : base(WeaponType.Pistol, SoundType.PistolShot)
+        {
+            this.projectilePrefab = projectilePrefab;
+        }
+
         public Pistol(GameObject owner, Projectile projectilePrefab) : base(WeaponType.Pistol, owner, SoundType.PistolShot)
         {
             this.projectilePrefab = projectilePrefab;
