@@ -64,12 +64,18 @@ public class UpgradesProvider : MonoBehaviour
             new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon),
             new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon),
 
+            //Weapon ammo cost upgrades
+            new PistolAmmoCostUpgrade(shootingSystem.Pistol, weaponAmmoCostIcon),
+            new ShotgunAmmoCostUpgrade(shootingSystem.Shotgun, weaponAmmoCostIcon),
+            new MachineGunAmmoCostUpgrade(shootingSystem.MachineGun, weaponAmmoCostIcon),
+            new GrenadeLauncherAmmoCostUpgrade(shootingSystem.GrenadeLauncher, weaponAmmoCostIcon),
+
             //Shotgun projectile count upgrade
             new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon),
 
             //Shotgun projectile dispersion upgrade
             new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon),
-            //TODO: add here ammo cost upgrades
+            
             //One time upgrades
 
             //Sword reflect enemy projectiles upgrade
