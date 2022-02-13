@@ -32,7 +32,7 @@ public class Shooting : MonoBehaviour
 
     private Dictionary<WeaponType, Weapon> weaponMap;
 
-    void Awake()
+    private void Awake()
     {
         Pistol = new Pistol(projectilePrefab);
         Shotgun = new Shotgun(bulletPrefab);
@@ -52,7 +52,12 @@ public class Shooting : MonoBehaviour
         if(weaponBar != null) WeaponChanged += (sender, weapon) => weaponBar.SelectSlot(weapon.WeaponType); 
     }
 
-    void Update()
+    private void Start()
+    {
+
+    }
+
+    private void Update()
     {
         weapons.Current().DecreaseTime();
     }
