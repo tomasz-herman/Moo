@@ -8,6 +8,12 @@ public class EnemySpawner
     public static int MaxNumber = 0;
     private int numberOfAliveEnemies = 0;
     public UnityEngine.Events.UnityEvent AllEnemiesKilled = new UnityEngine.Events.UnityEvent();
+    private GameWorld world;
+
+    public EnemySpawner(GameWorld world)
+    {
+        this.world = world;
+    }
 
     /// <returns>Current boss (if spawned) or null (if not)</returns>
     public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberNode chamberNode)
@@ -49,15 +55,10 @@ public class EnemySpawner
 
     private Enemy SpawnEnemy(EnemyTypes type, Vector3 position, int level)
     {
-        EnemyPrefabInfo enemyinfo = Enemys.GetEnemyInfoFromType(type);
-        var enemy = GameObject.Instantiate(enemyinfo.enemy, position, Quaternion.identity);
+        var enemy = world.SpawnEnemy(type, position, level);
         numberOfAliveEnemies++;
-        Enemy enemyClass = enemy.GetComponent<Enemy>();
-        enemyClass.Level = level;
-        enemyClass.Spawn();
-        enemyClass.KillEvent.AddListener(KillHandler);
-        TeleporterEffectScript.CreateTeleporterForEntity(enemy, enemyinfo.teleporterScale);
-        return enemyClass;
+        enemy.KillEvent.AddListener(KillHandler);
+        return enemy;
     }
 
     private EnemyTypes RandomEnemy(int chamberNumber, EnemiesSpawnData currData)
