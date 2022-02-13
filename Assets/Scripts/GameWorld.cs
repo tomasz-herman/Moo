@@ -43,8 +43,8 @@ public class GameWorld : MonoBehaviour
                 float expectedClearTime = node.Type switch
                 {
                     ChamberType.Normal => gameplay.NormalChamberClearTime,
-                    ChamberType.Boss => gameplay.NormalChamberClearTime,
-                    ChamberType.Optional => gameplay.NormalChamberClearTime,
+                    ChamberType.Boss => gameplay.BossChamberClearTime,
+                    ChamberType.Optional => gameplay.OptionalChamberClearTime,
                     _ => 0,
                 };
 
