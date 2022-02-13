@@ -12,48 +12,57 @@ public class EnemiesSpawnControl : ScriptableObject
 [System.Serializable]
 public struct EnemiesSpawnData
 {
-    public int MinEnemiesInNormalChamber;
-    public int MaxEnemiesInNormalChamber;
-    public int MinEnemiesInOptionalChamber;
-    public int MaxEnemiesInOptionalChamber;
-    public int MinEnemiesInBossChamber;
-    public int MaxEnemiesInBossChamber;
+    public int EnemiesInNormalChamber;
+    public int EnemiesInOptionalChamber;
+    public int EnemiesInBossChamber;
     public float BigEnemyStartFrequency;
     public float BigEnemyEndFrequency;
     public float MediumEnemyStartFrequency;
     public float MediumEnemyEndFrequency;
 
-    public IEnumerable<EnemyTypes> GetRandomEnemiesForChamber(ChamberType type, float progress)
+    public IEnumerable<EnemyTypes> GetEnemiesForChamber(ChamberNode node)
     {
-        int min = 0, max = 0;
-        switch(type)
-        {
-            case ChamberType.Normal:
-                min = MinEnemiesInNormalChamber;
-                max = MaxEnemiesInNormalChamber;
-                break;
-            case ChamberType.Optional:
-                min = MinEnemiesInOptionalChamber;
-                max = MaxEnemiesInOptionalChamber;
-                break;
-            case ChamberType.Boss:
-                min = MinEnemiesInBossChamber;
-                max = MaxEnemiesInBossChamber;
-                break;
-        }
+        var type = node.Type;
+        var progress = node.MainProgress;
 
-        //big and normal enemies are stronger, so we want a constant number of them for each progress
+        int totalEnemies = type switch
+        {
+            ChamberType.Normal => EnemiesInNormalChamber,
+            ChamberType.Optional => EnemiesInOptionalChamber,
+            ChamberType.Boss => EnemiesInBossChamber,
+            _ => 0
+        };
+
+        var bosses = type switch
+        {
+            ChamberType.Optional => Enumerable.Repeat(EnemyTypes.MiniBoss, 1),
+            ChamberType.Boss => Enumerable.Repeat(EnemyTypes.Boss, 1),
+            _ => Enumerable.Empty<EnemyTypes>()
+        };
+
         float bigFrequency = BigEnemyStartFrequency + (BigEnemyEndFrequency - BigEnemyStartFrequency) * progress;
-        int bigEnemyCount = Mathf.FloorToInt(min * bigFrequency);
+        int bigEnemyCount = Mathf.FloorToInt(totalEnemies * bigFrequency);
 
         float mediumFrequency = MediumEnemyStartFrequency + (MediumEnemyEndFrequency - MediumEnemyStartFrequency) * progress;
-        int mediumEnemyCount = Mathf.FloorToInt(min * mediumFrequency);
+        int mediumEnemyCount = Mathf.FloorToInt(totalEnemies * mediumFrequency);
 
-        int smallEnemyCount = Utils.NumberBetween(min, max) - mediumEnemyCount - bigEnemyCount;
+        int smallEnemyCount = totalEnemies - bigEnemyCount - mediumEnemyCount;
 
         return Enumerable.Repeat(EnemyTypes.Small, smallEnemyCount)
             .Concat(Enumerable.Repeat(EnemyTypes.Medium, mediumEnemyCount))
-            .Concat(Enumerable.Repeat(EnemyTypes.Big, bigEnemyCount));
+            .Concat(Enumerable.Repeat(EnemyTypes.Big, bigEnemyCount))
+            .Concat(bosses);
+    }
+
+    public float GetExpectedEnemyScoreForChamber(ChamberNode node)
+    {
+        float score = 0;
+        foreach(var type in GetEnemiesForChamber(node))
+        {
+            score += type.GetPointsForKill(node.Level);
+        }
+
+        return score;
     }
 }
 

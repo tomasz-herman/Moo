@@ -15,26 +15,18 @@ public class EnemySpawner
         this.world = world;
     }
 
-    /// <returns>Current boss (if spawned) or null (if not)</returns>
-    public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberNode chamberNode)
+    public IEnumerable<Enemy> Spawn(List<SpawnLocationScript> spawnLocations, ChamberNode chamberNode)
     {
         EnemiesSpawnData currentSpawnData = EnemiesData.GetData();
         ChamberType chamberType = chamberNode.Type;
         int chamberLevel = chamberNode.Level;
         int chamberNumber = chamberNode.Number;
 
-        var enemies = currentSpawnData.GetRandomEnemiesForChamber(chamberType, chamberNode.MainProgress);
+        var enemies = currentSpawnData.GetEnemiesForChamber(chamberNode);
 
-        EnemyTypes? bossType = chamberType switch
-        {
-            ChamberType.Boss => EnemyTypes.Boss,
-            ChamberType.Optional => EnemyTypes.MiniBoss,
-            _ => null
-        };
+        var spawned = SpawnEnemies(enemies, spawnLocations, chamberNumber, chamberLevel);
 
-        var boss = SpawnEnemies(enemies, spawnLocations, chamberNumber, chamberLevel, bossType);
-
-        return boss;
+        return spawned;
     }
 
     private void KillHandler(GameObject sender)
@@ -58,21 +50,20 @@ public class EnemySpawner
         return enemy;
     }
 
-    private Enemy SpawnEnemies(IEnumerable<EnemyTypes> enemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, int level, EnemyTypes? bossType = null)
+    private IEnumerable<Enemy> SpawnEnemies(IEnumerable<EnemyTypes> enemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, int level)
     {
+        var spawned = new List<Enemy>();
+
         var shuffled = spawnLocations.OrderBy(x => Utils.RandomNumber()).ToList();
         int i = 0;
 
         foreach (var item in enemies)
         {
             var spawn = shuffled[i];
-            SpawnEnemy(item, spawn.transform.position, level);
+            spawned.Add(SpawnEnemy(item, spawn.transform.position, level));
             i = (i + 1) % shuffled.Count;
         }
 
-        if (bossType != null)
-            return SpawnEnemy(bossType.Value, shuffled[i].transform.position, level);
-
-        return null;
+        return spawned;
     }
 }

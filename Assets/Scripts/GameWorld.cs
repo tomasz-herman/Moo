@@ -63,7 +63,9 @@ public class GameWorld : MonoBehaviour
             float b = - a * expectedTimeToClearAllChambers;
             float bonusMultiplier = Mathf.Max(0, a * (float)timeMs / 1000 + b);
 
-            score += bonusMultiplier * gameplay.QuickWinScoreBonus;
+            float expectedScoreInOptionalChambers = 0;
+
+            score += bonusMultiplier;
         }
 
 

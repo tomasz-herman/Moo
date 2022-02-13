@@ -65,7 +65,7 @@ public abstract class Enemy : Entity
         shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier * gameplay.GetTriggerTimeoutScalingMultiplier(level);
 
         movementSpeed = data.BaseMovementSpeed * gameplay.GetMovementSpeedScalingMultiplier(level);
-        pointsForKill = data.BaseScoreForKill * gameplay.GetScoreScalingMultiplier(level);
+        pointsForKill = EnemyType.GetPointsForKill(level);
 
         dropSystem.healthDropChance = data.HealthDropChance;
         dropSystem.minHealth = data.BaseMinHealthDrop * healthFactor;
