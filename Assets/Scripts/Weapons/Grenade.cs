@@ -39,21 +39,30 @@ public class Grenade : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject != Owner)
+        if (other.gameObject == Owner) return;
+        if (nonCollidableObjects.Contains(other.gameObject)) return;
+
+        if (!isExplosing)
         {
-            if (!isExplosing)
+            var enemy = other.gameObject.GetComponent<Enemy>();
+            if (Owner != null && Owner.GetComponent<Player>() != null && enemy != null) // Player was shooting and enemy was hit
             {
-                isExplosing = true;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
-                PlaySound();
-                
-                Instantiate(explosionParticles, transform.position, transform.rotation);
-                gameObject.GetComponentInChildren<Renderer>().enabled = false;
+                for (int i = 0; i < projectileUpgrades.Count; i++)
+                {
+                    projectileUpgrades[i].OnEnemyHit(this, enemy, projectileUpgradesData[i]);
+                }
             }
 
-            var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
-            var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
-            ApplyDamage(other, dmg);
+            isExplosing = true;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            PlaySound();
+                
+            Instantiate(explosionParticles, transform.position, transform.rotation);
+            gameObject.GetComponentInChildren<Renderer>().enabled = false;
         }
+
+        var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
+        var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
+        ApplyDamage(other, dmg);
     }
 }

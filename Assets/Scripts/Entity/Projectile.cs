@@ -28,7 +28,6 @@ public class Projectile : ProjectileBase
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == Owner) return;
-
         if (nonCollidableObjects.Contains(other.gameObject)) return;
 
         var enemy = other.gameObject.GetComponent<Enemy>();
