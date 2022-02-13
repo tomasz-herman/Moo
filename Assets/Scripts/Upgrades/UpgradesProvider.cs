@@ -75,9 +75,9 @@ public class UpgradesProvider : MonoBehaviour
             new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon),
 
             //Projectiles explode after hitting enemy upgrades
-            new PistolProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Pistol, projectilesExplodeAfterHittingEnemyIcon),
-            new ShotgunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Shotgun, projectilesExplodeAfterHittingEnemyIcon),
-            new MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.MachineGun, projectilesExplodeAfterHittingEnemyIcon),
+            //new PistolProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Pistol, projectilesExplodeAfterHittingEnemyIcon),
+            //new ShotgunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Shotgun, projectilesExplodeAfterHittingEnemyIcon),
+            //new MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.MachineGun, projectilesExplodeAfterHittingEnemyIcon),
 
             //Projectiles are chained to nearest enemy upgrades
             new PistolProjectilesChainToNearestEnemyUpgrade(shootingSystem.Pistol, projectilesChainToNearestEnemy),

@@ -8,6 +8,6 @@ public enum UpgradeType
     SwordDamage, SwordProjectileSpeed, SwordCooldown,
     //One time upgrades (do not place anything below if it's not one time upgrade)
     SwordReflectsEnemyProjectiles, 
-    PistolProjectilesExplodeAfterHittingEnemy, ShotgunProjectilesExplodeAfterHittingEnemy, MachineGunProjectilesExplodeAfterHittingEnemy,
+    //PistolProjectilesExplodeAfterHittingEnemy, ShotgunProjectilesExplodeAfterHittingEnemy, MachineGunProjectilesExplodeAfterHittingEnemy,
     PistolProjectilesChainToNearestEnemy, ShotgunProjectilesChainToNearestEnemy, MachineGunProjectilesChainToNearestEnemy, GrenadeLauncherProjectilesChainToNearestEnemy
 }
