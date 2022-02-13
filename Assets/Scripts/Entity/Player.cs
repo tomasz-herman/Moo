@@ -32,22 +32,6 @@ public class Player : Entity
 
         ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
         ammoSystem.Ammo = ammoSystem.MaxAmmo;
-
-        //TODO: delete (if you see this in PR let MichalR know)
-        var currweap = shooting.CurrentWeapon;
-        shooting.SelectWeapon(WeaponType.Sword);
-        var sword = shooting.CurrentWeapon as Sword;
-        var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(sword);
-        sword?.AddUpgrade(projectileUpgrade);
-        shooting.SelectWeapon(currweap.WeaponType);
-
-        //TODO: delete (if you see this in PR let MichalR know)
-        currweap = shooting.CurrentWeapon;
-        shooting.SelectWeapon(WeaponType.GrenadeLauncher);
-        var pistol = shooting.CurrentWeapon as GrenadeLauncher;
-        var projectileUpgrade2 = new GrenadeLauncherProjectilesChainToNearestEnemyUpgradeHandler(pistol);
-        pistol?.AddUpgrade(projectileUpgrade2);
-        shooting.SelectWeapon(currweap.WeaponType);
     }
 
     public void Upgrade(int upgradeCount = 1)
