@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +20,7 @@ public class WeaponBar : MonoBehaviour
     private Dictionary<WeaponType, WeaponInfo> weaponData = new Dictionary<WeaponType, WeaponInfo>();
 
     private Color overlayOffColor, overlayOnColor;
-    void Start()
+    private void Awake()
     {
         foreach(WeaponType type in Enum.GetValues(typeof(WeaponType)))
         {
@@ -67,6 +66,7 @@ public class WeaponBar : MonoBehaviour
             }
         }
     }
+
     void UpdateSprite(object sender, (float Timeout, WeaponType type) args)
     {
         var weaponInfo = weaponData[args.type];
