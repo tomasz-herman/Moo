@@ -46,6 +46,8 @@ public class Shooting : MonoBehaviour
         weapons.Add(GrenadeLauncher);
         weapons.Add(Sword);
         weapons.Sort((x, y) => x.WeaponType.CompareTo(y.WeaponType));
+        
+        SelectWeapon(WeaponType.Pistol);
 
         weaponMap = weapons.ToDictionary(w => w.WeaponType);
         if(weaponBar != null) WeaponChanged += (sender, weapon) => weaponBar.SelectSlot(weapon.WeaponType); 
