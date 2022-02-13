@@ -152,3 +152,7 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/rider
 
 Playerdata/
+
+# ReSharper is a .NET coding add-in
+_ReSharper*
+_dotCover*
