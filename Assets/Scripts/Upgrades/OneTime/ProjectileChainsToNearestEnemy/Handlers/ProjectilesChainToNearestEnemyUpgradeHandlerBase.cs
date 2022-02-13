@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Assets.Scripts.Upgrades.OneTime.Handlers;
+﻿using Assets.Scripts.Upgrades.OneTime.Handlers;
 using Assets.Scripts.Weapons;
 using UnityEngine;
 
@@ -61,8 +58,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handler
         protected Enemy FindClosestEnemy(Enemy startingEnemy)
         {
             var position = startingEnemy.transform.position;
-            var projectileLayer = Layers.GetLayer(Layers.Enemy);
-            int layerMask = 1 << projectileLayer;
+            int layerMask = LayerMask.GetMask(Layers.Enemy);
             var colliders = Physics.OverlapSphere(position, RayCastSphereRadius, layerMask);
 
             Enemy foundEnemy = null;

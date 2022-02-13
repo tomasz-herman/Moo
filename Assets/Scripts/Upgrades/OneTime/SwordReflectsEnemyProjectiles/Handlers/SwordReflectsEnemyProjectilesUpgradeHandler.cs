@@ -56,8 +56,7 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers
 
             _rayCastSphereCenter = position + _rayCastSphereRadius * _playerDirection;
 
-            var projectileLayer = Layers.GetLayer(Layers.Projectile);
-            int layerMask = 1 << projectileLayer;
+            int layerMask = LayerMask.GetMask(Layers.Projectile);
 
             var colliders = Physics.OverlapSphere(_rayCastSphereCenter, _rayCastSphereRadius, layerMask);
 
