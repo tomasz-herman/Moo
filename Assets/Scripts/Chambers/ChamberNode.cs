@@ -14,6 +14,7 @@ public class ChamberNode
     public ChamberControl ChamberControl;
     public int Number = -1;
     public int Level = 1;
+    public float MainProgress = 0f;
     public bool IsLast = false;
     private Dictionary<Direction, ChamberNode> children;
     private bool isCleared = false;

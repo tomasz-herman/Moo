@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: EnemiesSpawnControl
   m_EditorClassIdentifier: 
   enemiesSpawnData:
-    MinEnemiesInNormalChamber: 2
-    MaxEnemiesInNormalChamber: 100
+    MinEnemiesInNormalChamber: 6
+    MaxEnemiesInNormalChamber: 8
     MinEnemiesInOptionalChamber: 1
     MaxEnemiesInOptionalChamber: 5
     MinEnemiesInBossChamber: 1
     MaxEnemiesInBossChamber: 1
-    BigEnemySpawnThreshold: 0.5
-    MediumEnemySpawnThreshold: 0.25
+    BigEnemyStartFrequency: 0
+    BigEnemyEndFrequency: 0.2
+    MediumEnemyStartFrequency: 0
+    MediumEnemyEndFrequency: 0.4

@@ -179,8 +179,6 @@ public class SpawnScript : MonoBehaviour
         ChamberNode currentNode = chambersTreeRoot;
         ChamberNode tempNode;
 
-        currentNode.Level = 1;
-
         List<ChamberNode> orderedChambers = new List<ChamberNode>();
 
         while (currentNode != null)
@@ -194,8 +192,6 @@ public class SpawnScript : MonoBehaviour
                 currNumber++;
             }
 
-            int nextChamberLevel = currentNode.Level + (currentNode.Type == ChamberType.Boss ? 1 : 0);
-
             tempNode = null;
             foreach (var item in currentNode.Children())
             {
@@ -203,8 +199,6 @@ public class SpawnScript : MonoBehaviour
                     tempNode = item;
             }
             currentNode = tempNode;
-            if(currentNode != null)
-                currentNode.Level = nextChamberLevel;
         }
         EnemySpawner.MaxNumber = currNumber - 1;
 
@@ -225,6 +219,26 @@ public class SpawnScript : MonoBehaviour
                     NumberTheOptionalChambersRec(item);
                 }
             }
+        }
+
+        int level = 1;
+        int mainPathId = 0;
+        //we cache float value for division later on
+        float MaxMainPathId = NumberOfBossChambers * (NumbersOfChambersBeforeBoss + 1) - 1;
+
+        //in case there is 1 boss chamber and no normal chambers
+        if (MaxMainPathId == 0)
+            MaxMainPathId = 1;
+
+        foreach(var node in orderedChambers)
+        {
+            node.Level = level;
+            if (node.Type == ChamberType.Boss)
+                level++;
+
+            node.MainProgress = mainPathId / MaxMainPathId;
+            if (node.Type == ChamberType.Normal || node.Type == ChamberType.Boss)
+                mainPathId++;
         }
 
         return orderedChambers.ToArray();

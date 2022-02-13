@@ -19,25 +19,22 @@ public class EnemySpawner
     public Enemy Spawn(List<SpawnLocationScript> spawnLocations, ChamberNode chamberNode)
     {
         EnemiesSpawnData currentSpawnData = EnemiesData.GetData();
-        int numberOfEnemys;
         ChamberType chamberType = chamberNode.Type;
         int chamberLevel = chamberNode.Level;
         int chamberNumber = chamberNode.Number;
-        switch (chamberType)
+
+        var enemies = currentSpawnData.GetRandomEnemiesForChamber(chamberType, chamberNode.MainProgress);
+
+        EnemyTypes? bossType = chamberType switch
         {
-            case ChamberType.Normal:
-                numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInNormalChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInNormalChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInNormalChamber);
-                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, chamberLevel);
-            case ChamberType.Boss:
-                numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInBossChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInBossChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInBossChamber);
-                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, chamberLevel, EnemyTypes.Boss);
-            case ChamberType.Optional:
-                numberOfEnemys = Utils.NumberBetween(currentSpawnData.MinEnemiesInOptionalChamber, (spawnLocations.Count - 1) < currentSpawnData.MaxEnemiesInOptionalChamber ? spawnLocations.Count - 1 : currentSpawnData.MaxEnemiesInOptionalChamber);
-                return SpawnNumberOfEnemies(numberOfEnemys, spawnLocations, chamberNumber, currentSpawnData, chamberLevel, EnemyTypes.MiniBoss);
-            case ChamberType.Start:
-            default:
-                return null;
-        }
+            ChamberType.Boss => EnemyTypes.Boss,
+            ChamberType.Optional => EnemyTypes.MiniBoss,
+            _ => null
+        };
+
+        var boss = SpawnEnemies(enemies, spawnLocations, chamberNumber, chamberLevel, bossType);
+
+        return boss;
     }
 
     private void KillHandler(GameObject sender)
@@ -61,28 +58,21 @@ public class EnemySpawner
         return enemy;
     }
 
-    private EnemyTypes RandomEnemy(int chamberNumber, EnemiesSpawnData currData)
+    private Enemy SpawnEnemies(IEnumerable<EnemyTypes> enemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, int level, EnemyTypes? bossType = null)
     {
-        if (Utils.FloatBetween(0, (float)chamberNumber / (float)MaxNumber) > currData.BigEnemySpawnThreshold)
-            return EnemyTypes.Big;
-        if (Utils.FloatBetween(0, (float)chamberNumber / (float)MaxNumber) > currData.MediumEnemySpawnThreshold)
-            return EnemyTypes.Medium;
-        return EnemyTypes.Small;
-    }
+        var shuffled = spawnLocations.OrderBy(x => Utils.RandomNumber()).ToList();
+        int i = 0;
 
-    private Enemy SpawnNumberOfEnemies(int numberOfEnemies, List<SpawnLocationScript> spawnLocations, int chamberNumber, EnemiesSpawnData currData, int level, EnemyTypes? BossType = null)
-    {
-        Enemy boss = null;
-        foreach (var item in spawnLocations.OrderBy(x => Utils.RandomNumber()))
+        foreach (var item in enemies)
         {
-            if (numberOfEnemies <= 0)
-                return boss;
-            if (numberOfEnemies == 1 && BossType != null)
-                boss = SpawnEnemy(BossType.Value, item.transform.position, level);
-            else
-                SpawnEnemy(RandomEnemy(chamberNumber, currData), item.transform.position, level);
-            numberOfEnemies--;
+            var spawn = shuffled[i];
+            SpawnEnemy(item, spawn.transform.position, level);
+            i = (i + 1) % shuffled.Count;
         }
-        return boss;
+
+        if (bossType != null)
+            return SpawnEnemy(bossType.Value, shuffled[i].transform.position, level);
+
+        return null;
     }
 }
