@@ -14,7 +14,7 @@ public class Blade : ProjectileBase
     public float Emission = 6;
     public float length;
     private Vector3 ownerToBlade;
-    private HashSet<Entity> hitEntities = new HashSet<Entity>();
+    private HashSet<Entity> hitEntities;
 
     public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
     {
@@ -33,8 +33,10 @@ public class Blade : ProjectileBase
         }
     }
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        hitEntities ??= new HashSet<Entity>();
         length = GetComponent<BoxCollider>().transform.localScale.z;
     }
 
