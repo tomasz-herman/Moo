@@ -55,8 +55,8 @@ public class GameWorld : MonoBehaviour
                     expectedTimeToClearObligatoryChambers += expectedClearTime;
             }
 
-            float timeFactor = ((float)timeMs / 1000 - expectedTimeToClearObligatoryChambers)/(expectedTimeToClearAllChambers - expectedTimeToClearObligatoryChambers);
-            float bonusMultiplier = Mathf.Max(0, Mathf.Lerp(1, 0, timeFactor));
+            float bonusMultiplier = 1 - ((float)timeMs / 1000 - expectedTimeToClearObligatoryChambers)/(expectedTimeToClearAllChambers - expectedTimeToClearObligatoryChambers);
+            bonusMultiplier = Mathf.Max(0, bonusMultiplier);
 
             float expectedScoreInOptionalChambers = 0;
             for (int i = 0; i < chamberCount; i++)
