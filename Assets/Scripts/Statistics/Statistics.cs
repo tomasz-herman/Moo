@@ -32,13 +32,11 @@ public class Statistics : MonoBehaviour
 
     void UpdateAmmo(object sender, (float ammo, float maxAmmo) args)
     {
-        statisticsSystem.SetStatistic(StatisticType.Ammo, args.ammo);
         statisticsSystem.SetStatistic(StatisticType.MaxAmmo, args.maxAmmo);
     }
 
     void UpdateHealth(object sender, (float health, float maxHealth) args)
     {
-        statisticsSystem.SetStatistic(StatisticType.Health, args.health);
         statisticsSystem.SetStatistic(StatisticType.MaxHealth, args.maxHealth);
     }
 
