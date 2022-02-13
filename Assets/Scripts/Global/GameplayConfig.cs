@@ -34,7 +34,7 @@ public class GameplayConfig : ScriptableObject
     private float GetAscendingScalingFactor(int level, float multiplier)
     {
         float a, b, c, x;
-        a = b = (ScalingFactor * multiplier - 1) / 2;
+        a = b = (ScalingFactor - 1) * multiplier / 2;
         c = 1;
         x = level - 1;
         return (a * x + b) * x + c;
