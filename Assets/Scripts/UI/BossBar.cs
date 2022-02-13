@@ -27,7 +27,7 @@ public class BossBar : MonoBehaviour
 
     public Enemy TrackedEnemy
     {
-        get { return trackedEnemy; }
+        get => trackedEnemy;
         set
         {
             if (trackedEnemy != null)

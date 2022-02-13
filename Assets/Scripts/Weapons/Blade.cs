@@ -44,7 +44,7 @@ public class Blade : ProjectileBase
             Destroy(gameObject);
     }
 
-    public void Launch(GameObject owner, Vector3 direction, float damage, float speed)
+    public void Launch(GameObject owner, float damage, float speed)
     {
         Launch(owner, damage);
         this.speed = speed;
