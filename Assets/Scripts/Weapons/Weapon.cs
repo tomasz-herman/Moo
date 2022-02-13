@@ -22,6 +22,7 @@ namespace Assets.Scripts.Weapons
         public string Name { get; set; }
         public float baseAmmoConsumption { get; set; }
         public Color color { get; set; }
+        public GameObject owner { get; set; }
 
         public EventHandler<(float timeout, WeaponType weaponType)> WeaponShoot;
         public SoundTypeWithPlaybackSettings Sound { get; protected set; }
@@ -31,9 +32,10 @@ namespace Assets.Scripts.Weapons
         protected AudioManager AudioManager;
         public readonly WeaponType WeaponType;
 
-        protected Weapon(WeaponType weaponType, SoundType soundType = SoundType.NoSound)
+        protected Weapon(WeaponType weaponType, GameObject owner, SoundType soundType = SoundType.NoSound)
         {
             WeaponType = weaponType;
+            this.owner = owner;
             //TODO: update this section when Weapon will derive from MonoBehaviour
             AudioManager = AudioManager.Instance;
             Sound = new SoundTypeWithPlaybackSettings
