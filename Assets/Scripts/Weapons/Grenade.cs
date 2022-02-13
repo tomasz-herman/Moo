@@ -51,17 +51,24 @@ public class Grenade : Projectile
                 {
                     projectileUpgrades[i].OnEnemyHit(this, enemy, projectileUpgradesData[i]);
                 }
+
+                isExplosing = true;
+                var rigidbody = GetComponent<Rigidbody>();
+                var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                PlaySound();
+
+                transform.position = backtrackedPosition;
+                var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
+                particles.Color = color;
+                gameObject.GetComponentInChildren<Renderer>().enabled = false;
             }
 
             isExplosing = true;
-            var rigidbody = GetComponent<Rigidbody>();
-            var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             PlaySound();
-
-            transform.position = backtrackedPosition;
-            var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
-            particles.Color = color;
+                
+            Instantiate(explosionParticles, transform.position, transform.rotation);
             gameObject.GetComponentInChildren<Renderer>().enabled = false;
         }
 
