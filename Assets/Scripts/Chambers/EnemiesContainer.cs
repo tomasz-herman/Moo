@@ -40,4 +40,19 @@ public static class Enemys
         }
         return enemies[type];
     }
+
+    public static float GetPointsForKill(this EnemyTypes type, int level)
+    {
+        return ApplicationData.EnemyData[type].BaseScoreForKill * ApplicationData.GameplayData.GetScoreScalingMultiplier(level);
+    }
+
+    public static bool HasBossBar(this EnemyTypes type)
+    {
+        return type switch
+        {
+            EnemyTypes.MiniBoss => true,
+            EnemyTypes.Boss => true,
+            _ => false
+        };
+    }
 }

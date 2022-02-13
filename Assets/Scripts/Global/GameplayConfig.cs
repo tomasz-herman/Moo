@@ -25,7 +25,7 @@ public class GameplayConfig : ScriptableObject
     public float OptionalChamberClearTime = 40f;
     public float BossChamberClearTime = 60f;
     public float ChamberClearTimeScalingMultiplier = 0.5f;
-    public float QuickWinScoreBonus = 10000;
+    public float QuickWinScoreFactor = 2.5f;
 
     public int NumberOfChambersBeforeBoss = 2;
     public int NumberOfOptionalChambersBeforeBoss = 5;
