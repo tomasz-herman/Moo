@@ -4,7 +4,6 @@ using UnityEngine;
 public class Projectile : ProjectileBase
 {
     public float Emission = 6;
-    public string name = "NormalShootProjectile";
 
     protected override void Start()
     {
