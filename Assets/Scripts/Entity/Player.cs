@@ -43,9 +43,9 @@ public class Player : Entity
 
         //TODO: delete (if you see this in PR let MichalR know)
         currweap = shooting.CurrentWeapon;
-        shooting.SelectWeapon(WeaponType.Pistol);
-        var pistol = shooting.CurrentWeapon as Pistol;
-        var projectileUpgrade2 = new PistolProjectilesChainToNearestEnemyUpgradeHandler(pistol);
+        shooting.SelectWeapon(WeaponType.GrenadeLauncher);
+        var pistol = shooting.CurrentWeapon as GrenadeLauncher;
+        var projectileUpgrade2 = new GrenadeLauncherProjectilesChainToNearestEnemyUpgradeHandler(pistol);
         pistol?.AddUpgrade(projectileUpgrade2);
         shooting.SelectWeapon(currweap.WeaponType);
     }
