@@ -14,3 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultPlayerHealth: 100
   DefaultPlayerAmmo: 100
+  ScalingFactor: 1.5
+  HealthScalingMultiplier: 1
+  DamageScalingMultiplier: 1
+  MovementSpeedScalingMultiplier: 0.2
+  ProjectileSpeedScalingMultiplier: 0.8
+  ScoreScalingMultiplier: 1
+  TriggerTimeoutScalingMultiplier: 0.7
+  UpgradeScalingMultiplier: 0.9
+  AmmoScalingMultiplier: 0.6
+  NormalChamberClearTime: 25
+  OptionalChamberClearTime: 45
+  BossChamberClearTime: 90
+  ChamberClearTimeScalingMultiplier: 0.5
+  QuickWinScoreFactor: 2.5
+  NumberOfChambersBeforeBoss: 2
+  NumberOfOptionalChambersBeforeBoss: 5
+  NumberOfBossChambers: 3
