@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Weapons;
+﻿using Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers;
+using Assets.Scripts.Weapons;
 using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrades
@@ -10,7 +11,9 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrade
 
         public override UpgradeType CommitUpdate()
         {
-            throw new System.NotImplementedException();
+            var projectileUpgrade = new GrenadeLauncherProjectilesChainToNearestEnemyUpgradeHandler(Weapon as GrenadeLauncher);
+            projectileUpgrade.ApplyUpgrade();
+            return this.upgradeType;
         }
     }
 }
