@@ -215,7 +215,7 @@ namespace Assets.Scripts.SoundManager
         /// <param name="soundType">Type of sound</param>
         /// <param name="playbackSettings">Playback settings</param>
         /// <param name="sourceTransform">Object of audio origin</param>
-        public Audio CreateUISound(SoundType soundType, PlaybackSettings playbackSettings, Transform sourceTransform)
+        public Audio CreateUISound(SoundType soundType, PlaybackSettings playbackSettings, Transform sourceTransform = null)
         {
             return CreateAudio(AudioType.UISound, soundType, playbackSettings, sourceTransform);
         }
