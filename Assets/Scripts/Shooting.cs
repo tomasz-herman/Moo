@@ -34,6 +34,8 @@ public class Shooting : MonoBehaviour
 
     private GameObject _owner;
 
+    private bool _initializedWeaponOwner;
+
     private void Awake()
     {
         Pistol = new Pistol(projectilePrefab);
@@ -58,15 +60,20 @@ public class Shooting : MonoBehaviour
     {
         //TODO: do not use entity but some object that shows weapon sound position
         this._owner = GetComponent<Entity>().gameObject;
-        foreach (var weapon in this.weapons)
-        {
-            weapon.Owner = this._owner;
-        }
+
+        //there is some bug when player is weapon owners so we use lazy evaluation here
+        var player = GetComponent<Player>();
+        if (player != null) return;
+
+        this.InitializeWeaponOwners();
     }
 
     private void Update()
     {
-        weapons.Current().DecreaseTime();
+        foreach (var weapon in weapons)
+        {
+            weapon.DecreaseTime();
+        }
     }
 
     public void SelectWeapon(WeaponType type)
@@ -89,7 +96,11 @@ public class Shooting : MonoBehaviour
 
     public void TryShoot(GameObject shooter, Vector3 position, Vector3 direction)
     {
-        weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
+        if (!_initializedWeaponOwner)
+        {
+            this.InitializeWeaponOwners();
+        }
+        weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 
     public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].basetriggerTimeout * triggerTimeoutMultiplier; }
@@ -100,4 +111,13 @@ public class Shooting : MonoBehaviour
     }
 
     public Weapon this[WeaponType type] => weaponMap[type];
+
+    private void InitializeWeaponOwners()
+    {
+        foreach (var weapon in this.weapons)
+        {
+            weapon.Owner = this._owner;
+        }
+        _initializedWeaponOwner = true;
+    }
 }

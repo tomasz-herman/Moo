@@ -142,6 +142,6 @@ public class SimpleEnemyAI : MonoBehaviour
         var aimingDirection = (playerPosition - lastPlayerPosition) * (distance * Utils.RandomGaussNumber(1, 1) / (Time.deltaTime * 25));
         Vector3 toPlayer = (playerPosition + aimingDirection - position).normalized;
         transform.LookAt(player, Vector3.up);
-        shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0), toPlayer);
+        shooting.TryShoot(gameObject, position + new Vector3(0, 1, 0) + toPlayer, toPlayer);
     }
 }

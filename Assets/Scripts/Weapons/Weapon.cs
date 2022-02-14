@@ -97,9 +97,6 @@ namespace Assets.Scripts.Weapons
 
         protected virtual void PlayGunfireSound()
         {
-            //TODO: this is terrible hack, find what causes bug with sound crack at start
-            Sound.PlaybackSettings.Volume = 1f;
-            Audio?.ApplyPlaybackSettings();
             Audio?.PlayOneShot();
         }
 

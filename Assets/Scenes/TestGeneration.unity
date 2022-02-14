@@ -188,15 +188,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
       propertyPath: BackgroundMusicQueue.Array.data[0].SoundType
-      value: 3000
+      value: 3008
       objectReference: {fileID: 0}
     - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
       propertyPath: BackgroundMusicQueue.Array.data[1].SoundType
-      value: 3003
+      value: 3010
       objectReference: {fileID: 0}
     - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
       propertyPath: BackgroundMusicQueue.Array.data[2].SoundType
-      value: 3006
+      value: 3010
       objectReference: {fileID: 0}
     - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
       propertyPath: BackgroundMusicQueue.Array.data[3].SoundType
@@ -284,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8090741696975374808, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}
       propertyPath: BackgroundMusicQueue.Array.data[0].SoundType
-      value: 3001
+      value: 3009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e2e4c6ff9cfc2e4eb6dae4925933d20, type: 3}

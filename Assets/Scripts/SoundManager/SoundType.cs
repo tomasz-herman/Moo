@@ -13,6 +13,8 @@
         SwordSwing = 1006,
 
         //UI Sound
+        MenuButtonClick = 2001,
+        StartGameSound = 2002,
 
         //Music
         BackgroundTheme = 3000,
@@ -21,6 +23,10 @@
         Music2 = 3003,
         Music3 = 3004,
         Music4 = 3005,
-        Music5 = 3006
+        Music5 = 3006,
+        DeepInSpace_Music = 3007,
+        SciFiMasterPack_Music = 3008,
+        USFP_Battle_Music = 3009,
+        USFP_Universe_Music = 3010
     }
 }
