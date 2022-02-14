@@ -60,17 +60,12 @@ public class Shooting : MonoBehaviour
     {
         //TODO: do not use entity but some object that shows weapon sound position
         this._owner = GetComponent<Entity>().gameObject;
-        var player = GetComponent<Player>();
-        if (player != null)
-        {
-            return;
-        }
-        foreach (var weapon in this.weapons)
-        {
-            weapon.Owner = this._owner;
-        }
 
-        _initializedWeaponOwner = true;
+        //there is some bug when player is weapon owners so we use lazy evaluation here
+        var player = GetComponent<Player>();
+        if (player != null) return;
+
+        this.InitializeWeaponOwners();
     }
 
     private void Update()
@@ -100,11 +95,7 @@ public class Shooting : MonoBehaviour
     {
         if (!_initializedWeaponOwner)
         {
-            _initializedWeaponOwner = true;
-            foreach (var weapon in this.weapons)
-            {
-                weapon.Owner = this._owner;
-            }
+            this.InitializeWeaponOwners();
         }
         weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
     }
@@ -117,4 +108,13 @@ public class Shooting : MonoBehaviour
     }
 
     public Weapon this[WeaponType type] => weaponMap[type];
+
+    private void InitializeWeaponOwners()
+    {
+        foreach (var weapon in this.weapons)
+        {
+            weapon.Owner = this._owner;
+        }
+        _initializedWeaponOwner = true;
+    }
 }
