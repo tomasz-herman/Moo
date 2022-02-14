@@ -11,3 +11,14 @@ public enum UpgradeType
     //PistolProjectilesExplodeAfterHittingEnemy, ShotgunProjectilesExplodeAfterHittingEnemy, MachineGunProjectilesExplodeAfterHittingEnemy,
     PistolProjectilesChainToNearestEnemy, ShotgunProjectilesChainToNearestEnemy, MachineGunProjectilesChainToNearestEnemy, GrenadeLauncherProjectilesChainToNearestEnemy
 }
+
+public enum UpgradeIcon
+{
+    Default, MaxAmmo, MaxHealth, MovementSpeed, WeaponDamage, ProjectileSpeed, WeaponCooldown, AmmoCost,
+    ShotgunProjectileCount, ShotgunProjectileDispersion, Lightsaber, ExplodingProjectiles, Chaining
+}
+
+public enum UpgradeColor
+{
+    Shotgun, Pistol, MachineGun, Sword, GrenadeLauncher, OneTime, White
+}

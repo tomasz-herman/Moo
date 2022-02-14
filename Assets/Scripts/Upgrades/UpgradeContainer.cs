@@ -5,25 +5,26 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UpgradeContainer", menuName = "ScriptableObjects/UpgradeContainer")]
-public class UpgradeContainer : MonoBehaviour
+public class UpgradeContainer : ScriptableObject
 {
-    public List<UpgradeData> Upgrades;
+    public Color OneTimeUpgradeColor;
+    public List<UpgradeIconData> Upgrades;
 
-    private Dictionary<UpgradeType, UpgradeData> mapping;
-    public UpgradeData this[UpgradeType type]
+    private Dictionary<UpgradeIcon, UpgradeIconData> mapping;
+    public UpgradeIconData this[UpgradeIcon type]
     {
         get
         {
             if (mapping == null)
-                mapping = Upgrades.ToDictionary(data => data.type);
+                mapping = Upgrades.ToDictionary(data => data.iconType);
             return mapping[type];
         }
     }
 }
 
 [Serializable]
-public struct UpgradeData
+public struct UpgradeIconData
 {
-    public UpgradeType type;
+    public UpgradeIcon iconType;
     public Sprite image;
 }

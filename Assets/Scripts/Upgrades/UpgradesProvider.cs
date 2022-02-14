@@ -10,19 +10,6 @@ using UnityEngine;
 
 public class UpgradesProvider : MonoBehaviour
 {
-    [SerializeField] Sprite maxAmmoIcon;
-    [SerializeField] Sprite maxHealthIcon;
-    [SerializeField] Sprite movementSpeedIcon;
-    [SerializeField] Sprite weaponDamageIcon;
-    [SerializeField] Sprite weaponProjectileSpeedIcon;
-    [SerializeField] Sprite weaponCooldownIcon;
-    [SerializeField] Sprite weaponAmmoCostIcon;
-    [SerializeField] Sprite shotgunProjectileCountIcon;
-    [SerializeField] Sprite shotgunProjectileDispersionIcon;
-    [SerializeField] Sprite swordReflectsEnemyProjectilesIcon;
-    [SerializeField] Sprite projectilesExplodeAfterHittingEnemyIcon;
-    [SerializeField] Sprite projectilesChainToNearestEnemy;
-
     private HealthSystem healthSystem;
     private AmmoSystem ammoSystem;
     private PlayerMovement movementSystem;

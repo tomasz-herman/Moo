@@ -5,14 +5,14 @@ public abstract class UpgradeView
     private readonly string _name;
     private readonly Sprite _sprite;
     public UpgradeType upgradeType { get; protected set; }
+    public UpgradeIcon icon { get; private set; } = UpgradeIcon.Default;
+    public UpgradeColor color { get; private set; } = UpgradeColor.White;
 
     protected UpgradeView(string name, UpgradeType upgradeType)
     {
         this.upgradeType = upgradeType;
         this._name = name;
-
-        var data = ApplicationData.UpgradeData[upgradeType];
-        this._sprite = data.image;
+        this._sprite = icon.GetSprite();
     }
 
     public string GetName() { return _name; }
