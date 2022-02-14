@@ -7,17 +7,16 @@ namespace Assets.Scripts.Weapons
     {
         public Bullet bulletPrefab { get; protected set; }
 
-        public float scatterFactor { get; set; } = 10f;
-        public int projectileCount { get; set; } = 10;
+        public float baseScatterAngle { get; set; } = 70f;
+        public float scatterAngle { get; set; }
+        public int baseProjectileCount { get; set; } = 10;
+        public int projectileCount { get; set; }
 
         public Shotgun(Bullet bulletPrefab) : base(WeaponType.Shotgun, SoundType.ShotgunShot)
         {
             this.bulletPrefab = bulletPrefab;
-        }
-
-        public Shotgun(GameObject owner, Bullet bulletPrefab) : base(WeaponType.Shotgun, owner, SoundType.ShotgunShot)
-        {
-            this.bulletPrefab = bulletPrefab;
+            projectileCount = baseProjectileCount;
+            scatterAngle = baseScatterAngle;
         }
 
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)
@@ -27,8 +26,9 @@ namespace Assets.Scripts.Weapons
                 Bullet bullet = Object.Instantiate(bulletPrefab, position, Quaternion.identity);
                 bullet.color = color;
                 bullet.SetUpgrades(projectileUpgrades);
-                var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, scatterFactor), 0) * direction.normalized;
-                bullet.Launch(shooter, dir * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
+
+                var dir = Quaternion.Euler(0, Utils.RandomTriangular(-scatterAngle/2, 0, scatterAngle/2), 0) * direction.normalized;
+                bullet.Launch(shooter, dir * ProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * Damage);
             }
         }
     }

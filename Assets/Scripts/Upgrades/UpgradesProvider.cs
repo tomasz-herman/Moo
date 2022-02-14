@@ -39,47 +39,47 @@ public class UpgradesProvider : MonoBehaviour
         var upgradesList = new List<UpgradeView>
         {
             //Player upgrades
-            new MaxHealthUpgrade(healthSystem, maxHealthIcon),
-            new MaxAmmoUpgrade(ammoSystem, maxAmmoIcon),
-            new MovementSpeedUpgrade(movementSystem, movementSpeedIcon),
+            new MaxHealthUpgrade(),
+            new MaxAmmoUpgrade(),
+            new MovementSpeedUpgrade(),
 
             //Weapon damage upgrades
-            new PistolDamageUpgrade(shootingSystem.Pistol, weaponDamageIcon),
-            new ShotgunDamageUpgrade(shootingSystem.Shotgun, weaponDamageIcon),
-            new MachineGunDamageUpgrade(shootingSystem.MachineGun, weaponDamageIcon),
-            new GrenadeLauncherDamageUpgrade(shootingSystem.GrenadeLauncher, weaponDamageIcon),
-            new SwordDamageUpgrade(shootingSystem.Sword, weaponDamageIcon),
+            new PistolDamageUpgrade(),
+            new ShotgunDamageUpgrade(),
+            new MachineGunDamageUpgrade(),
+            new GrenadeLauncherDamageUpgrade(),
+            new SwordDamageUpgrade(),
 
             //Weapon projectile speed upgrades
-            new PistolProjectileSpeedUpgrade(shootingSystem.Pistol, weaponProjectileSpeedIcon),
-            new ShotgunProjectileSpeedUpgrade(shootingSystem.Shotgun, weaponProjectileSpeedIcon),
-            new MachineGunProjectileSpeedUpgrade(shootingSystem.MachineGun, weaponProjectileSpeedIcon),
-            new GrenadeLauncherProjectileSpeedUpgrade(shootingSystem.GrenadeLauncher, weaponProjectileSpeedIcon),
-            new SwordProjectileSpeedUpgrade(shootingSystem.Sword, weaponProjectileSpeedIcon),
+            new PistolProjectileSpeedUpgrade(),
+            new ShotgunProjectileSpeedUpgrade(),
+            new MachineGunProjectileSpeedUpgrade(),
+            new GrenadeLauncherProjectileSpeedUpgrade(),
+            new SwordProjectileSpeedUpgrade(),
 
             //Weapon cooldown upgrades
-            new PistolCooldownUpgrade(shootingSystem.Pistol, weaponCooldownIcon),
-            new ShotgunCooldownUpgrade(shootingSystem.Shotgun, weaponCooldownIcon),
-            new MachineGunCooldownUpgrade(shootingSystem.MachineGun, weaponCooldownIcon),
-            new GrenadeLauncherCooldownUpgrade(shootingSystem.GrenadeLauncher, weaponCooldownIcon),
-            new SwordCooldownUpgrade(shootingSystem.Sword, weaponCooldownIcon),
+            new PistolCooldownUpgrade(),
+            new ShotgunCooldownUpgrade(),
+            new MachineGunCooldownUpgrade(),
+            new GrenadeLauncherCooldownUpgrade(),
+            new SwordCooldownUpgrade(),
 
             //Weapon ammo cost upgrades
-            new PistolAmmoCostUpgrade(shootingSystem.Pistol, weaponAmmoCostIcon),
-            new ShotgunAmmoCostUpgrade(shootingSystem.Shotgun, weaponAmmoCostIcon),
-            new MachineGunAmmoCostUpgrade(shootingSystem.MachineGun, weaponAmmoCostIcon),
-            new GrenadeLauncherAmmoCostUpgrade(shootingSystem.GrenadeLauncher, weaponAmmoCostIcon),
+            new PistolAmmoCostUpgrade(),
+            new ShotgunAmmoCostUpgrade(),
+            new MachineGunAmmoCostUpgrade(),
+            new GrenadeLauncherAmmoCostUpgrade(),
 
             //Shotgun projectile count upgrade
-            new ShotgunProjectileCountUpgrade(shootingSystem.Shotgun, shotgunProjectileCountIcon),
+            new ShotgunProjectileCountUpgrade(),
 
             //Shotgun projectile dispersion upgrade
-            new ShotgunProjectileDispersionUpgrade(shootingSystem.Shotgun, shotgunProjectileDispersionIcon),
+            new ShotgunProjectileDispersionUpgrade(),
             
             //One time upgrades
 
             //Sword reflect enemy projectiles upgrade
-            new SwordReflectsEnemyProjectilesUpgrade(shootingSystem.Sword, swordReflectsEnemyProjectilesIcon),
+            new SwordReflectsEnemyProjectilesUpgrade(),
 
             //Projectiles explode after hitting enemy upgrades
             //new PistolProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.Pistol, projectilesExplodeAfterHittingEnemyIcon),
@@ -87,10 +87,10 @@ public class UpgradesProvider : MonoBehaviour
             //new MachineGunProjectilesExplodeAfterHittingEnemyUpgrade(shootingSystem.MachineGun, projectilesExplodeAfterHittingEnemyIcon),
 
             //Projectiles are chained to nearest enemy upgrades
-            new PistolProjectilesChainToNearestEnemyUpgrade(shootingSystem.Pistol, projectilesChainToNearestEnemy),
-            new ShotgunProjectilesChainToNearestEnemyUpgrade(shootingSystem.Shotgun, projectilesChainToNearestEnemy),
-            new MachineGunProjectilesChainToNearestEnemyUpgrade(shootingSystem.MachineGun, projectilesChainToNearestEnemy),
-            new GrenadeLauncherProjectilesChainToNearestEnemyUpgrade(shootingSystem.GrenadeLauncher, projectilesChainToNearestEnemy)
+            new PistolProjectilesChainToNearestEnemyUpgrade(),
+            new ShotgunProjectilesChainToNearestEnemyUpgrade(),
+            new MachineGunProjectilesChainToNearestEnemyUpgrade(),
+            new GrenadeLauncherProjectilesChainToNearestEnemyUpgrade(),
         };
 
         try

@@ -14,4 +14,5 @@ public static class ApplicationData
     public static EnemyConfig EnemyData = Resources.Load<EnemyConfig>("ScriptableObjects/EnemyData");
     public static EnemiesSpawnControl SpawnData = Resources.Load<EnemiesSpawnControl>("ScriptableObjects/EnemiesSpawnControl");
     public static UiConfig UiData = Resources.Load<UiConfig>("ScriptableObjects/UiConfig");
+    public static UpgradeContainer UpgradeData = Resources.Load<UpgradeContainer>("ScriptableObjects/UpgradeData");
 }

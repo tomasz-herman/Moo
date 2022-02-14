@@ -40,20 +40,27 @@ public class UpgradeSystem : MonoBehaviour
         upgradeWindow.Recalculate();
     }
 
+    public int GetUpgradeCount(UpgradeType type)
+    {
+        if (upgrades.TryGetValue(type, out int count))
+            return count;
+        return 0;
+    }
+
     public int GetPendingUpgrades() { return pendingUpgrades; }
 
     public void Upgrade(UpgradeView upgrade)
     {
-        var upgradeType = upgrade.CommitUpdate();
-        if (upgradeType.IsOneTimeUpgrade())
-        {
-            _oneTimeUpgradesUsed[upgradeType] = true;
-        }
-
+        var upgradeType = upgrade.upgradeType;
         if (upgrades.ContainsKey(upgradeType))
             upgrades[upgradeType]++;
         else
             upgrades[upgradeType] = 1;
+        upgrade.OnUpgraded(player);
+        if (upgradeType.IsOneTimeUpgrade())
+        {
+            _oneTimeUpgradesUsed[upgradeType] = true;
+        }
         Upgraded?.Invoke(this, (upgradeType, upgrades[upgradeType]));
     }
 

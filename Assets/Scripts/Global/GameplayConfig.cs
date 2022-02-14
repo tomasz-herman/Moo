@@ -31,22 +31,22 @@ public class GameplayConfig : ScriptableObject
     public int NumberOfOptionalChambersBeforeBoss = 5;
     public int NumberOfBossChambers = 3;
 
-    private float GetAscendingScalingFactor(int level, float multiplier)
+    public float GetAscendingScalingFactor(int level, float multiplier, float secondaryMultiplier = 1)
     {
         float a, b, c, x;
         a = b = (ScalingFactor - 1) * multiplier / 2;
         c = 1;
         x = level - 1;
-        return (a * x + b) * x + c;
+        float quadratic = (a * x + b) * x + c;
+        return 1 + (quadratic - 1) * secondaryMultiplier;
     }
-    private float GetDescendingScalingFactor(int level, float multiplier) { return 1 / GetAscendingScalingFactor(level, multiplier); }
-    public float GetHealthScalingMultiplier(int level) { return GetAscendingScalingFactor(level, HealthScalingMultiplier); }
-    public float GetDamageScalingMultiplier(int level) { return GetAscendingScalingFactor(level, DamageScalingMultiplier); }
-    public float GetMovementSpeedScalingMultiplier(int level) { return GetAscendingScalingFactor(level, MovementSpeedScalingMultiplier); }
-    public float GetProjectileSpeedScalingMultiplier(int level) { return GetAscendingScalingFactor(level, ProjectileSpeedScalingMultiplier); }
-    public float GetScoreScalingMultiplier(int level) { return GetAscendingScalingFactor(level, ScoreScalingMultiplier); }
-    public float GetTriggerTimeoutScalingMultiplier(int level) { return GetDescendingScalingFactor(level, TriggerTimeoutScalingMultiplier); }
-    public float GetUpgradeScalingMultiplier (int level) { return GetDescendingScalingFactor(level, UpgradeScalingMultiplier); }
-    public float GetAmmoScalingMultiplier (int level) { return GetAscendingScalingFactor(level, AmmoScalingMultiplier); }
-    public float GetChamberClearTimeScalingMultiplier (int level) { return GetAscendingScalingFactor(level, ChamberClearTimeScalingMultiplier); }
+    public float GetDescendingScalingFactor(int level, float multiplier, float secondaryMultiplier = 1) { return 1 / GetAscendingScalingFactor(level, multiplier, secondaryMultiplier); }
+    public float GetHealthScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, HealthScalingMultiplier, secondaryMultiplier); }
+    public float GetDamageScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, DamageScalingMultiplier, secondaryMultiplier); }
+    public float GetMovementSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, MovementSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetProjectileSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ProjectileSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetScoreScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ScoreScalingMultiplier, secondaryMultiplier); }
+    public float GetTriggerTimeoutScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetDescendingScalingFactor(level, TriggerTimeoutScalingMultiplier, secondaryMultiplier); }
+    public float GetAmmoScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, AmmoScalingMultiplier, secondaryMultiplier); }
+    public float GetChamberClearTimeScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ChamberClearTimeScalingMultiplier, secondaryMultiplier); }
 }

@@ -4,21 +4,30 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxHealthUpgrade : UpgradeView
     {
-        private const int Bonus = 50;
-
-        private readonly HealthSystem _healthSystem;
-
-        public MaxHealthUpgrade(HealthSystem system, Sprite sprite)
-            : base("Max health", "Increase max health", sprite, UpgradeType.MaxHealth)
+        public MaxHealthUpgrade()
+            : base("Max Health", UpgradeType.MaxHealth)
         {
-            _healthSystem = system;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _healthSystem.MaxHealth += Bonus;
-            _healthSystem.Health += Bonus;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            return gameplay.GetHealthScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private float GetMaxHealth(IUpgradeable upgradeable, float factor) { return upgradeable.HealthSystem.defaultHealth * factor; }
+
+        //TODO make sure everyone (player, enemies) actually change defaultHealth value when loading from AppData
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            return "Increase Max Health from ";
         }
     }
 }

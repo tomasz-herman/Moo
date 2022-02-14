@@ -3,15 +3,18 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrades
 {
-    public abstract class ProjectilesChainToNearestEnemyUpgradeBase : UpgradeView
+    public abstract class ProjectilesChainToNearestEnemyUpgradeBase : OneTimeUpgradeView
     {
-        protected readonly Weapon Weapon;
-        protected ProjectilesChainToNearestEnemyUpgradeBase(Weapon weapon, Sprite sprite, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(weapon.WeaponType)} projectile chaining",
-                $"Projectile chains to nearest enemy after hitting one with {Weapon.GetWeaponName(weapon.WeaponType)}. Chained projectile damage is decreased by 50%",
-                sprite, upgradeType)
+        public WeaponType WeaponType { get; private set; }
+        protected ProjectilesChainToNearestEnemyUpgradeBase(WeaponType type, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(type)} projectile chaining", upgradeType)
         {
-            Weapon = weapon;
+            WeaponType = type;
+        }
+
+        protected override sealed string GetDescription(IUpgradeable upgradeable)
+        {
+            return $"Projectile chains to nearest enemy after hitting one with {Weapon.GetWeaponName(WeaponType)}. Chained projectile damage is decreased by 50%";
         }
     }
 }

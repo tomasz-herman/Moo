@@ -5,21 +5,33 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public class ShotgunProjectileCountUpgrade : UpgradeView
     {
-        private const float Multiplier = 1.2f;
-
-        private readonly Shotgun _shotgun;
-        public ShotgunProjectileCountUpgrade(Shotgun w, Sprite sprite)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} projectile count",
-                $"Increase number of {Weapon.GetWeaponName(w.WeaponType)} projectiles in single shot by 20%",
-                sprite, UpgradeType.ShotgunProjectileCount)
+        public ShotgunProjectileCountUpgrade()
+            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Count", UpgradeType.ShotgunProjectileCount)
         {
-            _shotgun = w;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _shotgun.projectileCount = (int)(_shotgun.projectileCount * Multiplier);
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            //if it's needed, we can add a separate multiplier that would combine with damage multiplier to get projectile count
+            return gameplay.GetDamageScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem.Shotgun.projectileCount = GetProjectileCount(upgradeable, newFactor);
+        }
+
+        private int GetProjectileCount(IUpgradeable upgradeable, float factor)
+        {
+            return Mathf.RoundToInt(upgradeable.ShootingSystem.Shotgun.baseProjectileCount * factor);
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            return $"Increase number of {Weapon.GetWeaponName(WeaponType.Shotgun)} projectiles in single shot from " +
+                $"{GetProjectileCount(upgradeable, oldFactor)} to {GetProjectileCount(upgradeable, newFactor)}";
         }
     }
 }

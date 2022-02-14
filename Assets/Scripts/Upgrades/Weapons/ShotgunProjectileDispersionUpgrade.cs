@@ -5,21 +5,36 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public class ShotgunProjectileDispersionUpgrade : UpgradeView
     {
-        private const float Multiplier = 0.9f;
+        //if needed we can move this multiplier to UpgradeData
+        private const float Multiplier = 0.75f;
 
-        private readonly Shotgun _shotgun;
-        public ShotgunProjectileDispersionUpgrade(Shotgun w, Sprite sprite)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} projectile dispersion",
-                $"Decreases {Weapon.GetWeaponName(w.WeaponType)} projectiles dispersion by 10%",
-                sprite, UpgradeType.ShotgunProjectileDispersion)
+        public ShotgunProjectileDispersionUpgrade()
+            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Dispersion", UpgradeType.ShotgunProjectileDispersion)
         {
-            _shotgun = w;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _shotgun.scatterFactor *= Multiplier;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+
+            return gameplay.GetDescendingScalingFactor(upgradeCount + 1, Multiplier, gameplay.UpgradeScalingMultiplier);
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem.Shotgun.scatterAngle = GetScatter(upgradeable, newFactor);
+        }
+
+        private int GetScatter(IUpgradeable upgradeable, float factor)
+        {
+            return Mathf.RoundToInt(upgradeable.ShootingSystem.Shotgun.baseScatterAngle * factor);
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            return $"Decrease {Weapon.GetWeaponName(WeaponType.Shotgun)} scatter angle from " +
+                $"{GetScatter(upgradeable, oldFactor)}° to {GetScatter(upgradeable, newFactor)}°";
         }
     }
 }

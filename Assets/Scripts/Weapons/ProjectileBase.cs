@@ -88,7 +88,7 @@ namespace Assets.Scripts.Weapons
             {
                 if (playerHit != null)
                 {
-                    playerHit.healthSystem.Health -= damage;
+                    playerHit.HealthSystem.Health -= damage;
                 }
             }
         }

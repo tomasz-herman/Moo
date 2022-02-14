@@ -2,41 +2,42 @@ using Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Handlers;
 using Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Handlers;
 using Assets.Scripts.Weapons;
 
-public class Player : Entity
+public class Player : Entity, IUpgradeable
 {
-    public Shooting shooting;
+    public Shooting ShootingSystem { get; private set; }
     public PlayerMovement movement;
-    public HealthSystem healthSystem;
-    public UpgradeSystem upgradeSystem;
-    public AmmoSystem ammoSystem;
+    public HealthSystem HealthSystem { get; private set; }
+    public UpgradeSystem UpgradeSystem { get; private set; }
+    public AmmoSystem AmmoSystem { get; private set; }
+    public MovementSystem MovementSystem { get { return movement; } }
     public ScoreSystem scoreSystem;
     public float TeleporterScale = 2;
 
     private DamagePostProcessing damagePostProcessing;
     void Start()
     {
-        shooting = GetComponent<Shooting>();
+        ShootingSystem = GetComponent<Shooting>();
         movement = GetComponent<PlayerMovement>();
-        healthSystem = GetComponent<HealthSystem>();
-        upgradeSystem = GetComponent<UpgradeSystem>();
-        ammoSystem = GetComponent<AmmoSystem>();
+        HealthSystem = GetComponent<HealthSystem>();
+        UpgradeSystem = GetComponent<UpgradeSystem>();
+        AmmoSystem = GetComponent<AmmoSystem>();
         scoreSystem = GetComponent<ScoreSystem>();
 
-        healthSystem.HealthChanged += CheckDeath;
-        healthSystem.DamageReceived += OnDamageReceived;
-        healthSystem.MaxHealth = ApplicationData.GameplayData.DefaultPlayerHealth;
-        healthSystem.Health = healthSystem.MaxHealth;
+        HealthSystem.HealthChanged += CheckDeath;
+        HealthSystem.DamageReceived += OnDamageReceived;
+        HealthSystem.MaxHealth = ApplicationData.GameplayData.DefaultPlayerHealth;
+        HealthSystem.Health = HealthSystem.MaxHealth;
 
         damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
-        damagePostProcessing.healthSystem = healthSystem;
+        damagePostProcessing.healthSystem = HealthSystem;
 
-        ammoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
-        ammoSystem.Ammo = ammoSystem.MaxAmmo;
+        AmmoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
+        AmmoSystem.Ammo = AmmoSystem.MaxAmmo;
     }
 
     public void Upgrade(int upgradeCount = 1)
     {
-        upgradeSystem.AddUpgrade(upgradeCount);
+        UpgradeSystem.AddUpgrade(upgradeCount);
     }
 
     public void CheckDeath(object sender, (float health, float maxHealth) args)

@@ -26,14 +26,14 @@ public class Health : Entity
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            var playerCapacity = player.healthSystem.MaxHealth - player.healthSystem.Health;
+            var playerCapacity = player.HealthSystem.MaxHealth - player.HealthSystem.Health;
             if(playerCapacity <= 0) return;
             if (playerCapacity >= remainingHealth)
             {
                 int displayedValue = Mathf.CeilToInt(remainingHealth);
                 ShowText("+" + displayedValue);
 
-                player.healthSystem.Health += remainingHealth;
+                player.HealthSystem.Health += remainingHealth;
                 Destroy(gameObject);
             }
             else
@@ -41,7 +41,7 @@ public class Health : Entity
                 int displayedValue = Mathf.CeilToInt(playerCapacity);
                 ShowText("+" + displayedValue);
 
-                player.healthSystem.Health += playerCapacity;
+                player.HealthSystem.Health += playerCapacity;
                 remainingHealth -= playerCapacity;
             }
         }

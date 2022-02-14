@@ -103,7 +103,7 @@ public class Shooting : MonoBehaviour
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 
-    public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].basetriggerTimeout * triggerTimeoutMultiplier; }
+    public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].TriggerTimeout; }
 
     public bool HasEnoughAmmo()
     {

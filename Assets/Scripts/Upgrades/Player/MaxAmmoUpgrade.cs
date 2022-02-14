@@ -4,21 +4,33 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxAmmoUpgrade : UpgradeView
     {
-        private const int Bonus = 50;
+        public MaxAmmoUpgrade() : base("Max Ammo", UpgradeType.MaxAmmo) { }
 
-        private readonly AmmoSystem _ammoSystem;
-
-        public MaxAmmoUpgrade(AmmoSystem ammoSystem, Sprite sprite)
-            : base("Max ammo", "Increase max ammo", sprite, UpgradeType.MaxAmmo)
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _ammoSystem = ammoSystem;
+            var gameplay = ApplicationData.GameplayData;
+            return gameplay.GetAmmoScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
         }
 
-        public override UpgradeType CommitUpdate()
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
         {
-            _ammoSystem.MaxAmmo += Bonus;
-            _ammoSystem.Ammo += Bonus;
-            return this.upgradeType;
+            var ammoSystem = upgradeable.AmmoSystem;
+
+            float newAmmo = GetCapacity(upgradeable, newFactor);
+
+            float delta = newAmmo - ammoSystem.MaxAmmo;
+
+            ammoSystem.MaxAmmo = newAmmo;
+            ammoSystem.Ammo += delta;
+        }
+
+        private float GetCapacity(IUpgradeable upgradeable, float factor) { return upgradeable.AmmoSystem.defaultCapacity * factor; }
+
+        //TODO make sure everyone (player, enemies) actually change defaultCapacity value when loading from AppData
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            return $"Increase ammo capacity from {GetCapacity(upgradeable, oldFactor)} to {GetCapacity(upgradeable, newFactor)}";
         }
     }
 }

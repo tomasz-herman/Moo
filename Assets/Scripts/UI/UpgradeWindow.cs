@@ -12,7 +12,7 @@ public class UpgradeWindow : GuiWindow
     public TMP_Text leftDescription, middleDescription, rightDescription;
     public TMP_Text pendingUpgradesText;
     public Color upgradePendingColor, noUpgradeColor;
-    public UpgradeSystem upgradeSystem;
+    public IUpgradeable upgradeable;
     private UpgradeView[] upgrades;
 
     new void Start()
@@ -27,7 +27,7 @@ public class UpgradeWindow : GuiWindow
 
     public void Recalculate()
     {
-        int pendingUpgrades = upgradeSystem.GetPendingUpgrades();
+        int pendingUpgrades = upgradeable.UpgradeSystem.GetPendingUpgrades();
         
         pendingUpgradesText.text = $"({pendingUpgrades})";
         if (pendingUpgrades == 0)
@@ -40,40 +40,40 @@ public class UpgradeWindow : GuiWindow
         middleButton.interactable = interactable;
         rightButton.interactable = interactable;
 
-        upgrades = upgradeSystem.GenerateRandomUpgrades();
+        upgrades = upgradeable.UpgradeSystem.GenerateRandomUpgrades();
         leftName.text = upgrades[0].GetName();
-        leftDescription.text = upgrades[0].GetDescription();
+        leftDescription.text = upgrades[0].GetDescription(upgradeable);
         leftButton.image.sprite = upgrades[0].GetSprite();
 
         middleName.text = upgrades[1].GetName();
-        middleDescription.text = upgrades[1].GetDescription();
+        middleDescription.text = upgrades[1].GetDescription(upgradeable);
         middleButton.image.sprite = upgrades[1].GetSprite();
 
         rightName.text = upgrades[2].GetName();
-        rightDescription.text = upgrades[2].GetDescription();
+        rightDescription.text = upgrades[2].GetDescription(upgradeable);
         rightButton.image.sprite = upgrades[2].GetSprite();
     }
 
     private void OnLeftButtonClicked()
     {
-        upgradeSystem.Upgrade(upgrades[0]);
+        upgradeable.UpgradeSystem.Upgrade(upgrades[0]);
         OnAnyButtonClicked();
     }
     private void OnMiddleButtonClicked()
     {
-        upgradeSystem.Upgrade(upgrades[1]);
+        upgradeable.UpgradeSystem.Upgrade(upgrades[1]);
         OnAnyButtonClicked();
     }
     private void OnRightButtonClicked()
     {
-        upgradeSystem.Upgrade(upgrades[2]);
+        upgradeable.UpgradeSystem.Upgrade(upgrades[2]);
         OnAnyButtonClicked();
     }
     private void OnAnyButtonClicked()
     {
-        upgradeSystem.RemoveUpgrade();
+        upgradeable.UpgradeSystem.RemoveUpgrade();
         Recalculate();
-        if (upgradeSystem.GetPendingUpgrades() == 0)
+        if (upgradeable.UpgradeSystem.GetPendingUpgrades() == 0)
             ui.TryCloseWindow(this);
     }
 

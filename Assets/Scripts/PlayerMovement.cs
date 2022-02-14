@@ -1,17 +1,17 @@
 using UnityEngine;
 using System;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MovementSystem
 {
     private CharacterController characterController;
     private new Camera camera;
-    public float movementSpeed = 2f;
+    private float movementSpeed = 2f;
     private bool iswalking = false;
     public bool IsWalking => iswalking;
     public EventHandler<float> SpeedChanged;
     private Vector3 direction;
 
-    public float Speed
+    public override float Speed
     {
         get { return movementSpeed; }
         set
@@ -23,9 +23,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        movementSpeed = defaultMovementSpeed;
         characterController = GetComponent<CharacterController>();
         camera = Camera.main;
     }
+
+    //TODO make sure player sets default movement speed if loaded from a different source
 
     void Update()
     {

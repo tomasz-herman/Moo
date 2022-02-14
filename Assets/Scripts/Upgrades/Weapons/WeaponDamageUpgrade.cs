@@ -5,49 +5,63 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponDamageUpgrade : UpgradeView
     {
-        private const float Multiplier = 1.2f;
-
-        private readonly Weapon _weapon;
-        protected WeaponDamageUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} damage", $"Increase damage dealt by {Weapon.GetWeaponName(w.WeaponType)} by 20%", sprite, upgradeType)
+        public WeaponType WeaponType { get; private set; }
+        protected WeaponDamageUpgrade(WeaponType weapon, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(weapon)} Damage", upgradeType)
         {
-            _weapon = w;
+            WeaponType = weapon;
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _weapon.baseDamage *= Multiplier;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+
+            return gameplay.GetDamageScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            var weapon = upgradeable.ShootingSystem[WeaponType];
+
+            float currentDamage = weapon.Damage;
+            float newDamage = weapon.GetDamage(newFactor);
+
+            return $"Increase {Weapon.GetWeaponName(WeaponType)} projectile damage from {currentDamage.ToString("F1")} to {newDamage.ToString("F1")}";
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem[WeaponType].damageMultiplier = newFactor;
         }
     }
 
     public class PistolDamageUpgrade : WeaponDamageUpgrade
     {
-        public PistolDamageUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.PistolDamage) { }
+        public PistolDamageUpgrade()
+            : base(WeaponType.Pistol, UpgradeType.PistolDamage) { }
     }
 
     public class ShotgunDamageUpgrade : WeaponDamageUpgrade
     {
-        public ShotgunDamageUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.ShotgunDamage) { }
+        public ShotgunDamageUpgrade()
+            : base(WeaponType.Shotgun, UpgradeType.ShotgunDamage) { }
     }
 
     public class MachineGunDamageUpgrade : WeaponDamageUpgrade
     {
-        public MachineGunDamageUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.MachineGunDamage) { }
+        public MachineGunDamageUpgrade()
+            : base(WeaponType.MachineGun, UpgradeType.MachineGunDamage) { }
     }
 
     public class GrenadeLauncherDamageUpgrade : WeaponDamageUpgrade
     {
-        public GrenadeLauncherDamageUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.GrenadeLauncherDamage) { }
+        public GrenadeLauncherDamageUpgrade()
+            : base(WeaponType.GrenadeLauncher, UpgradeType.GrenadeLauncherDamage) { }
     }
 
     public class SwordDamageUpgrade : WeaponDamageUpgrade
     {
-        public SwordDamageUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.SwordDamage) { }
+        public SwordDamageUpgrade()
+            : base(WeaponType.Sword, UpgradeType.SwordDamage) { }
     }
 }

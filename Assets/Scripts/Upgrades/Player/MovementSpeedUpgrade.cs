@@ -4,20 +4,28 @@ namespace Assets.Scripts.Upgrades
 {
     public class MovementSpeedUpgrade : UpgradeView
     {
-        private const float Bonus = 0.2f;
-
-        private readonly PlayerMovement _movementSystem;
-
-        public MovementSpeedUpgrade(PlayerMovement movementSystem, Sprite sprite)
-            : base("Movement speed", "Increase movement speed", sprite, UpgradeType.MovementSpeed)
+        public MovementSpeedUpgrade()
+            : base("Movement speed", UpgradeType.MovementSpeed)
         {
-            _movementSystem = movementSystem;
+        
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _movementSystem.Speed += Bonus;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            return gameplay.GetMovementSpeedScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.MovementSystem.Speed = GetSpeed(upgradeable, newFactor);
+        }
+
+        private float GetSpeed(IUpgradeable upgradeable, float factor) { return upgradeable.MovementSystem.defaultMovementSpeed * factor; }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        {
+            return $"Increase Movement Speed from {GetSpeed(upgradeable, oldFactor)} to {GetSpeed(upgradeable, newFactor)}";
         }
     }
 }
