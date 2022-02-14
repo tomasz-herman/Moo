@@ -19,7 +19,7 @@ namespace Assets.Scripts.Upgrades.Weapons
             return gameplay.GetTriggerTimeoutScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
         }
 
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
             var weapon = upgradeable.ShootingSystem[WeaponType];
 

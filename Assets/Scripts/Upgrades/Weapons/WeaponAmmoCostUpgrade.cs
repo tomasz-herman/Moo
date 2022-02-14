@@ -21,7 +21,7 @@ namespace Assets.Scripts.Upgrades.Weapons
             return gameplay.GetDescendingScalingFactor(upgradeCount + 1, Multiplier, gameplay.UpgradeScalingMultiplier);
         }
 
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
             //TODO check if you can remove oldFactor from all these methods
             var weapon = upgradeable.ShootingSystem[WeaponType];

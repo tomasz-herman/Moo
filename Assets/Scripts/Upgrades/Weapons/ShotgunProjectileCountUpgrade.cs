@@ -20,18 +20,14 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
         {
-            upgradeable.ShootingSystem.Shotgun.projectileCount = GetProjectileCount(upgradeable, newFactor);
+            upgradeable.ShootingSystem.Shotgun.projectileCountMultiplier = newFactor;
         }
 
-        private int GetProjectileCount(IUpgradeable upgradeable, float factor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
-            return Mathf.RoundToInt(upgradeable.ShootingSystem.Shotgun.baseProjectileCount * factor);
-        }
-
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
-        {
+            var shotgun = upgradeable.ShootingSystem.Shotgun;
             return $"Increase number of {Weapon.GetWeaponName(WeaponType.Shotgun)} projectiles in single shot from " +
-                $"{GetProjectileCount(upgradeable, oldFactor)} to {GetProjectileCount(upgradeable, newFactor)}";
+                $"{shotgun.ProjectileCount} to {shotgun.GetProjectileCount(newFactor)}";
         }
     }
 }

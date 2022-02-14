@@ -23,7 +23,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
         {
-            upgradeable.ShootingSystem.Shotgun.scatterAngle = GetScatter(upgradeable, newFactor);
+            upgradeable.ShootingSystem.Shotgun.scatterAngleMultiplier = newFactor;
         }
 
         private int GetScatter(IUpgradeable upgradeable, float factor)
@@ -31,10 +31,10 @@ namespace Assets.Scripts.Upgrades.Weapons
             return Mathf.RoundToInt(upgradeable.ShootingSystem.Shotgun.baseScatterAngle * factor);
         }
 
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
             return $"Decrease {Weapon.GetWeaponName(WeaponType.Shotgun)} scatter angle from " +
-                $"{GetScatter(upgradeable, oldFactor)}° to {GetScatter(upgradeable, newFactor)}°";
+                $"{upgradeable.ShootingSystem.Shotgun.ScatterAngle.ToString("F1")}° to {GetScatter(upgradeable, newFactor).ToString("F1")}°";
         }
     }
 }

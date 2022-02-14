@@ -17,7 +17,7 @@ public abstract class OneTimeUpgradeView : UpgradeView
         CommitUpdate(upgradeable);
     }
 
-    protected override sealed string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+    protected override sealed string GetDescription(IUpgradeable upgradeable, float newFactor)
     {
         return GetDescription(upgradeable);
     }

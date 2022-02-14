@@ -21,6 +21,7 @@ public class UpgradeWindow : GuiWindow
         leftButton.onClick.AddListener(() => OnLeftButtonClicked());
         middleButton.onClick.AddListener(() => OnMiddleButtonClicked());
         rightButton.onClick.AddListener(() => OnRightButtonClicked());
+        upgradeable = FindObjectOfType<Player>();
         Recalculate();
     }
     

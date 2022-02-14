@@ -5,6 +5,8 @@ public abstract class UpgradeView
     private readonly string _name;
     private readonly Sprite _sprite;
     public UpgradeType upgradeType { get; protected set; }
+
+    //TODO let subclasses overwrite these enums
     public UpgradeIcon icon { get; private set; } = UpgradeIcon.Default;
     public UpgradeColor color { get; private set; } = UpgradeColor.White;
 
@@ -17,12 +19,11 @@ public abstract class UpgradeView
 
     public string GetName() { return _name; }
     public abstract float GetScalingFactor(int upgradeCount);
-    protected abstract string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor);
+    protected abstract string GetDescription(IUpgradeable upgradeable, float newFactor);
     public string GetDescription(IUpgradeable upgradeable)
     {
-        int currentCount = upgradeable.UpgradeSystem.GetUpgradeCount(upgradeType);
-        int newCount = currentCount + 1;
-        return GetDescription(upgradeable, GetScalingFactor(currentCount), GetScalingFactor(newCount));
+        int newCount = upgradeable.UpgradeSystem.GetUpgradeCount(upgradeType) + 1;
+        return GetDescription(upgradeable, GetScalingFactor(newCount));
     }
     public Sprite GetSprite() { return _sprite; }
     public void OnUpgraded(IUpgradeable upgradeable)

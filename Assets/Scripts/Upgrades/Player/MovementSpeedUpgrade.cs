@@ -23,9 +23,9 @@ namespace Assets.Scripts.Upgrades
 
         private float GetSpeed(IUpgradeable upgradeable, float factor) { return upgradeable.MovementSystem.defaultMovementSpeed * factor; }
 
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
-            return $"Increase Movement Speed from {GetSpeed(upgradeable, oldFactor)} to {GetSpeed(upgradeable, newFactor)}";
+            return $"Increase movement speed from {upgradeable.MovementSystem.Speed.ToString("F1")} to {GetSpeed(upgradeable, newFactor).ToString("F1")}";
         }
     }
 }

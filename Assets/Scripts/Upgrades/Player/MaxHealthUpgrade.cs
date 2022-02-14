@@ -18,16 +18,23 @@ namespace Assets.Scripts.Upgrades
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
         {
-            throw new System.NotImplementedException();
+            var healthSystem = upgradeable.HealthSystem;
+
+            float newHealth = GetMaxHealth(upgradeable, newFactor);
+
+            float delta = newHealth - healthSystem.MaxHealth;
+
+            healthSystem.MaxHealth = newHealth;
+            healthSystem.Health += delta;
         }
 
         private float GetMaxHealth(IUpgradeable upgradeable, float factor) { return upgradeable.HealthSystem.defaultHealth * factor; }
 
         //TODO make sure everyone (player, enemies) actually change defaultHealth value when loading from AppData
 
-        protected override string GetDescription(IUpgradeable upgradeable, float oldFactor, float newFactor)
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
-            return "Increase Max Health from ";
+            return $"Increase Max Health from {Mathf.CeilToInt(upgradeable.HealthSystem.MaxHealth)} to {Mathf.CeilToInt(GetMaxHealth(upgradeable, newFactor))}";
         }
     }
 }
