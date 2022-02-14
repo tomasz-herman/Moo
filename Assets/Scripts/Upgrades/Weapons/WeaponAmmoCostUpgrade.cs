@@ -23,7 +23,6 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
-            //TODO check if you can remove oldFactor from all these methods
             var weapon = upgradeable.ShootingSystem[WeaponType];
             float currentConsumption = weapon.AmmoConsumption;
             float newConsumtpion = weapon.GetAmmoConsumption(newFactor);
