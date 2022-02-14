@@ -70,7 +70,10 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
-        weapons.Current().DecreaseTime();
+        foreach (var weapon in weapons)
+        {
+            weapon.DecreaseTime();
+        }
     }
 
     public void SelectWeapon(WeaponType type)
