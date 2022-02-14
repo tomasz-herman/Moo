@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private bool iswalking = false;
     public bool IsWalking => iswalking;
     public EventHandler<float> SpeedChanged;
-    private Vector3 direction;
+    public Vector3 direction;
 
     public float Speed
     {
