@@ -97,7 +97,7 @@ public class Shooting : MonoBehaviour
         {
             this.InitializeWeaponOwners();
         }
-        weapons.Current().TryShoot(shooter, position + direction, direction, this, ammoSystem);
+        weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 
     public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].basetriggerTimeout * triggerTimeoutMultiplier; }
