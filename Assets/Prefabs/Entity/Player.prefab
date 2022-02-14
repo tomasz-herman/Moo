@@ -537,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5169997118168968773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.71, z: 0.236}
+  m_LocalPosition: {x: 0, y: 1.784, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 158384136302388091}
@@ -800,11 +800,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e16ce65d0724e94abfe5f9d8a61dd3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StepTreshold: 1
-  StepLong: 1.5
-  StepHaight: 0.3
-  SpeedMultiplayer: 1.5
-  BodyMovementMultiplayer: 0.2
+  StepTreshold: 0.8
+  StepLong: 1.2
+  StepHaight: 0.5
+  SpeedMultiplayer: 1
+  BodyMovementMultiplayer: 0.15
   SideOffset: 0.3
   LegTargets:
   - {fileID: 8249243289687648144}
@@ -1199,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d1852561fe8b8547bf62ff9fe2da11a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.29
+      value: -0.101
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d1852561fe8b8547bf62ff9fe2da11a, type: 3}
       propertyPath: m_LocalPosition.z
