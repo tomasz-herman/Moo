@@ -63,13 +63,6 @@ public class Grenade : Projectile
             var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
             particles.Color = color;
             gameObject.GetComponentInChildren<Renderer>().enabled = false;
-
-            //isExplosing = true;
-            //GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //PlaySound();
-
-            //Instantiate(explosionParticles, transform.position, transform.rotation);
-            //gameObject.GetComponentInChildren<Renderer>().enabled = false;
         }
 
         var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
