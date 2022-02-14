@@ -337,6 +337,7 @@ figcaption {
   font-size: 128px;
   line-height: 80px;
   font-weight: 400;
+  letter-spacing: normal;
   text-transform: none;
 }
 
