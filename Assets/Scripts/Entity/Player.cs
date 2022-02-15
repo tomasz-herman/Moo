@@ -25,13 +25,15 @@ public class Player : Entity, IUpgradeable
 
         HealthSystem.HealthChanged += CheckDeath;
         HealthSystem.DamageReceived += OnDamageReceived;
-        HealthSystem.MaxHealth = ApplicationData.GameplayData.DefaultPlayerHealth;
+        HealthSystem.defaultHealth = ApplicationData.GameplayData.DefaultPlayerHealth;
+        HealthSystem.MaxHealth = HealthSystem.defaultHealth;
         HealthSystem.Health = HealthSystem.MaxHealth;
 
         damagePostProcessing = FindObjectOfType<DamagePostProcessing>();
         damagePostProcessing.healthSystem = HealthSystem;
 
-        AmmoSystem.MaxAmmo = ApplicationData.GameplayData.DefaultPlayerAmmo;
+        AmmoSystem.defaultCapacity = ApplicationData.GameplayData.DefaultPlayerAmmo;
+        AmmoSystem.MaxAmmo = AmmoSystem.defaultCapacity;
         AmmoSystem.Ammo = AmmoSystem.MaxAmmo;
     }
 

@@ -40,6 +40,8 @@ public abstract class Enemy : Entity
         };
 
         data = ApplicationData.EnemyData[EnemyType];
+
+        healthSystem.defaultHealth = data.BaseHealth;
         Spawn();
     }
 

@@ -26,8 +26,6 @@ namespace Assets.Scripts.Upgrades
 
         private float GetCapacity(IUpgradeable upgradeable, float factor) { return upgradeable.AmmoSystem.defaultCapacity * factor; }
 
-        //TODO make sure everyone (player, enemies) actually change defaultCapacity value when loading from AppData
-
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
             return $"Increase ammo capacity from {Mathf.CeilToInt(upgradeable.AmmoSystem.MaxAmmo)} to {Mathf.CeilToInt(GetCapacity(upgradeable, newFactor))}";

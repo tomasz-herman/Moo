@@ -28,8 +28,6 @@ public class PlayerMovement : MovementSystem
         camera = Camera.main;
     }
 
-    //TODO make sure player sets default movement speed if loaded from a different source
-
     void Update()
     {
         if (!Application.isFocused) return;

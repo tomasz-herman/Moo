@@ -30,8 +30,6 @@ namespace Assets.Scripts.Upgrades
 
         private float GetMaxHealth(IUpgradeable upgradeable, float factor) { return upgradeable.HealthSystem.defaultHealth * factor; }
 
-        //TODO make sure everyone (player, enemies) actually change defaultHealth value when loading from AppData
-
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
         {
             return $"Increase Max Health from {Mathf.CeilToInt(upgradeable.HealthSystem.MaxHealth)} to {Mathf.CeilToInt(GetMaxHealth(upgradeable, newFactor))}";
