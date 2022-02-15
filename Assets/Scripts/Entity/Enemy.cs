@@ -23,6 +23,7 @@ public abstract class Enemy : Entity
 
     private int level = 1;
     private bool isDead = false;
+    private bool started = false;
 
     void Awake()
     {
@@ -42,13 +43,14 @@ public abstract class Enemy : Entity
         data = ApplicationData.EnemyData[EnemyType];
 
         healthSystem.defaultHealth = data.BaseHealth;
-        Spawn();
     }
 
     public void Start()
     {
+        started = true;
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
+        Spawn();
     }
 
     void OnDestroy()
@@ -89,7 +91,7 @@ public abstract class Enemy : Entity
 
     public void Spawn()
     {
-        if (isDead)
+        if (!started || isDead)
             return;
         RecalculateStatistics();
         healthSystem.Health = healthSystem.MaxHealth;
