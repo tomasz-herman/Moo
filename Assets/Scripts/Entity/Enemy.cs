@@ -45,7 +45,7 @@ public abstract class Enemy : Entity
         Spawn();
     }
 
-    protected virtual void Start()
+    public void Start()
     {
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
