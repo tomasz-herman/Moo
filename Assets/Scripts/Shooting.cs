@@ -14,10 +14,6 @@ public class Shooting : MonoBehaviour
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
 
-    public float projectileSpeedMultiplier = 1f;
-    public float triggerTimeoutMultiplier = 1f;
-    public float weaponDamageMultiplier = 1f;
-
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
 
@@ -76,10 +72,11 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public void SelectWeapon(WeaponType type)
+    public Weapon SelectWeapon(WeaponType type)
     {
         weapons.SetIndex((int)type);
         WeaponChanged?.Invoke(this, weapons.Current());
+        return CurrentWeapon;
     }
 
     public void NextWeapon()

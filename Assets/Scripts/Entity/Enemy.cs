@@ -1,4 +1,5 @@
 using Assets.Scripts.SoundManager;
+using System;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -60,9 +61,13 @@ public abstract class Enemy : Entity
         float healthFactor = gameplay.GetHealthScalingMultiplier(level);
         healthSystem.MaxHealth = data.BaseHealth * healthFactor;
 
-        shooting.weaponDamageMultiplier = data.BaseDamageMultiplier * gameplay.GetDamageScalingMultiplier(level);
-        shooting.projectileSpeedMultiplier = data.BaseProjectileSpeedMultiplier * gameplay.GetProjectileSpeedScalingMultiplier(level);
-        shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier * gameplay.GetTriggerTimeoutScalingMultiplier(level);
+        foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
+        {
+            var weapon = shooting[weaponType];
+            weapon.damageMultiplier = gameplay.GetDamageScalingMultiplier(level);
+            weapon.projectileSpeedMultiplier = gameplay.GetProjectileSpeedScalingMultiplier(level);
+            weapon.triggerTimeoutMultiplier = gameplay.GetTriggerTimeoutScalingMultiplier(level);
+        }
 
         movementSpeed = data.BaseMovementSpeed * gameplay.GetMovementSpeedScalingMultiplier(level);
         pointsForKill = EnemyType.GetPointsForKill(level);

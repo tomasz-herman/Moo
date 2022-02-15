@@ -31,7 +31,7 @@ namespace Assets.Scripts.Weapons
                 bullet.SetUpgrades(projectileUpgrades);
 
                 var dir = Quaternion.Euler(0, Utils.RandomTriangular(-ScatterAngle/2, 0, ScatterAngle/2), 0) * direction.normalized;
-                bullet.Launch(shooter, dir * ProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * Damage);
+                bullet.Launch(shooter, dir * ProjectileSpeed, Damage);
             }
         }
     }

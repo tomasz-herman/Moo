@@ -42,7 +42,7 @@ public class UpgradesProvider : MonoBehaviour
             new ShotgunProjectileSpeedUpgrade(),
             new MachineGunProjectileSpeedUpgrade(),
             new GrenadeLauncherProjectileSpeedUpgrade(),
-            new SwordProjectileSpeedUpgrade(),
+            //new SwordProjectileSpeedUpgrade(),
 
             //Weapon cooldown upgrades
             new PistolCooldownUpgrade(),

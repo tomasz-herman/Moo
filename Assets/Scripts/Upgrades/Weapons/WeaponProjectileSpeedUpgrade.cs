@@ -59,22 +59,22 @@ namespace Assets.Scripts.Upgrades.Weapons
             : base(WeaponType.GrenadeLauncher, UpgradeType.GrenadeLauncherProjectileSpeed) { }
     }
 
-    //TODO consider removing this upgrade, it may be quite useless
-    public class SwordProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
-    {
-        public SwordProjectileSpeedUpgrade()
-            : base(WeaponType.Sword, UpgradeType.SwordProjectileSpeed, $"Increase {Weapon.GetWeaponName(WeaponType.Sword)} sweep speed") 
-        {
+    //TODO this upgrade seems unreasonably weak, so it's removed for now
+    //public class SwordProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
+    //{
+    //    public SwordProjectileSpeedUpgrade()
+    //        : base(WeaponType.Sword, UpgradeType.SwordProjectileSpeed, $"Increase {Weapon.GetWeaponName(WeaponType.Sword)} sweep speed") 
+    //    {
 
-        }
-        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
-        {
-            var weapon = upgradeable.ShootingSystem[WeaponType];
+    //    }
+    //    protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+    //    {
+    //        var weapon = upgradeable.ShootingSystem[WeaponType];
 
-            float currentSpeed = weapon.ProjectileSpeed;
-            float newSpeed = weapon.GetProjectileSpeed(newFactor);
+    //        float currentSpeed = weapon.ProjectileSpeed;
+    //        float newSpeed = weapon.GetProjectileSpeed(newFactor);
 
-            return $"Increase {Weapon.GetWeaponName(weapon.WeaponType)} sweep velocity from {currentSpeed.ToString("F1")} to {newSpeed.ToString("F1")}";
-        }
-    }
+    //        return $"Increase {Weapon.GetWeaponName(weapon.WeaponType)} sweep velocity from {currentSpeed.ToString("F1")} to {newSpeed.ToString("F1")}";
+    //    }
+    //}
 }
