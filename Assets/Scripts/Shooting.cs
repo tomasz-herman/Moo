@@ -8,6 +8,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Projectile projectilePrefab;
+    public Projectile machineGunProjectilePrefab;
     public Blade bladePrefab;
     public Grenade grenadePrefab;
     public Bullet bulletPrefab;
@@ -36,7 +37,7 @@ public class Shooting : MonoBehaviour
     {
         Pistol = new Pistol(projectilePrefab);
         Shotgun = new Shotgun(bulletPrefab);
-        MachineGun = new MachineGun(projectilePrefab);
+        MachineGun = new MachineGun(machineGunProjectilePrefab);
         GrenadeLauncher = new GrenadeLauncher(grenadePrefab);
         Sword = new Sword(bladePrefab);
         weapons.Add(Pistol);
