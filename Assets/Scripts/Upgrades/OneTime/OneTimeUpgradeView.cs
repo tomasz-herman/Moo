@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class OneTimeUpgradeView : UpgradeView
 {
-    public OneTimeUpgradeView(string name, UpgradeType type)
-           : base(name, type)
+    public OneTimeUpgradeView(string name, UpgradeType type, UpgradeIcon icon)
+           : base(name, type, icon, UpgradeColor.OneTime)
     {
         
     }

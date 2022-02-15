@@ -6,15 +6,16 @@ public abstract class UpgradeView
     private readonly Sprite _sprite;
     public UpgradeType upgradeType { get; protected set; }
 
-    //TODO let subclasses overwrite these enums
-    public UpgradeIcon icon { get; private set; } = UpgradeIcon.Default;
-    public UpgradeColor color { get; private set; } = UpgradeColor.White;
+    public UpgradeIcon Icon { get; private set; } = UpgradeIcon.Default;
+    public UpgradeColor Color { get; private set; } = UpgradeColor.White;
 
-    protected UpgradeView(string name, UpgradeType upgradeType)
+    protected UpgradeView(string name, UpgradeType upgradeType, UpgradeIcon icon, UpgradeColor color)
     {
         this.upgradeType = upgradeType;
         this._name = name;
         this._sprite = icon.GetSprite();
+        this.Icon = icon;
+        this.Color = color;
     }
 
     public string GetName() { return _name; }

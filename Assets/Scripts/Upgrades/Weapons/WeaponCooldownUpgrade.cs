@@ -7,7 +7,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     {
         public WeaponType WeaponType { get; private set; }
         protected WeaponCooldownUpgrade(WeaponType weapon, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(weapon)} Cooldown", upgradeType)
+            : base($"{Weapon.GetWeaponName(weapon)} Cooldown", upgradeType, UpgradeIcon.WeaponCooldown, UpgradeColorExtensions.FromWeapon(weapon))
         {
             WeaponType = weapon;
         }

@@ -7,7 +7,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrade
     {
         public WeaponType WeaponType { get; private set; }
         protected ProjectilesChainToNearestEnemyUpgradeBase(WeaponType type, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(type)} projectile chaining", upgradeType)
+            : base($"{Weapon.GetWeaponName(type)} projectile chaining", upgradeType, UpgradeIcon.Chaining)
         {
             WeaponType = type;
         }

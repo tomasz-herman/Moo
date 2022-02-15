@@ -6,7 +6,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     public class ShotgunProjectileCountUpgrade : UpgradeView
     {
         public ShotgunProjectileCountUpgrade()
-            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Count", UpgradeType.ShotgunProjectileCount)
+            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Count", UpgradeType.ShotgunProjectileCount, UpgradeIcon.ShotgunProjectileCount, UpgradeColor.Shotgun)
         {
 
         }

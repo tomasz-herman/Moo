@@ -7,7 +7,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     {
         public WeaponType WeaponType { get; private set; }
         protected WeaponProjectileSpeedUpgrade(WeaponType weapon, UpgradeType upgradeType, string name = null)
-            : base(name ?? $"{Weapon.GetWeaponName(weapon)} Projectile Speed", upgradeType)
+            : base(name ?? $"{Weapon.GetWeaponName(weapon)} Projectile Speed", upgradeType, UpgradeIcon.ProjectileSpeed, UpgradeColorExtensions.FromWeapon(weapon))
         {
             WeaponType = weapon;
         }

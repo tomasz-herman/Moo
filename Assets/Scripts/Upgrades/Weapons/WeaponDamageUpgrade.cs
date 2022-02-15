@@ -7,7 +7,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     {
         public WeaponType WeaponType { get; private set; }
         protected WeaponDamageUpgrade(WeaponType weapon, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(weapon)} Damage", upgradeType)
+            : base($"{Weapon.GetWeaponName(weapon)} Damage", upgradeType, UpgradeIcon.WeaponDamage, UpgradeColorExtensions.FromWeapon(weapon))
         {
             WeaponType = weapon;
         }

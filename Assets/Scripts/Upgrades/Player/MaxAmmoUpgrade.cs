@@ -4,7 +4,11 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxAmmoUpgrade : UpgradeView
     {
-        public MaxAmmoUpgrade() : base("Max Ammo", UpgradeType.MaxAmmo) { }
+        public MaxAmmoUpgrade()
+            : base("Max Ammo", UpgradeType.MaxAmmo, UpgradeIcon.MaxAmmo, UpgradeColor.White)
+        {
+
+        }
 
         public override float GetScalingFactor(int upgradeCount)
         {

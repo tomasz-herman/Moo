@@ -7,7 +7,7 @@ namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Upgrades
     public class SwordReflectsEnemyProjectilesUpgrade : OneTimeUpgradeView
     {
         public SwordReflectsEnemyProjectilesUpgrade()
-            : base("Lightsaber", UpgradeType.SwordReflectsEnemyProjectiles)
+            : base("Lightsaber", UpgradeType.SwordReflectsEnemyProjectiles, UpgradeIcon.Lightsaber)
         {
             
         }

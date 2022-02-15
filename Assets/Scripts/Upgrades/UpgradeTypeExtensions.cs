@@ -45,4 +45,17 @@ public static class UpgradeColorExtensions
             _ => Color.white
         };
     }
+
+    public static UpgradeColor FromWeapon(WeaponType type)
+    {
+        return type switch
+        {
+            WeaponType.GrenadeLauncher => UpgradeColor.GrenadeLauncher,
+            WeaponType.Pistol => UpgradeColor.Pistol,
+            WeaponType.Sword => UpgradeColor.Sword,
+            WeaponType.MachineGun => UpgradeColor.MachineGun,
+            WeaponType.Shotgun => UpgradeColor.Shotgun,
+            _ => UpgradeColor.White
+        };
+    }
 }

@@ -9,7 +9,8 @@ namespace Assets.Scripts.Upgrades.Weapons
         private const float Multiplier = 0.75f;
 
         public ShotgunProjectileDispersionUpgrade()
-            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Dispersion", UpgradeType.ShotgunProjectileDispersion)
+            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Dispersion", UpgradeType.ShotgunProjectileDispersion,
+                  UpgradeIcon.ShotgunProjectileDispersion, UpgradeColor.Shotgun)
         {
 
         }

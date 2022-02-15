@@ -8,7 +8,7 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Up
         public WeaponType WeaponType { get; private set; }
 
         protected ProjectilesExplodeAfterHittingEnemyUpgradeBase(WeaponType type, UpgradeType upgradeType)
-            : base($"Exploding {Weapon.GetWeaponName(type)} Projectiles", upgradeType)
+            : base($"Exploding {Weapon.GetWeaponName(type)} Projectiles", upgradeType, UpgradeIcon.ExplodingProjectiles)
         {
             WeaponType = type;
         }

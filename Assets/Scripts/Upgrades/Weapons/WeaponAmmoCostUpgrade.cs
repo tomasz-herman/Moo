@@ -9,7 +9,7 @@ namespace Assets.Scripts.Upgrades.Weapons
         private const float Multiplier = 0.75f;
         public WeaponType WeaponType { get; private set; }
         protected WeaponAmmoCostUpgrade(WeaponType weaponType, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(weaponType)} Ammo Cost", upgradeType)
+            : base($"{Weapon.GetWeaponName(weaponType)} Ammo Cost", upgradeType, UpgradeIcon.AmmoCost, UpgradeColorExtensions.FromWeapon(weaponType))
         {
             WeaponType = weaponType;
         }
