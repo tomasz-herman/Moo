@@ -26,7 +26,7 @@ namespace Assets.Scripts.Upgrades.Weapons
             float currentDamage = weapon.Damage;
             float newDamage = weapon.GetDamage(newFactor);
 
-            return $"Increase {Weapon.GetWeaponName(WeaponType)} projectile damage from {currentDamage.ToString("F1")} to {newDamage.ToString("F1")}";
+            return $"Increase {Weapon.GetWeaponName(WeaponType)} damage from {currentDamage.ToString("F1")} to {newDamage.ToString("F1")}";
         }
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
