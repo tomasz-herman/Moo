@@ -9,7 +9,7 @@ namespace Assets.Scripts.Upgrades
         public override float GetScalingFactor(int upgradeCount)
         {
             var gameplay = ApplicationData.GameplayData;
-            return gameplay.GetAmmoScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+            return gameplay.GetAmmoScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)

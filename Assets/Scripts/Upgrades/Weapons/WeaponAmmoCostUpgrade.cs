@@ -18,7 +18,7 @@ namespace Assets.Scripts.Upgrades.Weapons
         {
             var gameplay = ApplicationData.GameplayData;
 
-            return gameplay.GetDescendingScalingFactor(upgradeCount + 1, Multiplier, gameplay.UpgradeScalingMultiplier);
+            return gameplay.GetDescendingScalingFactor(upgradeCount + 1, Multiplier, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)

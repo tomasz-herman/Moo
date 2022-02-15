@@ -22,7 +22,7 @@ public class GameplayConfig : ScriptableObject
 
     /// <summary>
     /// Each upgrade multiplier shall scale with ScalingFactor and UpgradeScalingMultiplier, but because there are many of them before each boss,
-    /// the multiplier is divided by total number of upgrades before each boss (including optional chambers)
+    /// the multiplier is divided by total number of upgrades for each boss (including optional chambers)
     /// Because such mechanic makes upgrades worthless (but scales well for arbitrary optional chamber count), we introduce correction factor
     /// This number should be considered as "how many upgrades do I need to pick up to fully scale my character to be equivalent to next-level enemies
     /// 
@@ -35,6 +35,8 @@ public class GameplayConfig : ScriptableObject
     /// Correction factor shall equal to N if there are N different types of upgrades that all need to be upgraded once to match enemy's 1-level increase in scaling
     /// Note that UpgradeScalingMultiplier < 1 makes sure that the game gets progressively harder on purpose and upgrade correction factor shall not correct for this
     /// When determining this factor, assume the upgrade scaling multiplier is set to 1
+    /// 
+    /// If the upgrades shall ever feel "too weak", this is the value to change
     /// </summary>
     public float UpgradeCorrectionFactor = 10f;
 
@@ -67,4 +69,17 @@ public class GameplayConfig : ScriptableObject
     public float GetTriggerTimeoutScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetDescendingScalingFactor(level, TriggerTimeoutScalingMultiplier, secondaryMultiplier); }
     public float GetAmmoScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, AmmoScalingMultiplier, secondaryMultiplier); }
     public float GetChamberClearTimeScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ChamberClearTimeScalingMultiplier, secondaryMultiplier); }
+    public float GetSecondaryUpgradeMultiplier()
+    {
+        //TODO: fix this if the game shall ever go into real production
+        //in order to do this properly we'd technically need to add Minibosses/Bosses per chamber type variables
+        //and count expected number of upgrades dropped by non-boss enemies, but since we don't have such architecture this shall do
+        var bossData = ApplicationData.EnemyData[EnemyTypes.Boss];
+        var minibossData = ApplicationData.EnemyData[EnemyTypes.MiniBoss];
+
+        float miniBossUpgradesPerBoss = NumberOfOptionalChambersBeforeBoss * minibossData.UpgradeDropChance * minibossData.UpgradeDropCount;
+        float bossUpgradesPerBoss = bossData.UpgradeDropChance * bossData.UpgradeDropCount;
+
+        return UpgradeScalingMultiplier * UpgradeCorrectionFactor / (miniBossUpgradesPerBoss + bossUpgradesPerBoss);
+    }
 }

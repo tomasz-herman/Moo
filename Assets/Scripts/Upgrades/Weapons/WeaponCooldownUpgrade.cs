@@ -16,7 +16,7 @@ namespace Assets.Scripts.Upgrades.Weapons
         {
             var gameplay = ApplicationData.GameplayData;
 
-            return gameplay.GetTriggerTimeoutScalingMultiplier(upgradeCount + 1, gameplay.UpgradeScalingMultiplier);
+            return gameplay.GetTriggerTimeoutScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
