@@ -17,7 +17,7 @@ MonoBehaviour:
     name: Machine Gun
     image: {fileID: 21300000, guid: 7b5d668ca9fcafe4f9052b9f07797127, type: 3}
     color: {r: 0, g: 0.81717014, b: 1, a: 1}
-    projectileSpeed: 17
+    projectileSpeed: 20
     triggerTimeout: 0.2
     damage: 7
     ammoConsumption: 1
