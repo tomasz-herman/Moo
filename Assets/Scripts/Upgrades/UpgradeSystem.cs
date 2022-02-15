@@ -29,9 +29,9 @@ public class UpgradeSystem : MonoBehaviour
     {
         bool wasZero = pendingUpgrades == 0;
         pendingUpgrades += upgradeCount;
-        upgradeWindow.Recalculate();
         if(wasZero)
             upgradeWindow.Open();
+        upgradeWindow.Recalculate();
     }
 
     public void RemoveUpgrade()

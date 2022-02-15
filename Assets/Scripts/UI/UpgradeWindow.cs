@@ -15,9 +15,9 @@ public class UpgradeWindow : GuiWindow
     public IUpgradeable upgradeable;
     private UpgradeView[] upgrades;
 
-    new void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         leftButton.onClick.AddListener(() => OnLeftButtonClicked());
         middleButton.onClick.AddListener(() => OnMiddleButtonClicked());
         rightButton.onClick.AddListener(() => OnRightButtonClicked());
