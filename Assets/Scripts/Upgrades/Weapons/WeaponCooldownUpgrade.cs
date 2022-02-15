@@ -31,7 +31,7 @@ namespace Assets.Scripts.Upgrades.Weapons
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
         {
-            upgradeable.ShootingSystem[WeaponType].ammoConsumptionMultiplier = newFactor;
+            upgradeable.ShootingSystem[WeaponType].triggerTimeoutMultiplier = newFactor;
         }
     }
 
