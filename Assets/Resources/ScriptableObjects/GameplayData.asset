@@ -17,12 +17,13 @@ MonoBehaviour:
   ScalingFactor: 1.5
   HealthScalingMultiplier: 1
   DamageScalingMultiplier: 1
-  MovementSpeedScalingMultiplier: 0.2
+  MovementSpeedScalingMultiplier: 0.5
   ProjectileSpeedScalingMultiplier: 0.8
   ScoreScalingMultiplier: 1
   TriggerTimeoutScalingMultiplier: 0.7
   UpgradeScalingMultiplier: 0.9
-  AmmoScalingMultiplier: 0.6
+  AmmoScalingMultiplier: 0.75
+  UpgradeCorrectionFactor: 10
   NormalChamberClearTime: 25
   OptionalChamberClearTime: 45
   BossChamberClearTime: 90
