@@ -15,7 +15,7 @@ namespace Assets.Scripts.Upgrades.Weapons
         {
             var gameplay = ApplicationData.GameplayData;
             //if it's needed, we can add a separate multiplier that would combine with damage multiplier to get projectile count
-            return gameplay.GetDamageScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+            return gameplay.GetPlayerDamageScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)

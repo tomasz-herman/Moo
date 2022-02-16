@@ -52,7 +52,7 @@ MonoBehaviour:
     DamageMultiplier: 1
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 4
-    AmmoRechargeAmmount: 25
+    AmmoRechargeAmmount: 10
   - Type: 1
     MinimumRange: 0
     PreferredRange: 2

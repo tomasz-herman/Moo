@@ -11,14 +11,20 @@ public class GameplayConfig : ScriptableObject
     public int DefaultPlayerAmmo = 100;
 
     public float ScalingFactor = 1.5f;
-    public float HealthScalingMultiplier = 1f;
-    public float DamageScalingMultiplier = 1f;
-    public float MovementSpeedScalingMultiplier = 0.2f;
-    public float ProjectileSpeedScalingMultiplier = 0.8f;
+    public float PlayerHealthScalingMultiplier = 1f;
+    public float EnemyHealthScalingMultiplier = 1f;
+    public float PlayerDamageScalingMultiplier = 1f;
+    public float EnemyDamageScalingMultiplier = 1f;
+    public float PlayerMovementSpeedScalingMultiplier = 1f;
+    public float EnemyMovementSpeedScalingMultiplier = 0.25f;
+    public float PlayerProjectileSpeedScalingMultiplier = 0.75f;
+    public float EnemyProjectileSpeedScalingMultiplier = 0.25f;
     public float ScoreScalingMultiplier = 1f;
-    public float TriggerTimeoutScalingMultiplier = 0.7f;
-    public float UpgradeScalingMultiplier = 0.9f;
-    public float AmmoScalingMultiplier = 0.6f;
+    public float PlayerTriggerTimeoutScalingMultiplier = 1f;
+    public float EnemyTriggerTimeoutScalingMultiplier = 0.25f;
+    public float UpgradeScalingMultiplier = 1f;
+    public float PlayerAmmoScalingMultiplier = 1f;
+    public float EnemyAmmoScalingMultiplier = 1f;
 
     /// <summary>
     /// Each upgrade multiplier shall scale with ScalingFactor and UpgradeScalingMultiplier, but because there are many of them before each boss,
@@ -61,13 +67,19 @@ public class GameplayConfig : ScriptableObject
         return 1 + (quadratic - 1) * secondaryMultiplier;
     }
     public float GetDescendingScalingFactor(int level, float multiplier, float secondaryMultiplier = 1) { return 1 / GetAscendingScalingFactor(level, multiplier, secondaryMultiplier); }
-    public float GetHealthScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, HealthScalingMultiplier, secondaryMultiplier); }
-    public float GetDamageScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, DamageScalingMultiplier, secondaryMultiplier); }
-    public float GetMovementSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, MovementSpeedScalingMultiplier, secondaryMultiplier); }
-    public float GetProjectileSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ProjectileSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyHealthScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, EnemyHealthScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerHealthScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, PlayerHealthScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyDamageScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, EnemyDamageScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerDamageScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, PlayerDamageScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyMovementSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, EnemyMovementSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerMovementSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, PlayerMovementSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyProjectileSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, EnemyProjectileSpeedScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerProjectileSpeedScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, PlayerProjectileSpeedScalingMultiplier, secondaryMultiplier); }
     public float GetScoreScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ScoreScalingMultiplier, secondaryMultiplier); }
-    public float GetTriggerTimeoutScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetDescendingScalingFactor(level, TriggerTimeoutScalingMultiplier, secondaryMultiplier); }
-    public float GetAmmoScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, AmmoScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyTriggerTimeoutScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetDescendingScalingFactor(level, EnemyTriggerTimeoutScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerTriggerTimeoutScalingMultiplier(int level, float secondaryMultiplier = 1) { return GetDescendingScalingFactor(level, PlayerTriggerTimeoutScalingMultiplier, secondaryMultiplier); }
+    public float GetEnemyAmmoScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, EnemyAmmoScalingMultiplier, secondaryMultiplier); }
+    public float GetPlayerAmmoScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, PlayerAmmoScalingMultiplier, secondaryMultiplier); }
     public float GetChamberClearTimeScalingMultiplier (int level, float secondaryMultiplier = 1) { return GetAscendingScalingFactor(level, ChamberClearTimeScalingMultiplier, secondaryMultiplier); }
     public float GetSecondaryUpgradeMultiplier()
     {
@@ -80,6 +92,8 @@ public class GameplayConfig : ScriptableObject
         float miniBossUpgradesPerBoss = NumberOfOptionalChambersBeforeBoss * minibossData.UpgradeDropChance * minibossData.UpgradeDropCount;
         float bossUpgradesPerBoss = bossData.UpgradeDropChance * bossData.UpgradeDropCount;
 
+        Debug.Log(UpgradeScalingMultiplier * UpgradeCorrectionFactor / (miniBossUpgradesPerBoss + bossUpgradesPerBoss));
+        
         return UpgradeScalingMultiplier * UpgradeCorrectionFactor / (miniBossUpgradesPerBoss + bossUpgradesPerBoss);
     }
 }
