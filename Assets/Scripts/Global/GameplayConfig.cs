@@ -39,7 +39,7 @@ public class GameplayConfig : ScriptableObject
     /// that there are multiple upgrades, therefore available types of upgrades are the only parameter in determining this factor
     /// 
     /// Correction factor shall equal to N if there are N different types of upgrades that all need to be upgraded once to match enemy's 1-level increase in scaling
-    /// Note that UpgradeScalingMultiplier < 1 makes sure that the game gets progressively harder on purpose and upgrade correction factor shall not correct for this
+    /// Note that UpgradeScalingMultiplier &lt; 1 makes sure that the game gets progressively harder on purpose and upgrade correction factor shall not correct for this
     /// When determining this factor, assume the upgrade scaling multiplier is set to 1
     /// 
     /// If the upgrades shall ever feel "too weak", this is the value to change
@@ -92,8 +92,6 @@ public class GameplayConfig : ScriptableObject
         float miniBossUpgradesPerBoss = NumberOfOptionalChambersBeforeBoss * minibossData.UpgradeDropChance * minibossData.UpgradeDropCount;
         float bossUpgradesPerBoss = bossData.UpgradeDropChance * bossData.UpgradeDropCount;
 
-        Debug.Log(UpgradeScalingMultiplier * UpgradeCorrectionFactor / (miniBossUpgradesPerBoss + bossUpgradesPerBoss));
-        
         return UpgradeScalingMultiplier * UpgradeCorrectionFactor / (miniBossUpgradesPerBoss + bossUpgradesPerBoss);
     }
 }

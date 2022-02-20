@@ -16,9 +16,9 @@ MonoBehaviour:
   DefaultPlayerAmmo: 100
   ScalingFactor: 1.5
   PlayerHealthScalingMultiplier: 1
-  EnemyHealthScalingMultiplier: 2
+  EnemyHealthScalingMultiplier: 1.5
   PlayerDamageScalingMultiplier: 0.5
-  EnemyDamageScalingMultiplier: 0.5
+  EnemyDamageScalingMultiplier: 0.25
   PlayerMovementSpeedScalingMultiplier: 0.5
   EnemyMovementSpeedScalingMultiplier: 0.25
   PlayerProjectileSpeedScalingMultiplier: 1

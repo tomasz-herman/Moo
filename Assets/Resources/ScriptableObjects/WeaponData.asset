@@ -19,8 +19,8 @@ MonoBehaviour:
     color: {r: 0, g: 0.81717014, b: 1, a: 1}
     projectileSpeed: 12
     triggerTimeout: 0.2
-    damage: 7.5
-    ammoConsumption: 0.5
+    damage: 8
+    ammoConsumption: 0.75
   - type: 1
     name: Shotgun
     image: {fileID: 21300000, guid: 61b060dbc4421154bb20299ba1a7998a, type: 3}

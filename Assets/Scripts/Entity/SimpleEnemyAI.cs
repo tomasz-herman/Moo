@@ -45,9 +45,10 @@ public class SimpleEnemyAI : MonoBehaviour
         foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
         {
             var weapon = shooting[weaponType];
-            weapon.basetriggerTimeout *= enemy.data.BaseTriggerTimeoutMultiplier * weaponAIProperties.TriggerTimeoutMultiplier;
-            weapon.baseDamage *= enemy.data.BaseDamageMultiplier * weaponAIProperties.DamageMultiplier;
-            weapon.baseProjectileSpeed *= enemy.data.BaseProjectileSpeedMultiplier * weaponAIProperties.ProjectileSpeedMultiplier;
+            var properties = ApplicationData.WeaponAIData[weaponType];
+            weapon.basetriggerTimeout *= enemy.data.BaseTriggerTimeoutMultiplier * properties.TriggerTimeoutMultiplier;
+            weapon.baseDamage *= enemy.data.BaseDamageMultiplier * properties.DamageMultiplier;
+            weapon.baseProjectileSpeed *= enemy.data.BaseProjectileSpeedMultiplier * properties.ProjectileSpeedMultiplier;
         }
     }
 

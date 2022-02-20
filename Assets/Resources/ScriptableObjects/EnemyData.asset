@@ -38,7 +38,7 @@ MonoBehaviour:
     BaseScoreForKill: 3
     UpgradeDropCount: 0
     UpgradeDropChance: 1
-    HealthDropChance: 0.5
+    HealthDropChance: 0.25
     BaseMinHealthDrop: 15
     BaseMaxHealthDrop: 30
     AmmoDropChance: 0.5
@@ -54,7 +54,7 @@ MonoBehaviour:
     BaseScoreForKill: 10
     UpgradeDropCount: 0
     UpgradeDropChance: 1
-    HealthDropChance: 0.75
+    HealthDropChance: 0.3
     BaseMinHealthDrop: 25
     BaseMaxHealthDrop: 50
     AmmoDropChance: 0.75
@@ -62,8 +62,8 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 40
     ChildSpawnRules: []
   - Type: 3
-    BaseHealth: 240
-    BaseDamageMultiplier: 1.25
+    BaseHealth: 180
+    BaseDamageMultiplier: 1
     BaseProjectileSpeedMultiplier: 0.75
     BaseMovementSpeed: 1.5
     BaseTriggerTimeoutMultiplier: 1.5
