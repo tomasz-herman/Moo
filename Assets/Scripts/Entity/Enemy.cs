@@ -62,25 +62,25 @@ public abstract class Enemy : Entity
     {
         var gameplay = ApplicationData.GameplayData;
 
-        float healthFactor = gameplay.GetHealthScalingMultiplier(level);
+        float healthFactor = gameplay.GetEnemyHealthScalingMultiplier(level);
         healthSystem.MaxHealth = data.BaseHealth * healthFactor;
 
         foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
         {
             var weapon = shooting[weaponType];
-            weapon.damageMultiplier = gameplay.GetDamageScalingMultiplier(level);
-            weapon.projectileSpeedMultiplier = gameplay.GetProjectileSpeedScalingMultiplier(level);
-            weapon.triggerTimeoutMultiplier = gameplay.GetTriggerTimeoutScalingMultiplier(level);
+            weapon.damageMultiplier = gameplay.GetEnemyDamageScalingMultiplier(level);
+            weapon.projectileSpeedMultiplier = gameplay.GetEnemyProjectileSpeedScalingMultiplier(level);
+            weapon.triggerTimeoutMultiplier = gameplay.GetEnemyTriggerTimeoutScalingMultiplier(level);
         }
 
-        movementSpeed = data.BaseMovementSpeed * gameplay.GetMovementSpeedScalingMultiplier(level);
+        movementSpeed = data.BaseMovementSpeed * gameplay.GetEnemyMovementSpeedScalingMultiplier(level);
         pointsForKill = EnemyType.GetPointsForKill(level);
 
         dropSystem.healthDropChance = data.HealthDropChance;
         dropSystem.minHealth = data.BaseMinHealthDrop * healthFactor;
         dropSystem.maxHealth = data.BaseMaxHealthDrop * healthFactor;
 
-        float ammoFactor = gameplay.GetAmmoScalingMultiplier(level);
+        float ammoFactor = gameplay.GetEnemyAmmoScalingMultiplier(level);
         dropSystem.ammoDropChance = data.AmmoDropChance;
         dropSystem.minAmmo = data.BaseMinAmmoDrop * ammoFactor;
         dropSystem.maxAmmo = data.BaseMaxAmmoDrop * ammoFactor;

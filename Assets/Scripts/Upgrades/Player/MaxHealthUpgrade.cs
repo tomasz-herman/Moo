@@ -13,7 +13,7 @@ namespace Assets.Scripts.Upgrades
         public override float GetScalingFactor(int upgradeCount)
         {
             var gameplay = ApplicationData.GameplayData;
-            return gameplay.GetHealthScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+            return gameplay.GetPlayerHealthScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)

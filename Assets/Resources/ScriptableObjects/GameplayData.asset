@@ -15,14 +15,20 @@ MonoBehaviour:
   DefaultPlayerHealth: 100
   DefaultPlayerAmmo: 100
   ScalingFactor: 1.5
-  HealthScalingMultiplier: 1
-  DamageScalingMultiplier: 1
-  MovementSpeedScalingMultiplier: 0.5
-  ProjectileSpeedScalingMultiplier: 0.8
+  PlayerHealthScalingMultiplier: 1
+  EnemyHealthScalingMultiplier: 1.5
+  PlayerDamageScalingMultiplier: 0.5
+  EnemyDamageScalingMultiplier: 0.25
+  PlayerMovementSpeedScalingMultiplier: 0.5
+  EnemyMovementSpeedScalingMultiplier: 0.25
+  PlayerProjectileSpeedScalingMultiplier: 1
+  EnemyProjectileSpeedScalingMultiplier: 0.25
   ScoreScalingMultiplier: 1
-  TriggerTimeoutScalingMultiplier: 0.7
-  UpgradeScalingMultiplier: 0.9
-  AmmoScalingMultiplier: 0.75
+  PlayerTriggerTimeoutScalingMultiplier: 0.5
+  EnemyTriggerTimeoutScalingMultiplier: 0.25
+  UpgradeScalingMultiplier: 1
+  PlayerAmmoScalingMultiplier: 1
+  EnemyAmmoScalingMultiplier: 1
   UpgradeCorrectionFactor: 10
   NormalChamberClearTime: 25
   OptionalChamberClearTime: 45

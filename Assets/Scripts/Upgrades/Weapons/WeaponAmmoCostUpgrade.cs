@@ -6,7 +6,7 @@ namespace Assets.Scripts.Upgrades.Weapons
     public abstract class WeaponAmmoCostUpgrade : UpgradeView
     {
         //we could move this multiplier to UpgradeData
-        private const float Multiplier = 0.75f;
+        private const float Multiplier = 1f;
         public WeaponType WeaponType { get; private set; }
         protected WeaponAmmoCostUpgrade(WeaponType weaponType, UpgradeType upgradeType)
             : base($"{Weapon.GetWeaponName(weaponType)} Ammo Cost", upgradeType, UpgradeIcon.AmmoCost, UpgradeColorExtensions.FromWeapon(weaponType))

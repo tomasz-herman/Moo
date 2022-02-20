@@ -16,7 +16,7 @@ namespace Assets.Scripts.Upgrades.Weapons
         {
             var gameplay = ApplicationData.GameplayData;
 
-            return gameplay.GetProjectileSpeedScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+            return gameplay.GetPlayerProjectileSpeedScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
         }
 
         protected override string GetDescription(IUpgradeable upgradeable, float newFactor)

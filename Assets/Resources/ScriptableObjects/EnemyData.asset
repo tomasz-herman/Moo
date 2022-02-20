@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
   - Type: 0
-    BaseHealth: 10
+    BaseHealth: 15
     BaseDamageMultiplier: 0.25
-    BaseProjectileSpeedMultiplier: 0.6
+    BaseProjectileSpeedMultiplier: 0.75
     BaseMovementSpeed: 1
     BaseTriggerTimeoutMultiplier: 2
     BaseScoreForKill: 1
@@ -30,15 +30,15 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 10
     ChildSpawnRules: []
   - Type: 1
-    BaseHealth: 20
+    BaseHealth: 30
     BaseDamageMultiplier: 0.5
-    BaseProjectileSpeedMultiplier: 0.6
-    BaseMovementSpeed: 1
+    BaseProjectileSpeedMultiplier: 0.75
+    BaseMovementSpeed: 1.25
     BaseTriggerTimeoutMultiplier: 2
     BaseScoreForKill: 3
     UpgradeDropCount: 0
     UpgradeDropChance: 1
-    HealthDropChance: 0.5
+    HealthDropChance: 0.25
     BaseMinHealthDrop: 15
     BaseMaxHealthDrop: 30
     AmmoDropChance: 0.5
@@ -46,15 +46,15 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 20
     ChildSpawnRules: []
   - Type: 2
-    BaseHealth: 40
+    BaseHealth: 60
     BaseDamageMultiplier: 0.75
-    BaseProjectileSpeedMultiplier: 0.6
-    BaseMovementSpeed: 1
+    BaseProjectileSpeedMultiplier: 0.75
+    BaseMovementSpeed: 1.5
     BaseTriggerTimeoutMultiplier: 2
     BaseScoreForKill: 10
     UpgradeDropCount: 0
     UpgradeDropChance: 1
-    HealthDropChance: 0.75
+    HealthDropChance: 0.3
     BaseMinHealthDrop: 25
     BaseMaxHealthDrop: 50
     AmmoDropChance: 0.75
@@ -62,11 +62,11 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 40
     ChildSpawnRules: []
   - Type: 3
-    BaseHealth: 160
+    BaseHealth: 180
     BaseDamageMultiplier: 1
-    BaseProjectileSpeedMultiplier: 0.6
-    BaseMovementSpeed: 1
-    BaseTriggerTimeoutMultiplier: 2
+    BaseProjectileSpeedMultiplier: 0.75
+    BaseMovementSpeed: 1.5
+    BaseTriggerTimeoutMultiplier: 1.5
     BaseScoreForKill: 25
     UpgradeDropCount: 1
     UpgradeDropChance: 1
@@ -78,11 +78,11 @@ MonoBehaviour:
     BaseMaxAmmoDrop: 50
     ChildSpawnRules: []
   - Type: 4
-    BaseHealth: 480
-    BaseDamageMultiplier: 2
-    BaseProjectileSpeedMultiplier: 0.6
+    BaseHealth: 720
+    BaseDamageMultiplier: 1.5
+    BaseProjectileSpeedMultiplier: 0.75
     BaseMovementSpeed: 1
-    BaseTriggerTimeoutMultiplier: 2
+    BaseTriggerTimeoutMultiplier: 1.2
     BaseScoreForKill: 100
     UpgradeDropCount: 5
     UpgradeDropChance: 1
