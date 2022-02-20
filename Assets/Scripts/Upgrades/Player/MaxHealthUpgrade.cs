@@ -4,21 +4,35 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxHealthUpgrade : UpgradeView
     {
-        private const int Bonus = 50;
-
-        private readonly HealthSystem _healthSystem;
-
-        public MaxHealthUpgrade(HealthSystem system, Sprite sprite)
-            : base("Max health", "Increase max health", sprite, UpgradeType.MaxHealth)
+        public MaxHealthUpgrade()
+            : base("Max Health", UpgradeType.MaxHealth, UpgradeIcon.MaxHealth, UpgradeColor.White)
         {
-            _healthSystem = system;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _healthSystem.MaxHealth += Bonus;
-            _healthSystem.Health += Bonus;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            return gameplay.GetPlayerHealthScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            var healthSystem = upgradeable.HealthSystem;
+
+            float newHealth = GetMaxHealth(upgradeable, newFactor);
+
+            float delta = newHealth - healthSystem.MaxHealth;
+
+            healthSystem.MaxHealth = newHealth;
+            healthSystem.Health += delta;
+        }
+
+        private float GetMaxHealth(IUpgradeable upgradeable, float factor) { return upgradeable.HealthSystem.defaultHealth * factor; }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            return $"Increase Max Health from {Mathf.CeilToInt(upgradeable.HealthSystem.MaxHealth)} to {Mathf.CeilToInt(GetMaxHealth(upgradeable, newFactor))}";
         }
     }
 }

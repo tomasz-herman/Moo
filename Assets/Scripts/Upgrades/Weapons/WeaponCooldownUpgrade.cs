@@ -5,50 +5,63 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponCooldownUpgrade : UpgradeView
     {
-        private const float Multiplier = 0.9f;
-
-        private readonly Weapon _weapon;
-
-        protected WeaponCooldownUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} cooldown", $"Decrease cooldown of {Weapon.GetWeaponName(w.WeaponType)} by 10%", sprite, upgradeType)
+        public WeaponType WeaponType { get; private set; }
+        protected WeaponCooldownUpgrade(WeaponType weapon, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(weapon)} Cooldown", upgradeType, UpgradeIcon.WeaponCooldown, UpgradeColorExtensions.FromWeapon(weapon))
         {
-            _weapon = w;
+            WeaponType = weapon;
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _weapon.basetriggerTimeout *= Multiplier;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+
+            return gameplay.GetPlayerTriggerTimeoutScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            var weapon = upgradeable.ShootingSystem[WeaponType];
+
+            float currentTimeout = weapon.TriggerTimeout;
+            float newTimeout = weapon.GetTriggerTimeout(newFactor);
+
+            return $"Decrease cooldown of {Weapon.GetWeaponName(WeaponType)} from {currentTimeout.ToString("F2")}s to {newTimeout.ToString("F2")}s";
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem[WeaponType].triggerTimeoutMultiplier = newFactor;
         }
     }
 
     public class PistolCooldownUpgrade : WeaponCooldownUpgrade
     {
-        public PistolCooldownUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.PistolCooldown) { }
+        public PistolCooldownUpgrade()
+            : base(WeaponType.Pistol, UpgradeType.PistolCooldown) { }
     }
 
     public class ShotgunCooldownUpgrade : WeaponCooldownUpgrade
     {
-        public ShotgunCooldownUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.ShotgunCooldown) { }
+        public ShotgunCooldownUpgrade()
+            : base(WeaponType.Shotgun, UpgradeType.ShotgunCooldown) { }
     }
 
     public class MachineGunCooldownUpgrade : WeaponCooldownUpgrade
     {
-        public MachineGunCooldownUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.MachineGunCooldown) { }
+        public MachineGunCooldownUpgrade()
+            : base(WeaponType.MachineGun, UpgradeType.MachineGunCooldown) { }
     }
 
     public class GrenadeLauncherCooldownUpgrade : WeaponCooldownUpgrade
     {
-        public GrenadeLauncherCooldownUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.GrenadeLauncherCooldown) { }
+        public GrenadeLauncherCooldownUpgrade()
+            : base(WeaponType.GrenadeLauncher, UpgradeType.GrenadeLauncherCooldown) { }
     }
 
     public class SwordCooldownUpgrade : WeaponCooldownUpgrade
     {
-        public SwordCooldownUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.SwordCooldown) { }
+        public SwordCooldownUpgrade()
+            : base(WeaponType.Sword, UpgradeType.SwordCooldown) { }
     }
 }

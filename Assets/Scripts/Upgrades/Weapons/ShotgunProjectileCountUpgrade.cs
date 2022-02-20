@@ -5,21 +5,29 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public class ShotgunProjectileCountUpgrade : UpgradeView
     {
-        private const float Multiplier = 1.2f;
-
-        private readonly Shotgun _shotgun;
-        public ShotgunProjectileCountUpgrade(Shotgun w, Sprite sprite)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} projectile count",
-                $"Increase number of {Weapon.GetWeaponName(w.WeaponType)} projectiles in single shot by 20%",
-                sprite, UpgradeType.ShotgunProjectileCount)
+        public ShotgunProjectileCountUpgrade()
+            : base($"{Weapon.GetWeaponName(WeaponType.Shotgun)} Projectile Count", UpgradeType.ShotgunProjectileCount, UpgradeIcon.ShotgunProjectileCount, UpgradeColor.Shotgun)
         {
-            _shotgun = w;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _shotgun.projectileCount = (int)(_shotgun.projectileCount * Multiplier);
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            //if it's needed, we can add a separate multiplier that would combine with damage multiplier to get projectile count
+            return gameplay.GetPlayerDamageScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem.Shotgun.projectileCountMultiplier = newFactor;
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            var shotgun = upgradeable.ShootingSystem.Shotgun;
+            return $"Increase number of {Weapon.GetWeaponName(WeaponType.Shotgun)} projectiles in single shot from " +
+                $"{shotgun.ProjectileCount} to {shotgun.GetProjectileCount(newFactor)}";
         }
     }
 }

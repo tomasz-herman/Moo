@@ -1,4 +1,5 @@
 using Assets.Scripts.SoundManager;
+using System;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -22,6 +23,7 @@ public abstract class Enemy : Entity
 
     private int level = 1;
     private bool isDead = false;
+    private bool started = false;
 
     void Awake()
     {
@@ -39,13 +41,16 @@ public abstract class Enemy : Entity
         };
 
         data = ApplicationData.EnemyData[EnemyType];
-        Spawn();
+
+        healthSystem.defaultHealth = data.BaseHealth;
     }
 
-    protected virtual void Start()
+    public void Start()
     {
+        started = true;
         _audioManager = AudioManager.Instance;
         Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
+        Spawn();
     }
 
     void OnDestroy()
@@ -57,21 +62,25 @@ public abstract class Enemy : Entity
     {
         var gameplay = ApplicationData.GameplayData;
 
-        float healthFactor = gameplay.GetHealthScalingMultiplier(level);
+        float healthFactor = gameplay.GetEnemyHealthScalingMultiplier(level);
         healthSystem.MaxHealth = data.BaseHealth * healthFactor;
 
-        shooting.weaponDamageMultiplier = data.BaseDamageMultiplier * gameplay.GetDamageScalingMultiplier(level);
-        shooting.projectileSpeedMultiplier = data.BaseProjectileSpeedMultiplier * gameplay.GetProjectileSpeedScalingMultiplier(level);
-        shooting.triggerTimeoutMultiplier = data.BaseTriggerTimeoutMultiplier * gameplay.GetTriggerTimeoutScalingMultiplier(level);
+        foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
+        {
+            var weapon = shooting[weaponType];
+            weapon.damageMultiplier = gameplay.GetEnemyDamageScalingMultiplier(level);
+            weapon.projectileSpeedMultiplier = gameplay.GetEnemyProjectileSpeedScalingMultiplier(level);
+            weapon.triggerTimeoutMultiplier = gameplay.GetEnemyTriggerTimeoutScalingMultiplier(level);
+        }
 
-        movementSpeed = data.BaseMovementSpeed * gameplay.GetMovementSpeedScalingMultiplier(level);
+        movementSpeed = data.BaseMovementSpeed * gameplay.GetEnemyMovementSpeedScalingMultiplier(level);
         pointsForKill = EnemyType.GetPointsForKill(level);
 
         dropSystem.healthDropChance = data.HealthDropChance;
         dropSystem.minHealth = data.BaseMinHealthDrop * healthFactor;
         dropSystem.maxHealth = data.BaseMaxHealthDrop * healthFactor;
 
-        float ammoFactor = gameplay.GetAmmoScalingMultiplier(level);
+        float ammoFactor = gameplay.GetEnemyAmmoScalingMultiplier(level);
         dropSystem.ammoDropChance = data.AmmoDropChance;
         dropSystem.minAmmo = data.BaseMinAmmoDrop * ammoFactor;
         dropSystem.maxAmmo = data.BaseMaxAmmoDrop * ammoFactor;
@@ -82,7 +91,7 @@ public abstract class Enemy : Entity
 
     public void Spawn()
     {
-        if (isDead)
+        if (!started || isDead)
             return;
         RecalculateStatistics();
         healthSystem.Health = healthSystem.MaxHealth;

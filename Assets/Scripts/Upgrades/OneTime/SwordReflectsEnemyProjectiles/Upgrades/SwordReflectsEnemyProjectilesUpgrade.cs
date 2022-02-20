@@ -4,20 +4,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.SwordReflectsEnemyProjectiles.Upgrades
 {
-    public class SwordReflectsEnemyProjectilesUpgrade : UpgradeView
+    public class SwordReflectsEnemyProjectilesUpgrade : OneTimeUpgradeView
     {
-        private readonly Sword _sword;
-        public SwordReflectsEnemyProjectilesUpgrade(Sword sword, Sprite sprite)
-            : base("Lightsaber", $"{Weapon.GetWeaponName(sword.WeaponType)} reflects enemy projectiles", sprite, UpgradeType.SwordReflectsEnemyProjectiles)
+        public SwordReflectsEnemyProjectilesUpgrade()
+            : base("Lightsaber", UpgradeType.SwordReflectsEnemyProjectiles, UpgradeIcon.Lightsaber)
         {
-            _sword = sword;
+            
         }
 
-        public override UpgradeType CommitUpdate()
+        protected override void CommitUpdate(IUpgradeable upgradeable)
         {
-            var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(_sword);
+            var projectileUpgrade = new SwordReflectsEnemyProjectilesUpgradeHandler(upgradeable.ShootingSystem.Sword);
             projectileUpgrade.ApplyUpgrade();
-            return this.upgradeType;
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable)
+        {
+            return $"{Weapon.GetWeaponName(upgradeable.ShootingSystem.Sword.WeaponType)} reflects enemy projectiles";
         }
     }
 }

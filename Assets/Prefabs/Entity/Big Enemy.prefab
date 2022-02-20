@@ -459,6 +459,7 @@ MonoBehaviour:
     AmmoDropChance: 1
     BaseMinAmmoDrop: 10
     BaseMaxAmmoDrop: 25
+    ChildSpawnRules: []
   healthSystem: {fileID: 0}
   dropSystem: {fileID: 0}
   KillEvent:
@@ -511,7 +512,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRange: 25
   movementDirection: {x: 0, y: 0, z: 0}
+  dodgeDirection: 0
   remainingMovementTime: 0
+  remainingDodgeTime: 0
+  remainingLagTime: 0
   ammoSystem: {fileID: 0}
   weapon: 0
 --- !u!114 &7777235469271342937
@@ -527,12 +531,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7884263693069889528, guid: 1750f5a51375e9f43a437f778a4799d3, type: 3}
+  machineGunProjectilePrefab: {fileID: 9031496734421737681, guid: 47da7f05e598f124f96deb6935c8eaef, type: 3}
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  projectileSpeedMultiplier: 1
-  triggerTimeoutMultiplier: 1
-  weaponDamageMultiplier: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &-1757155267967381844
@@ -562,6 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultHealth: 150
+  godMode: 0
 --- !u!114 &717185852922523951
 MonoBehaviour:
   m_ObjectHideFlags: 0

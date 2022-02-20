@@ -6,14 +6,13 @@ namespace Assets.Scripts.Upgrades.OneTime.ProjectileChainsToNearestEnemy.Upgrade
 {
     public class ShotgunProjectilesChainToNearestEnemyUpgrade : ProjectilesChainToNearestEnemyUpgradeBase
     {
-        public ShotgunProjectilesChainToNearestEnemyUpgrade(Shotgun shotgun, Sprite sprite)
-            : base(shotgun, sprite, UpgradeType.ShotgunProjectilesChainToNearestEnemy) {}
+        public ShotgunProjectilesChainToNearestEnemyUpgrade()
+            : base(WeaponType.Shotgun, UpgradeType.ShotgunProjectilesChainToNearestEnemy) {}
 
-        public override UpgradeType CommitUpdate()
+        protected override void CommitUpdate(IUpgradeable upgradeable)
         {
-            var projectileUpgrade = new ShotgunProjectilesChainToNearestEnemyUpgradeHandler(Weapon as Shotgun);
+            var projectileUpgrade = new ShotgunProjectilesChainToNearestEnemyUpgradeHandler(upgradeable.ShootingSystem.Shotgun);
             projectileUpgrade.ApplyUpgrade();
-            return this.upgradeType;
         }
     }
 }

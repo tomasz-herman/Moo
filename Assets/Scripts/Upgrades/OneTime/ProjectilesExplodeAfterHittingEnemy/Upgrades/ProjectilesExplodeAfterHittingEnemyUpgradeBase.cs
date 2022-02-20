@@ -3,16 +3,19 @@ using UnityEngine;
 
 namespace Assets.Scripts.Upgrades.OneTime.ProjectilesExplodeAfterHittingEnemy.Upgrades
 {
-    public abstract class ProjectilesExplodeAfterHittingEnemyUpgradeBase : UpgradeView
+    public abstract class ProjectilesExplodeAfterHittingEnemyUpgradeBase : OneTimeUpgradeView
     {
-        private readonly Weapon _weapon;
+        public WeaponType WeaponType { get; private set; }
 
-        protected ProjectilesExplodeAfterHittingEnemyUpgradeBase(Weapon weapon, Sprite sprite, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(weapon.WeaponType)} projectile explodes",
-                $"{Weapon.GetWeaponName(weapon.WeaponType)} projectile explodes after hitting enemy",
-                sprite, upgradeType)
+        protected ProjectilesExplodeAfterHittingEnemyUpgradeBase(WeaponType type, UpgradeType upgradeType)
+            : base($"Exploding {Weapon.GetWeaponName(type)} Projectiles", upgradeType, UpgradeIcon.ExplodingProjectiles)
         {
-            _weapon = weapon;
+            WeaponType = type;
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable)
+        {
+            return $"{Weapon.GetWeaponName(WeaponType)} projectile explodes after hitting enemy";
         }
     }
 }

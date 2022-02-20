@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c275fa401a1cb45812a2c278b44277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
+  defaultMovementSpeed: 5
 --- !u!114 &5699320512004101978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,12 +112,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7884263693069889528, guid: 1750f5a51375e9f43a437f778a4799d3, type: 3}
+  machineGunProjectilePrefab: {fileID: 9031496734421737681, guid: 47da7f05e598f124f96deb6935c8eaef, type: 3}
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  projectileSpeedMultiplier: 1
-  triggerTimeoutMultiplier: 1
-  weaponDamageMultiplier: 1
   ammoSystem: {fileID: 0}
   weaponBar: {fileID: 0}
 --- !u!114 &5724624748060603388
@@ -161,11 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a96da793d373a4083d50262bab5261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooting: {fileID: 0}
   movement: {fileID: 0}
-  healthSystem: {fileID: 0}
-  upgradeSystem: {fileID: 0}
-  ammoSystem: {fileID: 0}
   scoreSystem: {fileID: 0}
   TeleporterScale: 2
 --- !u!114 &4063650702846584660
@@ -180,18 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a863465fa9a3d468c668addcb83597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmoIcon: {fileID: 21300000, guid: aa8e17fb9cea8404b98689f3ac75ac15, type: 3}
-  maxHealthIcon: {fileID: 21300000, guid: 621ecc0dd90c6e24393ad9773c725dc4, type: 3}
-  movementSpeedIcon: {fileID: 21300000, guid: 80e5ef45856663448ae39543560b6093, type: 3}
-  weaponDamageIcon: {fileID: 21300000, guid: 13bd3c62a964f864d88dc4cf698de040, type: 3}
-  weaponProjectileSpeedIcon: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
-  weaponCooldownIcon: {fileID: 21300000, guid: 0c411a9f8544b61458d7e501f1c4a77b, type: 3}
-  weaponAmmoCostIcon: {fileID: 21300000, guid: aa8e17fb9cea8404b98689f3ac75ac15, type: 3}
-  shotgunProjectileCountIcon: {fileID: 21300000, guid: 37c38d8a4c2036648b09de0be2352d42, type: 3}
-  shotgunProjectileDispersionIcon: {fileID: 21300000, guid: eb4a92dd8655fa34297fe19dc0d782d8, type: 3}
-  swordReflectsEnemyProjectilesIcon: {fileID: 21300000, guid: e676184011ba94a4f972b1822a697bdc, type: 3}
-  projectilesExplodeAfterHittingEnemyIcon: {fileID: 21300000, guid: 3fb568f79d381104580787e1d994c4e4, type: 3}
-  projectilesChainToNearestEnemy: {fileID: 21300000, guid: 35d276838957fa740be5ec26471359c3, type: 3}
 --- !u!1 &5699320512156656962
 GameObject:
   m_ObjectHideFlags: 0
