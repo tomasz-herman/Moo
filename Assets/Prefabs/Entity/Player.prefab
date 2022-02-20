@@ -18,6 +18,11 @@ GameObject:
   - component: {fileID: 4999639116163168770}
   - component: {fileID: 717938059912514948}
   - component: {fileID: 4063650702846584660}
+  - component: {fileID: 3327421064569499473}
+  - component: {fileID: 8526168305067781232}
+  - component: {fileID: 4922808541942355558}
+  - component: {fileID: 62214721925051522}
+  - component: {fileID: 4365685975785715610}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -116,7 +121,7 @@ MonoBehaviour:
   bladePrefab: {fileID: -2442205089556700087, guid: 1d23c9f0a032c31409447abb2e4d91ad, type: 3}
   grenadePrefab: {fileID: 9010175660501646390, guid: b29d698325586ac409183fcb50d0c295, type: 3}
   bulletPrefab: {fileID: 3023845835336368615, guid: e5a6c5905d2946f489af881a77d730ec, type: 3}
-  ammoSystem: {fileID: 0}
+  ammoSystem: {fileID: 8526168305067781232}
   weaponBar: {fileID: 0}
 --- !u!114 &5724624748060603388
 MonoBehaviour:
@@ -143,10 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c118dbf5f95652459f86b9eb5dbed7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statisticsSystem: {fileID: 0}
-  ammoSystem: {fileID: 0}
-  healthSystem: {fileID: 0}
-  playerMovement: {fileID: 0}
+  statisticsSystem: {fileID: 4922808541942355558}
+  ammoSystem: {fileID: 8526168305067781232}
+  healthSystem: {fileID: 3327421064569499473}
+  playerMovement: {fileID: 5699320512004101983}
 --- !u!114 &717938059912514948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a96da793d373a4083d50262bab5261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 0}
-  scoreSystem: {fileID: 0}
+  movement: {fileID: 5699320512004101983}
+  scoreSystem: {fileID: 4365685975785715610}
   TeleporterScale: 2
 --- !u!114 &4063650702846584660
 MonoBehaviour:
@@ -174,6 +179,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a863465fa9a3d468c668addcb83597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3327421064569499473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e99fa591a7f37041a36bdbe8b039a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultHealth: 100
+  godMode: 0
+--- !u!114 &8526168305067781232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a205519e091115b40865c709a1fdfc1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAmmo: 100
+  defaultCapacity: 100
+--- !u!114 &4922808541942355558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314781cea85fcf2418353a097cf336fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &62214721925051522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f312b9d41b1e9a418e3772ad905b5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeWindow: {fileID: 0}
+  player: {fileID: 717938059912514948}
+--- !u!114 &4365685975785715610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699320512004101980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1cb56ab231e04428c680c93c0797c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 0}
 --- !u!1 &5699320512156656962
 GameObject:
   m_ObjectHideFlags: 0
