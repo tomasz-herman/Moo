@@ -17,6 +17,6 @@ public class FpsCounter : MonoBehaviour
 
     void Update()
     {
-        text.text = Mathf.RoundToInt(1 / Time.deltaTime).ToString();
+        text.text = Mathf.RoundToInt(1 / Time.unscaledDeltaTime).ToString();
     }
 }

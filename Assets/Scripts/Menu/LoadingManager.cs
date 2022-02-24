@@ -58,7 +58,7 @@ public class LoadingManager : MonoBehaviour
         }
 
         const float waitTimeTick = 0.1f;
-        const float waitTimeVariance = 0.5f * waitTimeTick;
+        const float waitTimeVariance = 0.8f * waitTimeTick;
 
         int waitingTicks = Mathf.CeilToInt(secondsToWait / waitTimeTick);
 
