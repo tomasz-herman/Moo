@@ -32,6 +32,8 @@ public class MainMenu : MonoBehaviour
 
         if(firstTimeLoading)
         {
+            ApplicationData.Debug = ApplicationData.GameplayData.Debug;
+
             Config.Load(ApplicationData.configPath);
             Application.quitting += () => Config.Save(ApplicationData.configPath);
             firstTimeLoading = false;

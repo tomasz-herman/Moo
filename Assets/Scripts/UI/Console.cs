@@ -95,6 +95,20 @@ public class Console : MonoBehaviour
                 };
                 gameWorld.EndGame(win);
             });
+        ActionCommand<string> debugMode = new ActionCommand<string>(
+            "debug",
+            "Switches debug mode",
+            "debug <on|off>",
+            result =>
+            {
+                bool on = result switch
+                {
+                    "on" => true,
+                    "off" => false,
+                    _ => throw new ArgumentOutOfRangeException(nameof(result), result, "Should be one of: on, off")
+                };
+                ApplicationData.Debug = on;
+            });
         Commands = new Dictionary<string, Command>
         {
             [help.Id] = help, 
@@ -103,7 +117,8 @@ public class Console : MonoBehaviour
             [setHealth.Id] = setHealth,
             [spawn.Id] = spawn,
             [godMode.Id] = godMode,
-            [endGame.Id] = endGame
+            [endGame.Id] = endGame,
+            [debugMode.Id] = debugMode
         };
     }
 

@@ -59,6 +59,10 @@ public class LoadingManager : MonoBehaviour
 
         const float waitTimeTick = 0.1f;
         int waitingTicks = Mathf.CeilToInt(secondsToWait / waitTimeTick);
+
+        if (ApplicationData.Debug)
+            waitingTicks = 1;
+
         for (int i = 0; i < waitingTicks; i++)
         {
             progress = (scenes + (i + 1.0f) / waitingTicks) / (scenes + 1.0f);
