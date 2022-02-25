@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     private OptionsView optionsView;
 
     private MenuView activeView;
-    private bool firstTimeLoading = true;
+    private static bool firstTimeLoading = true;
 
     public void Start()
     {
