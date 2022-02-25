@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf1dab834d4ec34195b920ea7bbf9ec, type: 3}
-  m_Name: Very low
+  m_Name: 5_Ultra
   m_EditorClassIdentifier: 
   m_Version: 18
   m_ObsoleteFrameSettings:
@@ -197,18 +197,18 @@ MonoBehaviour:
     sssCustomSampleBudget: 20
     materialQuality: 0
   m_RenderPipelineSettings:
-    supportShadowMask: 0
+    supportShadowMask: 1
     supportSSR: 0
     supportSSRTransparent: 0
-    supportSSAO: 0
-    supportSSGI: 0
-    supportSubsurfaceScattering: 0
+    supportSSAO: 1
+    supportSSGI: 1
+    supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 0
-    supportLightLayers: 0
+    supportVolumetrics: 1
+    supportLightLayers: 1
     lightLayerName0: Light Layer default
     lightLayerName1: Light Layer 1
     lightLayerName2: Light Layer 2
@@ -217,19 +217,19 @@ MonoBehaviour:
     lightLayerName5: Light Layer 5
     lightLayerName6: Light Layer 6
     lightLayerName7: Light Layer 7
-    supportDistortion: 0
-    supportTransparentBackface: 0
-    supportTransparentDepthPrepass: 0
-    supportTransparentDepthPostpass: 0
+    supportDistortion: 1
+    supportTransparentBackface: 1
+    supportTransparentDepthPrepass: 1
+    supportTransparentDepthPostpass: 1
     colorBufferFormat: 74
-    supportCustomPass: 0
-    customBufferFormat: 12
-    supportedLitShaderMode: 2
+    supportCustomPass: 1
+    customBufferFormat: 48
+    supportedLitShaderMode: 1
     planarReflectionResolution:
-      m_Values: 000100000004000000080000
+      m_Values: 000100000004000000040000
       m_SchemaId:
         m_Id: With3Levels
-    supportDecals: 0
+    supportDecals: 1
     supportDecalLayers: 0
     decalLayerName0: Decal Layer default
     decalLayerName1: Decal Layer 1
@@ -240,10 +240,10 @@ MonoBehaviour:
     decalLayerName6: Decal Layer 6
     decalLayerName7: Decal Layer 7
     msaaSampleCount: 1
-    supportMotionVectors: 0
+    supportMotionVectors: 1
     supportRuntimeDebugDisplay: 0
     supportRuntimeAOVAPI: 0
-    supportDitheringCrossFade: 0
+    supportDitheringCrossFade: 1
     supportTerrainHole: 0
     supportProbeVolume: 0
     supportRayTracing: 0
@@ -275,17 +275,17 @@ MonoBehaviour:
       maxLightsPerClusterCell: 8
     hdShadowInitParams:
       maxShadowRequests: 128
-      directionalShadowsDepthBits: 16
-      shadowFilteringQuality: 0
+      directionalShadowsDepthBits: 32
+      shadowFilteringQuality: 2
       punctualLightShadowAtlas:
-        shadowAtlasResolution: 512
-        shadowAtlasDepthBits: 16
+        shadowAtlasResolution: 8192
+        shadowAtlasDepthBits: 32
         useDynamicViewportRescale: 1
       areaLightShadowAtlas:
-        shadowAtlasResolution: 512
-        shadowAtlasDepthBits: 16
+        shadowAtlasResolution: 8192
+        shadowAtlasDepthBits: 32
         useDynamicViewportRescale: 1
-      cachedPunctualLightShadowAtlas: 512
+      cachedPunctualLightShadowAtlas: 2048
       cachedAreaLightShadowAtlas: 1024
       shadowResolutionDirectional:
         m_Values: 00010000000200000004000000080000
@@ -312,7 +312,7 @@ MonoBehaviour:
       perChannelMask: 0
     postProcessSettings:
       m_LutSize: 32
-      lutFormat: 74
+      lutFormat: 48
       bufferFormat: 74
     dynamicResolutionSettings:
       enabled: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
       forceResolution: 0
       forcedPercentage: 100
     lowresTransparentSettings:
-      enabled: 0
+      enabled: 1
       checkerboardDepthBuffer: 1
       upsampleType: 1
     xrSettings:
@@ -331,27 +331,27 @@ MonoBehaviour:
       occlusionMesh: 1
       cameraJitter: 0
     postProcessQualitySettings:
-      NearBlurSampleCount: 010000000100000001000000
+      NearBlurSampleCount: 030000000500000008000000
       NearBlurMaxRadius:
       - 2
       - 4
       - 7
-      FarBlurSampleCount: 010000000100000001000000
+      FarBlurSampleCount: 04000000070000000e000000
       FarBlurMaxRadius:
       - 5
       - 8
       - 13
-      DoFResolution: 040000000400000004000000
-      DoFHighQualityFiltering: 000000
+      DoFResolution: 040000000200000001000000
+      DoFHighQualityFiltering: 000101
       DoFPhysicallyBased: 000000
-      MotionBlurSampleCount: 010000000100000001000000
-      BloomRes: 040000000400000004000000
-      BloomHighQualityFiltering: 000000
-      BloomHighQualityPrefiltering: 000000
-      ChromaticAberrationMaxSamples: 010000000100000001000000
+      MotionBlurSampleCount: 04000000080000000c000000
+      BloomRes: 040000000200000002000000
+      BloomHighQualityFiltering: 000101
+      BloomHighQualityPrefiltering: 000001
+      ChromaticAberrationMaxSamples: 03000000060000000c000000
     lightSettings:
       useContactShadow:
-        m_Values: 000000
+        m_Values: 000001
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:

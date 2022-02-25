@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf1dab834d4ec34195b920ea7bbf9ec, type: 3}
-  m_Name: Medium
+  m_Name: 0_Very low
   m_EditorClassIdentifier: 
   m_Version: 18
   m_ObsoleteFrameSettings:
@@ -197,7 +197,7 @@ MonoBehaviour:
     sssCustomSampleBudget: 20
     materialQuality: 0
   m_RenderPipelineSettings:
-    supportShadowMask: 1
+    supportShadowMask: 0
     supportSSR: 0
     supportSSRTransparent: 0
     supportSSAO: 0
@@ -217,19 +217,19 @@ MonoBehaviour:
     lightLayerName5: Light Layer 5
     lightLayerName6: Light Layer 6
     lightLayerName7: Light Layer 7
-    supportDistortion: 1
+    supportDistortion: 0
     supportTransparentBackface: 0
     supportTransparentDepthPrepass: 0
     supportTransparentDepthPostpass: 0
     colorBufferFormat: 74
-    supportCustomPass: 1
+    supportCustomPass: 0
     customBufferFormat: 12
-    supportedLitShaderMode: 1
+    supportedLitShaderMode: 2
     planarReflectionResolution:
       m_Values: 000100000004000000080000
       m_SchemaId:
         m_Id: With3Levels
-    supportDecals: 1
+    supportDecals: 0
     supportDecalLayers: 0
     decalLayerName0: Decal Layer default
     decalLayerName1: Decal Layer 1
@@ -275,17 +275,17 @@ MonoBehaviour:
       maxLightsPerClusterCell: 8
     hdShadowInitParams:
       maxShadowRequests: 128
-      directionalShadowsDepthBits: 32
-      shadowFilteringQuality: 1
+      directionalShadowsDepthBits: 16
+      shadowFilteringQuality: 0
       punctualLightShadowAtlas:
-        shadowAtlasResolution: 2048
-        shadowAtlasDepthBits: 32
+        shadowAtlasResolution: 512
+        shadowAtlasDepthBits: 16
         useDynamicViewportRescale: 1
       areaLightShadowAtlas:
-        shadowAtlasResolution: 2048
-        shadowAtlasDepthBits: 32
+        shadowAtlasResolution: 512
+        shadowAtlasDepthBits: 16
         useDynamicViewportRescale: 1
-      cachedPunctualLightShadowAtlas: 2048
+      cachedPunctualLightShadowAtlas: 512
       cachedAreaLightShadowAtlas: 1024
       shadowResolutionDirectional:
         m_Values: 00010000000200000004000000080000
@@ -312,7 +312,7 @@ MonoBehaviour:
       perChannelMask: 0
     postProcessSettings:
       m_LutSize: 32
-      lutFormat: 48
+      lutFormat: 74
       bufferFormat: 74
     dynamicResolutionSettings:
       enabled: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
       forceResolution: 0
       forcedPercentage: 100
     lowresTransparentSettings:
-      enabled: 1
+      enabled: 0
       checkerboardDepthBuffer: 1
       upsampleType: 1
     xrSettings:
@@ -331,27 +331,27 @@ MonoBehaviour:
       occlusionMesh: 1
       cameraJitter: 0
     postProcessQualitySettings:
-      NearBlurSampleCount: 030000000500000008000000
+      NearBlurSampleCount: 010000000100000001000000
       NearBlurMaxRadius:
       - 2
       - 4
       - 7
-      FarBlurSampleCount: 04000000070000000e000000
+      FarBlurSampleCount: 010000000100000001000000
       FarBlurMaxRadius:
       - 5
       - 8
       - 13
-      DoFResolution: 040000000200000001000000
-      DoFHighQualityFiltering: 000101
+      DoFResolution: 040000000400000004000000
+      DoFHighQualityFiltering: 000000
       DoFPhysicallyBased: 000000
-      MotionBlurSampleCount: 04000000080000000c000000
-      BloomRes: 040000000200000002000000
-      BloomHighQualityFiltering: 000101
-      BloomHighQualityPrefiltering: 000001
-      ChromaticAberrationMaxSamples: 03000000060000000c000000
+      MotionBlurSampleCount: 010000000100000001000000
+      BloomRes: 040000000400000004000000
+      BloomHighQualityFiltering: 000000
+      BloomHighQualityPrefiltering: 000000
+      ChromaticAberrationMaxSamples: 010000000100000001000000
     lightSettings:
       useContactShadow:
-        m_Values: 000001
+        m_Values: 000000
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:
@@ -436,8 +436,8 @@ MonoBehaviour:
   allowShaderVariantStripping: 1
   enableSRPBatcher: 1
   shaderVariantLogLevel: 0
-  availableMaterialQualityLevels: 3
-  m_DefaultMaterialQualityLevel: 2
+  availableMaterialQualityLevels: -1
+  m_DefaultMaterialQualityLevel: 4
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList:
   - {fileID: 11400000, guid: c01b34471c1fe4f48a247433bb629067, type: 2}
