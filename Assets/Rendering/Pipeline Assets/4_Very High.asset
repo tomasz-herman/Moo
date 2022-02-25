@@ -204,7 +204,7 @@ MonoBehaviour:
     supportSSGI: 0
     supportSubsurfaceScattering: 1
     sssSampleBudget:
-      m_Values: 140000002800000050000000
+      m_Values: 0a0000001400000028000000
       m_SchemaId:
         m_Id: With3Levels
     supportVolumetrics: 1
