@@ -274,7 +274,7 @@ MonoBehaviour:
       maxPlanarReflectionOnScreen: 16
       maxLightsPerClusterCell: 8
     hdShadowInitParams:
-      maxShadowRequests: 128
+      maxShadowRequests: 388
       directionalShadowsDepthBits: 32
       shadowFilteringQuality: 0
       punctualLightShadowAtlas:
