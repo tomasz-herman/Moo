@@ -13,6 +13,12 @@ public class Console : MonoBehaviour
 
     private void Awake()
     {
+        if(!ApplicationData.GameplayData.Debug)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         ActionCommand help = new ActionCommand(
             "help",
             "Shows all commands",
