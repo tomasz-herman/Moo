@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameplayConfig", menuName = "ScriptableObjects/GameplayConfig")]
 public class GameplayConfig : ScriptableObject
 {
+    public bool Debug = false;
     public float DefaultPlayerHealth = 100;
     public int DefaultPlayerAmmo = 100;
 

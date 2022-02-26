@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 295459154561307112}
   - component: {fileID: 295459154561307031}
   - component: {fileID: 295459154561307030}
-  - component: {fileID: 2831023374209806392}
   m_Layer: 0
   m_Name: GameWorld
   m_TagString: Untagged
@@ -48,7 +47,10 @@ MonoBehaviour:
   userInterface: {fileID: 0}
   timer: {fileID: 295459154561307030}
   audioManager: {fileID: 0}
-  BackgroundMusicManager: {fileID: 0}
+  FightMusicManager: {fileID: 0}
+  IdleMusicManager: {fileID: 0}
+  ScoreSystem: {fileID: 0}
+  chambersControler: {fileID: 0}
 --- !u!114 &295459154561307030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,17 +61,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a68d308d0d4a83440b1e1d61c9073f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2831023374209806392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295459154561307029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88884ac016b5d3f409a1b0752f8d7936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
