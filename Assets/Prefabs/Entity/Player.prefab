@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 0ec06bf7e859dbb46b5a4068acf9ba41, type: 2}
-  shooting: {fileID: 0}
+  shooting: {fileID: 5699320512004101977}
 --- !u!1 &5699320512156656962
 GameObject:
   m_ObjectHideFlags: 0
