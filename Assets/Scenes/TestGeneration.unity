@@ -1262,6 +1262,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1578148783827557731, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
+      propertyPath: gameWorld
+      value: 
+      objectReference: {fileID: 1027701283}
     - target: {fileID: 8248976420710688242, guid: 3cfb58902eec7d24fb6d93f4095905ac, type: 3}
       propertyPath: timer
       value: 

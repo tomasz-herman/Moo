@@ -7,6 +7,7 @@ public class UserInterface : MonoBehaviour
     public UpgradeWindow upgradeWindow;
     public StatsWindow statsWindow;
     public PauseMenu pauseMenu;
+    public EndScreen endScreen;
 
     public GuiWindow selectedWindow;
 
