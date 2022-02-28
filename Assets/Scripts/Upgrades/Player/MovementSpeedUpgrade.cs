@@ -5,7 +5,7 @@ namespace Assets.Scripts.Upgrades
     public class MovementSpeedUpgrade : UpgradeView
     {
         public MovementSpeedUpgrade()
-            : base("Movement speed", UpgradeType.MovementSpeed, UpgradeIcon.MovementSpeed, UpgradeColor.White)
+            : base("Movement speed", UpgradeType.MovementSpeed, UpgradeIcon.MovementSpeed, UpgradeColor.Speed)
         {
         
         }

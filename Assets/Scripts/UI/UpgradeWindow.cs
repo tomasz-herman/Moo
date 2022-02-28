@@ -43,16 +43,22 @@ public class UpgradeWindow : GuiWindow
 
         upgrades = upgradeable.UpgradeSystem.GenerateRandomUpgrades();
         leftName.text = upgrades[0].GetName();
+        leftName.color = UpgradeColorExtensions.GetColor(upgrades[0].Color);
         leftDescription.text = upgrades[0].GetDescription(upgradeable);
         leftButton.image.sprite = upgrades[0].GetSprite();
+        leftButton.image.color = UpgradeColorExtensions.GetColor(upgrades[0].Color);
 
         middleName.text = upgrades[1].GetName();
+        middleName.color = UpgradeColorExtensions.GetColor(upgrades[1].Color);
         middleDescription.text = upgrades[1].GetDescription(upgradeable);
         middleButton.image.sprite = upgrades[1].GetSprite();
+        middleButton.image.color = UpgradeColorExtensions.GetColor(upgrades[1].Color);
 
         rightName.text = upgrades[2].GetName();
+        rightName.color = UpgradeColorExtensions.GetColor(upgrades[2].Color);
         rightDescription.text = upgrades[2].GetDescription(upgradeable);
         rightButton.image.sprite = upgrades[2].GetSprite();
+        rightButton.image.color = UpgradeColorExtensions.GetColor(upgrades[2].Color);
     }
 
     private void OnLeftButtonClicked()
