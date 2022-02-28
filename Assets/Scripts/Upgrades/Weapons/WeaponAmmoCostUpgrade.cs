@@ -5,46 +5,58 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponAmmoCostUpgrade : UpgradeView
     {
-        private const float Multiplier = 0.75f;
-
-        private readonly Weapon _weapon;
-
-        protected WeaponAmmoCostUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType)
-            : base($"{Weapon.GetWeaponName(w.WeaponType)} ammo cost",
-         $"Decrease ammo cost of {Weapon.GetWeaponName(w.WeaponType)} by 25%",
-                   sprite, upgradeType)
+        //we could move this multiplier to UpgradeData
+        private const float Multiplier = 1f;
+        public WeaponType WeaponType { get; private set; }
+        protected WeaponAmmoCostUpgrade(WeaponType weaponType, UpgradeType upgradeType)
+            : base($"{Weapon.GetWeaponName(weaponType)} Ammo Cost", upgradeType, UpgradeIcon.AmmoCost, UpgradeColorExtensions.FromWeapon(weaponType))
         {
-            _weapon = w;
+            WeaponType = weaponType;
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _weapon.baseAmmoConsumption *= Multiplier;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+
+            return gameplay.GetDescendingScalingFactor(upgradeCount + 1, Multiplier, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            var weapon = upgradeable.ShootingSystem[WeaponType];
+            float currentConsumption = weapon.AmmoConsumption;
+            float newConsumtpion = weapon.GetAmmoConsumption(newFactor);
+
+            return $"Decrease ammo cost of { Weapon.GetWeaponName(WeaponType) } from {currentConsumption.ToString("F2")} to {newConsumtpion.ToString("F2")}";
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem[WeaponType].ammoConsumptionMultiplier = newFactor;
         }
     }
 
     public class PistolAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
-        public PistolAmmoCostUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.PistolAmmoCost) { }
+        public PistolAmmoCostUpgrade()
+            : base(WeaponType.Pistol, UpgradeType.PistolAmmoCost) { }
     }
 
     public class ShotgunAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
-        public ShotgunAmmoCostUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.ShotgunAmmoCost) { }
+        public ShotgunAmmoCostUpgrade()
+            : base(WeaponType.Shotgun, UpgradeType.ShotgunAmmoCost) { }
     }
 
     public class MachineGunAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
-        public MachineGunAmmoCostUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.MachineGunAmmoCost) { }
+        public MachineGunAmmoCostUpgrade()
+            : base(WeaponType.MachineGun, UpgradeType.MachineGunAmmoCost) { }
     }
 
     public class GrenadeLauncherAmmoCostUpgrade : WeaponAmmoCostUpgrade
     {
-        public GrenadeLauncherAmmoCostUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.GrenadeLauncherAmmoCost) { }
+        public GrenadeLauncherAmmoCostUpgrade()
+            : base(WeaponType.GrenadeLauncher, UpgradeType.GrenadeLauncherAmmoCost) { }
     }
 }

@@ -58,12 +58,18 @@ public class LoadingManager : MonoBehaviour
         }
 
         const float waitTimeTick = 0.1f;
+        const float waitTimeVariance = 0.8f * waitTimeTick;
+
         int waitingTicks = Mathf.CeilToInt(secondsToWait / waitTimeTick);
+
+        if (ApplicationData.Debug)
+            waitingTicks = 1;
+
         for (int i = 0; i < waitingTicks; i++)
         {
             progress = (scenes + (i + 1.0f) / waitingTicks) / (scenes + 1.0f);
             progressBar.value = progress;
-            yield return new WaitForSecondsRealtime(waitTimeTick);
+            yield return new WaitForSecondsRealtime(Utils.FloatBetween(waitTimeTick - waitTimeVariance, waitTimeTick + waitTimeVariance));
         }
 
         loadingScreen.gameObject.SetActive(false);

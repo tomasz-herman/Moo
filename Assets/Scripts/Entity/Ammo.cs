@@ -25,14 +25,14 @@ public class Ammo : Entity
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            var playerCapacity = player.ammoSystem.MaxAmmo - player.ammoSystem.Ammo;
+            var playerCapacity = player.AmmoSystem.MaxAmmo - player.AmmoSystem.Ammo;
             if(playerCapacity <= 0) return;
             if (playerCapacity >= remainingAmmo)
             {
                 int displayedValue = Mathf.CeilToInt(remainingAmmo);
                 ShowText("+" + displayedValue);
 
-                player.ammoSystem.Ammo += remainingAmmo;
+                player.AmmoSystem.Ammo += remainingAmmo;
                 Destroy(gameObject);
             }
             else
@@ -40,7 +40,7 @@ public class Ammo : Entity
                 int displayedValue = Mathf.CeilToInt(playerCapacity);
                 ShowText("+" + displayedValue);
 
-                player.ammoSystem.Ammo += playerCapacity;
+                player.AmmoSystem.Ammo += playerCapacity;
                 remainingAmmo -= playerCapacity;
             }
         }

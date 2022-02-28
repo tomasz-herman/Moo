@@ -22,7 +22,7 @@ namespace Assets.Scripts.Weapons
             Projectile projectile = Object.Instantiate(projectilePrefab, position, Quaternion.identity);
             projectile.color = color;
             projectile.SetUpgrades(projectileUpgrades);
-            projectile.Launch(shooter, direction.normalized * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
+            projectile.Launch(shooter, direction.normalized * ProjectileSpeed, Damage);
         }
     }
 }

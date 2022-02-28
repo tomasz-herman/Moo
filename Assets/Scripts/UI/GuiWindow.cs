@@ -6,7 +6,7 @@ public class GuiWindow : MonoBehaviour
 {
     public GameObject overlay;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         overlay = gameObject;
     }

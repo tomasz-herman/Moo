@@ -8,15 +8,12 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Projectile projectilePrefab;
+    public Projectile machineGunProjectilePrefab;
     public Blade bladePrefab;
     public Grenade grenadePrefab;
     public Bullet bulletPrefab;
 
     private CircularList<Weapon> weapons = new CircularList<Weapon>();
-
-    public float projectileSpeedMultiplier = 1f;
-    public float triggerTimeoutMultiplier = 1f;
-    public float weaponDamageMultiplier = 1f;
 
     public AmmoSystem ammoSystem;
     public WeaponBar weaponBar;
@@ -40,7 +37,7 @@ public class Shooting : MonoBehaviour
     {
         Pistol = new Pistol(projectilePrefab);
         Shotgun = new Shotgun(bulletPrefab);
-        MachineGun = new MachineGun(projectilePrefab);
+        MachineGun = new MachineGun(machineGunProjectilePrefab);
         GrenadeLauncher = new GrenadeLauncher(grenadePrefab);
         Sword = new Sword(bladePrefab);
         weapons.Add(Pistol);
@@ -76,10 +73,11 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public void SelectWeapon(WeaponType type)
+    public Weapon SelectWeapon(WeaponType type)
     {
         weapons.SetIndex((int)type);
         WeaponChanged?.Invoke(this, weapons.Current());
+        return CurrentWeapon;
     }
 
     public void NextWeapon()
@@ -103,7 +101,7 @@ public class Shooting : MonoBehaviour
         weapons.Current().TryShoot(shooter, position, direction, this, ammoSystem);
     }
 
-    public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].basetriggerTimeout * triggerTimeoutMultiplier; }
+    public float GetTriggerTimeout(WeaponType type) { return weaponMap[type].TriggerTimeout; }
 
     public bool HasEnoughAmmo()
     {

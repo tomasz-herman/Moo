@@ -26,7 +26,7 @@ namespace Assets.Scripts.Weapons
             currentBlade = Object.Instantiate(bladePrefab, position, Quaternion.identity);
             currentBlade.color = color;
             currentBlade.SetUpgrades(projectileUpgrades);
-            currentBlade.Launch(shooter, direction.normalized, shooting.weaponDamageMultiplier * baseDamage, baseProjectileSpeed * shooting.projectileSpeedMultiplier);
+            currentBlade.Launch(shooter, direction.normalized, Damage, ProjectileSpeed);
         }
     }
 }

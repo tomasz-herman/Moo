@@ -25,7 +25,7 @@ namespace Assets.Scripts.Weapons
             projectile.color = color;
             projectile.SetUpgrades(projectileUpgrades);
             var dir = Quaternion.Euler(0, Utils.RandomGaussNumber(0, _scatterFactor), 0) * direction.normalized;
-            projectile.Launch(shooter, dir * baseProjectileSpeed * shooting.projectileSpeedMultiplier, shooting.weaponDamageMultiplier * baseDamage);
+            projectile.Launch(shooter, dir * ProjectileSpeed, Damage);
         }
     }
 }

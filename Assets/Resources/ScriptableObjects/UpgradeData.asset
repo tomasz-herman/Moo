@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a25b2fdf2e47a74f9bb2f3037b6aa1f, type: 3}
+  m_Name: UpgradeData
+  m_EditorClassIdentifier: 
+  OneTimeUpgradeColor: {r: 1, g: 0.6332026, b: 0, a: 0}
+  Upgrades:
+  - iconType: 0
+    image: {fileID: 21300000, guid: e676184011ba94a4f972b1822a697bdc, type: 3}
+  - iconType: 1
+    image: {fileID: 21300000, guid: aa8e17fb9cea8404b98689f3ac75ac15, type: 3}
+  - iconType: 2
+    image: {fileID: 21300000, guid: 621ecc0dd90c6e24393ad9773c725dc4, type: 3}
+  - iconType: 3
+    image: {fileID: 21300000, guid: 80e5ef45856663448ae39543560b6093, type: 3}
+  - iconType: 4
+    image: {fileID: 21300000, guid: 13bd3c62a964f864d88dc4cf698de040, type: 3}
+  - iconType: 5
+    image: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
+  - iconType: 6
+    image: {fileID: 21300000, guid: 0c411a9f8544b61458d7e501f1c4a77b, type: 3}
+  - iconType: 7
+    image: {fileID: 21300000, guid: 3fb568f79d381104580787e1d994c4e4, type: 3}
+  - iconType: 8
+    image: {fileID: 21300000, guid: 37c38d8a4c2036648b09de0be2352d42, type: 3}
+  - iconType: 9
+    image: {fileID: 21300000, guid: eb4a92dd8655fa34297fe19dc0d782d8, type: 3}
+  - iconType: 10
+    image: {fileID: 21300000, guid: 35d276838957fa740be5ec26471359c3, type: 3}
+  - iconType: 11
+    image: {fileID: 21300000, guid: b0ee1c9a268de2f4e8133bf6fa6ca386, type: 3}
+  - iconType: 12
+    image: {fileID: 21300000, guid: e79175541a6fc5941a35aa0cbb39e261, type: 3}

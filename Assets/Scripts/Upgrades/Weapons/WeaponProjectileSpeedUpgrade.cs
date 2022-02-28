@@ -5,50 +5,76 @@ namespace Assets.Scripts.Upgrades.Weapons
 {
     public abstract class WeaponProjectileSpeedUpgrade : UpgradeView
     {
-        private const float Multiplier = 1.1f;
-
-        private readonly Weapon _weapon;
-
-        protected WeaponProjectileSpeedUpgrade(Weapon w, Sprite sprite, UpgradeType upgradeType, string name = null, string description = null)
-            : base(name ?? $"{Weapon.GetWeaponName(w.WeaponType)} projectile speed", description ?? $"Increase velocity of {Weapon.GetWeaponName(w.WeaponType)} projectiles by 10%", sprite, upgradeType)
+        public WeaponType WeaponType { get; private set; }
+        protected WeaponProjectileSpeedUpgrade(WeaponType weapon, UpgradeType upgradeType, string name = null)
+            : base(name ?? $"{Weapon.GetWeaponName(weapon)} Projectile Speed", upgradeType, UpgradeIcon.ProjectileSpeed, UpgradeColorExtensions.FromWeapon(weapon))
         {
-            _weapon = w;
+            WeaponType = weapon;
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _weapon.baseProjectileSpeed *= Multiplier;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+
+            return gameplay.GetPlayerProjectileSpeedScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            var weapon = upgradeable.ShootingSystem[WeaponType];
+
+            float currentSpeed = weapon.ProjectileSpeed;
+            float newSpeed = weapon.GetProjectileSpeed(newFactor);
+
+            return $"Increase velocity of {Weapon.GetWeaponName(WeaponType)} projectiles from {currentSpeed.ToString("F1")} to {newSpeed.ToString("F1")}";
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            upgradeable.ShootingSystem[WeaponType].projectileSpeedMultiplier = newFactor;
         }
     }
 
     public class PistolProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
     {
-        public PistolProjectileSpeedUpgrade(Pistol weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.PistolProjectileSpeed) { }
+        public PistolProjectileSpeedUpgrade()
+            : base(WeaponType.Pistol, UpgradeType.PistolProjectileSpeed) { }
     }
 
     public class ShotgunProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
     {
-        public ShotgunProjectileSpeedUpgrade(Shotgun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.ShotgunProjectileSpeed) { }
+        public ShotgunProjectileSpeedUpgrade()
+            : base(WeaponType.Shotgun, UpgradeType.ShotgunProjectileSpeed) { }
     }
 
     public class MachineGunProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
     {
-        public MachineGunProjectileSpeedUpgrade(MachineGun weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.MachineGunProjectileSpeed) { }
+        public MachineGunProjectileSpeedUpgrade()
+            : base(WeaponType.MachineGun, UpgradeType.MachineGunProjectileSpeed) { }
     }
 
     public class GrenadeLauncherProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
     {
-        public GrenadeLauncherProjectileSpeedUpgrade(GrenadeLauncher weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.GrenadeLauncherProjectileSpeed) { }
+        public GrenadeLauncherProjectileSpeedUpgrade()
+            : base(WeaponType.GrenadeLauncher, UpgradeType.GrenadeLauncherProjectileSpeed) { }
     }
 
-    public class SwordProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
-    {
-        public SwordProjectileSpeedUpgrade(Sword weapon, Sprite sprite)
-            : base(weapon, sprite, UpgradeType.SwordProjectileSpeed, $"Increase {Weapon.GetWeaponName(weapon.WeaponType)} sweep speed", $"Increase {Weapon.GetWeaponName(weapon.WeaponType)} sweep velocity by 10%") { }
-    }
+    //TODO this upgrade seems unreasonably weak, so it's removed for now
+    //public class SwordProjectileSpeedUpgrade : WeaponProjectileSpeedUpgrade
+    //{
+    //    public SwordProjectileSpeedUpgrade()
+    //        : base(WeaponType.Sword, UpgradeType.SwordProjectileSpeed, $"Increase {Weapon.GetWeaponName(WeaponType.Sword)} sweep speed") 
+    //    {
+
+    //    }
+    //    protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+    //    {
+    //        var weapon = upgradeable.ShootingSystem[WeaponType];
+
+    //        float currentSpeed = weapon.ProjectileSpeed;
+    //        float newSpeed = weapon.GetProjectileSpeed(newFactor);
+
+    //        return $"Increase {Weapon.GetWeaponName(weapon.WeaponType)} sweep velocity from {currentSpeed.ToString("F1")} to {newSpeed.ToString("F1")}";
+    //    }
+    //}
 }

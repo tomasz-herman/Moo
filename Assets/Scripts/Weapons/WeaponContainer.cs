@@ -32,7 +32,7 @@ public struct WeaponData
     public float projectileSpeed;
     public float triggerTimeout;
     public float damage;
-    public int ammoConsumption;
+    public float ammoConsumption;
 }
 
 public enum WeaponType { MachineGun, Shotgun, Pistol, Sword, GrenadeLauncher };

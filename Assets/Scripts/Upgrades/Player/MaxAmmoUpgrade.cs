@@ -4,21 +4,35 @@ namespace Assets.Scripts.Upgrades
 {
     public class MaxAmmoUpgrade : UpgradeView
     {
-        private const int Bonus = 50;
-
-        private readonly AmmoSystem _ammoSystem;
-
-        public MaxAmmoUpgrade(AmmoSystem ammoSystem, Sprite sprite)
-            : base("Max ammo", "Increase max ammo", sprite, UpgradeType.MaxAmmo)
+        public MaxAmmoUpgrade()
+            : base("Max Ammo", UpgradeType.MaxAmmo, UpgradeIcon.MaxAmmo, UpgradeColor.White)
         {
-            _ammoSystem = ammoSystem;
+
         }
 
-        public override UpgradeType CommitUpdate()
+        public override float GetScalingFactor(int upgradeCount)
         {
-            _ammoSystem.MaxAmmo += Bonus;
-            _ammoSystem.Ammo += Bonus;
-            return this.upgradeType;
+            var gameplay = ApplicationData.GameplayData;
+            return gameplay.GetPlayerAmmoScalingMultiplier(upgradeCount + 1, gameplay.GetSecondaryUpgradeMultiplier());
+        }
+
+        protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
+        {
+            var ammoSystem = upgradeable.AmmoSystem;
+
+            float newAmmo = GetCapacity(upgradeable, newFactor);
+
+            float delta = newAmmo - ammoSystem.MaxAmmo;
+
+            ammoSystem.MaxAmmo = newAmmo;
+            ammoSystem.Ammo += delta;
+        }
+
+        private float GetCapacity(IUpgradeable upgradeable, float factor) { return upgradeable.AmmoSystem.defaultCapacity * factor; }
+
+        protected override string GetDescription(IUpgradeable upgradeable, float newFactor)
+        {
+            return $"Increase ammo capacity from {Mathf.CeilToInt(upgradeable.AmmoSystem.MaxAmmo)} to {Mathf.CeilToInt(GetCapacity(upgradeable, newFactor))}";
         }
     }
 }

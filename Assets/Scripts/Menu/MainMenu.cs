@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     private OptionsView optionsView;
 
     private MenuView activeView;
-    private bool firstTimeLoading = true;
+    private static bool firstTimeLoading = true;
 
     public void Start()
     {
@@ -32,6 +32,8 @@ public class MainMenu : MonoBehaviour
 
         if(firstTimeLoading)
         {
+            ApplicationData.Debug = ApplicationData.GameplayData.Debug;
+
             Config.Load(ApplicationData.configPath);
             Application.quitting += () => Config.Save(ApplicationData.configPath);
             firstTimeLoading = false;

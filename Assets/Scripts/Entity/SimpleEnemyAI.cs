@@ -41,14 +41,21 @@ public class SimpleEnemyAI : MonoBehaviour
         weaponAIProperties = ApplicationData.WeaponAIData[weapon];
         lastPlayerPosition = player.position;
         remainingLagTime = Random.value;
+
+        foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
+        {
+            var weapon = shooting[weaponType];
+            var properties = ApplicationData.WeaponAIData[weaponType];
+            weapon.basetriggerTimeout *= enemy.data.BaseTriggerTimeoutMultiplier * properties.TriggerTimeoutMultiplier;
+            weapon.baseDamage *= enemy.data.BaseDamageMultiplier * properties.DamageMultiplier;
+            weapon.baseProjectileSpeed *= enemy.data.BaseProjectileSpeedMultiplier * properties.ProjectileSpeedMultiplier;
+        }
     }
 
     protected void Update()
     {
-        shooting.SelectWeapon(weaponAIProperties.Type);
-        shooting.triggerTimeoutMultiplier = enemy.data.BaseTriggerTimeoutMultiplier * weaponAIProperties.TriggerTimeoutMultiplier;
-        shooting.weaponDamageMultiplier = enemy.data.BaseDamageMultiplier * weaponAIProperties.DamageMultiplier;
-        shooting.projectileSpeedMultiplier = enemy.data.BaseProjectileSpeedMultiplier * weaponAIProperties.ProjectileSpeedMultiplier;
+        var weaponType = weaponAIProperties.Type;
+        shooting.SelectWeapon(weaponType);
 
         if (remainingLagTime > 0)
         {

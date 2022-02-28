@@ -10,7 +10,7 @@ public class GameWorld : MonoBehaviour
     public AudioManager audioManager;
     public BackgroundMusicManager FightMusicManager;
     public BackgroundMusicManager IdleMusicManager;
-    public Player player;
+    public ScoreSystem ScoreSystem;
     public ChambersControler chambersControler;
 
     private void Start()
@@ -18,7 +18,6 @@ public class GameWorld : MonoBehaviour
         timer.SetTicking(true);
         IdleMusicManager?.Play();
         audioManager = AudioManager.Instance;
-        player = FindObjectOfType<Player>();
         chambersControler = FindObjectOfType<ChambersControler>();
     }
 
@@ -37,7 +36,7 @@ public class GameWorld : MonoBehaviour
 
     public void EndGame(bool win)
     {
-        float score = player.GetComponent<ScoreSystem>().Score;
+        float score = ScoreSystem.Score;
         double timeMs = timer.GetElapsedTime().TotalMilliseconds;
         if(win)
         {

@@ -17,10 +17,23 @@ namespace Assets.Scripts.Weapons
         public List<IOneTimeProjectileUpgradeHandler> projectileUpgrades { get; } = new List<IOneTimeProjectileUpgradeHandler>();
 
         public float baseProjectileSpeed { get; set; }
+        public float projectileSpeedMultiplier { get; set; }
+        public float ProjectileSpeed { get { return GetProjectileSpeed(projectileSpeedMultiplier); } }
+
         public float basetriggerTimeout { get; set; }
+        public float triggerTimeoutMultiplier { get; set; }
+        public float TriggerTimeout { get { return GetTriggerTimeout(triggerTimeoutMultiplier); } }
+
         public float baseDamage { get; set; }
+        public float damageMultiplier { get; set; }
+        public float Damage { get { return GetDamage(damageMultiplier); } }
+
         public string Name { get; set; }
+
         public float baseAmmoConsumption { get; set; }
+        public float ammoConsumptionMultiplier { get; set; }
+        public float AmmoConsumption { get { return GetAmmoConsumption(ammoConsumptionMultiplier); } }
+
         public Color color { get; set; }
 
         private GameObject _owner;
@@ -48,6 +61,10 @@ namespace Assets.Scripts.Weapons
 
             WeaponData data = ApplicationData.WeaponData[WeaponType];
             baseAmmoConsumption = data.ammoConsumption;
+            ammoConsumptionMultiplier = 1;
+            triggerTimeoutMultiplier = 1;
+            damageMultiplier = 1;
+            projectileSpeedMultiplier = 1;
             baseDamage = data.damage;
             baseProjectileSpeed = data.projectileSpeed;
             basetriggerTimeout = data.triggerTimeout;
@@ -88,7 +105,7 @@ namespace Assets.Scripts.Weapons
                     WeaponShoot?.Invoke(this, (triggerTimeout, WeaponType));
                     Shoot(shooter, position, direction, shooting);
                     PlayGunfireSound();
-                    ammoSystem.Ammo -= baseAmmoConsumption;
+                    ammoSystem.Ammo -= AmmoConsumption;
                 }
             }
         }
@@ -107,7 +124,7 @@ namespace Assets.Scripts.Weapons
 
         public bool HasEnoughAmmo(AmmoSystem ammoSystem)
         {
-            return ammoSystem.Ammo >= baseAmmoConsumption;
+            return ammoSystem.Ammo >= AmmoConsumption;
         }
 
         public void AddUpgrade<T>(T handler) where T : IOneTimeProjectileUpgradeHandler
@@ -124,21 +141,12 @@ namespace Assets.Scripts.Weapons
 
         public static string GetWeaponName(WeaponType type)
         {
-            switch (type)
-            {
-                case WeaponType.MachineGun:
-                    return "MACHINEGUN";
-                case WeaponType.Shotgun:
-                    return "SHOTGUN";
-                case WeaponType.Pistol:
-                    return "PISTOL";
-                case WeaponType.Sword:
-                    return "SWORD";
-                case WeaponType.GrenadeLauncher:
-                    return "GRENADE LAUNCHER";
-                default:
-                    return "";
-            }
+            return ApplicationData.WeaponData[type].name;
         }
+
+        public float GetAmmoConsumption(float multiplier) { return baseAmmoConsumption * multiplier; }
+        public float GetTriggerTimeout(float multiplier) { return basetriggerTimeout * multiplier; }
+        public float GetDamage(float multiplier) { return baseDamage * multiplier; }
+        public float GetProjectileSpeed(float multiplier) { return baseProjectileSpeed * multiplier; }
     }
 }
