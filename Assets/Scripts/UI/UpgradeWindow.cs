@@ -24,12 +24,12 @@ public class UpgradeWindow : GuiWindow
         upgradeable = FindObjectOfType<Player>();
         Recalculate();
     }
-    
+
 
     public void Recalculate()
     {
         int pendingUpgrades = upgradeable.UpgradeSystem.GetPendingUpgrades();
-        
+
         pendingUpgradesText.text = $"({pendingUpgrades})";
         if (pendingUpgrades == 0)
             pendingUpgradesText.color = noUpgradeColor;
@@ -42,17 +42,18 @@ public class UpgradeWindow : GuiWindow
         rightButton.interactable = interactable;
 
         upgrades = upgradeable.UpgradeSystem.GenerateRandomUpgrades();
-        leftName.text = upgrades[0].GetName();
-        leftDescription.text = upgrades[0].GetDescription(upgradeable);
-        leftButton.image.sprite = upgrades[0].GetSprite();
+        SetUpgradeButon(leftName, leftDescription, leftButton, upgrades[0]);
+        SetUpgradeButon(middleName, middleDescription, middleButton, upgrades[1]);
+        SetUpgradeButon(rightName, rightDescription, rightButton, upgrades[2]);
+    }
 
-        middleName.text = upgrades[1].GetName();
-        middleDescription.text = upgrades[1].GetDescription(upgradeable);
-        middleButton.image.sprite = upgrades[1].GetSprite();
-
-        rightName.text = upgrades[2].GetName();
-        rightDescription.text = upgrades[2].GetDescription(upgradeable);
-        rightButton.image.sprite = upgrades[2].GetSprite();
+    private void SetUpgradeButon(TMP_Text name, TMP_Text description, Button button, UpgradeView upgrade)
+    {
+        name.text = upgrade.GetName();
+        name.color = UpgradeColorExtensions.GetColor(upgrade.Color);
+        description.text = upgrade.GetDescription(upgradeable);
+        button.image.sprite = upgrade.GetSprite();
+        button.image.color = UpgradeColorExtensions.GetColor(upgrade.Color);
     }
 
     private void OnLeftButtonClicked()
