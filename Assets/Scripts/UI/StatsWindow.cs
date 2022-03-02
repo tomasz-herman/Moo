@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StatsWindow : GuiWindow
@@ -24,15 +26,32 @@ public class StatsWindow : GuiWindow
         statList.Clear();
         foreach(var stat in statSystem.GetStatistics())
         {
-            statList.AddEntry(stat.type.ToString(), Mathf.CeilToInt(stat.value).ToString());
+            statList.AddEntry(stat.type.GetName(), $"{stat.value:0.##}", stat.type.GetColor());
         }
     }
     public void RecalculateUpgrades()
     {
         upgradeList.Clear();
-        foreach(var upgrade in upgradeSystem.GetUpgrades())
+
+        //get colors and sort
+        var upgrades = upgradeSystem.GetUpgrades()
+            .Select(c => new { c.type, c.count, color = c.type.GetColor() })
+            .OrderBy(c => c.type);
+
+        var added = new bool[Enum.GetValues(typeof(UpgradeType)).Length];
+        //add collected upgrades
+        foreach (var upgrade in upgrades)
         {
-            upgradeList.AddEntry(upgrade.type.ToString(), $"x{upgrade.count}");
+            added[(int)upgrade.type] = true;
+            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.color);
+        }
+
+        //add rest of upgrades
+        for (int i = 0; i < added.Length; i++)
+        {
+            if (added[i]) continue;
+
+            upgradeList.AddEntry(((UpgradeType)i).GetName(), $"x0", Color.gray);
         }
     }
 }
