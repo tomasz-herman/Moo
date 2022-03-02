@@ -623,7 +623,7 @@ figcaption {
 .motto-wrap {
   width: 80%;
   margin-right: auto;
-  margin-bottom: 85px;
+  margin-bottom: 0px;
   margin-left: auto;
   text-align: center;
 }
@@ -1770,6 +1770,10 @@ figcaption {
 
   .project-details-grid {
     width: 100%;
+  }
+
+  .project-pics {
+    margin-bottom: 40px;
   }
 
   .blog-detail-header-wrap {
