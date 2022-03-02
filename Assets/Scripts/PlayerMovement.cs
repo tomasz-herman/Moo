@@ -9,7 +9,7 @@ public class PlayerMovement : MovementSystem
     private bool iswalking = false;
     public bool IsWalking => iswalking;
     public EventHandler<float> SpeedChanged;
-    public Vector3 direction;
+    [HideInInspector] public Vector3 direction;
 
     public override float Speed
     {
@@ -47,12 +47,12 @@ public class PlayerMovement : MovementSystem
         if (Input.GetKey(KeyCode.S))
             moveForward--;
 
-        direction = toCharacter * moveForward + toRight * moveRight;
+        direction = (toCharacter * moveForward + toRight * moveRight).normalized;
     }
 
     private void FixedUpdate()
     {
-        Vector3 velocity = direction.normalized * movementSpeed * Time.deltaTime;
+        Vector3 velocity = direction * movementSpeed * Time.fixedDeltaTime;
 
         iswalking = velocity != Vector3.zero;
 

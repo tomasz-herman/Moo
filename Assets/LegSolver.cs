@@ -6,6 +6,7 @@ public class LegSolver : MonoBehaviour
 {
     [HideInInspector] public Vector3 currentPosition;
     [SerializeField] bool isRight;
+    [SerializeField] bool DrawGizmos = false;
     void Start()
     {
         currentPosition = gameObject.transform.position;
@@ -18,13 +19,16 @@ public class LegSolver : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(currentPosition, 0.5f);
+        if (!DrawGizmos)
+            return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(currentPosition, 0.2f);
     }
 
-    public Vector3 getDirection(Transform root)
+    public float getDirection()
     {
         if (isRight)
-            return root.transform.right;
-        return -root.transform.right;
+            return 1;
+        return -1;
     }
 }
