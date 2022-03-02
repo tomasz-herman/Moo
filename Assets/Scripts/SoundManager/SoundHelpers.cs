@@ -1,6 +1,8 @@
-﻿namespace Assets.Scripts.SoundManager
+﻿using System;
+
+namespace Assets.Scripts.SoundManager
 {
-    public static class SoundTypeSettings
+    public static class SoundHelpers
     {
         public static float GetVolumeForSoundType(SoundType soundType)
         {
@@ -33,6 +35,13 @@
             }
 
             return volume;
+        }
+
+        public static SoundType GetRandomEnemyDeathSound()
+        {
+            //TODO:
+            return SoundType.EnemyKilled;
+            //throw new NotImplementedException();
         }
     }
 }
