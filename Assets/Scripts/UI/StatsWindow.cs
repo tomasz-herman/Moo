@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StatsWindow : GuiWindow
@@ -30,9 +31,12 @@ public class StatsWindow : GuiWindow
     public void RecalculateUpgrades()
     {
         upgradeList.Clear();
-        foreach(var upgrade in upgradeSystem.GetUpgrades())
+        var upgrades = upgradeSystem.GetUpgrades()
+            .Select(c => new { c.type, c.count, color = c.type.GetColor() })
+            .OrderBy(c => c.type);
+        foreach (var upgrade in upgrades)
         {
-            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.type.GetColor());
+            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.color);
         }
     }
 }
