@@ -19,10 +19,42 @@ namespace Assets.Scripts.SoundManager
 
         private AudioManager _audioManager;
 
-        // Use this for initialization
         private void Start()
         {
-            this._audioManager = AudioManager.Instance;
+            Initialize();
+        }
+
+        private void Update()
+        {
+            this.currentTimeout = Mathf.Max(this.currentTimeout - Time.deltaTime, 0f);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, 1f);
+        }
+
+        public void PlayNextSound()
+        {
+            if (this.currentTimeout > 0) return;
+
+            if (this.RandomSoundQueue.Length == 0) return;
+
+            var audio = this.RandomSoundAudio[this.nextPlayingIndex];
+            audio.PlayOneShot();
+            this.nextPlayingIndex = GetNextAudioIndex(this.nextPlayingIndex, this.RandomSoundQueue.Length, this.SwitchType);
+            this.currentTimeout = Utils.FloatBetween(this.minSoundIntervalSeconds, this.maxSoundIntervalSeconds);
+        }
+
+        public void SetRandomSoundQueue(SoundTypeWithPlaybackSettings[] randomSoundQueue)
+        {
+            RandomSoundQueue = randomSoundQueue;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            this._audioManager ??= AudioManager.Instance;
             this.RandomSoundAudio = new Audio[this.RandomSoundQueue.Length];
             for (int i = 0; i < this.RandomSoundQueue.Length; i++)
             {
@@ -32,21 +64,6 @@ namespace Assets.Scripts.SoundManager
             }
 
             this.nextPlayingIndex = Utils.NumberBetween(0, this.RandomSoundQueue.Length - 1);
-        }
-
-        private void Update()
-        {
-            this.currentTimeout = Mathf.Max(this.currentTimeout - Time.deltaTime, 0f);
-        }
-
-        public void PlayNextSound()
-        {
-            if (this.currentTimeout > 0) return;
-
-            var audio = this.RandomSoundAudio[this.nextPlayingIndex];
-            audio.PlayOneShot();
-            this.nextPlayingIndex = GetNextAudioIndex(this.nextPlayingIndex, this.RandomSoundQueue.Length, this.SwitchType);
-            this.currentTimeout = Utils.FloatBetween(this.minSoundIntervalSeconds, this.maxSoundIntervalSeconds);
         }
 
         private static int GetNextAudioIndex(int currentlyPlayingIndex, int queueLength, BackgroundMusicSwitchType switchType)
