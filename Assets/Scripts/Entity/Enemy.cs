@@ -1,6 +1,7 @@
 using Assets.Scripts.SoundManager;
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public abstract class Enemy : Entity
 {
@@ -11,12 +12,6 @@ public abstract class Enemy : Entity
     
     [HideInInspector] public UnityEngine.Events.UnityEvent<GameObject> KillEvent;
 
-    public SoundTypeWithPlaybackSettings Sound;
-
-    [HideInInspector]
-    public Audio Audio;
-
-    private AudioManager _audioManager;
     [HideInInspector] public Shooting shooting;
     [HideInInspector] public float movementSpeed;
     [HideInInspector] public float pointsForKill;
@@ -25,18 +20,30 @@ public abstract class Enemy : Entity
     private bool isDead = false;
     private bool started = false;
 
+    public AudioSourcePrefab AudioSourcePrefab;
+
+    //Death sound
+    [HideInInspector]
+    public SoundTypeWithPlaybackSettings DeathSound;
+    protected AudioSourcePrefab DeathAudioSourceInstance;
+
+    //Random enemy hit sound player
+    [HideInInspector] public RandomSoundPlayer RandomEnemyHitSoundPlayer;
+
     void Awake()
     {
         dropSystem = GetComponent<DropSystem>();
         healthSystem = GetComponent<HealthSystem>();
         shooting = GetComponent<Shooting>();
-        Sound = new SoundTypeWithPlaybackSettings
+
+        var deathSoundType = SoundHelpers.GetRandomEnemyDeathSound();
+        this.DeathSound = new SoundTypeWithPlaybackSettings
         {
-            SoundType = SoundType.EnemyKilled,
+            SoundType = deathSoundType,
             PlaybackSettings = new PlaybackSettings
             {
                 SpatialBlend = 1f,
-                Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.EnemyKilled)
+                Volume = SoundHelpers.GetVolumeForSoundType(deathSoundType)
             }
         };
 
@@ -47,15 +54,19 @@ public abstract class Enemy : Entity
 
     public void Start()
     {
-        started = true;
-        _audioManager = AudioManager.Instance;
-        Audio = _audioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
-        Spawn();
-    }
+        var allCOmp = GetComponents<RandomSoundPlayer>();
+        RandomEnemyHitSoundPlayer = GetComponent<RandomSoundPlayer>();
 
-    void OnDestroy()
-    {
-        Audio?.Dispose();
+        started = true;
+
+        if (AudioSourcePrefab != null)
+        {
+            this.DeathAudioSourceInstance = Object.Instantiate(AudioSourcePrefab, transform.position, Quaternion.identity);
+            this.DeathAudioSourceInstance.InitializeSound(this.DeathSound);
+            this.DeathAudioSourceInstance.Owner = gameObject;
+        }
+
+        Spawn();
     }
 
     private void RecalculateStatistics()
@@ -114,9 +125,15 @@ public abstract class Enemy : Entity
         if (isDead)
             return;
         healthSystem.Health -= damage;
-        Audio.PlayOneShot();
         if (healthSystem.Health <= 0)
+        {
             Die(system);
+            this.DeathAudioSourceInstance?.Play();
+        }
+        else
+        {
+            this.RandomEnemyHitSoundPlayer?.PlayNextSound();
+        }
     }
 
     public void Kill(ScoreSystem system = null)
@@ -124,8 +141,9 @@ public abstract class Enemy : Entity
         if (isDead)
             return;
         healthSystem.Health = 0;
-        Audio.PlayOneShot();
         Die(system);
+        //there is no need to play sound there, because if I understand it correctly this method is called when parent of enemy dies
+        //so a lot sounds would be played at the same time
     }
 
     private void Die(ScoreSystem system = null)
