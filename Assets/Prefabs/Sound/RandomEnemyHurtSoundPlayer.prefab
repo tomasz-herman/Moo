@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777871764905064761}
   m_Layer: 0
-  m_Name: RandomEnemyHitSoundPlayer
+  m_Name: RandomEnemyHurtSoundPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,10 +85,6 @@ PrefabInstance:
     - target: {fileID: 6609302963699975042, guid: fb647f53e83e09543a38430a84d2db7e, type: 3}
       propertyPath: m_Name
       value: RandomSoundPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635275863187822753, guid: fb647f53e83e09543a38430a84d2db7e, type: 3}
-      propertyPath: RandomSoundQueue.Array.size
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb647f53e83e09543a38430a84d2db7e, type: 3}
