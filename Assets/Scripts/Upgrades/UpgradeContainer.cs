@@ -8,6 +8,9 @@ using UnityEngine;
 public class UpgradeContainer : ScriptableObject
 {
     public Color OneTimeUpgradeColor;
+    public Color HealthColor;
+    public Color AmmoColor;
+    public Color SpeedColor;
     public List<UpgradeIconData> Upgrades;
 
     private Dictionary<UpgradeIcon, UpgradeIconData> mapping;

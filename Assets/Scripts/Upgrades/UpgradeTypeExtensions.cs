@@ -42,6 +42,9 @@ public static class UpgradeColorExtensions
             UpgradeColor.Sword => ApplicationData.WeaponData[WeaponType.Sword].color,
             UpgradeColor.Shotgun => ApplicationData.WeaponData[WeaponType.Shotgun].color,
             UpgradeColor.OneTime => ApplicationData.UpgradeData.OneTimeUpgradeColor,
+            UpgradeColor.Health => ApplicationData.UpgradeData.HealthColor,
+            UpgradeColor.Ammo=>ApplicationData.UpgradeData.AmmoColor,
+            UpgradeColor.Speed => ApplicationData.UpgradeData.SpeedColor,
             _ => Color.white
         };
     }
