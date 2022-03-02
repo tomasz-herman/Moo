@@ -24,7 +24,7 @@ public class StatsWindow : GuiWindow
         statList.Clear();
         foreach(var stat in statSystem.GetStatistics())
         {
-            statList.AddEntry(stat.type.GetName(), Mathf.CeilToInt(stat.value).ToString(), stat.type.GetColor());
+            statList.AddEntry(stat.type.GetName(), $"{stat.value:0.##}", stat.type.GetColor());
         }
     }
     public void RecalculateUpgrades()
