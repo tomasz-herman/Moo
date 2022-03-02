@@ -20,6 +20,8 @@ internal static class UpgradeTypeExtensions
     {
         return OneTimeUpgrades.Contains(upgrade);
     }
+
+    public static string GetName(this UpgradeType type) => Utils.EnumStringToReadable(type.ToString());
 }
 
 public static class UpgradeIconExtensions

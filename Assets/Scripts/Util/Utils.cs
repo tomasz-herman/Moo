@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class Utils
@@ -40,5 +42,20 @@ public static class Utils
         }
         result /= colors.Length;
         return result;
+    }
+
+    public static string EnumStringToReadable(string str)
+    {
+        var words = Regex.Split(str, @"(?<!^)(?=[A-Z])");
+
+        if (words.Length == 0) return str;
+
+        var nameBuilder = new StringBuilder();
+        nameBuilder.Append(words[0]);
+        for (int i = 1; i < words.Length; i++)
+        {
+            nameBuilder.Append($" {words[i].ToLower()}");
+        }
+        return nameBuilder.ToString();
     }
 }
