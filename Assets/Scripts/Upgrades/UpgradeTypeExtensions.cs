@@ -22,6 +22,17 @@ internal static class UpgradeTypeExtensions
     }
 
     public static string GetName(this UpgradeType type) => Utils.EnumStringToReadable(type.ToString());
+
+    public static Color GetColor(this UpgradeType type)
+    {
+        var str = type.ToString();
+
+        foreach (var t in Enum.GetValues(typeof(UpgradeColor)).Cast<UpgradeColor>())
+            if (str.Contains(t.ToString())) 
+                return t.GetColor();
+
+        return Color.white;
+    }
 }
 
 public static class UpgradeIconExtensions

@@ -24,7 +24,7 @@ public class StatsWindow : GuiWindow
         statList.Clear();
         foreach(var stat in statSystem.GetStatistics())
         {
-            statList.AddEntry(stat.type.GetName(), Mathf.CeilToInt(stat.value).ToString());
+            statList.AddEntry(stat.type.GetName(), Mathf.CeilToInt(stat.value).ToString(), stat.type.GetColor());
         }
     }
     public void RecalculateUpgrades()
@@ -32,7 +32,7 @@ public class StatsWindow : GuiWindow
         upgradeList.Clear();
         foreach(var upgrade in upgradeSystem.GetUpgrades())
         {
-            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}");
+            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.type.GetColor());
         }
     }
 }
