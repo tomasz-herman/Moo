@@ -1,5 +1,6 @@
 using Assets.Scripts.SoundManager;
 using System;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -28,7 +29,7 @@ public abstract class Enemy : Entity
     protected AudioSourcePrefab DeathAudioSourceInstance;
 
     //Random enemy hit sound player
-    [HideInInspector] public RandomSoundPlayer RandomEnemyHitSoundPlayer;
+    [HideInInspector] public RandomSoundPlayer RandomEnemyHurtSoundPlayer;
 
     void Awake()
     {
@@ -54,8 +55,8 @@ public abstract class Enemy : Entity
 
     public void Start()
     {
-        var allCOmp = GetComponents<RandomSoundPlayer>();
-        RandomEnemyHitSoundPlayer = GetComponent<RandomSoundPlayer>();
+        RandomEnemyHurtSoundPlayer = GetComponentInChildren<RandomSoundPlayer>();
+        FillRandomEnemyHurtSoundPlayer();
 
         started = true;
 
@@ -132,7 +133,7 @@ public abstract class Enemy : Entity
         }
         else
         {
-            this.RandomEnemyHitSoundPlayer?.PlayNextSound();
+            this.RandomEnemyHurtSoundPlayer?.PlayNextSound();
         }
     }
 
@@ -156,6 +157,25 @@ public abstract class Enemy : Entity
         KillEvent.Invoke(gameObject);
         isDead = true;
         Destroy(gameObject);
+    }
+
+    private void FillRandomEnemyHurtSoundPlayer()
+    {
+        if (RandomEnemyHurtSoundPlayer == null) return;
+
+        if (RandomEnemyHurtSoundPlayer.RandomSoundQueue.Any()) return;
+
+        var randomSoundQueue = SoundHelpers.GetEnemyHurtSoundTypes().Select(x => new SoundTypeWithPlaybackSettings()
+        {
+            SoundType = x,
+            PlaybackSettings = new PlaybackSettings()
+            {
+                SpatialBlend = 1f,
+                Volume = SoundHelpers.GetVolumeForSoundType(x)
+            }
+        }).ToArray();
+
+        RandomEnemyHurtSoundPlayer.SetRandomSoundQueue(randomSoundQueue);
     }
 
     public abstract EnemyTypes EnemyType { get; }
