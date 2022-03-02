@@ -36,6 +36,7 @@ public class GameWorld : MonoBehaviour
     public void EndGame(bool win)
     {
         userInterface.endScreen.Open(win);
+        userInterface.enabled = false;
     }
     public void ReturnToMenu(bool win)
     {
