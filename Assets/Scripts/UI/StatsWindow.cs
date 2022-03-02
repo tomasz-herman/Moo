@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,26 @@ public class StatsWindow : GuiWindow
     public void RecalculateUpgrades()
     {
         upgradeList.Clear();
+
+        //get colors and sort
         var upgrades = upgradeSystem.GetUpgrades()
             .Select(c => new { c.type, c.count, color = c.type.GetColor() })
             .OrderBy(c => c.type);
+
+        var added = new bool[Enum.GetValues(typeof(UpgradeType)).Length];
+        //add collected upgrades
         foreach (var upgrade in upgrades)
         {
+            added[(int)upgrade.type] = true;
             upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.color);
+        }
+
+        //add rest of upgrades
+        for (int i = 0; i < added.Length; i++)
+        {
+            if (added[i]) continue;
+
+            upgradeList.AddEntry(((UpgradeType)i).GetName(), $"x0", Color.gray);
         }
     }
 }
