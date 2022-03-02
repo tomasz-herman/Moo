@@ -23,6 +23,13 @@ public class Grenade : Projectile
             }
         };
 
+        if (AudioSourcePrefab != null)
+        {
+            AudioSourceInstance = Object.Instantiate(AudioSourcePrefab, transform.position, Quaternion.identity);
+            AudioSourceInstance.InitializeSound(Sound);
+            AudioSourceInstance.Owner = gameObject;
+        }
+
         base.Start();
     }
 

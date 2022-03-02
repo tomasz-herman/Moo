@@ -13,5 +13,14 @@ namespace Assets.Scripts.SoundManager
             SoundType = SoundType.NoSound;
             PlaybackSettings = new PlaybackSettings();
         }
+
+        public SoundTypeWithPlaybackSettings Clone()
+        {
+            return new SoundTypeWithPlaybackSettings()
+            {
+                SoundType = this.SoundType,
+                PlaybackSettings = this.PlaybackSettings.Clone()
+            };
+        }
     }
 }
