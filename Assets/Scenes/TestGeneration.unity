@@ -576,6 +576,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2113982995}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: QuitButtonPlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ButtonSounds, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402245529651004924, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b6649e7390ffe947bc9b3a0be924cc9, type: 3}
 --- !u!114 &758687808 stripped
