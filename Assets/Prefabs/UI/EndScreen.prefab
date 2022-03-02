@@ -256,7 +256,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2083865155828686284}
   - component: {fileID: 6055519196682268408}
-  - component: {fileID: 1991745409556147281}
   m_Layer: 0
   m_Name: EndScreen
   m_TagString: Untagged
@@ -304,25 +303,8 @@ MonoBehaviour:
   resultText: {fileID: 1980065483085163407}
   panel: {fileID: 1889569516219076966}
   AnimationTime: 2
---- !u!95 &1991745409556147281
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558793663463240762}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a92261461acbe148b839559d5ec5c79, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  WinText: You survived!
+  LoseText: You died!
 --- !u!1 &7697087861440910154
 GameObject:
   m_ObjectHideFlags: 0
