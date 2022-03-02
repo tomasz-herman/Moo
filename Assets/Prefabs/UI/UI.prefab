@@ -1293,6 +1293,7 @@ RectTransform:
   - {fileID: 8248976421718810700}
   - {fileID: 8248976422468481433}
   - {fileID: 2165518208780880756}
+  - {fileID: 6702573424813026903}
   m_Father: {fileID: 8248976421841418139}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4215,6 +4216,7 @@ MonoBehaviour:
   upgradeWindow: {fileID: 8248976421718810697}
   statsWindow: {fileID: 8248976422468481446}
   pauseMenu: {fileID: 1121118527032390530}
+  endScreen: {fileID: 1578148783827557731}
   selectedWindow: {fileID: 0}
 --- !u!1 &8248976421845437352
 GameObject:
