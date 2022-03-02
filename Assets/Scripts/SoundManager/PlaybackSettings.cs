@@ -115,6 +115,27 @@ namespace Assets.Scripts.SoundManager
             audioSource.maxDistance = Mathf.Max(Max3DDistance, 0.01f);
         }
 
+        public PlaybackSettings Clone()
+        {
+            return new PlaybackSettings()
+            {
+                Volume = this.Volume,
+                Loop = this.Loop,
+                Pitch = this.Pitch,
+                Priority = this.Priority,
+                SpatialBlend = this.SpatialBlend,
+                StereoPan = this.StereoPan,
+                DopplerLevel = this.DopplerLevel,
+                Spread = this.Spread,
+                RolloffMode = this.RolloffMode,
+                Min3DDistance = this.Min3DDistance,
+                Max3DDistance = this.Max3DDistance,
+                FadeInSeconds = this.FadeInSeconds,
+                FadeOutSeconds = this.FadeOutSeconds,
+                UseDefault = this.UseDefault
+            };
+        }
+
         private void SetDefaultSettings()
         {
             Volume = 1f;

@@ -45,6 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59ac71015c6937468439f76427368bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonCollidableObjects: []
+  hitTerrainParticles: {fileID: 0}
+  particleCount: 30
+  color: {r: 0.6415094, g: 0, b: 0.52964926, a: 1}
+  TimeToLive: 10
+  Owner: {fileID: 0}
+  damage: 1
   Sound:
     SoundType: 0
     PlaybackSettings:
@@ -52,7 +59,7 @@ MonoBehaviour:
       Loop: 0
       Pitch: 1
       Priority: 128
-      SpatialBlend: 0
+      SpatialBlend: 1
       StereoPan: 0
       DopplerLevel: 0
       Spread: 0
@@ -62,10 +69,9 @@ MonoBehaviour:
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
-  TimeToLive: 10
-  explosionParticles: {fileID: 1527760608311520470, guid: d3423f19c6691874d915bb809a9cc3a4, type: 3}
-  color: {r: 0.6415094, g: 0, b: 0.52964926, a: 1}
+  AudioSourcePrefab: {fileID: 8928574510408002760, guid: 6c8eacc0c253fba42a33c9af89700b40, type: 3}
   Emission: 6
+  explosionParticles: {fileID: 1527760608311520470, guid: d3423f19c6691874d915bb809a9cc3a4, type: 3}
 --- !u!54 &1481721371994369965
 Rigidbody:
   m_ObjectHideFlags: 0
