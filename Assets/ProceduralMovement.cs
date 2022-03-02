@@ -20,7 +20,8 @@ public class ProceduralMovement : MonoBehaviour
     Vector3 nextPosition;
     private float lerp = 0;
     private float rootHaight;
-    private Ray currentRay;
+    private Ray currentRightRay;
+    private Ray currentForwardRay;
     private Ray predictionRay;
     private float currentSideOffset;
     void Start()
@@ -35,11 +36,21 @@ public class ProceduralMovement : MonoBehaviour
         currentSideOffset = playerMovement.direction.magnitude > 0 ? SideOffsetMoving : SideOffsetStanding;
         if (Physics.Raycast(new Ray(rigidbody.transform.position + Vector3.up, Vector3.down), out RaycastHit info, 10, LayerMask.GetMask(Layers.Floor)))
         {
-            currentRay = new Ray(info.point, rigidbody.transform.right);
-            predictionRay = new Ray(currentRay.origin + StepLong * playerMovement.direction, currentRay.direction);
+            currentRightRay = new Ray(info.point, rigidbody.transform.right);
+            currentForwardRay = new Ray(currentRightRay.origin, rigidbody.transform.forward);
+            predictionRay = new Ray(currentRightRay.origin + StepLong * playerMovement.direction, currentRightRay.direction);
             foreach (var item in LegTargets)
             {
-                item.currentPosition = predictionRay.origin + predictionRay.direction * currentSideOffset * item.getDirection();
+                if (playerMovement.direction.magnitude > 0)
+                {
+                    Ray ray = GetTestRay(playerMovement.direction);
+                    if (Vector3.Cross(ray.direction, item.currentPosition - ray.origin).magnitude > 1)
+                        item.currentPosition = predictionRay.origin + predictionRay.direction * currentSideOffset * item.getDirection();
+                }
+                else
+                {
+                    item.currentPosition = predictionRay.origin + predictionRay.direction * currentSideOffset * item.getDirection();
+                }
             }
         }
         //if (Physics.Raycast(new Ray(gameObject.transform.position + Vector3.up, Vector3.down), out RaycastHit info, 10, LayerMask.GetMask(Layers.Floor)))
@@ -78,10 +89,21 @@ public class ProceduralMovement : MonoBehaviour
         //}
     }
 
+    private Ray GetTestRay(Vector3 direction)
+    {
+        float angle = Vector3.Angle(direction, currentForwardRay.direction);
+        if (angle > 90f)
+            angle = 180f - angle;
+        if (angle>45f)
+            return currentForwardRay;
+        return currentRightRay;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(currentRay.origin - currentRay.direction * SideOffsetStanding, currentRay.origin + currentRay.direction * SideOffsetStanding);
+        Gizmos.DrawLine(currentRightRay.origin - currentRightRay.direction * SideOffsetStanding, currentRightRay.origin + currentRightRay.direction * SideOffsetStanding);
+        Gizmos.DrawLine(currentForwardRay.origin - currentForwardRay.direction * SideOffsetStanding, currentForwardRay.origin + currentForwardRay.direction * SideOffsetStanding);
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(predictionRay.origin - predictionRay.direction * currentSideOffset, predictionRay.origin + predictionRay.direction * currentSideOffset);
     }
