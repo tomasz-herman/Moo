@@ -21,7 +21,7 @@ public class EndScreen : GuiWindow
     public void Open(bool win)
     {
         Win = win;
-        userInterface.TryOpenWindow(this);
+        userInterface.TryToggleWindow(this);
     }
     void Start()
     {

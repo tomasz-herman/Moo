@@ -56,8 +56,13 @@ public class UserInterface : MonoBehaviour
     {
         if (window == selectedWindow)
             TryCloseWindow(window);
-        else
+        else if(selectedWindow == null)
             TryOpenWindow(window);
+        else
+        {
+            TryCloseWindow(selectedWindow);
+            TryOpenWindow(window);
+        }
     }
 
     public void SetPause(bool pause)
