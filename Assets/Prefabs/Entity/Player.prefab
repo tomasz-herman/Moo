@@ -3399,12 +3399,12 @@ MonoBehaviour:
   StepHaight: 0.5
   StepSpeed: 7
   StepTooLong: 0.5
-  BodyMovementMultiplayer: 0.2
   SideOffsetStanding: 0.4
   SideOffsetMoving: 0.1
   StendingMinOffset: 0.9
-  IdleSpeed: 0.5
-  HaightOffset: 0.05
+  IdleSpeed: 0.6
+  HaightOffset: 0.1
+  HeadMovementMultiplayer: 0.5
   LegTargets:
   - {fileID: 2242119479040337113}
   - {fileID: 5392310239548965739}

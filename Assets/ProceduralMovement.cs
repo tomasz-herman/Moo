@@ -8,20 +8,20 @@ public class ProceduralMovement : MonoBehaviour
     [SerializeField] float StepHaight;
     [SerializeField] float StepSpeed;
     [SerializeField] float StepTooLong;
-    [SerializeField] float BodyMovementMultiplayer;
     [SerializeField] float SideOffsetStanding;
     [SerializeField] float SideOffsetMoving;
     [SerializeField] float StendingMinOffset;
     [SerializeField] float IdleSpeed;
     [SerializeField] float HaightOffset;
+    [SerializeField] float HeadMovementMultiplayer;
     [SerializeField] List<LegSolver> LegTargets = new List<LegSolver>();
     [SerializeField] HeadSolover HeadTarget;
     [SerializeField] Transform RootTransform;
     PlayerMovement playerMovement;
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     Vector3 oldPosition;
     Vector3 nextPosition;
-    private float rooHaight;
+    private Vector3 rootLocalPosition;
     private Ray currentRightRay;
     private Ray currentForwardRay;
     private Ray predictionRay;
@@ -32,7 +32,7 @@ public class ProceduralMovement : MonoBehaviour
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        rooHaight = RootTransform.position.y;
+        rootLocalPosition = RootTransform.localPosition-Vector3.up*HaightOffset;
         UpdateSteps();
     }
 
@@ -95,13 +95,13 @@ public class ProceduralMovement : MonoBehaviour
             foreach (var item in LegTargets)
             {
                 if (!item.IsGrounded())
-                {
                     lerp = item.lerp;
-                }
             }
         }
 
-        RootTransform.position = new Vector3(RootTransform.position.x, rooHaight + Mathf.Sin(lerp * Mathf.PI) * HaightOffset * 2, RootTransform.position.z);
+        float sin = Mathf.Sin(lerp * Mathf.PI);
+        RootTransform.localPosition = rootLocalPosition + Vector3.up * sin * HaightOffset;
+        HeadTarget.Offset = Vector3.up * sin * HaightOffset * HeadMovementMultiplayer;
         lerp += Time.fixedDeltaTime * IdleSpeed;
         if (lerp >= 1)
             lerp = 0;
