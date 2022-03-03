@@ -14,7 +14,7 @@
                     volume = 1f;
                     break;
                 case SoundType.GrenadeExplosion:
-                    volume = 0.4f;
+                    volume = 0.9f;
                     break;
                 case SoundType.BackgroundTheme:
                     break;
