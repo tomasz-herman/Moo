@@ -498,7 +498,12 @@ MonoBehaviour:
   KillEvent:
     m_PersistentCalls:
       m_Calls: []
-  Sound:
+  shooting: {fileID: 0}
+  movementSpeed: 0
+  pointsForKill: 0
+  isDead: 0
+  AudioSourcePrefab: {fileID: 0}
+  DeathSound:
     SoundType: 0
     PlaybackSettings:
       Volume: 1
@@ -508,17 +513,14 @@ MonoBehaviour:
       SpatialBlend: 0
       StereoPan: 0
       DopplerLevel: 0
-      Spread: 0
-      RolloffMode: 1
-      Min3DDistance: 1
-      Max3DDistance: 500
+      Spread: 315
+      RolloffMode: 0
+      Min3DDistance: 10
+      Max3DDistance: 40
       FadeInSeconds: 0
       FadeOutSeconds: 0
       UseDefault: 0
-  shooting: {fileID: 0}
-  movementSpeed: 0
-  pointsForKill: 0
-  isDead: 0
+  RandomEnemyHurtSoundPlayer: {fileID: 0}
 --- !u!114 &5250545107766033320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,15 +904,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -918,11 +920,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.032412
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e261fb0b2e59ce4482c2fe026ca64ff, type: 3}
       propertyPath: m_LocalRotation.w
