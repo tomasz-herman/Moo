@@ -15,7 +15,7 @@ public class UpgradeSystem : MonoBehaviour
     private Dictionary<UpgradeType, int> upgrades = new Dictionary<UpgradeType, int>();
     public event EventHandler<(UpgradeType type, int Count)> Upgraded;
 
-    private UpgradesProvider upgradesProvider;
+    public UpgradesProvider upgradesProvider;
 
     private Dictionary<UpgradeType, bool> _oneTimeUpgradesUsed;
 

@@ -43,7 +43,7 @@ public class StatsWindow : GuiWindow
         foreach (var upgrade in upgrades)
         {
             added[(int)upgrade.type] = true;
-            upgradeList.AddEntry(upgrade.type.GetName(), $"x{upgrade.count}", upgrade.color);
+            upgradeList.AddEntry(upgradeSystem.upgradesProvider.GetUpgrade(upgrade.type).GetName(), $"x{upgrade.count}", upgrade.color);
         }
 
         //add rest of upgrades
@@ -51,7 +51,7 @@ public class StatsWindow : GuiWindow
         {
             if (added[i]) continue;
 
-            upgradeList.AddEntry(((UpgradeType)i).GetName(), $"x0", Color.gray);
+            upgradeList.AddEntry(upgradeSystem.upgradesProvider.GetUpgrade((UpgradeType)i).GetName(), $"x0", Color.gray);
         }
     }
 }
