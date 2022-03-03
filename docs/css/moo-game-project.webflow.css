@@ -595,7 +595,7 @@ figcaption {
   -ms-flex-align: center;
   align-items: center;
   background-color: #f4f4f4;
-  background-image: url('../images/portfolio-2---wide.svg');
+  background-image: url('../images/HomeScreen4_Blur.png');
   background-position: 0px 0px;
   background-size: cover;
   color: #fff;
@@ -604,9 +604,9 @@ figcaption {
 .intro-header.cc-subpage {
   height: 480px;
   background-color: #000;
-  background-image: url('../images/portfolio-4---wide.svg');
-  background-position: 0px 0px;
-  background-size: auto;
+  background-image: url('../images/HomeScreen4_Blur.png');
+  background-position: 50% 50%;
+  background-size: cover;
   color: #fff;
 }
 
@@ -971,7 +971,7 @@ figcaption {
   -ms-flex-align: center;
   align-items: center;
   background-color: #f4f4f4;
-  background-image: url('../images/portfolio-1---wide.svg');
+  background-image: url('../images/HomeScreen4_Blur.png');
   background-position: 50% 50%;
   background-size: cover;
   color: #fff;
@@ -1741,6 +1741,10 @@ figcaption {
   .cta-wrap {
     padding-right: 15px;
     padding-left: 15px;
+  }
+
+  .intro-header {
+    background-position: 50% 50%;
   }
 
   .status-message.cc-no-data {
