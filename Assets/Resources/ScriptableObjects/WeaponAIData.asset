@@ -38,8 +38,8 @@ MonoBehaviour:
     PreferredRange: 15
     MaximumRange: 25
     TriggerTimeoutMultiplier: 0.25
-    ProjectileSpeedMultiplier: 2
-    DamageMultiplier: 0.5
+    ProjectileSpeedMultiplier: 1.33
+    DamageMultiplier: 0.75
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 2
     AmmoRechargeAmmount: 8
