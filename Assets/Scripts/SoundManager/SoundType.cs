@@ -15,6 +15,7 @@
         //UI Sound
         MenuButtonClick = 2001,
         StartGameSound = 2002,
+        QuitButtonClick = 2003,
 
         //Music
         BackgroundTheme = 3000,

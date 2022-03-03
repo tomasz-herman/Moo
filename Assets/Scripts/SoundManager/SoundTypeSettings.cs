@@ -18,6 +18,9 @@
                     break;
                 case SoundType.BackgroundTheme:
                     break;
+                case SoundType.QuitButtonClick:
+                    volume = 0.5f;
+                    break;
                 case SoundType.MusicRoom:
                     break;
                 case SoundType.Music1:
