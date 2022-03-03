@@ -1418,12 +1418,12 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         m_Version: 0
-        filterFoldout: 0
+        filterFoldout: 1
         rendererFoldout: 0
         renderQueueType: 2
         layerMask:
           serializedVersion: 2
-          m_Bits: 1152
+          m_Bits: 33920
         sortingCriteria: 59
         overrideMaterial: {fileID: 2100000, guid: f16d1b1ee701e394e8314d130a85460a, type: 2}
         overrideMaterialPassIndex: 0
@@ -1442,12 +1442,12 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         m_Version: 0
-        filterFoldout: 0
+        filterFoldout: 1
         rendererFoldout: 0
         renderQueueType: 2
         layerMask:
           serializedVersion: 2
-          m_Bits: 1152
+          m_Bits: 33920
         sortingCriteria: 59
         overrideMaterial: {fileID: 0}
         overrideMaterialPassIndex: 0

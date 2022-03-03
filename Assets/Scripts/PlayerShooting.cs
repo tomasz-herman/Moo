@@ -22,7 +22,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.GetMouseButton((int)MouseButton.LeftMouse))
         {
-            shooting.TryShoot(gameObject, gun.transform.position+gun.transform.forward/2, gameObject.transform.forward);
+            shooting.TryShoot(gameObject, gun.transform.position/*+gun.transform.forward/2*/, gameObject.transform.forward);
         }
 
         if (Input.mouseScrollDelta.y > 0) shooting.PrevWeapon();
