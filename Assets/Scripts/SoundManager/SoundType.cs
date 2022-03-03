@@ -24,14 +24,6 @@ namespace Assets.Scripts.SoundManager
         enemy_die_007 = 1017,
         enemy_die_008 = 1018,
         enemy_die_009 = 1019,
-        enemy_die_010 = 1020,
-        enemy_die_011 = 1021,
-        enemy_die_012 = 1022,
-        enemy_die_013 = 1023,
-        enemy_die_014 = 1024,
-        enemy_die_015 = 1025,
-        enemy_die_016 = 1026,
-        enemy_die_017 = 1027,
 
         //Enemy hurt
         enemy_hurt_001 = 1031,
@@ -56,16 +48,6 @@ namespace Assets.Scripts.SoundManager
         enemy_hurt_020 = 1050,
         enemy_hurt_021 = 1051,
         enemy_hurt_022 = 1052,
-        enemy_hurt_023 = 1053,
-        enemy_hurt_024 = 1054,
-        enemy_hurt_025 = 1055,
-        enemy_hurt_026 = 1056,
-        enemy_hurt_027 = 1057,
-        enemy_hurt_028 = 1058,
-        enemy_hurt_029 = 1059,
-        enemy_hurt_030 = 1060,
-        enemy_hurt_031 = 1061,
-        enemy_hurt_032 = 1062,
 
         //UI Sound
         MenuButtonClick = 2001,

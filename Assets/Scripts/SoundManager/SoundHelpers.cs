@@ -53,12 +53,12 @@
 
         private static readonly SoundType[] EnemyHurtSoundTypes = new SoundType[]
         {
-            SoundType.enemy_hurt_001, SoundType.enemy_hurt_002, SoundType.enemy_hurt_003, SoundType.enemy_hurt_004, SoundType.enemy_hurt_005, SoundType.enemy_hurt_006, SoundType.enemy_hurt_007, SoundType.enemy_hurt_008, SoundType.enemy_hurt_009, SoundType.enemy_hurt_010, SoundType.enemy_hurt_011, SoundType.enemy_hurt_012, SoundType.enemy_hurt_013, SoundType.enemy_hurt_014, SoundType.enemy_hurt_015, SoundType.enemy_hurt_016, SoundType.enemy_hurt_017, SoundType.enemy_hurt_018, SoundType.enemy_hurt_019, SoundType.enemy_hurt_020, SoundType.enemy_hurt_021, SoundType.enemy_hurt_022, SoundType.enemy_hurt_023, SoundType.enemy_hurt_024, SoundType.enemy_hurt_025, SoundType.enemy_hurt_026, SoundType.enemy_hurt_027, SoundType.enemy_hurt_028, SoundType.enemy_hurt_029, SoundType.enemy_hurt_030, SoundType.enemy_hurt_031, SoundType.enemy_hurt_032
+            SoundType.enemy_hurt_001, SoundType.enemy_hurt_002, SoundType.enemy_hurt_003, SoundType.enemy_hurt_004, SoundType.enemy_hurt_005, SoundType.enemy_hurt_006, SoundType.enemy_hurt_007, SoundType.enemy_hurt_008, SoundType.enemy_hurt_009, SoundType.enemy_hurt_010, SoundType.enemy_hurt_011, SoundType.enemy_hurt_012, SoundType.enemy_hurt_013, SoundType.enemy_hurt_014, SoundType.enemy_hurt_015, SoundType.enemy_hurt_016, SoundType.enemy_hurt_017, SoundType.enemy_hurt_018, SoundType.enemy_hurt_019, SoundType.enemy_hurt_020, SoundType.enemy_hurt_021, SoundType.enemy_hurt_022
         };
 
         private static readonly SoundType[] EnemyDeathSoundTypes = new SoundType[]
         {
-            SoundType.enemy_die_001, SoundType.enemy_die_002, SoundType.enemy_die_003, SoundType.enemy_die_004, SoundType.enemy_die_005, SoundType.enemy_die_006, SoundType.enemy_die_007, SoundType.enemy_die_008, SoundType.enemy_die_009, SoundType.enemy_die_010, SoundType.enemy_die_011, SoundType.enemy_die_012, SoundType.enemy_die_013, SoundType.enemy_die_014, SoundType.enemy_die_015, SoundType.enemy_die_016, SoundType.enemy_die_017
+            SoundType.enemy_die_001, SoundType.enemy_die_002, SoundType.enemy_die_003, SoundType.enemy_die_004, SoundType.enemy_die_005, SoundType.enemy_die_006, SoundType.enemy_die_007, SoundType.enemy_die_008, SoundType.enemy_die_009
         };
     }
 }

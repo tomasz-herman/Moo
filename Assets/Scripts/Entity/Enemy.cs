@@ -56,6 +56,8 @@ public abstract class Enemy : Entity
     public void Start()
     {
         RandomEnemyHurtSoundPlayer = GetComponentInChildren<RandomSoundPlayer>();
+        RandomEnemyHurtSoundPlayer.minSoundIntervalSeconds = 1;
+        RandomEnemyHurtSoundPlayer.maxSoundIntervalSeconds = 2;
         FillRandomEnemyHurtSoundPlayer();
 
         started = true;
