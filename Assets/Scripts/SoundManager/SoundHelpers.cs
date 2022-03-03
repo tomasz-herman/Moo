@@ -16,19 +16,17 @@
                 case SoundType.GrenadeExplosion:
                     volume = 0.9f;
                     break;
-                case SoundType.BackgroundTheme:
+                case SoundType.PistolShot:
+                    volume = 0.25f;
                     break;
-                case SoundType.MusicRoom:
+                case SoundType.GrenadeLauncherShot:
+                    volume = 0.9f;
                     break;
-                case SoundType.Music1:
+                case SoundType.ShotgunShot:
+                    volume = 0.9f;
                     break;
-                case SoundType.Music2:
-                    break;
-                case SoundType.Music3:
-                    break;
-                case SoundType.Music4:
-                    break;
-                case SoundType.Music5:
+                case SoundType.SwordSwing:
+                    volume = 0.8f;
                     break;
             }
 
@@ -49,6 +47,26 @@
         public static SoundType[] GetEnemyDeathSoundTypes()
         {
             return EnemyDeathSoundTypes;
+        }
+
+        public static PlaybackSettings GetEnemyHurtPlaybackSettings(SoundType soundType)
+        {
+            return new PlaybackSettings()
+            {
+                SpatialBlend = 1f,
+                Volume = GetVolumeForSoundType(soundType),
+                Pitch = 0.7f
+            };
+        }
+
+        public static PlaybackSettings GetEnemyDeathPlaybackSettings(SoundType soundType)
+        {
+            return new PlaybackSettings()
+            {
+                SpatialBlend = 1f,
+                Volume = GetVolumeForSoundType(soundType),
+                Pitch = 0.7f
+            };
         }
 
         private static readonly SoundType[] EnemyHurtSoundTypes = new SoundType[]

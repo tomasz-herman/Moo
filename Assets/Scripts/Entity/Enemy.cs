@@ -41,11 +41,7 @@ public abstract class Enemy : Entity
         this.DeathSound = new SoundTypeWithPlaybackSettings
         {
             SoundType = deathSoundType,
-            PlaybackSettings = new PlaybackSettings
-            {
-                SpatialBlend = 1f,
-                Volume = SoundHelpers.GetVolumeForSoundType(deathSoundType)
-            }
+            PlaybackSettings = SoundHelpers.GetEnemyDeathPlaybackSettings(deathSoundType)
         };
 
         data = ApplicationData.EnemyData[EnemyType];
@@ -170,11 +166,7 @@ public abstract class Enemy : Entity
         var randomSoundQueue = SoundHelpers.GetEnemyHurtSoundTypes().Select(x => new SoundTypeWithPlaybackSettings()
         {
             SoundType = x,
-            PlaybackSettings = new PlaybackSettings()
-            {
-                SpatialBlend = 1f,
-                Volume = SoundHelpers.GetVolumeForSoundType(x)
-            }
+            PlaybackSettings = SoundHelpers.GetEnemyHurtPlaybackSettings(x)
         }).ToArray();
 
         RandomEnemyHurtSoundPlayer.SetRandomSoundQueue(randomSoundQueue);
