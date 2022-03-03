@@ -5637,6 +5637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8904516855963417935, guid: 2c3bf0b0bba119e4998a8c8c60f3d6f4, type: 3}
+      propertyPath: QuitButtonSound.SoundType
+      value: 2003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3bf0b0bba119e4998a8c8c60f3d6f4, type: 3}
 --- !u!4 &6201806980097518602 stripped
