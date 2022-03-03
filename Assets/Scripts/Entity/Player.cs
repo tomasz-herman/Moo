@@ -12,6 +12,7 @@ public class Player : Entity, IUpgradeable
     public MovementSystem MovementSystem { get { return movement; } }
     public ScoreSystem scoreSystem;
     public float TeleporterScale = 2;
+    private bool isDead;
 
     private DamagePostProcessing damagePostProcessing;
     void Start()
@@ -35,6 +36,8 @@ public class Player : Entity, IUpgradeable
         AmmoSystem.defaultCapacity = ApplicationData.GameplayData.DefaultPlayerAmmo;
         AmmoSystem.MaxAmmo = AmmoSystem.defaultCapacity;
         AmmoSystem.Ammo = AmmoSystem.MaxAmmo;
+
+        isDead = false;
     }
 
     public void Upgrade(int upgradeCount = 1)
@@ -44,8 +47,9 @@ public class Player : Entity, IUpgradeable
 
     public void CheckDeath(object sender, (float health, float maxHealth) args)
     {
-        if(args.health <= 0)
+        if(!isDead && args.health <= 0)
         {
+            isDead = true;
             GameWorld.EndGame(false);
         }
     }
