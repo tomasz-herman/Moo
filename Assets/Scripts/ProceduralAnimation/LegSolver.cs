@@ -47,6 +47,7 @@ public class LegSolver : MonoBehaviour
 
     public void Step(Vector3 newPosition)
     {
+        position = oldPosition;
         oldPosition = currentPosition;
         currentPosition = newPosition;
         lerp = 0;

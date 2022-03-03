@@ -7,13 +7,13 @@ public class Dissolve : MonoBehaviour
 {
     [SerializeField] Material DissolveMaterial;
     [SerializeField] float time = 1f;
-    List<MeshRenderer> renderers = new List<MeshRenderer>();
+    List<Renderer> renderers = new List<Renderer>();
     System.Action finished;
     float DissolveTime = 0;
     bool dissolve = false;
     private void Start()
     {
-        renderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
+        renderers = gameObject.GetComponentsInChildren<Renderer>().ToList();
     }
 
     private void Update()

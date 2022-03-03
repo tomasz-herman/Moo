@@ -58,16 +58,17 @@ public abstract class ProceduralMovement : MonoBehaviour
                 if (further != null)
                     if (further.IsGrounded())
                         if (Other(further).IsGrounded())
-                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection());
+                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection() + Vector3.up * FootHaight());
                 moving = true;
             }
             else // rotating in place
             {
                 Vector3 legline = LegTargets[1].currentPosition - LegTargets[0].currentPosition;
+                Vector3 legcenter = LegTargets[1].currentPosition + legline / 2;
                 float angle = Vector3.Angle(legline, currentRightRay.direction);
                 if (angle > 90f)
                     angle = 180f - angle;
-                if (angle > 45f || legline.magnitude < SideOffsetStanding * 2 * StendingMinOffset || legline.magnitude > SideOffsetStanding * 2 * 1.1f)
+                if (angle > 45f || legline.magnitude < SideOffsetStanding * 2 * StendingMinOffset || legline.magnitude > SideOffsetStanding * 2 * 1.1f || (legcenter - currentRightRay.origin).magnitude > SideOffsetStanding * 5)
                 {
                     float max = 0;
                     LegSolver further = null;
@@ -83,7 +84,7 @@ public abstract class ProceduralMovement : MonoBehaviour
 
                     if (further.IsGrounded())
                         if (Other(further).IsGrounded())
-                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection());
+                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection() + Vector3.up * FootHaight());
                 }
                 moving = false;
             }
@@ -105,6 +106,7 @@ public abstract class ProceduralMovement : MonoBehaviour
 
     protected abstract Vector3 GetDirection();
     protected abstract void MovementStart();
+    protected abstract float FootHaight();
 
     private Ray GetTestRay(Vector3 direction)
     {

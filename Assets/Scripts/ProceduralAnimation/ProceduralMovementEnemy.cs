@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProceduralMovementEnemy : ProceduralMovement
 {
+    [SerializeField] float footHaight = 0.2f;
     SimpleEnemyAI enemyAI;
     protected override void MovementStart()
     {
@@ -13,5 +14,10 @@ public class ProceduralMovementEnemy : ProceduralMovement
     protected override Vector3 GetDirection()
     {
         return enemyAI.movementDirection;
+    }
+
+    protected override float FootHaight()
+    {
+        return footHaight;
     }
 }
