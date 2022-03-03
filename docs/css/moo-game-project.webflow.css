@@ -596,7 +596,7 @@ figcaption {
   align-items: center;
   background-color: #f4f4f4;
   background-image: url('../images/HomeScreen4_Blur.png');
-  background-position: 0px 0px;
+  background-position: 50% 50%;
   background-size: cover;
   color: #fff;
 }
