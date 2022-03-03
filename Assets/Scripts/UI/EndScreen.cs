@@ -37,7 +37,6 @@ public class EndScreen : GuiWindow
 
     void Start()
     {
-        //panel.transform.localPosition = new Vector3(0, -panel.rect.height, 0);
         panel.gameObject.SetActive(false);
         if (Win)
         {
@@ -66,15 +65,6 @@ public class EndScreen : GuiWindow
             flashColor.a = Mathf.Clamp01(1 - elapsedTime / FlashTime);
             flashImage.color = flashColor;
         }
-        //if (panel.transform.localPosition.y <= 0)
-        //{
-        //    var d = Time.fixedDeltaTime / AnimationTime;
-        //    panel.transform.localPosition = panel.transform.localPosition + Vector3.up * d * panel.rect.height;
-        //    if (panel.transform.localPosition.y >= 0)
-        //    {
-        //        panel.transform.localPosition = Vector3.zero;
-        //    }
-        //}
     }
     public void EndGame()
     {
