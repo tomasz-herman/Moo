@@ -20,5 +20,5 @@ public enum UpgradeIcon
 
 public enum UpgradeColor
 {
-    Shotgun, Pistol, MachineGun, Sword, GrenadeLauncher, OneTime, White
+    Shotgun, Pistol, MachineGun, Sword, GrenadeLauncher, OneTime, Health, Ammo, Speed, White
 }

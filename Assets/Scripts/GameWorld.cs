@@ -33,8 +33,12 @@ public class GameWorld : MonoBehaviour
     }
 
     public bool IsPaused() { return Time.timeScale == 0; }
-
     public void EndGame(bool win)
+    {
+        userInterface.endScreen.Open(win);
+        userInterface.enabled = false;
+    }
+    public void ReturnToMenu(bool win)
     {
         float score = ScoreSystem.Score;
         double timeMs = timer.GetElapsedTime().TotalMilliseconds;

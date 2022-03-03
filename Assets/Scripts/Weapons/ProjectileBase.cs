@@ -20,23 +20,21 @@ namespace Assets.Scripts.Weapons
 
         public List<GameObject> nonCollidableObjects;
 
-        public SoundTypeWithPlaybackSettings Sound;
-
         [SerializeField] private ProjectileHitTerrainParticles hitTerrainParticles;
         [SerializeField] private int particleCount = 30;
         public Color color;
 
-        [HideInInspector]
-        public Audio Audio;
-
         public float TimeToLive = 10f;
 
         public GameObject Owner;
-        protected AudioManager AudioManager;
 
         private float _elapsedTime = 0f;
 
         public float damage = 1;
+
+        public SoundTypeWithPlaybackSettings Sound;
+        public AudioSourcePrefab AudioSourcePrefab;
+        protected AudioSourcePrefab AudioSourceInstance;
 
         protected virtual void Awake()
         {
@@ -47,8 +45,6 @@ namespace Assets.Scripts.Weapons
 
         protected virtual void Start()
         {
-            AudioManager = AudioManager.Instance;
-            Audio = AudioManager.CreateSound(Sound.SoundType, Sound.PlaybackSettings, transform);
         }
 
         protected virtual void FixedUpdate()
@@ -95,7 +91,7 @@ namespace Assets.Scripts.Weapons
 
         protected virtual void PlaySound()
         {
-            Audio?.PlayOneShot();
+            AudioSourceInstance?.PlayOneShot();
         }
 
         public void SpawnParticles(Vector3 position)

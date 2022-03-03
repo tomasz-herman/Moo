@@ -5,7 +5,7 @@ namespace Assets.Scripts.Upgrades
     public class MaxHealthUpgrade : UpgradeView
     {
         public MaxHealthUpgrade()
-            : base("Max Health", UpgradeType.MaxHealth, UpgradeIcon.MaxHealth, UpgradeColor.White)
+            : base("Max Health", UpgradeType.MaxHealth, UpgradeIcon.MaxHealth, UpgradeColor.Health)
         {
 
         }

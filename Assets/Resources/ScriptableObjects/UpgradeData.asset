@@ -12,31 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a25b2fdf2e47a74f9bb2f3037b6aa1f, type: 3}
   m_Name: UpgradeData
   m_EditorClassIdentifier: 
-  OneTimeUpgradeColor: {r: 1, g: 0.6332026, b: 0, a: 0}
+  OneTimeUpgradeColor: {r: 1, g: 0.6332026, b: 0, a: 1}
+  HealthColor: {r: 0, g: 0.98823535, b: 0.18823531, a: 1}
+  AmmoColor: {r: 0, g: 0.30668616, b: 1, a: 1}
+  SpeedColor: {r: 1, g: 1, b: 1, a: 1}
   Upgrades:
   - iconType: 0
-    image: {fileID: 21300000, guid: e676184011ba94a4f972b1822a697bdc, type: 3}
+    image: {fileID: 21300000, guid: 3a87811f38ee4f841a87ad8a8213e776, type: 3}
   - iconType: 1
-    image: {fileID: 21300000, guid: aa8e17fb9cea8404b98689f3ac75ac15, type: 3}
+    image: {fileID: 21300000, guid: 3a87811f38ee4f841a87ad8a8213e776, type: 3}
   - iconType: 2
-    image: {fileID: 21300000, guid: 621ecc0dd90c6e24393ad9773c725dc4, type: 3}
+    image: {fileID: 21300000, guid: c83be349aa79d0c4a84d339c971a066b, type: 3}
   - iconType: 3
-    image: {fileID: 21300000, guid: 80e5ef45856663448ae39543560b6093, type: 3}
+    image: {fileID: 21300000, guid: d4d6e1eacfb24dc4798a5ae39334790f, type: 3}
   - iconType: 4
-    image: {fileID: 21300000, guid: 13bd3c62a964f864d88dc4cf698de040, type: 3}
+    image: {fileID: 21300000, guid: 0517e7c7403e4b7408b09e0c3f7c0509, type: 3}
   - iconType: 5
-    image: {fileID: 21300000, guid: de3fc723e7724bc4bbb39c8f027406eb, type: 3}
+    image: {fileID: 21300000, guid: 144883ccb834d8d409cb749b1d882fd8, type: 3}
   - iconType: 6
-    image: {fileID: 21300000, guid: 0c411a9f8544b61458d7e501f1c4a77b, type: 3}
+    image: {fileID: 21300000, guid: e8978a93e0a651b428c0f8d271ca32c0, type: 3}
   - iconType: 7
-    image: {fileID: 21300000, guid: 3fb568f79d381104580787e1d994c4e4, type: 3}
+    image: {fileID: 21300000, guid: 3a87811f38ee4f841a87ad8a8213e776, type: 3}
   - iconType: 8
-    image: {fileID: 21300000, guid: 37c38d8a4c2036648b09de0be2352d42, type: 3}
+    image: {fileID: 21300000, guid: ef602c8a2b3e91141a110a78b565baca, type: 3}
   - iconType: 9
-    image: {fileID: 21300000, guid: eb4a92dd8655fa34297fe19dc0d782d8, type: 3}
+    image: {fileID: 21300000, guid: e78c4d19dd7e1d24480356bf97340789, type: 3}
   - iconType: 10
-    image: {fileID: 21300000, guid: 35d276838957fa740be5ec26471359c3, type: 3}
+    image: {fileID: 21300000, guid: 7b35718a6ba7c16418227f593b7232f7, type: 3}
   - iconType: 11
-    image: {fileID: 21300000, guid: b0ee1c9a268de2f4e8133bf6fa6ca386, type: 3}
+    image: {fileID: 21300000, guid: 0517e7c7403e4b7408b09e0c3f7c0509, type: 3}
   - iconType: 12
-    image: {fileID: 21300000, guid: e79175541a6fc5941a35aa0cbb39e261, type: 3}
+    image: {fileID: 21300000, guid: 270a251b55e9fe7448482c6feff479e1, type: 3}

@@ -20,6 +20,19 @@ internal static class UpgradeTypeExtensions
     {
         return OneTimeUpgrades.Contains(upgrade);
     }
+
+    public static string GetName(this UpgradeType type) => Utils.EnumStringToReadable(type.ToString());
+
+    public static Color GetColor(this UpgradeType type)
+    {
+        var str = type.ToString();
+
+        foreach (var t in Enum.GetValues(typeof(UpgradeColor)).Cast<UpgradeColor>())
+            if (str.Contains(t.ToString())) 
+                return t.GetColor();
+
+        return Color.white;
+    }
 }
 
 public static class UpgradeIconExtensions
@@ -42,6 +55,9 @@ public static class UpgradeColorExtensions
             UpgradeColor.Sword => ApplicationData.WeaponData[WeaponType.Sword].color,
             UpgradeColor.Shotgun => ApplicationData.WeaponData[WeaponType.Shotgun].color,
             UpgradeColor.OneTime => ApplicationData.UpgradeData.OneTimeUpgradeColor,
+            UpgradeColor.Health => ApplicationData.UpgradeData.HealthColor,
+            UpgradeColor.Ammo=>ApplicationData.UpgradeData.AmmoColor,
+            UpgradeColor.Speed => ApplicationData.UpgradeData.SpeedColor,
             _ => Color.white
         };
     }
