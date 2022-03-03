@@ -46,6 +46,12 @@ public class Blade : ProjectileBase
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.SetColor("_EmissiveColor", color * Emission);
         material.SetColor("_BaseColor", color);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            material = transform.GetChild(i).gameObject.GetComponentInChildren<Renderer>().material;
+            material.SetColor("_EmissiveColor", color * Emission*(i+1));
+            material.SetColor("_BaseColor", color);
+        }
 
         UpdateTransform();
     }

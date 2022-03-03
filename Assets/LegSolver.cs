@@ -7,6 +7,11 @@ public class LegSolver : MonoBehaviour
     [HideInInspector] public Vector3 currentPosition;
     [SerializeField] bool isRight;
     [SerializeField] bool DrawGizmos = false;
+    Vector3 oldPosition;
+    Vector3 position;
+    [HideInInspector] public float lerp = 1;
+    float StepHaight;
+    float StepSpeed;
     void Start()
     {
         currentPosition = gameObject.transform.position;
@@ -14,7 +19,15 @@ public class LegSolver : MonoBehaviour
 
     private void FixedUpdate()
     {
-        gameObject.transform.position = currentPosition;
+        if (lerp < 1)
+        {
+            Vector3 footPosition = Vector3.Lerp(oldPosition, currentPosition, lerp);
+            footPosition.y += Mathf.Sin(lerp * Mathf.PI) * StepHaight;
+
+            lerp += Time.fixedDeltaTime * StepSpeed;
+            position = footPosition;
+        }
+        gameObject.transform.position = position;
     }
 
     private void OnDrawGizmos()
@@ -30,5 +43,23 @@ public class LegSolver : MonoBehaviour
         if (isRight)
             return 1;
         return -1;
+    }
+
+    public void Step(Vector3 newPosition)
+    {
+        oldPosition = currentPosition;
+        currentPosition = newPosition;
+        lerp = 0;
+    }
+
+    public bool IsGrounded()
+    {
+        return lerp >= 1;
+    }
+
+    public void UpdateHaightSpeed(float haight, float speed)
+    {
+        StepHaight = haight;
+        StepSpeed = speed;
     }
 }

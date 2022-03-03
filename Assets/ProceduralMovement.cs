@@ -6,29 +6,34 @@ public class ProceduralMovement : MonoBehaviour
 {
     [SerializeField] float StepLong;
     [SerializeField] float StepHaight;
-    [SerializeField] float SpeedMultiplayer;
+    [SerializeField] float StepSpeed;
+    [SerializeField] float StepTooLong;
     [SerializeField] float BodyMovementMultiplayer;
     [SerializeField] float SideOffsetStanding;
     [SerializeField] float SideOffsetMoving;
+    [SerializeField] float StendingMinOffset;
+    [SerializeField] float IdleSpeed;
+    [SerializeField] float HaightOffset;
     [SerializeField] List<LegSolver> LegTargets = new List<LegSolver>();
     [SerializeField] HeadSolover HeadTarget;
     [SerializeField] Transform RootTransform;
     PlayerMovement playerMovement;
     Rigidbody rigidbody;
-    LegSolver CurrentLeg = null;
     Vector3 oldPosition;
     Vector3 nextPosition;
-    private float lerp = 0;
-    private float rootHaight;
+    private float rooHaight;
     private Ray currentRightRay;
     private Ray currentForwardRay;
     private Ray predictionRay;
     private float currentSideOffset;
+    private bool moving = false;
+    private float lerp = 0;
     void Start()
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
         rigidbody = gameObject.GetComponent<Rigidbody>();
-        rootHaight = RootTransform.position.y;
+        rooHaight = RootTransform.position.y;
+        UpdateSteps();
     }
 
     private void FixedUpdate()
@@ -39,54 +44,67 @@ public class ProceduralMovement : MonoBehaviour
             currentRightRay = new Ray(info.point, rigidbody.transform.right);
             currentForwardRay = new Ray(currentRightRay.origin, rigidbody.transform.forward);
             predictionRay = new Ray(currentRightRay.origin + StepLong * playerMovement.direction, currentRightRay.direction);
+            Ray ray = GetTestRay(playerMovement.direction);
+            if (playerMovement.direction.magnitude > 0) //moving
+            {
+                float max = 0;
+                LegSolver further = null;
+                foreach (var item in LegTargets)
+                {
+                    float distance = Vector3.Cross(ray.direction, item.currentPosition - ray.origin).magnitude;
+                    if (distance > max && (distance > StepTooLong || !moving))
+                    {
+                        max = distance;
+                        further = item;
+                    }
+                }
+
+                if (further != null)
+                    if (further.IsGrounded())
+                        if (Other(further).IsGrounded())
+                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection());
+                moving = true;
+            }
+            else // rotating in place
+            {
+                Vector3 legline = LegTargets[1].currentPosition - LegTargets[0].currentPosition;
+                float angle = Vector3.Angle(legline, currentRightRay.direction);
+                if (angle > 90f)
+                    angle = 180f - angle;
+                if (angle > 45f || legline.magnitude < SideOffsetStanding * 2 * StendingMinOffset || legline.magnitude > SideOffsetStanding * 2 * 1.1f)
+                {
+                    float max = 0;
+                    LegSolver further = null;
+                    foreach (var item in LegTargets)
+                    {
+                        float distance = Vector3.Cross(currentRightRay.direction, item.currentPosition - currentRightRay.origin).magnitude;
+                        if (distance > max)
+                        {
+                            max = distance;
+                            further = item;
+                        }
+                    }
+
+                    if (further.IsGrounded())
+                        if (Other(further).IsGrounded())
+                            further.Step(predictionRay.origin + predictionRay.direction * currentSideOffset * further.getDirection());
+                }
+                moving = false;
+            }
+
             foreach (var item in LegTargets)
             {
-                if (playerMovement.direction.magnitude > 0)
+                if (!item.IsGrounded())
                 {
-                    Ray ray = GetTestRay(playerMovement.direction);
-                    if (Vector3.Cross(ray.direction, item.currentPosition - ray.origin).magnitude > 1)
-                        item.currentPosition = predictionRay.origin + predictionRay.direction * currentSideOffset * item.getDirection();
-                }
-                else
-                {
-                    item.currentPosition = predictionRay.origin + predictionRay.direction * currentSideOffset * item.getDirection();
+                    lerp = item.lerp;
                 }
             }
         }
-        //if (Physics.Raycast(new Ray(gameObject.transform.position + Vector3.up, Vector3.down), out RaycastHit info, 10, LayerMask.GetMask(Layers.Floor)))
-        //    foreach (var item in LegTargets)
-        //    {
-        //        if (CurrentLeg == null)
-        //        {
-        //            if (Mathf.Abs(Vector3.Distance(item.currentPosition, info.point)) > StepTreshold)
-        //            {
-        //                Ray ray = new Ray(gameObject.transform.position + rigidbody.velocity * StepLong + item.getDirection(gameObject.transform) * SideOffset + Vector3.up, Vector3.down);
-        //                if (Physics.Raycast(ray, out RaycastHit info2, 10, LayerMask.GetMask(Layers.Floor)))
-        //                {
-        //                    CurrentLeg = item;
-        //                    lerp = 0;
-        //                    oldPosition = CurrentLeg.currentPosition;
-        //                    nextPosition = info2.point;
-        //                }
-        //            }
-        //        }
-        //    }
-        //if (CurrentLeg != null)
-        //{
-        //    if (lerp < 1)
-        //    {
-        //        Vector3 footPosition = Vector3.Lerp(oldPosition, nextPosition, lerp);
-        //        footPosition.y += Mathf.Sin(lerp * Mathf.PI) * StepHaight;
-        //        RootTransform.position = new Vector3(RootTransform.position.x, rootHaight + Mathf.Sin(lerp * Mathf.PI) * StepHaight * BodyMovementMultiplayer, RootTransform.position.z);
 
-        //        lerp += Time.fixedDeltaTime * rigidbody.velocity.magnitude * SpeedMultiplayer;
-        //        CurrentLeg.currentPosition = footPosition;
-        //    }
-        //    else
-        //    {
-        //        CurrentLeg = null;
-        //    }
-        //}
+        RootTransform.position = new Vector3(RootTransform.position.x, rooHaight + Mathf.Sin(lerp * Mathf.PI) * HaightOffset * 2, RootTransform.position.z);
+        lerp += Time.fixedDeltaTime * IdleSpeed;
+        if (lerp >= 1)
+            lerp = 0;
     }
 
     private Ray GetTestRay(Vector3 direction)
@@ -94,7 +112,7 @@ public class ProceduralMovement : MonoBehaviour
         float angle = Vector3.Angle(direction, currentForwardRay.direction);
         if (angle > 90f)
             angle = 180f - angle;
-        if (angle>45f)
+        if (angle > 45f)
             return currentForwardRay;
         return currentRightRay;
     }
@@ -106,5 +124,24 @@ public class ProceduralMovement : MonoBehaviour
         Gizmos.DrawLine(currentForwardRay.origin - currentForwardRay.direction * SideOffsetStanding, currentForwardRay.origin + currentForwardRay.direction * SideOffsetStanding);
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(predictionRay.origin - predictionRay.direction * currentSideOffset, predictionRay.origin + predictionRay.direction * currentSideOffset);
+    }
+
+    private void UpdateSteps()
+    {
+        foreach (var item in LegTargets)
+            item.UpdateHaightSpeed(StepHaight, StepSpeed);
+    }
+
+    private void OnValidate()
+    {
+        UpdateSteps();
+    }
+
+    private LegSolver Other(LegSolver leg)
+    {
+        foreach (var item in LegTargets)
+            if (item != leg)
+                return item;
+        return null;
     }
 }
