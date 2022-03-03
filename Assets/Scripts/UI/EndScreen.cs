@@ -31,6 +31,7 @@ public class EndScreen : GuiWindow
             FlashTime = AnimationTime;
 
         Color baseFlashColor = win ? winColor : loseColor;
+        baseFlashColor /= 2;
         baseFlashColor.a = 0;
         flashImage.color = baseFlashColor;
     }

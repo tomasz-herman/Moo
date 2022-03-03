@@ -2867,7 +2867,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8213663046907809332}
+      - m_Target: {fileID: 223395623}
         m_TargetAssemblyTypeName: ButtonSounds, Assembly-CSharp
         m_MethodName: OptionsButtonPlaySound
         m_Mode: 1
@@ -4018,14 +4018,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbc1e90555bb3c944b04b67e5a2f07be, type: 3}
---- !u!114 &8213663046907809332 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7866185492343030841, guid: fbc1e90555bb3c944b04b67e5a2f07be, type: 3}
-  m_PrefabInstance: {fileID: 8213663046907809331}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb61d87b75325f14ebdda1200f7c2d35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
