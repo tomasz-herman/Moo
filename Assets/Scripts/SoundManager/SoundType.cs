@@ -16,6 +16,7 @@
         MenuButtonClick = 2001,
         StartGameSound = 2002,
         QuitButtonClick = 2003,
+        TickSound = 2004,
 
         //Music
         BackgroundTheme = 3000,
