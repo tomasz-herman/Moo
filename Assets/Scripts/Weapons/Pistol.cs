@@ -10,11 +10,13 @@ namespace Assets.Scripts.Weapons
         public Pistol(Projectile projectilePrefab) : base(WeaponType.Pistol, SoundType.PistolShot)
         {
             this.projectilePrefab = projectilePrefab;
+            Sound.PlaybackSettings.Pitch = 0.8f;
         }
 
         public Pistol(GameObject owner, Projectile projectilePrefab) : base(WeaponType.Pistol, owner, SoundType.PistolShot)
         {
             this.projectilePrefab = projectilePrefab;
+            Sound.PlaybackSettings.Pitch = 0.8f;
         }
 
         public override void Shoot(GameObject shooter, Vector3 position, Vector3 direction, Shooting shooting)

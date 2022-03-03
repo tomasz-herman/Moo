@@ -11,21 +11,34 @@ public class EndScreen : GuiWindow
     [SerializeField] Color winColor, loseColor;
     [SerializeField] Text resultText;
     [SerializeField] RectTransform panel;
+    [SerializeField] Image flashImage;
 
     [SerializeField] float AnimationTime = 2;
+    [SerializeField] float FlashTime = 0.5f;
 
     [SerializeField] string WinText = "You survived!";
     [SerializeField] string LoseText = "You died!";
 
     private bool Win;
+    private float elapsedTime;
     public void Open(bool win)
     {
         Win = win;
+        elapsedTime = 0;
         userInterface.TryToggleWindow(this);
+        userInterface.hud.gameObject.SetActive(false);
+        if (FlashTime > AnimationTime)
+            FlashTime = AnimationTime;
+
+        Color baseFlashColor = win ? winColor : loseColor;
+        baseFlashColor /= 2;
+        baseFlashColor.a = 0;
+        flashImage.color = baseFlashColor;
     }
+
     void Start()
     {
-        panel.transform.localPosition = new Vector3(0, -panel.rect.height, 0);
+        panel.gameObject.SetActive(false);
         if (Win)
         {
             resultText.text = WinText;
@@ -39,14 +52,19 @@ public class EndScreen : GuiWindow
     }
     void Update()
     {
-        if (panel.transform.localPosition.y <= 0)
+        if(elapsedTime < AnimationTime)
         {
-            var d = Time.fixedDeltaTime / AnimationTime;
-            panel.transform.localPosition = panel.transform.localPosition + Vector3.up * d * panel.rect.height;
-            if (panel.transform.localPosition.y >= 0)
+            elapsedTime += Time.unscaledDeltaTime;
+            if (elapsedTime >= AnimationTime)
             {
-                panel.transform.localPosition = Vector3.zero;
+                elapsedTime = AnimationTime;
+                panel.gameObject.SetActive(true);
             }
+            Time.timeScale = 1 - elapsedTime / AnimationTime;
+
+            var flashColor = flashImage.color;
+            flashColor.a = Mathf.Clamp01(1 - elapsedTime / FlashTime);
+            flashImage.color = flashColor;
         }
     }
     public void EndGame()
