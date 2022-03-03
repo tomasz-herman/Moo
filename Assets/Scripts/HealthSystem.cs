@@ -18,6 +18,8 @@ public class HealthSystem : MonoBehaviour
             health = value;
             if (health > maxHealth)
                 health = maxHealth;
+            if (health < 0)
+                health = 0;
             HealthChanged?.Invoke(this, (health, maxHealth));
 
             if (health < previousHealth)
