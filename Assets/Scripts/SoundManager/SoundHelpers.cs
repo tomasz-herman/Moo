@@ -55,7 +55,7 @@
             {
                 SpatialBlend = 1f,
                 Volume = GetVolumeForSoundType(soundType),
-                Pitch = 0.7f
+                Pitch = 0.85f
             };
         }
 
@@ -65,7 +65,7 @@
             {
                 SpatialBlend = 1f,
                 Volume = GetVolumeForSoundType(soundType),
-                Pitch = 0.7f
+                Pitch = 0.85f
             };
         }
 
