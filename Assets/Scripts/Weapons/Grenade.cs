@@ -19,7 +19,7 @@ public class Grenade : Projectile
             PlaybackSettings = new PlaybackSettings
             {
                 SpatialBlend = 1f,
-                Volume = SoundTypeSettings.GetVolumeForSoundType(SoundType.GrenadeExplosion)
+                Volume = SoundHelpers.GetVolumeForSoundType(SoundType.GrenadeExplosion)
             }
         };
 

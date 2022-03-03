@@ -79,7 +79,7 @@ namespace Assets.Scripts.Weapons
                 {
                     //TODO: maybe set spatial blend to 0f if player is owner
                     SpatialBlend = 1f,
-                    Volume = SoundTypeSettings.GetVolumeForSoundType(soundType)
+                    Volume = SoundHelpers.GetVolumeForSoundType(soundType)
                 }
             };
         }
