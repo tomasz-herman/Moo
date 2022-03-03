@@ -29,6 +29,10 @@ public class EndScreen : GuiWindow
         userInterface.hud.gameObject.SetActive(false);
         if (FlashTime > AnimationTime)
             FlashTime = AnimationTime;
+
+        Color baseFlashColor = win ? winColor : loseColor;
+        baseFlashColor.a = 0;
+        flashImage.color = baseFlashColor;
     }
 
     void Start()
@@ -51,7 +55,6 @@ public class EndScreen : GuiWindow
         if(elapsedTime < AnimationTime)
         {
             elapsedTime += Time.unscaledDeltaTime;
-            Debug.Log(elapsedTime);
             if (elapsedTime >= AnimationTime)
             {
                 elapsedTime = AnimationTime;
