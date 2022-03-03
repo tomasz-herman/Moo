@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProceduralMovement : MonoBehaviour
+public abstract class ProceduralMovement : MonoBehaviour
 {
     [SerializeField] float StepLong;
     [SerializeField] float StepHaight;
@@ -17,8 +17,6 @@ public class ProceduralMovement : MonoBehaviour
     [SerializeField] List<LegSolver> LegTargets = new List<LegSolver>();
     [SerializeField] HeadSolover HeadTarget;
     [SerializeField] Transform RootTransform;
-    PlayerMovement playerMovement;
-    new Rigidbody rigidbody;
     private Vector3 rootLocalPosition;
     private Ray currentRightRay;
     private Ray currentForwardRay;
@@ -28,22 +26,22 @@ public class ProceduralMovement : MonoBehaviour
     private float lerp = 0;
     void Start()
     {
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
-        rigidbody = gameObject.GetComponent<Rigidbody>();
-        rootLocalPosition = RootTransform.localPosition-Vector3.up*HaightOffset;
+        MovementStart();
+        rootLocalPosition = RootTransform.localPosition - Vector3.up * HaightOffset;
         UpdateSteps();
     }
 
     private void FixedUpdate()
     {
-        currentSideOffset = playerMovement.direction.magnitude > 0 ? SideOffsetMoving : SideOffsetStanding;
-        if (Physics.Raycast(new Ray(rigidbody.transform.position + Vector3.up, Vector3.down), out RaycastHit info, 10, LayerMask.GetMask(Layers.Floor)))
+        Vector3 direction = GetDirection();
+        currentSideOffset = direction.magnitude > 0 ? SideOffsetMoving : SideOffsetStanding;
+        if (Physics.Raycast(new Ray(gameObject.transform.position + Vector3.up, Vector3.down), out RaycastHit info, 10, LayerMask.GetMask(Layers.Floor)))
         {
-            currentRightRay = new Ray(info.point, rigidbody.transform.right);
-            currentForwardRay = new Ray(currentRightRay.origin, rigidbody.transform.forward);
-            predictionRay = new Ray(currentRightRay.origin + StepLong * playerMovement.direction, currentRightRay.direction);
-            Ray ray = GetTestRay(playerMovement.direction);
-            if (playerMovement.direction.magnitude > 0) //moving
+            currentRightRay = new Ray(info.point, gameObject.transform.right);
+            currentForwardRay = new Ray(currentRightRay.origin, gameObject.transform.forward);
+            predictionRay = new Ray(currentRightRay.origin + StepLong * direction, currentRightRay.direction);
+            Ray ray = GetTestRay(direction);
+            if (direction.magnitude > 0) //moving
             {
                 float max = 0;
                 LegSolver further = null;
@@ -104,6 +102,9 @@ public class ProceduralMovement : MonoBehaviour
         if (lerp >= 1)
             lerp = 0;
     }
+
+    protected abstract Vector3 GetDirection();
+    protected abstract void MovementStart();
 
     private Ray GetTestRay(Vector3 direction)
     {
