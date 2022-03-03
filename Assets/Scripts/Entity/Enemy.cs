@@ -8,7 +8,7 @@ public abstract class Enemy : Entity
 
     [HideInInspector] public HealthSystem healthSystem;
     [HideInInspector] public DropSystem dropSystem;
-    
+
     [HideInInspector] public UnityEngine.Events.UnityEvent<GameObject> KillEvent;
 
     public SoundTypeWithPlaybackSettings Sound;
@@ -21,12 +21,15 @@ public abstract class Enemy : Entity
     [HideInInspector] public float movementSpeed;
     [HideInInspector] public float pointsForKill;
 
+    Dissolve dissolve;
+
     private int level = 1;
-    private bool isDead = false;
+    [HideInInspector] public bool isDead = false;
     private bool started = false;
 
     void Awake()
     {
+        dissolve = GetComponent<Dissolve>();
         dropSystem = GetComponent<DropSystem>();
         healthSystem = GetComponent<HealthSystem>();
         shooting = GetComponent<Shooting>();
@@ -65,7 +68,7 @@ public abstract class Enemy : Entity
         float healthFactor = gameplay.GetEnemyHealthScalingMultiplier(level);
         healthSystem.MaxHealth = data.BaseHealth * healthFactor;
 
-        foreach(WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
+        foreach (WeaponType weaponType in Enum.GetValues(typeof(WeaponType)))
         {
             var weapon = shooting[weaponType];
             weapon.damageMultiplier = gameplay.GetEnemyDamageScalingMultiplier(level);
@@ -130,14 +133,17 @@ public abstract class Enemy : Entity
 
     private void Die(ScoreSystem system = null)
     {
-        system?.AddScore(pointsForKill);
-    
-        //drop loot
-        dropSystem.Drop();
-
-        KillEvent.Invoke(gameObject);
         isDead = true;
-        Destroy(gameObject);
+        dissolve.StartDissolve(() =>
+        {
+            system?.AddScore(pointsForKill);
+
+            //drop loot
+            dropSystem.Drop();
+
+            KillEvent.Invoke(gameObject);
+            Destroy(gameObject);
+        });
     }
 
     public abstract EnemyTypes EnemyType { get; }

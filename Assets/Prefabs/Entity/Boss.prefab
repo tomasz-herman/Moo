@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 717185852922523951}
   - component: {fileID: 1946711218915444227}
   - component: {fileID: 2738986268363875180}
+  - component: {fileID: 5987821563794425181}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
@@ -619,6 +620,20 @@ MonoBehaviour:
   MinSpawnRadius: 1
   MaxSpawnRadius: 5
   NumberOfSpawnTriesBeforeFail: 20
+--- !u!114 &5987821563794425181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584923067921654789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3b40464e04b8341af9f6de76ca51be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveMaterial: {fileID: 2100000, guid: b4948574026c33a4dafe3a06c1a81282, type: 2}
+  time: 1
 --- !u!1 &1653182828857183468
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class GunProceduralMovement : MonoBehaviour
     [SerializeField] float ShootOffset = 0.1f;
     [SerializeField] float SpeedGun = 1f;
     [SerializeField] float SpeedBlade = 1f;
+    [SerializeField] float BladeAngle = 60f;
+    [SerializeField] float BodyMultiplayer = 0.5f;
     [SerializeField] GameObject Gun;
     [SerializeField] Transform root;
     private Shooting shooting;
@@ -15,11 +17,12 @@ public class GunProceduralMovement : MonoBehaviour
     private float slerp = 1;
     private Vector3 localGunPosition;
     private Vector3 ShootGunPosition;
+    private Vector3 localRootPosition;
+    private Vector3 ShootRootPosition;
     private Quaternion SwordStart;
     private Quaternion SwordEnd;
     private Quaternion RootStart;
     private Quaternion RootEnd;
-    private Vector3 BladeStartPosition;
     private void Start()
     {
         shooting = gameObject.GetComponent<Shooting>();
@@ -29,25 +32,32 @@ public class GunProceduralMovement : MonoBehaviour
         }
         localGunPosition = Gun.transform.localPosition;
         ShootGunPosition = localGunPosition - Vector3.forward * ShootOffset;
+        localRootPosition = root.transform.localPosition;
+        ShootRootPosition = localRootPosition - Vector3.forward * ShootOffset*BodyMultiplayer;
         SwordEnd = Gun.transform.localRotation;
-        SwordStart = SwordEnd * Quaternion.AngleAxis(45, Vector3.up);
+        SwordStart = SwordEnd * Quaternion.AngleAxis(BladeAngle, Vector3.up);
         RootEnd = root.localRotation;
-        RootStart = RootEnd * Quaternion.AngleAxis(30, Vector3.up);
-        BladeStartPosition = localGunPosition;
+        RootStart = RootEnd * Quaternion.AngleAxis(BladeAngle*BodyMultiplayer, Vector3.up);
+    }
+    private void OnDestroy()
+    {
+        foreach (WeaponType type in Enum.GetValues(typeof(WeaponType)))
+        {
+            shooting[type].WeaponShoot -= Shoot;
+        }
     }
     private void FixedUpdate()
     {
         if (slerp < 1)
         {
             Gun.transform.localRotation = Quaternion.Slerp(SwordStart, SwordEnd, slerp);
-            Gun.transform.localPosition = Gun.transform.localRotation * BladeStartPosition;
             root.localRotation = Quaternion.Slerp(RootStart, RootEnd, slerp);
             slerp += Time.fixedDeltaTime * SpeedBlade;
         }
         if (lerp < 1)
         {
             Gun.transform.localPosition = Vector3.Lerp(ShootGunPosition, localGunPosition, lerp);
-
+            root.localPosition = Vector3.Lerp(ShootRootPosition, localRootPosition, lerp);
             lerp += Time.fixedDeltaTime * SpeedGun;
         }
     }

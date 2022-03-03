@@ -19,8 +19,6 @@ public class ProceduralMovement : MonoBehaviour
     [SerializeField] Transform RootTransform;
     PlayerMovement playerMovement;
     new Rigidbody rigidbody;
-    Vector3 oldPosition;
-    Vector3 nextPosition;
     private Vector3 rootLocalPosition;
     private Ray currentRightRay;
     private Ray currentForwardRay;

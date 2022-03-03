@@ -54,6 +54,9 @@ public class SimpleEnemyAI : MonoBehaviour
 
     protected void Update()
     {
+        if (enemy.isDead)
+            return;
+
         var weaponType = weaponAIProperties.Type;
         shooting.SelectWeapon(weaponType);
 
