@@ -135,7 +135,8 @@ public class Console : MonoBehaviour
             [spawn.Id] = spawn,
             [godMode.Id] = godMode,
             [endGame.Id] = endGame,
-            [debugMode.Id] = debugMode
+            [debugMode.Id] = debugMode,
+            [ammo.Id] = ammo,
         };
     }
 
