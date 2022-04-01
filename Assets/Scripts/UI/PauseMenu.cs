@@ -13,4 +13,9 @@ public class PauseMenu : GuiWindow
         pausePanel.SetActive(!show);
         options.SetActive(show);
     }
+
+    private void OnEnable()
+    {
+        SetShowOptions(false);
+    }
 }
