@@ -126,6 +126,17 @@ public class Console : MonoBehaviour
                     FindObjectOfType<Player>().AmmoSystem.Ammo = ammo;
                 }
             });
+        ActionCommand<string> upgrade = new ActionCommand<string>(
+            "upgrade",
+            "gives upgrades",
+            "upgrade <amount>",
+            result =>
+            {
+                if (int.TryParse(result, out int count))
+                {
+                    FindObjectOfType<Player>().UpgradeSystem.AddUpgrade(count);
+                }
+            });
         Commands = new Dictionary<string, Command>
         {
             [help.Id] = help, 
@@ -137,6 +148,7 @@ public class Console : MonoBehaviour
             [endGame.Id] = endGame,
             [debugMode.Id] = debugMode,
             [ammo.Id] = ammo,
+            [upgrade.Id] = upgrade,
         };
     }
 
