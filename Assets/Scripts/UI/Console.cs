@@ -115,6 +115,17 @@ public class Console : MonoBehaviour
                 };
                 ApplicationData.Debug = on;
             });
+        ActionCommand<string> ammo = new ActionCommand<string>(
+            "ammo",
+            "sets ammo",
+            "ammo <amount>",
+            result =>
+            {
+                if(float.TryParse(result, out float ammo))
+                {
+                    FindObjectOfType<Player>().AmmoSystem.Ammo = ammo;
+                }
+            });
         Commands = new Dictionary<string, Command>
         {
             [help.Id] = help, 

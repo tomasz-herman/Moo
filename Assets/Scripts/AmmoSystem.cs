@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class AmmoSystem : MonoBehaviour
 {
-    public float defaultAmmo = 100;
-    public float defaultCapacity = 100;
+    public float defaultAmmo = 1000;
+    public float defaultCapacity = 1000;
     private float ammo, maxAmmo;
     public float Ammo
     {
