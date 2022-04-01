@@ -1,14 +1,15 @@
 using Assets.Scripts.SoundManager;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grenade : Projectile
 {
     [SerializeField] private ExplosionParticles explosionParticles;
 
-    private float explosionSpeed = 40f;
     private float explosionRange = 10f;
+    private int explosionRayCount = 1000;
     private float damageDecay = 7f; // how many times damage drops on the edge of explosionRange
-    private bool isExplosing = false;
 
     protected override void Start()
     {
@@ -36,12 +37,6 @@ public class Grenade : Projectile
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        if (gameObject.transform.localScale.x > explosionRange)
-            Destroy(gameObject);
-
-        if (isExplosing)
-            gameObject.transform.localScale += explosionSpeed * Time.deltaTime * Vector3.one;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,31 +44,53 @@ public class Grenade : Projectile
         if (other.gameObject == Owner) return;
         if (nonCollidableObjects.Contains(other.gameObject)) return;
 
-        if (!isExplosing)
+        var enemy = other.gameObject.GetComponent<Enemy>();
+        if (Owner != null && Owner.GetComponent<Player>() != null && enemy != null) // Player was shooting and enemy was hit
         {
-            var enemy = other.gameObject.GetComponent<Enemy>();
-            if (Owner != null && Owner.GetComponent<Player>() != null && enemy != null) // Player was shooting and enemy was hit
+            for (int i = 0; i < projectileUpgrades.Count; i++)
             {
-                for (int i = 0; i < projectileUpgrades.Count; i++)
-                {
-                    projectileUpgrades[i].OnEnemyHit(this, enemy, projectileUpgradesData[i]);
-                }
+                projectileUpgrades[i].OnEnemyHit(this, enemy, projectileUpgradesData[i]);
             }
-
-            isExplosing = true;
-            var rigidbody = GetComponent<Rigidbody>();
-            var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
-            rigidbody.velocity = Vector3.zero;
-            transform.position = backtrackedPosition;
-            PlaySound();
-
-            var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
-            particles.Color = color;
-            gameObject.GetComponentInChildren<Renderer>().enabled = false;
         }
 
-        var distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
-        var dmg = damage / (1 + damageDecay * distance / explosionRange); //damage is higher near the explosion
-        ApplyDamage(other, dmg);
+        var rigidbody = GetComponent<Rigidbody>();
+        var backtrackedPosition = transform.position - rigidbody.velocity * 2f * Time.fixedDeltaTime;
+        rigidbody.velocity = Vector3.zero;
+        transform.position = backtrackedPosition;
+        PlaySound();
+
+        var particles = Instantiate(explosionParticles, transform.position, transform.rotation);
+        particles.Color = color;
+        gameObject.GetComponentInChildren<Renderer>().enabled = false;
+
+        int layer = gameObject.layer;
+        int mask = 0;
+        for (int i = 0; i < 32; i++)
+        {
+            if (!Physics.GetIgnoreLayerCollision(layer, i))
+                mask |= (1 << i);
+        }
+
+        Dictionary<Collider, float> hitColliders = new Dictionary<Collider, float>();
+        for (int i = 0; i < explosionRayCount; i++)
+        {
+            Vector3 direction = new Vector3(Utils.FloatBetween(-1, 1), Utils.FloatBetween(-1, 1), Utils.FloatBetween(-1, 1));
+            foreach (var hit in Physics.RaycastAll(backtrackedPosition, direction, explosionRange, mask).OrderBy(ray => ray.distance))
+            {
+                Collider collider = hit.collider;
+                if (Layers.TerrainLayers.Contains(collider.gameObject.layer))
+                    break;
+                float distance = hit.distance;
+                if (hitColliders.ContainsKey(collider))
+                    distance = Mathf.Min(distance, hitColliders[collider]);
+                hitColliders[collider] = distance;
+            }
+        }
+        foreach (var data in hitColliders)
+        {
+            var dmg = damage / (1 + damageDecay * data.Value / explosionRange); //damage is higher near the explosion
+            ApplyDamage(data.Key, dmg);
+        }
+        Destroy(gameObject);
     }
 }
