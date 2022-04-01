@@ -21,7 +21,7 @@ public class AmmoBar : MonoBehaviour
     {
         fill.transform.localScale = new Vector3(args.ammo / args.maxAmmo, 1, 1);
 
-        int displayAmmo = Mathf.CeilToInt(args.ammo);
+        int displayAmmo = Mathf.FloorToInt(args.ammo);
         int displayMaxAmmo = Mathf.CeilToInt(args.maxAmmo);
         text.text = $"{displayAmmo}/{displayMaxAmmo}";
     }
