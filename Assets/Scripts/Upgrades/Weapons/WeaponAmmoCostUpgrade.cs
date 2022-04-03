@@ -27,7 +27,7 @@ namespace Assets.Scripts.Upgrades.Weapons
             float currentConsumption = weapon.AmmoConsumption;
             float newConsumtpion = weapon.GetAmmoConsumption(newFactor);
 
-            return $"Decrease ammo cost of { Weapon.GetWeaponName(WeaponType) } from {currentConsumption.ToString("F2")} to {newConsumtpion.ToString("F2")}";
+            return $"Decrease ammo cost of { Weapon.GetWeaponName(WeaponType) } from {currentConsumption.ToString("F1")} to {newConsumtpion.ToString("F1")}";
         }
 
         protected override void CommitUpdate(IUpgradeable upgradeable, float newFactor)
