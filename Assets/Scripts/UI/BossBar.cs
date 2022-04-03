@@ -35,6 +35,7 @@ public class BossBar : MonoBehaviour
                 healthSystem.HealthChanged -= UpdateBar;
                 shooting.WeaponChanged -= OnWeaponChange;
                 trackedEnemy.KillEvent.RemoveListener(OnKill);
+                trackedEnemy.EnabledEvent.RemoveListener(OnEnableEvent);
             }
             trackedEnemy = value;
             if (value != null)
@@ -46,6 +47,7 @@ public class BossBar : MonoBehaviour
                 shooting.WeaponChanged += OnWeaponChange;
 
                 trackedEnemy.KillEvent.AddListener(OnKill);
+                trackedEnemy.EnabledEvent.AddListener(OnEnableEvent);
 
                 UpdateBar(this, (healthSystem.Health, healthSystem.MaxHealth));
                 SetWeaponSprite(shooting.CurrentWeapon.WeaponType);
@@ -64,7 +66,7 @@ public class BossBar : MonoBehaviour
 
     private void CalculateVisibility()
     {
-        bool show = visible && trackedEnemy != null;
+        bool show = visible && trackedEnemy != null && TrackedEnemy.gameObject.activeInHierarchy;
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(show);
@@ -93,5 +95,10 @@ public class BossBar : MonoBehaviour
     private void OnKill(GameObject obj)
     {
         TrackedEnemy = null;
+    }
+
+    private void OnEnableEvent(bool enabled)
+    {
+        CalculateVisibility();
     }
 }

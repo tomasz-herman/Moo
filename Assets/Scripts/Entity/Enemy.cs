@@ -1,6 +1,7 @@
 using Assets.Scripts.SoundManager;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Enemy : Entity
 {
@@ -20,6 +21,7 @@ public abstract class Enemy : Entity
     [HideInInspector] public Shooting shooting;
     [HideInInspector] public float movementSpeed;
     [HideInInspector] public float pointsForKill;
+    public UnityEvent<bool> EnabledEvent { get; private set; } = new UnityEvent<bool>();
 
     private int level = 1;
     private bool isDead = false;
@@ -141,4 +143,14 @@ public abstract class Enemy : Entity
     }
 
     public abstract EnemyTypes EnemyType { get; }
+
+    public void OnEnable()
+    {
+        EnabledEvent.Invoke(true);
+    }
+
+    public void OnDisable()
+    {
+        EnabledEvent.Invoke(false);
+    }
 }
