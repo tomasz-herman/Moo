@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865d00685df478d41921dd88dfd3e252, type: 3}
   m_Name: GameplayData
   m_EditorClassIdentifier: 
-  Debug: 1
+  Debug: 0
   DefaultPlayerHealth: 100
   DefaultPlayerAmmo: 100
   ScalingFactor: 1.5
