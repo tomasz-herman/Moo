@@ -22,7 +22,7 @@ MonoBehaviour:
     DamageMultiplier: 1
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 1
-    AmmoRechargeAmmount: 6
+    AmmoRechargeAmmount: 60
   - Type: 3
     MinimumRange: 0
     PreferredRange: 1.5
@@ -42,7 +42,7 @@ MonoBehaviour:
     DamageMultiplier: 0.75
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 2
-    AmmoRechargeAmmount: 8
+    AmmoRechargeAmmount: 80
   - Type: 0
     MinimumRange: 7.5
     PreferredRange: 15
@@ -52,7 +52,7 @@ MonoBehaviour:
     DamageMultiplier: 1
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 4
-    AmmoRechargeAmmount: 12
+    AmmoRechargeAmmount: 120
   - Type: 1
     MinimumRange: 0
     PreferredRange: 2
@@ -62,4 +62,4 @@ MonoBehaviour:
     DamageMultiplier: 1
     MovementSpeedMultiplier: 1
     AmmoRechargeTime: 2
-    AmmoRechargeAmmount: 6
+    AmmoRechargeAmmount: 60

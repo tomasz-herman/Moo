@@ -20,7 +20,7 @@ MonoBehaviour:
     projectileSpeed: 12
     triggerTimeout: 0.2
     damage: 8
-    ammoConsumption: 0.75
+    ammoConsumption: 7.5
   - type: 1
     name: Shotgun
     image: {fileID: 21300000, guid: 61b060dbc4421154bb20299ba1a7998a, type: 3}
@@ -28,7 +28,7 @@ MonoBehaviour:
     projectileSpeed: 12
     triggerTimeout: 1.5
     damage: 10
-    ammoConsumption: 5
+    ammoConsumption: 50
   - type: 2
     name: Pistol
     image: {fileID: 21300000, guid: 69eb638843cdcbd45b5354096d3deb69, type: 3}
@@ -36,7 +36,7 @@ MonoBehaviour:
     projectileSpeed: 10
     triggerTimeout: 0.5
     damage: 15
-    ammoConsumption: 1
+    ammoConsumption: 10
   - type: 3
     name: Sword
     image: {fileID: 21300000, guid: 74ccd435b03073b4baad110b822ba3dc, type: 3}
@@ -52,4 +52,4 @@ MonoBehaviour:
     projectileSpeed: 20
     triggerTimeout: 3
     damage: 50
-    ammoConsumption: 8
+    ammoConsumption: 80

@@ -115,6 +115,28 @@ public class Console : MonoBehaviour
                 };
                 ApplicationData.Debug = on;
             });
+        ActionCommand<string> ammo = new ActionCommand<string>(
+            "ammo",
+            "sets ammo",
+            "ammo <amount>",
+            result =>
+            {
+                if(float.TryParse(result, out float ammo))
+                {
+                    FindObjectOfType<Player>().AmmoSystem.Ammo = ammo;
+                }
+            });
+        ActionCommand<string> upgrade = new ActionCommand<string>(
+            "upgrade",
+            "gives upgrades",
+            "upgrade <amount>",
+            result =>
+            {
+                if (int.TryParse(result, out int count))
+                {
+                    FindObjectOfType<Player>().UpgradeSystem.AddUpgrade(count);
+                }
+            });
         Commands = new Dictionary<string, Command>
         {
             [help.Id] = help, 
@@ -124,7 +146,9 @@ public class Console : MonoBehaviour
             [spawn.Id] = spawn,
             [godMode.Id] = godMode,
             [endGame.Id] = endGame,
-            [debugMode.Id] = debugMode
+            [debugMode.Id] = debugMode,
+            [ammo.Id] = ammo,
+            [upgrade.Id] = upgrade,
         };
     }
 
