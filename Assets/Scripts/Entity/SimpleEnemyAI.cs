@@ -54,6 +54,9 @@ public class SimpleEnemyAI : MonoBehaviour
 
     protected void Update()
     {
+        if (enemy.isDead)
+            return;
+
         var weaponType = weaponAIProperties.Type;
         shooting.SelectWeapon(weaponType);
 
@@ -85,6 +88,8 @@ public class SimpleEnemyAI : MonoBehaviour
         if (playerInSight && playerInAttackRange) Attack();
         if (playerTooClose) Escape();
         lastPlayerPosition = playerPosition;
+        movementDirection = characterController.velocity.normalized;
+        transform.LookAt(playerPosition, Vector3.up);
     }
 
     private void Dodge()

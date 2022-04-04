@@ -45,6 +45,11 @@ namespace Assets.Scripts.SoundManager
             Destroy(gameObject);
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, 2f);
+        }
+
         public void InitializeSound(SoundTypeWithPlaybackSettings sound)
         {
             Sound = sound.Clone();

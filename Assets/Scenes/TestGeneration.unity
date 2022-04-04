@@ -422,6 +422,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1cb56ab231e04428c680c93c0797c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &480821175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -2387963733600932354, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: Owner
+      value: 
+      objectReference: {fileID: 1722772163}
+    - target: {fileID: 191822508213462622, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_Name
+      value: PlayerAudioListener
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560006843709213340, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e854af8ad9da5114099d40d8e8183072, type: 3}
 --- !u!1 &697869625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,6 +1152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293e0f0e1a4b32c47b40edba5c200bcf, type: 3}
+--- !u!1 &1722772163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5011303572117569819, guid: 89aa5e6337ce34f4984563a47325b214, type: 3}
+  m_PrefabInstance: {fileID: 414731220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1766101293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,12 +1418,12 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         m_Version: 0
-        filterFoldout: 0
+        filterFoldout: 1
         rendererFoldout: 0
         renderQueueType: 2
         layerMask:
           serializedVersion: 2
-          m_Bits: 1152
+          m_Bits: 33920
         sortingCriteria: 59
         overrideMaterial: {fileID: 2100000, guid: f16d1b1ee701e394e8314d130a85460a, type: 2}
         overrideMaterialPassIndex: 0
@@ -1376,12 +1442,12 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         m_Version: 0
-        filterFoldout: 0
+        filterFoldout: 1
         rendererFoldout: 0
         renderQueueType: 2
         layerMask:
           serializedVersion: 2
-          m_Bits: 1152
+          m_Bits: 33920
         sortingCriteria: 59
         overrideMaterial: {fileID: 0}
         overrideMaterialPassIndex: 0

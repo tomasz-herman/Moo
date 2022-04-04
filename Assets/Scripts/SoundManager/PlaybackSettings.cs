@@ -145,10 +145,10 @@ namespace Assets.Scripts.SoundManager
             SpatialBlend = 0f;
             StereoPan = 0f;
             DopplerLevel = 0f;
-            Spread = 0f;
-            RolloffMode = AudioRolloffMode.Linear;
-            Min3DDistance = 0.01f;
-            Max3DDistance = 1000f;
+            Spread = 315f;
+            RolloffMode = AudioRolloffMode.Logarithmic;
+            Min3DDistance = 10f;
+            Max3DDistance = 40f;
             FadeInSeconds = 0f;
             FadeOutSeconds = 0f;
         }
