@@ -14,6 +14,7 @@ public class LoadingManager : MonoBehaviour
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     private float progress;
     public float secondsToWait;
+    private List<GameObject> disabledObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -57,6 +58,8 @@ public class LoadingManager : MonoBehaviour
             }
         }
 
+        Disable(FindObjectOfType<UserInterface>());
+
         const float waitTimeTick = 0.1f;
         const float waitTimeVariance = 0.8f * waitTimeTick;
 
@@ -72,10 +75,27 @@ public class LoadingManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(Utils.FloatBetween(waitTimeTick - waitTimeVariance, waitTimeTick + waitTimeVariance));
         }
 
-        loadingScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
+        EnableAll();
         Destroy(loadingScreen);
         Destroy(gameObject);
+    }
+
+    private void Disable(MonoBehaviour monoBehaviour)
+    {
+        if(monoBehaviour != null)
+        {
+            GameObject obj = monoBehaviour.gameObject;
+            disabledObjects.Add(obj);
+            obj.SetActive(false);
+        }
+    }
+
+    private void EnableAll()
+    {
+        foreach (GameObject obj in disabledObjects)
+            obj.SetActive(true);
+        disabledObjects.Clear();
     }
 
 }
