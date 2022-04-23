@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MovementSystem
 {
@@ -13,7 +14,7 @@ public class PlayerMovement : MovementSystem
 
     public override float Speed
     {
-        get { return movementSpeed; }
+        get => movementSpeed;
         set
         {
             movementSpeed = value;
@@ -28,26 +29,20 @@ public class PlayerMovement : MovementSystem
         camera = Camera.main;
     }
 
-    void Update()
+    void OnMove(InputValue movementValue)
     {
         if (!Application.isFocused) return;
+        
+        Vector2 movementVector = movementValue.Get<Vector2>();
+        float right = movementVector.x;
+        float forward = movementVector.y;
 
         Vector3 toCharacter = characterController.transform.position - camera.transform.position;
         toCharacter.y = 0;
         toCharacter.Normalize();
         Vector3 toRight = Quaternion.Euler(0, 90, 0) * toCharacter;
 
-        float moveForward = 0, moveRight = 0;
-        if (Input.GetKey(KeyCode.D))
-            moveRight++;
-        if (Input.GetKey(KeyCode.A))
-            moveRight--;
-        if (Input.GetKey(KeyCode.W))
-            moveForward++;
-        if (Input.GetKey(KeyCode.S))
-            moveForward--;
-
-        direction = (toCharacter * moveForward + toRight * moveRight).normalized;
+        direction = toCharacter * forward + toRight * right;
     }
 
     private void FixedUpdate()
