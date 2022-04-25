@@ -243,10 +243,10 @@
                 {
                     "name": "negative",
                     "id": "3ff4c9f7-8905-4f3b-a6c0-b0535922a4d9",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "SelectWeapon",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -254,10 +254,10 @@
                 {
                     "name": "positive",
                     "id": "3fc9e842-dd66-439c-a2eb-f131ebd0af74",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "SelectWeapon",
                     "isComposite": false,
                     "isPartOfComposite": true
