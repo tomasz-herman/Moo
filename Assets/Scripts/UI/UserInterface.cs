@@ -11,19 +11,22 @@ public class UserInterface : MonoBehaviour
 
     public GuiWindow selectedWindow;
 
-    void Update()
+    void OnPauseMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (selectedWindow != null)
-                ClearWindow();
-            else
-                TryToggleWindow(pauseMenu);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-            TryToggleWindow(statsWindow);
-        if (Input.GetKeyDown(KeyCode.Q))
-            TryToggleWindow(upgradeWindow);
+        if (selectedWindow != null)
+            ClearWindow();
+        else
+            TryToggleWindow(pauseMenu);
+    }
+    
+    void OnStatsWindow()
+    {
+        TryToggleWindow(statsWindow);
+    }
+    
+    void OnUpgradeWindow()
+    {
+        TryToggleWindow(upgradeWindow);
     }
 
     public void ClearWindow()
