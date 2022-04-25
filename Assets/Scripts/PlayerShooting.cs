@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
@@ -8,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
     public GameWorld gameWorld;
 
     private GameObject gun;
+    private bool isShooting;
 
     void Start()
     {
@@ -21,16 +21,10 @@ public class PlayerShooting : MonoBehaviour
         if (!Application.isFocused) return;
         if (gameWorld.IsPaused()) return;
 
-        if (Input.GetMouseButton((int)MouseButton.LeftMouse))
+        if (isShooting)
         {
             shooting.TryShoot(gameObject, gun.transform.position/*+gun.transform.forward/2*/, gameObject.transform.forward);
         }
-
-        if(Input.GetKeyDown(KeyCode.Alpha1)) shooting.SelectWeapon(WeaponType.MachineGun);
-        if(Input.GetKeyDown(KeyCode.Alpha2)) shooting.SelectWeapon(WeaponType.Shotgun);
-        if(Input.GetKeyDown(KeyCode.Alpha3)) shooting.SelectWeapon(WeaponType.Pistol);
-        if(Input.GetKeyDown(KeyCode.Alpha4)) shooting.SelectWeapon(WeaponType.Sword);
-        if(Input.GetKeyDown(KeyCode.Alpha5)) shooting.SelectWeapon(WeaponType.GrenadeLauncher);
     }
     
     void OnSelectWeapon(InputValue nextWeaponValue)
@@ -39,5 +33,35 @@ public class PlayerShooting : MonoBehaviour
 
         if (next > 0) shooting.PrevWeapon();
         else if (next < 0) shooting.NextWeapon();
+    }
+    
+    void OnSelectMachineGun()
+    {
+        shooting.SelectWeapon(WeaponType.MachineGun);
+    }
+    
+    void OnSelectShotgun()
+    {
+        shooting.SelectWeapon(WeaponType.Shotgun);
+    }
+    
+    void OnSelectPistol()
+    {
+        shooting.SelectWeapon(WeaponType.Pistol);
+    }
+    
+    void OnSelectSword()
+    {
+        shooting.SelectWeapon(WeaponType.Sword);
+    }
+    
+    void OnSelectGrenade()
+    {
+        shooting.SelectWeapon(WeaponType.GrenadeLauncher);
+    }
+
+    void OnFire()
+    {
+        isShooting = !isShooting;
     }
 }

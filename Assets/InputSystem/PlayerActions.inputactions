@@ -28,6 +28,46 @@
                     "expectedControlType": "Double",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SelectMachineGun",
+                    "type": "Button",
+                    "id": "dc418eb3-93f2-46d8-a039-c68097dd240d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectShotgun",
+                    "type": "Button",
+                    "id": "4fbe87aa-8dff-41f3-bdfd-38a309bef015",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectPistol",
+                    "type": "Button",
+                    "id": "1ab93796-c672-4e06-874a-1e4327f4fed8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectSword",
+                    "type": "Button",
+                    "id": "fbbc3f18-a3d8-4df2-8ecb-85ec8d2b1dcc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectGrenade",
+                    "type": "Button",
+                    "id": "1e2f7e12-a689-47b8-b379-dfe6b51d2dab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -261,6 +301,61 @@
                     "action": "SelectWeapon",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "969167f4-e897-46e4-adb6-b7cda23b96d9",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectMachineGun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d15b7827-72c6-473b-89c4-d5bee080b5b6",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectShotgun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f434e31-e73c-4581-9a89-d83b44f27963",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectPistol",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98354a82-441c-4242-b693-1aad6f0cd50a",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectSword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a02fbef-e10f-4521-b66a-62d47e7626fb",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectGrenade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
